@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormLabelControl: FormStackControl, FormLabelStackControlElementDelegate, FormControlSelectable {
+open class FormLabelControl: FormStackControl, FormLabelStackControlElementDelegate, FormControlSelectable {
     
     lazy var formTextLabel: FormLabelStackControlElement = {
         let label = FormLabelStackControlElement(isMain: true)
@@ -28,16 +28,16 @@ class FormLabelControl: FormStackControl, FormLabelStackControlElementDelegate, 
         
         formTextLabel.text = text
         formDetailTextLabel.text = detail
-        
     }
     
     // MARK: - FormLabelStackControlElementDelegate
     
     func labelDidChanged(label: FormLabelStackControlElement) {
         layoutElements()
+        buildLayout()
     }
     
-    func layoutElements() {
+    open func layoutElements() {
         
         if elements.firstIndex(where: {$0.name == formTextLabel.name}) == nil {
             elements.append(formTextLabel)
@@ -55,8 +55,6 @@ class FormLabelControl: FormStackControl, FormLabelStackControlElementDelegate, 
                 elements.append(formDetailTextLabel)
             }
         }
-        
-        buildLayout()
         
     }
     

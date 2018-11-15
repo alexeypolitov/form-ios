@@ -52,8 +52,6 @@ open class FormLabelStackControlElement: ExtendedLabel, FormStackControlElement 
         }
     }
     
-    private var observations: [NSKeyValueObservation] = []
-    
     public override init(frame: CGRect) {
         fatalError("Use init()")
     }
@@ -80,25 +78,6 @@ open class FormLabelStackControlElement: ExtendedLabel, FormStackControlElement 
         self.textVerticalAlignment = textVerticalAlignment
         self.textAlignment = textHorizontalAlignment
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-
-//        observations.append(observe(
-//            \.text,
-//            options: [.new]
-//        ) { [weak self] object, change in
-//
-//            self?.stackDelegate?.updateControl()
-//
-//        })
-//
-//        observations.append(observe(
-//            \.attributedText,
-//            options: [.new]
-//        ) { [weak self] object, change in
-//
-//            self?.stackDelegate?.updateControl()
-//
-//        })
-        
     }
     
     func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
@@ -125,6 +104,7 @@ open class FormBadgeStackControlElement: FormLabelStackControlElement {
     {
         super.init(name: name, text, textVerticalAlignment: textVerticalAlignment, textHorizontalAlignment: textHorizontalAlignment, isMain: isMain)
         
+        self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize - 2)
         self.numberOfLines = 0
         self.insets = inserts
         self.backgroundRectColor = color
@@ -233,8 +213,10 @@ open class FormTextViewStackControlElement: ExtendedTextView, FormStackControlEl
     
 }
 
-
-class FormStackControl: FormControl, FormStackControlCellDataSource, FormStackControlElementDelegate {
+open class FormStackControl: FormControl, FormStackControlCellDataSource, FormStackControlElementDelegate {
+    
+    var insets: UIEdgeInsets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+    var minimalInset: CGFloat = 8
     
     var elements: [FormStackControlElement] = []
     
@@ -274,6 +256,14 @@ class FormStackControl: FormControl, FormStackControlCellDataSource, FormStackCo
     
     func element(at index: Int) -> FormStackControlElement {
         return elements[index]
+    }
+    
+    func elementsInsets() -> UIEdgeInsets {
+        return insets
+    }
+    
+    func minimalInsetBetweenElements() -> CGFloat {
+        return minimalInset
     }
     
     // MARK: - Accessories

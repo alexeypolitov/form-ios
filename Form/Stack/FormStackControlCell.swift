@@ -11,6 +11,8 @@ import UIKit
 protocol FormStackControlCellDataSource {
     func numberOfElements() -> Int
     func element(at index: Int) -> FormStackControlElement
+    func elementsInsets() -> UIEdgeInsets
+    func minimalInsetBetweenElements() -> CGFloat
 }
 
 class FormStackControlCell: FormControlCell {
@@ -42,6 +44,9 @@ class FormStackControlCell: FormControlCell {
         
         removeStoredConstrains()
         
+        let insets = dataSource.elementsInsets()
+        let minimalInset = dataSource.minimalInsetBetweenElements()
+        
         var lastElement: FormStackControlElement?
         for index in 0...dataSource.numberOfElements() - 1 {
             let element = dataSource.element(at: index)
@@ -53,13 +58,13 @@ class FormStackControlCell: FormControlCell {
             
             contentView.addSubview(elementView)
             
-            storeConstrain(view: elementView, constrain: elementView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 14))
-            storeConstrain(view: elementView, constrain: elementView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -14))
+            storeConstrain(view: elementView, constrain: elementView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: insets.top))
+            storeConstrain(view: elementView, constrain: elementView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: insets.bottom * -1))
             
             if let lastElementView = lastElement as? UIView {
-                storeConstrain(view: elementView, constrain: elementView.leftAnchor.constraint(equalTo: lastElementView.rightAnchor, constant: 8))
+                storeConstrain(view: elementView, constrain: elementView.leftAnchor.constraint(equalTo: lastElementView.rightAnchor, constant: minimalInset))
             } else {
-                storeConstrain(view: elementView, constrain: elementView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 16))
+                storeConstrain(view: elementView, constrain: elementView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: insets.left))
             }
             
             if element.isMain {
@@ -70,7 +75,7 @@ class FormStackControlCell: FormControlCell {
             
             // is last
             if dataSource.numberOfElements() - 1 == index {
-                storeConstrain(view: elementView, constrain: elementView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -16))
+                storeConstrain(view: elementView, constrain: elementView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: insets.right * -1))
             }
             
             lastElement = element

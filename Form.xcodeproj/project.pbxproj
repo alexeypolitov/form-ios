@@ -26,6 +26,7 @@
 		291E3D25217A3CBD006C3D4D /* FormStackControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E3D23217A3CBD006C3D4D /* FormStackControlCell.swift */; };
 		291E3D28217A3D80006C3D4D /* FormLabelControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E3D27217A3D80006C3D4D /* FormLabelControl.swift */; };
 		299FD8CC219D076400A1CE48 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD8CB219D076400A1CE48 /* TestViewController.swift */; };
+		299FD8CF219D354A00A1CE48 /* FormBadgeLabelControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD8CE219D354A00A1CE48 /* FormBadgeLabelControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		291E3D23217A3CBD006C3D4D /* FormStackControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormStackControlCell.swift; sourceTree = "<group>"; };
 		291E3D27217A3D80006C3D4D /* FormLabelControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormLabelControl.swift; sourceTree = "<group>"; };
 		299FD8CB219D076400A1CE48 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		299FD8CE219D354A00A1CE48 /* FormBadgeLabelControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormBadgeLabelControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		291E3D26217A3D61006C3D4D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				299FD8CD219D353300A1CE48 /* Badge */,
 				291E3D29217A3D84006C3D4D /* Label */,
 			);
 			path = Components;
@@ -144,6 +147,14 @@
 				291E3D27217A3D80006C3D4D /* FormLabelControl.swift */,
 			);
 			path = Label;
+			sourceTree = "<group>";
+		};
+		299FD8CD219D353300A1CE48 /* Badge */ = {
+			isa = PBXGroup;
+			children = (
+				299FD8CE219D354A00A1CE48 /* FormBadgeLabelControl.swift */,
+			);
+			path = Badge;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +231,7 @@
 				291E3D14217A3A7B006C3D4D /* FormView.swift in Sources */,
 				291E3CF6217A3942006C3D4D /* ViewController.swift in Sources */,
 				299FD8CC219D076400A1CE48 /* TestViewController.swift in Sources */,
+				299FD8CF219D354A00A1CE48 /* FormBadgeLabelControl.swift in Sources */,
 				291E3D1C217A3BB0006C3D4D /* FormCollectionView.swift in Sources */,
 				291E3D28217A3D80006C3D4D /* FormLabelControl.swift in Sources */,
 				291E3D0F217A39BD006C3D4D /* ExtendedButton.swift in Sources */,
