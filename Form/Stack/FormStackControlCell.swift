@@ -53,12 +53,6 @@ class FormStackControlCell: FormControlCell {
             
             contentView.addSubview(elementView)
             
-//            storeConstrain(view: elementView, constrain: elementView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 14))
-//            storeConstrain(view: self.contentView, constrain: self.contentView.bottomAnchor.constraint(equalTo: elementView.bottomAnchor, constant: 14))
-//
-//            storeConstrain(view: elementView, constrain: elementView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16))
-//            storeConstrain(view: self.contentView, constrain: self.contentView.trailingAnchor.constraint(equalTo: elementView.trailingAnchor, constant: 16))
-            
             storeConstrain(view: elementView, constrain: elementView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 14))
             storeConstrain(view: elementView, constrain: elementView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -14))
             
@@ -73,35 +67,11 @@ class FormStackControlCell: FormControlCell {
             } else {
                 elementView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
             }
-            //            elementView.setContentHuggingPriority(.required, for: .vertical)
-            //            elementView.setContentCompressionResistancePriority(.required, for: .vertical)
             
             // is last
             if dataSource.numberOfElements() - 1 == index {
                 storeConstrain(view: elementView, constrain: elementView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -16))
             }
-            
-//            elementView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 14).isActive = true
-//            elementView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -14).isActive = true
-//
-//            if let lastElementView = lastElement as? UIView {
-//                elementView.leftAnchor.constraint(equalTo: lastElementView.rightAnchor, constant: 8).isActive = true
-//            } else {
-//                elementView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 16).isActive = true
-//            }
-//
-//            if element.isMain {
-//                elementView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
-//            } else {
-//                elementView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
-//            }
-////            elementView.setContentHuggingPriority(.required, for: .vertical)
-////            elementView.setContentCompressionResistancePriority(.required, for: .vertical)
-//
-//            // is last
-//            if dataSource.numberOfElements() - 1 == index {
-//                elementView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -16).isActive = true
-//            }
             
             lastElement = element
             
