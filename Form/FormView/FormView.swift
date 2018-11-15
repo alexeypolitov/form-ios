@@ -212,6 +212,14 @@ extension FormView: UITableViewDataSource {
         let control = storedGroups[indexPath.section].controls [indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: control.cellClass), for: indexPath)
 
+        if let `control` = control as? FormControlSelectable {
+            cell.selectionStyle = control.selectionStyle
+            cell.accessoryType = control.accessoryType
+        } else {
+            cell.selectionStyle = .none
+            cell.accessoryType = .none
+        }
+        
         control.prepare(cell: cell)
 
         return cell
@@ -257,6 +265,11 @@ extension FormView: UITableViewDelegate {
 //    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let control = storedGroups[indexPath.section].controls [indexPath.row]
+        
+        if let `control` = control as? FormControlSelectable {
+            control.formControlOnSelect()
+        }
         
         tableView.deselectRow(at: indexPath, animated: true)
     }

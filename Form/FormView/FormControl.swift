@@ -8,11 +8,17 @@
 
 import UIKit
 
+@objc protocol FormControlSelectable: NSObjectProtocol {
+    var selectionStyle: UITableViewCell.SelectionStyle { get set }
+    var accessoryType: UITableViewCell.AccessoryType { get set }
+    @objc func formControlOnSelect()
+}
+
 open class FormControl: NSObject {
     
     open var cellClass: UITableViewCell.Type { return UITableViewCell.self }
     open weak var linkedCell: UITableViewCell?
-    let name: String
+    let name: String    
     
     init(name: String = UUID().uuidString) {
         self.name = name

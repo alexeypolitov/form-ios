@@ -8,12 +8,7 @@
 
 import UIKit
 
-class FormLabelControl: FormStackControl, FormLabelStackControlElementDelegate {
-
-//    enum Style {
-//        case single
-//        case detail
-//    }
+class FormLabelControl: FormStackControl, FormLabelStackControlElementDelegate, FormControlSelectable {
     
     lazy var formTextLabel: FormLabelStackControlElement = {
         let label = FormLabelStackControlElement(isMain: true)
@@ -28,34 +23,24 @@ class FormLabelControl: FormStackControl, FormLabelStackControlElementDelegate {
         return label
     }()
     
-    private var observations: [NSKeyValueObservation] = []
-    
     init(name: String = UUID().uuidString, text: String? = nil, detail: String? = nil) {
         super.init(name: name)
-        
-//        elements = [formTextLabel]
         
         formTextLabel.text = text
         formDetailTextLabel.text = detail
         
     }
     
+    // MARK: - FormLabelStackControlElementDelegate
+    
     func labelDidChanged(label: FormLabelStackControlElement) {
-//        if label == formTextLabel {
-//            print("ddd 1")
-//        } else if label == formDetailTextLabel {
-//            print("ddd 2")
-//        }
         layoutElements()
     }
     
     func layoutElements() {
         
-        var changed: Bool = false
-        
         if elements.firstIndex(where: {$0.name == formTextLabel.name}) == nil {
             elements.append(formTextLabel)
-            changed = true
         }
         
         if
@@ -64,19 +49,44 @@ class FormLabelControl: FormStackControl, FormLabelStackControlElementDelegate {
         {
             if let index = elements.firstIndex(where: {$0.name == formDetailTextLabel.name}) {
                 elements.remove(at: index)
-                changed = true
             }
         } else {
             if elements.firstIndex(where: {$0.name == formDetailTextLabel.name}) == nil {
                 elements.append(formDetailTextLabel)
-                changed = true
             }
         }
         
-        if changed {
-            buildLayout()
-        }
+        buildLayout()
         
     }
     
+    // MARK: - FormControlSelectable
+    
+    private var _selectionStyle: UITableViewCell.SelectionStyle = .default
+    var selectionStyle: UITableViewCell.SelectionStyle {
+        get {
+            if onSelectHandler == nil {
+                return .none
+            } else {
+                return _selectionStyle
+            }
+        }
+        set {
+            _selectionStyle = newValue
+        }
+    }
+    private var _accessoryType: UITableViewCell.AccessoryType = .none
+    var accessoryType: UITableViewCell.AccessoryType {
+        get {
+            return _accessoryType
+        }
+        set {
+            _accessoryType = newValue
+        }
+    }
+    var onSelectHandler: ((FormLabelControl) -> Void)?
+    
+    func formControlOnSelect() {
+        onSelectHandler?(self)
+    }
 }
