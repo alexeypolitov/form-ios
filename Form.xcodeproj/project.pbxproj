@@ -32,6 +32,8 @@
 		299FD956219D5AFC00A1CE48 /* FormTextViewStackControlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD955219D5AFC00A1CE48 /* FormTextViewStackControlElement.swift */; };
 		299FD95A219D611000A1CE48 /* FormSwitchStackControlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD959219D611000A1CE48 /* FormSwitchStackControlElement.swift */; };
 		299FD95E219DAAE600A1CE48 /* FormImageStackControlElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD95D219DAAE600A1CE48 /* FormImageStackControlElement.swift */; };
+		299FD963219DB3B400A1CE48 /* FormLabelCollectionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD961219DB3B400A1CE48 /* FormLabelCollectionItemCell.swift */; };
+		299FD964219DB3B400A1CE48 /* FormLabelCollectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD962219DB3B400A1CE48 /* FormLabelCollectionItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		299FD955219D5AFC00A1CE48 /* FormTextViewStackControlElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextViewStackControlElement.swift; sourceTree = "<group>"; };
 		299FD959219D611000A1CE48 /* FormSwitchStackControlElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSwitchStackControlElement.swift; sourceTree = "<group>"; };
 		299FD95D219DAAE600A1CE48 /* FormImageStackControlElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormImageStackControlElement.swift; sourceTree = "<group>"; };
+		299FD961219DB3B400A1CE48 /* FormLabelCollectionItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormLabelCollectionItemCell.swift; sourceTree = "<group>"; };
+		299FD962219DB3B400A1CE48 /* FormLabelCollectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormLabelCollectionItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 		291E3CF2217A3942006C3D4D /* Form */ = {
 			isa = PBXGroup;
 			children = (
+				299FD95F219DB38400A1CE48 /* Collection */,
 				291E3D21217A3C9F006C3D4D /* Stack */,
 				291E3D12217A3A48006C3D4D /* FormView */,
 				291E3D05217A3959006C3D4D /* Libraries */,
@@ -154,6 +159,23 @@
 				299FD95D219DAAE600A1CE48 /* FormImageStackControlElement.swift */,
 			);
 			path = Elements;
+			sourceTree = "<group>";
+		};
+		299FD95F219DB38400A1CE48 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				299FD960219DB39700A1CE48 /* Label */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		299FD960219DB39700A1CE48 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				299FD962219DB3B400A1CE48 /* FormLabelCollectionItem.swift */,
+				299FD961219DB3B400A1CE48 /* FormLabelCollectionItemCell.swift */,
+			);
+			path = Label;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +255,7 @@
 				299FD95E219DAAE600A1CE48 /* FormImageStackControlElement.swift in Sources */,
 				299FD956219D5AFC00A1CE48 /* FormTextViewStackControlElement.swift in Sources */,
 				291E3CF6217A3942006C3D4D /* ViewController.swift in Sources */,
+				299FD963219DB3B400A1CE48 /* FormLabelCollectionItemCell.swift in Sources */,
 				299FD8CC219D076400A1CE48 /* TestViewController.swift in Sources */,
 				299FD95A219D611000A1CE48 /* FormSwitchStackControlElement.swift in Sources */,
 				291E3D1C217A3BB0006C3D4D /* FormCollectionView.swift in Sources */,
@@ -241,6 +264,7 @@
 				299FD950219D5AA900A1CE48 /* FormLabelStackControlElement.swift in Sources */,
 				291E3D10217A39BD006C3D4D /* ExtendedTextView.swift in Sources */,
 				291E3D20217A3BDC006C3D4D /* FormControl.swift in Sources */,
+				299FD964219DB3B400A1CE48 /* FormLabelCollectionItem.swift in Sources */,
 				291E3D24217A3CBD006C3D4D /* FormStackControl.swift in Sources */,
 				291E3D11217A39BD006C3D4D /* ExtendedLabel.swift in Sources */,
 				291E3D16217A3B13006C3D4D /* FormGroup.swift in Sources */,

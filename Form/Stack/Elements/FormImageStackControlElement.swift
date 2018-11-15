@@ -15,6 +15,13 @@ class FormImageStackControlElement: UIImageView, FormStackControlElement, FormSt
     var stackDelegate: FormStackControlElementDelegate?
     var layoutDelegate: FormStackControlElementLayoutDelegate?
     
+    open override var image: UIImage? {
+        didSet {
+            stackDelegate?.updateControl()
+            layoutDelegate?.updateControlLayout(element: self)
+        }
+    }
+    
     public override init(frame: CGRect) {
         fatalError("Use init()")
     }

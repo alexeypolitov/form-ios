@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class FormCollection: FormCollectionViewDataSource {
     
     var items: [FormCollectionItem] = []
@@ -17,7 +16,7 @@ class FormCollection: FormCollectionViewDataSource {
         return FormCollectionView.self
     }
     
-    init(_ items: [FormCollectionItem]) {
+    init(_ items: [FormCollectionItem] = []) {
         self.items = items
     }
     
@@ -45,6 +44,17 @@ class FormCollection: FormCollectionViewDataSource {
     
     func formCollectionView(itemAt index: Int) -> FormCollectionItem {
         return items[index]
+    }
+    
+}
+
+// MARK: - Setters
+
+extension FormCollection {
+    
+    func add(_ item: FormCollectionItem) -> FormCollection {
+        items.append(item)
+        return self
     }
     
 }
@@ -78,6 +88,5 @@ open class FormCollectionItem {
     }
     
 }
-
 
 

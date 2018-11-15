@@ -64,9 +64,21 @@ class ViewController: UIViewController {
                 .isMain(true)
                 .text("Some label 1")
                 .numberOfLines(0))
+        let collection = FormCollection()
+            .add(FormLabelCollectionItem("label1")
+                .text("Some text1")
+                .insets(UIEdgeInsets(top: 50, left:0, bottom: 60, right: 0)))
+            .add(FormLabelCollectionItem("label2")
+                .text("Some text2"))
+            .add(FormLabelCollectionItem("label3")
+                .text("Some text3"))
+            .add(FormLabelCollectionItem("label4")
+                .text("Some text4"))
 
+        let group = FormGroup(header: collection, [control], footer: nil)
 
-        try? formView.addControl(control)
+        try? formView.addGroup(group)
+//        try? formView.addControl(control)
         
     }
     
@@ -102,10 +114,14 @@ class ViewController: UIViewController {
         
         actionSheet.addAction(UIAlertAction(title: "Change textLabel", style: .default, handler: { [weak self] (action) in
             guard let `self` = self else { return }
-            guard let control = self.formView.control(name: "testStackControl") as? FormStackControl else { return }
-            guard let element = control.element(by: "textLabel") as? FormLabelStackControlElement else { return }
+            guard let item = self.formView.collectionItem(name: "label1") as? FormLabelCollectionItem else { return }
             
-            element.text = "sdfdsfkldsjflkdsjfdlksjflkfdsjkfjdslkfjdslfjdslfjslfjljfdslfjdslfj"
+            item.text = "Test\ntest\ntest\ntest"
+            
+//            guard let control = self.formView.control(name: "testStackControl") as? FormStackControl else { return }
+//            guard let element = control.element(by: "textLabel") as? FormLabelStackControlElement else { return }
+//
+//            element.text = "sdfdsfkldsjflkdsjfdlksjflkfdsjkfjdslkfjdslfjdslfjslfjljfdslfjdslfj"
             
 //            control.formLabel.text = "Some text"
             
