@@ -61,6 +61,16 @@ class FormStackControlCell: FormControlCell {
             storeConstrain(view: elementView, constrain: elementView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: insets.top))
             storeConstrain(view: elementView, constrain: elementView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: insets.bottom * -1))
             
+            if let elementSizing = element as? FormStackControlElementSizing {
+                if let fixedHeigth = elementSizing.fixedHeigth {
+                    storeConstrain(view: elementView, constrain: elementView.heightAnchor.constraint(equalToConstant: fixedHeigth))
+                }
+                if let fixedWidth = elementSizing.fixedWidth {
+                    storeConstrain(view: elementView, constrain: elementView.widthAnchor.constraint(equalToConstant: fixedWidth))
+                }
+            }
+            
+            
             if let lastElementView = lastElement as? UIView {
                 storeConstrain(view: elementView, constrain: elementView.leftAnchor.constraint(equalTo: lastElementView.rightAnchor, constant: minimalInset))
             } else {
@@ -75,7 +85,11 @@ class FormStackControlCell: FormControlCell {
             
             // is last
             if dataSource.numberOfElements() - 1 == index {
-                storeConstrain(view: elementView, constrain: elementView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: insets.right * -1))
+                if let elementSizing = element as? FormStackControlElementSizing, elementSizing.fixedWidth != nil {
+                    // do noting
+                } else {
+                  storeConstrain(view: elementView, constrain: elementView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: insets.right * -1))
+                }
             }
             
             lastElement = element

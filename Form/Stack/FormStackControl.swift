@@ -16,7 +16,7 @@ open class FormStackControl: FormControl, FormControlSelectable {
     var elements: [FormStackControlElement] = []
     var onSelect: ((FormStackControl) -> Void)?
     
-    init(name: String = UUID().uuidString, elements: [FormStackControlElement] = []) {
+    init(_ name: String = UUID().uuidString, elements: [FormStackControlElement] = []) {
         super.init(name: name)
         
         precondition(elements.filter({$0.isMain}).count <= 1, "Only one element could be main")
@@ -54,20 +54,6 @@ open class FormStackControl: FormControl, FormControlSelectable {
     
     func prepareElements() {
         // to add custom elements
-    }
-    
-    // MARL: - Setters
-    func setOnSelect(_ handler: ((FormStackControl) -> Void)?) -> FormStackControl {
-        onSelect = handler
-        return self
-    }
-    
-    // MARK: - Actions
-    
-    func add(_ element: FormStackControlElement) -> FormStackControl {
-        element.prepareStackDelegate(delegate: self)
-        elements.append(element)
-        return self
     }
     
     // MARK: - FormControlSelectable
@@ -147,6 +133,33 @@ extension FormStackControl: FormStackControlElementLayoutDelegate {
     func updateControlLayout(element: FormStackControlElement) {
         prepareElements()
         buildLayout()
+    }
+    
+}
+
+// MARK: - Setters
+
+extension FormStackControl {
+    
+    func add(_ element: FormStackControlElement) -> FormStackControl {
+        element.prepareStackDelegate(delegate: self)
+        elements.append(element)
+        return self
+    }
+    
+    func onSelect(_ handler: ((FormStackControl) -> Void)?) -> FormStackControl {
+        onSelect = handler
+        return self
+    }
+    
+    func onInsets(_ insets: UIEdgeInsets) -> FormStackControl {
+        self.insets = insets
+        return self
+    }
+    
+    func onMinimalInset(_ minimalInset: CGFloat) -> FormStackControl {
+        self.minimalInset = minimalInset
+        return self
     }
     
 }

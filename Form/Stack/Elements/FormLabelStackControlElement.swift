@@ -37,8 +37,8 @@ open class FormLabelStackControlElement: ExtendedLabel, FormStackControlElement 
         fatalError("Use init()")
     }
     
-    init(name: String = UUID().uuidString,
-         _ text: String? = nil,
+    init(_ name: String = UUID().uuidString,
+         text: String? = nil,
          textVerticalAlignment: ExtendedLabel.TextVerticalAlignment = .center,
          textHorizontalAlignment: NSTextAlignment = .left,
          isMain: Bool = false
@@ -66,6 +66,11 @@ open class FormLabelStackControlElement: ExtendedLabel, FormStackControlElement 
 // MARK: - Setters
 
 extension FormLabelStackControlElement {
+    
+    func isMain(_ isMain: Bool) -> FormLabelStackControlElement {
+        self.isMain = isMain
+        return self
+    }
     
     func textHorizontalAlignment(_ textAlignment: NSTextAlignment) -> FormLabelStackControlElement {
         self.textAlignment = textAlignment

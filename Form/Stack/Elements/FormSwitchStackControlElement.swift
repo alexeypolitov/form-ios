@@ -13,7 +13,8 @@ open class FormSwitchStackControlElement: UISwitch, FormStackControlElement {
     var isMain: Bool
     let name: String
     var stackDelegate: FormStackControlElementDelegate?
-    var layoutDelegate: FormStackControlElementLayoutDelegate?    
+    var layoutDelegate: FormStackControlElementLayoutDelegate?
+    
     var onChange: ((FormSwitchStackControlElement, Bool) -> Void)?
     
     open override var isOn: Bool {
@@ -30,8 +31,8 @@ open class FormSwitchStackControlElement: UISwitch, FormStackControlElement {
         fatalError("Use init()")
     }
     
-    init(name: String = UUID().uuidString,
-         _ isOn: Bool = true,
+    init(_ name: String = UUID().uuidString,
+         isOn: Bool = true,
          isMain: Bool = false
         )
     {
@@ -60,6 +61,16 @@ open class FormSwitchStackControlElement: UISwitch, FormStackControlElement {
 
 extension FormSwitchStackControlElement {
 
+    func isMain(_ isMain: Bool) -> FormSwitchStackControlElement {
+        self.isMain = isMain
+        return self
+    }
+    
+    func isOn(_ isOn: Bool) -> FormSwitchStackControlElement {
+        self.isOn = isOn
+        return self
+    }
+    
     func onChange(_ handler: ((FormSwitchStackControlElement, Bool) -> Void)?) -> FormSwitchStackControlElement {
         onChange = handler
         return self

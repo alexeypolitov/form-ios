@@ -14,8 +14,8 @@ open class FormBadgeStackControlElement: FormLabelStackControlElement {
         fatalError("Use init()")
     }
     
-    init(name: String = UUID().uuidString,
-         _ text: String? = nil,
+    init(_ name: String = UUID().uuidString,
+         text: String? = nil,
          color: UIColor = UIColor.red,
          cornerRadius: CGFloat = 5,
          inserts: UIEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4),
@@ -24,7 +24,7 @@ open class FormBadgeStackControlElement: FormLabelStackControlElement {
          isMain: Bool = false
         )
     {
-        super.init(name: name, text, textVerticalAlignment: textVerticalAlignment, textHorizontalAlignment: textHorizontalAlignment, isMain: isMain)
+        super.init(name, text: text, textVerticalAlignment: textVerticalAlignment, textHorizontalAlignment: textHorizontalAlignment, isMain: isMain)
         
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize - 2)
         self.numberOfLines = 0

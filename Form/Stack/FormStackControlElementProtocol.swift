@@ -17,6 +17,11 @@ protocol FormStackControlElementLayoutDelegate {
     func updateControlLayout(element: FormStackControlElement)
 }
 
+protocol FormStackControlElementSizing {
+    var fixedWidth: CGFloat? { get set }
+    var fixedHeigth: CGFloat? { get set }
+}
+
 protocol FormStackControlElement {
     
     var isMain: Bool { get set }

@@ -17,150 +17,84 @@ class ViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Actions", style: .plain, target: self, action: #selector(self.onAction(_:)))
         
-        let control = FormStackControl(name: "testStackControl")
-            .add(FormBadgeStackControlElement(name: "badge", "OK"))
-            .add(FormLabelStackControlElement(name: "textLabel", "Some label 1", isMain: true)
+//        let control = FormStackControl("testStackControl")
+//            .add(FormBadgeStackControlElement("badge")
+//                .text("OK"))
+//            .add(FormLabelStackControlElement("textLabel")
+//                .isMain(true)
+//                .text("Some label 1")
+//                .numberOfLines(0))
+//            .add(FormTextFieldStackControlElement("textField")
+//                .text("Some text")
+//                .placeholder("Some placeholder")
+//                .textAlignment(.right)
+//                .onDidBeginEditing({ (element) in
+//                  print("ok 1")
+//                })
+//                .onDidEndEditing({ (element, reason) in
+//                  print("ok 2")
+//                }))
+//            .add(FormSwitchStackControlElement("switch")
+//                .isOn(true)
+//                .onChange({ (element, isOn) in
+//                    print("isOn: \(isOn)")
+//                }))
+//            .onSelect({ (control) in
+//                print("did selected")
+//            })
+        
+//        let control = FormStackControl("testStackControl")
+//            .add(FormTextViewStackControlElement("textView")
+//                .isMain(true)
+//                .text("Some label 1")
+//                .placeholder("Some placeholder")
+//                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
+//                    guard let `string` = string else { return true }
+//                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
+//                    return newString.count >= 50 ? false : true
+//                }))
+        
+        let control = FormStackControl("testStackControl")
+            .add(FormImageStackControlElement("image")
+                .isMain(true)
+                .image(UIImage(named: "lemur1"))
+                .fixedWidth(40)
+                .fixedHeigth(40))
+            .add(FormLabelStackControlElement("textLabel")
+                .isMain(true)
+                .text("Some label 1")
                 .numberOfLines(0))
-            .add(FormTextFieldStackControlElement(name: "textField", "Some text", placeholder: "Some placeholder")
-                .textAlignment(.right))
-            .add(FormSwitchStackControlElement(name: "switch", true)
-                .onChange({ (element, isOn) in
-                    print("isOn: \(isOn)")
-                }))
-            .setOnSelect({ (control) in
-                print("did selected")
-            })
+
 
         try? formView.addControl(control)
         
     }
     
-    @objc func onLabelSelected(_ sender: Any) {
-        
-//        guard let `control` = sender as? FormLabelControl else { return }
+//    func editLabelDetailText(control: FormLabelControl) {
 //
-//        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+////        let alert = UIAlertController(title: "Detail Text", message: nil, preferredStyle: .alert)
+////
+////        alert.addTextField { (textField:UITextField) in
+////            textField.placeholder = "detail"
+////            textField.text = control.formDetailTextLabel.text
+////        }
+////
+////        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action:UIAlertAction) in
+////            guard let text =  alert.textFields?.first?.text else { return }
+////
+////            if text.count > 0 {
+////                control.formDetailTextLabel.text = text
+////            } else {
+////                control.formDetailTextLabel.text = nil
+////            }
+////
+////
+////        }))
+////        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+////
+////        self.present(alert, animated: true, completion: nil)
 //
-//        actionSheet.addAction(UIAlertAction(title: "Set text", style: .default, handler: { (action) in
-//            self.editLabelText(control: control)
-//        }))
-//
-//        actionSheet.addAction(UIAlertAction(title: "Set detail text", style: .default, handler: { (action) in
-//            self.editLabelDetailText(control: control)
-//        }))
-//
-//        if control.formDetailTextLabel.text != nil {
-//
-//            actionSheet.addAction(UIAlertAction(title: "Remove detail", style: .default, handler: { (action) in
-//                control.formDetailTextLabel.text = nil
-//            }))
-//
-//        }
-//
-//
-//        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//
-//        self.present(actionSheet, animated: true, completion: nil)
-    }
-    
-    @objc func onBadgeLabelSelected(_ sender: Any) {
-        
-//        guard let `control` = sender as? FormBadgeLabelControl else { return }
-//
-//        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//
-//        actionSheet.addAction(UIAlertAction(title: "Set badge", style: .default, handler: { (action) in
-//            self.editLabelBadge(control: control)
-//        }))
-//
-//        actionSheet.addAction(UIAlertAction(title: "Set text", style: .default, handler: { (action) in
-//            self.editLabelText(control: control)
-//        }))
-//
-//        actionSheet.addAction(UIAlertAction(title: "Set detail text", style: .default, handler: { (action) in
-//            self.editLabelDetailText(control: control)
-//        }))
-//
-//        if control.formDetailTextLabel.text != nil {
-//
-//            actionSheet.addAction(UIAlertAction(title: "Remove detail", style: .default, handler: { (action) in
-//                control.formDetailTextLabel.text = nil
-//            }))
-//
-//        }
-//
-//        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//
-//        self.present(actionSheet, animated: true, completion: nil)
-    }
-    
-    func editLabelBadge(control: FormBadgeLabelControl) {
-        
-//        let alert = UIAlertController(title: "Badge", message: nil, preferredStyle: .alert)
-//
-//        alert.addTextField { (textField:UITextField) in
-//            textField.placeholder = "badge"
-//            textField.text = control.formBadgeLabel.text
-//        }
-//
-//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action:UIAlertAction) in
-//            guard let text =  alert.textFields?.first?.text else { return }
-//
-//            control.formBadgeLabel.text = text
-//
-//        }))
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//
-//        self.present(alert, animated: true, completion: nil)
-        
-    }
-    
-    func editLabelText(control: FormLabelControl) {
-        
-//        let alert = UIAlertController(title: "Text", message: nil, preferredStyle: .alert)
-//
-//        alert.addTextField { (textField:UITextField) in
-//            textField.placeholder = "title"
-//            textField.text = control.formTextLabel.text
-//        }
-//
-//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action:UIAlertAction) in
-//            guard let text =  alert.textFields?.first?.text else { return }
-//
-//            control.formTextLabel.text = text
-//
-//        }))
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//
-//        self.present(alert, animated: true, completion: nil)
-        
-    }
-    
-    func editLabelDetailText(control: FormLabelControl) {
-        
-//        let alert = UIAlertController(title: "Detail Text", message: nil, preferredStyle: .alert)
-//
-//        alert.addTextField { (textField:UITextField) in
-//            textField.placeholder = "detail"
-//            textField.text = control.formDetailTextLabel.text
-//        }
-//
-//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action:UIAlertAction) in
-//            guard let text =  alert.textFields?.first?.text else { return }
-//
-//            if text.count > 0 {
-//                control.formDetailTextLabel.text = text
-//            } else {
-//                control.formDetailTextLabel.text = nil
-//            }
-//
-//
-//        }))
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//
-//        self.present(alert, animated: true, completion: nil)
-        
-    }
+//    }
 
     @objc func onAction(_ sender: Any) {
         
