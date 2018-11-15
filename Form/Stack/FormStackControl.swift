@@ -8,217 +8,13 @@
 
 import UIKit
 
-protocol FormStackControlElementDelegate {
-    
-    func updateControl()
-    func buildLayout()
-    
-}
-
-protocol FormStackControlElement {
-    
-    var isMain: Bool { get }
-    var name: String { get }
-    var stackDelegate: FormStackControlElementDelegate? { get set }
-    
-    func prepareStackDelegate(delegate: FormStackControlElementDelegate)
-
-}
-
-protocol FormLabelStackControlElementDelegate {
-    
-    func labelDidChanged(label: FormLabelStackControlElement)
-    
-}
-
-open class FormLabelStackControlElement: ExtendedLabel, FormStackControlElement {
-    
-    let isMain: Bool
-    let name: String
-    var stackDelegate: FormStackControlElementDelegate?
-    var labelDelegate: FormLabelStackControlElementDelegate?
-    
-    open override var text: String? {
-        didSet {
-            stackDelegate?.updateControl()
-            labelDelegate?.labelDidChanged(label: self)
-        }
-    }
-    
-    open override var attributedText: NSAttributedString? {
-        didSet {
-            stackDelegate?.updateControl()
-            labelDelegate?.labelDidChanged(label: self)
-        }
-    }
-    
-    public override init(frame: CGRect) {
-        fatalError("Use init()")
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("Use init()")
-    }
-    
-    init(name: String = UUID().uuidString,
-         _ text: String? = nil,
-         textVerticalAlignment: ExtendedLabel.TextVerticalAlignment = .center,
-         textHorizontalAlignment: NSTextAlignment = .left,
-         isMain: Bool = false
-        )
-    {
-        self.name = name
-        self.isMain = isMain
-        
-        super.init(frame: CGRect.zero)
-        
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.text = text
-        self.numberOfLines = 1
-        self.textVerticalAlignment = textVerticalAlignment
-        self.textAlignment = textHorizontalAlignment
-        self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-    }
-    
-    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-        stackDelegate = delegate
-    }
-    
-}
-
-open class FormBadgeStackControlElement: FormLabelStackControlElement {
- 
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("Use init()")
-    }
-    
-    init(name: String = UUID().uuidString,
-         _ text: String? = nil,
-         color: UIColor = UIColor.red,
-         cornerRadius: CGFloat = 5,
-         inserts: UIEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4),
-         textVerticalAlignment: ExtendedLabel.TextVerticalAlignment = .center,
-         textHorizontalAlignment: NSTextAlignment = .left,
-         isMain: Bool = false
-        )
-    {
-        super.init(name: name, text, textVerticalAlignment: textVerticalAlignment, textHorizontalAlignment: textHorizontalAlignment, isMain: isMain)
-        
-        self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize - 2)
-        self.numberOfLines = 0
-        self.insets = inserts
-        self.backgroundRectColor = color
-        self.backgroundRectCornerRadius = cornerRadius
-        
-    }
-    
-}
-
-open class FormTextFieldStackControlElement: UITextField, FormStackControlElement {
-    
-    let isMain: Bool
-    let name: String
-    var stackDelegate: FormStackControlElementDelegate?
-    
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("Use init()")
-    }
-    
-    init(name: String = UUID().uuidString,
-         _ text: String? = nil,
-         placeholder: String? = nil,
-         isMultiline: Bool = false,
-         isMain: Bool = false
-        )
-    {
-        self.name = name
-        self.isMain = isMain
-        
-        super.init(frame: CGRect.zero)
-        
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.text = text
-        self.placeholder = placeholder
-        self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-        
-    }
-    
-    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-        stackDelegate = delegate
-    }
-    
-//    open override func onTextDidChange(notification: Notification) {
-//        super.onTextDidChange(notification: notification)
-//
-//        let size = self.bounds.size
-//        let newSize = self.sizeThatFits(CGSize(width: size.width, height: CGFloat.greatestFiniteMagnitude))
-//
-//        // Resize the cell only when cell's size is changed
-//        if size.height != newSize.height {
-//            self.stackDelegate?.updateControl()
-//        }
-//
-//    }
-    
-}
-
-open class FormTextViewStackControlElement: ExtendedTextView, FormStackControlElement {
-    
-    let isMain: Bool
-    let name: String
-    var stackDelegate: FormStackControlElementDelegate?
-    
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("Use init()")
-    }
-    
-    init(name: String = UUID().uuidString,
-         _ text: String? = nil,
-         placeholder: String? = nil,
-         isMultiline: Bool = false,
-         isMain: Bool = false
-        )
-    {
-        self.name = name
-        self.isMain = isMain
-        
-        super.init()
-        
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.text = text
-        self.placeholder = placeholder
-        self.textContainerInset = UIEdgeInsets.zero
-        self.textContainer.lineFragmentPadding = 0
-        self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-        self.isScrollEnabled = false
-        
-    }
-
-    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-        stackDelegate = delegate
-    }
-    
-    open override func onTextDidChange(notification: Notification) {
-        super.onTextDidChange(notification: notification)
-     
-        let size = self.bounds.size
-        let newSize = self.sizeThatFits(CGSize(width: size.width, height: CGFloat.greatestFiniteMagnitude))
-        
-        // Resize the cell only when cell's size is changed
-        if size.height != newSize.height {
-            self.stackDelegate?.updateControl()
-        }
-     
-    }
-    
-}
-
-open class FormStackControl: FormControl, FormStackControlCellDataSource, FormStackControlElementDelegate {
+open class FormStackControl: FormControl, FormControlSelectable {
     
     var insets: UIEdgeInsets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
     var minimalInset: CGFloat = 8
     
     var elements: [FormStackControlElement] = []
+    var onSelect: ((FormStackControl) -> Void)?
     
     init(name: String = UUID().uuidString, elements: [FormStackControlElement] = []) {
         super.init(name: name)
@@ -248,7 +44,65 @@ open class FormStackControl: FormControl, FormStackControlCellDataSource, FormSt
         
     }
     
-    // MARK: - FormStackControlCellDataSource
+    // MARK: - Accessories
+    
+    func element(by name: String) -> FormStackControlElement? {
+        return elements.first(where: {$0.name == name})
+    }
+    
+    // MARK: - Elements
+    
+    func prepareElements() {
+        // to add custom elements
+    }
+    
+    // MARL: - Setters
+    func setOnSelect(_ handler: ((FormStackControl) -> Void)?) -> FormStackControl {
+        onSelect = handler
+        return self
+    }
+    
+    // MARK: - Actions
+    
+    func add(_ element: FormStackControlElement) -> FormStackControl {
+        element.prepareStackDelegate(delegate: self)
+        elements.append(element)
+        return self
+    }
+    
+    // MARK: - FormControlSelectable
+    
+    private var _selectionStyle: UITableViewCell.SelectionStyle = .default
+    var selectionStyle: UITableViewCell.SelectionStyle {
+        get {
+            if onSelect == nil {
+                return .none
+            } else {
+                return _selectionStyle
+            }
+        }
+        set {
+            _selectionStyle = newValue
+        }
+    }
+    private var _accessoryType: UITableViewCell.AccessoryType = .none
+    var accessoryType: UITableViewCell.AccessoryType {
+        get {
+            return _accessoryType
+        }
+        set {
+            _accessoryType = newValue
+        }
+    }
+        
+    func formControlOnSelect() {        
+        onSelect?(self)
+    }
+}
+
+// MARK: - FormStackControlCellDataSource
+
+extension FormStackControl: FormStackControlCellDataSource {
     
     func numberOfElements() -> Int {
         return elements.count
@@ -266,13 +120,11 @@ open class FormStackControl: FormControl, FormStackControlCellDataSource, FormSt
         return minimalInset
     }
     
-    // MARK: - Accessories
-    
-    func element(by name: String) -> FormStackControlElement? {
-        return elements.first(where: {$0.name == name})
-    }
-    
-    // MARK: - FormStackControlElementDelegate
+}
+
+// MARK: - FormStackControlElementDelegate
+
+extension FormStackControl: FormStackControlElementDelegate {
     
     func updateControl() {
         guard let formView = linkedCell?.superview?.superview as? FormView else { return }
@@ -285,4 +137,16 @@ open class FormStackControl: FormControl, FormStackControlCellDataSource, FormSt
         
         updateControl()
     }
+    
+}
+
+// MARK: - FormStackControlElementLayoutDelegate
+
+extension FormStackControl: FormStackControlElementLayoutDelegate {
+    
+    func updateControlLayout(element: FormStackControlElement) {
+        prepareElements()
+        buildLayout()
+    }
+    
 }

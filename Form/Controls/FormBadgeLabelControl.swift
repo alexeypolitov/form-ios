@@ -8,11 +8,11 @@
 
 import UIKit
 
-class FormBadgeLabelControl: FormLabelControl {
+class FormBadgeLabelControl: FormRightDetailLabelControl {
 
     lazy var formBadgeLabel: FormBadgeStackControlElement = {
         let badge = FormBadgeStackControlElement(isMain: false)
-        badge.labelDelegate = self
+        badge.layoutDelegate = self
         return badge
     }()
  
@@ -26,7 +26,7 @@ class FormBadgeLabelControl: FormLabelControl {
     
     // MARK: - Layout
     
-    override func layoutElements() {
+    override func prepareElements() {
         
         if
             (formBadgeLabel.text == nil || formBadgeLabel.text?.count == 0) &&
@@ -41,7 +41,8 @@ class FormBadgeLabelControl: FormLabelControl {
             }
         }
         
-        super.layoutElements()
+        super.prepareElements()
         
     }
+    
 }
