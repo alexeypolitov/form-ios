@@ -102,4 +102,9 @@ extension FormLabelStackControlElement {
         return self
     }
     
+    func backgroundColor(_ backgroundColor: UIColor?) -> FormLabelStackControlElement {
+        self.backgroundColor = backgroundColor
+        return self
+    }
+    
 }

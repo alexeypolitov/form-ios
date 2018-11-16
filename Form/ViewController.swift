@@ -64,18 +64,38 @@ class ViewController: UIViewController {
                 .isMain(true)
                 .text("Some label 1")
                 .numberOfLines(0))
-        let collection = FormCollection()
-            .add(FormLabelCollectionItem("label1")
-                .text("Some text1")
-                .insets(UIEdgeInsets(top: 50, left:0, bottom: 60, right: 0)))
-            .add(FormLabelCollectionItem("label2")
-                .text("Some text2"))
-            .add(FormLabelCollectionItem("label3")
-                .text("Some text3"))
-            .add(FormLabelCollectionItem("label4")
-                .text("Some text4"))
+//        let collection = FormCollection()
+//            .add(FormLabelCollectionItem("label1")
+//                .text("Some text1")
+//                .insets(UIEdgeInsets(top: 50, left:0, bottom: 60, right: 0)))
+//            .add(FormLabelCollectionItem("label2")
+//                .text("Some text2"))
+//            .add(FormLabelCollectionItem("label3")
+//                .text("Some text3"))
+//            .add(FormLabelCollectionItem("label4")
+//                .text("Some text4"))
+        let header = FormHeaderFooterContainer("header1")
+            .element(FormLabelStackControlElement("textLabel")
+                .isMain(true)
+                .text("Some label 1")
+                .numberOfLines(0))
+//            .element(FormImageStackControlElement("image")
+//                .isMain(true)
+//                .image(UIImage(named: "lemur1"))
+//                .fixedWidth(40)
+//                .fixedHeigth(40))
+//            .element(FormTextViewStackControlElement("textView")
+//                .isMain(true)
+//                .text("Some label 1\nrttryry\ntdfgdfgdf\nkhkjhkj")
+//                .placeholder("Some placeholder")
+//                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
+//                    guard let `string` = string else { return true }
+//                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
+//                    return newString.count >= 50 ? false : true
+//                }))
+            .insets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
 
-        let group = FormGroup(header: collection, [control], footer: nil)
+        let group = FormGroup(header: header, [control], footer: nil)
 
         try? formView.addGroup(group)
 //        try? formView.addControl(control)
@@ -114,9 +134,10 @@ class ViewController: UIViewController {
         
         actionSheet.addAction(UIAlertAction(title: "Change textLabel", style: .default, handler: { [weak self] (action) in
             guard let `self` = self else { return }
-            guard let item = self.formView.collectionItem(name: "label1") as? FormLabelCollectionItem else { return }
+            guard let collection = self.formView.collection("header1") as? FormHeaderFooterContainer else { return }
+            guard let element = collection.element as? FormLabelStackControlElement else { return }
             
-            item.text = "Test\ntest\ntest\ntest"
+            element.text = "Test\ntest\ntest\ntest"
             
 //            guard let control = self.formView.control(name: "testStackControl") as? FormStackControl else { return }
 //            guard let element = control.element(by: "textLabel") as? FormLabelStackControlElement else { return }

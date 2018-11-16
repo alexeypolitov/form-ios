@@ -158,15 +158,28 @@ extension FormView {
         return nil
     }
     
-    func collectionItem(name: String) -> FormCollectionItem? {
+    func collection(_ name: String) -> FormHeaderFooter? {
         
         for group in storedGroups {
-            if let item = group.headerCollection?.item(name: name) {
-                return item
-            } else if let item = group.footerCollection?.item(name: name) {
-                return item
+            if let header = group.headerCollection {
+                if header.name == name {
+                    return header
+                }
             }
         }
+        
+        return nil
+    }
+    
+    func collectionItem(name: String) -> FormCollectionItem? {
+        
+//        for group in storedGroups {
+//            if let item = group.headerCollection?.item(name: name) {
+//                return item
+//            } else if let item = group.footerCollection?.item(name: name) {
+//                return item
+//            }
+//        }
         
         return nil
     }
@@ -230,24 +243,26 @@ extension FormView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if storedGroups.count > 0, let collection = storedGroups[section].headerCollection {
-            let collectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: collection.viewClass)) as! FormCollectionView
-            collection.prepare(collectionView: collectionView)            
-            return collectionView
+            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: collection.viewClass)) as! FormHeaderFooterView
+            collection.prepare(headerView)
+//            print("\(headerView.contentView.constraints)")
+            return headerView
         }
         return nil
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if storedGroups.count > 0, let collection = storedGroups[section].headerCollection {
-            return collection.height(maxWidth: tableView.frame.width)
-        }
-        return 0
-    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        if storedGroups.count > 0, let collection = storedGroups[section].headerCollection {
+//            return collection.height(maxWidth: tableView.frame.width)
+//        }
+//        return 0
+//    }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if storedGroups.count > 0, let collection = storedGroups[section].footerCollection {
             let collectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: collection.viewClass)) as! FormCollectionView
             collection.prepare(collectionView: collectionView)
+            
             return collectionView
         }
         return nil

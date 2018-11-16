@@ -9,11 +9,11 @@
 import Foundation
 
 open class FormGroup {
-    var headerCollection: FormCollection?
+    var headerCollection: FormHeaderFooter?
     var controls: [FormControl] = []
     var footerCollection: FormCollection?
     
-    init(header: FormCollection? = nil, _ controls: [FormControl] = [], footer: FormCollection? = nil) {
+    init(header: FormHeaderFooter? = nil, _ controls: [FormControl] = [], footer: FormCollection? = nil) {
         self.headerCollection = header
         self.controls = controls
         self.footerCollection = footer
