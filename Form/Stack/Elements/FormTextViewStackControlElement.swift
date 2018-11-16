@@ -12,7 +12,7 @@ open class FormTextViewStackControlElement: ExtendedTextView, FormStackControlEl
     
     var isMain: Bool
     let name: String
-    var stackDelegate: FormStackControlElementDelegate?
+//    var stackDelegate: FormStackControlElementDelegate?
     var layoutDelegate: FormStackControlElementLayoutDelegate?
     
     var onChange: ((FormTextViewStackControlElement, String?) -> Void)?
@@ -52,9 +52,12 @@ open class FormTextViewStackControlElement: ExtendedTextView, FormStackControlEl
         
     }
     
-    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-        stackDelegate = delegate
+    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+        self.layoutDelegate = layoutDelegate
     }
+//    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
+//        stackDelegate = delegate
+//    }
     
     open override func onTextDidChange(notification: Notification) {
         super.onTextDidChange(notification: notification)
@@ -64,7 +67,8 @@ open class FormTextViewStackControlElement: ExtendedTextView, FormStackControlEl
 
         // Resize the cell only when cell's size is changed
         if size.height != newSize.height {
-            self.stackDelegate?.updateControl()
+            layoutDelegate?.updateControlLayout(element: self)
+//            self.stackDelegate?.updateControl()
         }
 
     }
@@ -97,6 +101,11 @@ extension FormTextViewStackControlElement {
     
     func placeholder(_ placeholder: String) -> FormTextViewStackControlElement {
         self.placeholder = placeholder
+        return self
+    }
+    
+    func backgroundColor(_ backgroundColor: UIColor?) -> FormTextViewStackControlElement {
+        self.backgroundColor = backgroundColor
         return self
     }
     

@@ -27,4 +27,9 @@ open class FormControl: NSObject {
     open func prepare(cell: UITableViewCell) {
         linkedCell = cell        
     }
+    
+    func updateFormView() {
+        guard let formView = linkedCell?.superview?.superview as? FormView else { return }
+        formView.updateControls()
+    }
 }

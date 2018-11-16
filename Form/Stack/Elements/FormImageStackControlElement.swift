@@ -12,12 +12,12 @@ class FormImageStackControlElement: UIImageView, FormStackControlElement, FormSt
 
     var isMain: Bool
     let name: String
-    var stackDelegate: FormStackControlElementDelegate?
+//    var stackDelegate: FormStackControlElementDelegate?
     var layoutDelegate: FormStackControlElementLayoutDelegate?
     
     open override var image: UIImage? {
         didSet {
-            stackDelegate?.updateControl()
+//            stackDelegate?.updateControl()
             layoutDelegate?.updateControlLayout(element: self)
         }
     }
@@ -45,9 +45,13 @@ class FormImageStackControlElement: UIImageView, FormStackControlElement, FormSt
         self.contentMode = .scaleAspectFit        
     }
     
-    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-        stackDelegate = delegate
+    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+        self.layoutDelegate = layoutDelegate
     }
+    
+//    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
+//        stackDelegate = delegate
+//    }
 
     // MARK: - FormStackControlElementSizing
     private var _fixedWidth:CGFloat?
@@ -92,6 +96,11 @@ extension FormImageStackControlElement {
     
     func fixedHeigth(_ height: CGFloat?) -> FormImageStackControlElement {
         self.fixedHeigth = height
+        return self
+    }
+    
+    func backgroundColor(_ backgroundColor: UIColor?) -> FormImageStackControlElement {
+        self.backgroundColor = backgroundColor
         return self
     }
     

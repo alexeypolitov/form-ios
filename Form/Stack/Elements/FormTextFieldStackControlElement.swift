@@ -12,7 +12,7 @@ open class FormTextFieldStackControlElement: UITextField, FormStackControlElemen
     
     var isMain: Bool
     let name: String
-    var stackDelegate: FormStackControlElementDelegate?
+//    var stackDelegate: FormStackControlElementDelegate?
     var layoutDelegate: FormStackControlElementLayoutDelegate?
     
     var onChange: ((FormTextFieldStackControlElement, String?) -> Void)?
@@ -47,9 +47,12 @@ open class FormTextFieldStackControlElement: UITextField, FormStackControlElemen
         
     }
     
-    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-        stackDelegate = delegate
+    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+        self.layoutDelegate = layoutDelegate
     }
+//    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
+//        stackDelegate = delegate
+//    }
     
 }
 
@@ -79,6 +82,11 @@ extension FormTextFieldStackControlElement {
     
     func placeholder(_ placeholder: String) -> FormTextFieldStackControlElement {
         self.placeholder = placeholder
+        return self
+    }
+    
+    func backgroundColor(_ backgroundColor: UIColor?) -> FormTextFieldStackControlElement {
+        self.backgroundColor = backgroundColor
         return self
     }
     

@@ -12,16 +12,10 @@ open class FormSwitchStackControlElement: UISwitch, FormStackControlElement {
 
     var isMain: Bool
     let name: String
-    var stackDelegate: FormStackControlElementDelegate?
+//    var stackDelegate: FormStackControlElementDelegate?
     var layoutDelegate: FormStackControlElementLayoutDelegate?
     
     var onChange: ((FormSwitchStackControlElement, Bool) -> Void)?
-    
-    open override var isOn: Bool {
-        didSet {
-            stackDelegate?.updateControl()
-        }
-    }
     
     public override init(frame: CGRect) {
         fatalError("Use init()")
@@ -47,9 +41,13 @@ open class FormSwitchStackControlElement: UISwitch, FormStackControlElement {
         self.addTarget(self, action: #selector(self.onChangeEvent(_:)), for: .valueChanged)
     }
     
-    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-        stackDelegate = delegate
+    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+        self.layoutDelegate = layoutDelegate
     }
+    
+//    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
+//        stackDelegate = delegate
+//    }
         
     // MARK: - Actions
     @objc private func onChangeEvent(_ sender: Any) {
@@ -73,6 +71,11 @@ extension FormSwitchStackControlElement {
     
     func onChange(_ handler: ((FormSwitchStackControlElement, Bool) -> Void)?) -> FormSwitchStackControlElement {
         onChange = handler
+        return self
+    }
+    
+    func backgroundColor(_ backgroundColor: UIColor?) -> FormSwitchStackControlElement {
+        self.backgroundColor = backgroundColor
         return self
     }
     

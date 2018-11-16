@@ -12,19 +12,19 @@ open class FormLabelStackControlElement: ExtendedLabel, FormStackControlElement 
     
     var isMain: Bool
     let name: String
-    var stackDelegate: FormStackControlElementDelegate?
+//    var stackDelegate: FormStackControlElementDelegate?
     var layoutDelegate: FormStackControlElementLayoutDelegate?
     
     open override var text: String? {
         didSet {
-            stackDelegate?.updateControl()
+//            stackDelegate?.updateControl()
             layoutDelegate?.updateControlLayout(element: self)
         }
     }
     
     open override var attributedText: NSAttributedString? {
         didSet {
-            stackDelegate?.updateControl()
+//            stackDelegate?.updateControl()
             layoutDelegate?.updateControlLayout(element: self)
         }
     }
@@ -57,9 +57,12 @@ open class FormLabelStackControlElement: ExtendedLabel, FormStackControlElement 
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
     }
     
-    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-        stackDelegate = delegate
+    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+        self.layoutDelegate = layoutDelegate
     }
+//    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
+//        stackDelegate = delegate
+//    }
     
 }
 

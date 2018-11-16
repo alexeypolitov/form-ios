@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol FormStackControlElementDelegate {
-    func updateControl()
-    func buildLayout()
-}
+//protocol FormStackControlElementDelegate {
+//    func updateControl()
+//    func buildLayout()
+//}
 
 protocol FormStackControlElementLayoutDelegate {
-    func updateControlLayout(element: FormStackControlElement)
+    func updateControlLayout(element: FormStackControlElement) //, withoutReload: Bool)
 }
 
 protocol FormStackControlElementSizing {
@@ -26,10 +26,11 @@ protocol FormStackControlElement {
     
     var isMain: Bool { get set }
     var name: String { get }
-    var stackDelegate: FormStackControlElementDelegate? { get set }
+//    var stackDelegate: FormStackControlElementDelegate? { get set }
     var layoutDelegate: FormStackControlElementLayoutDelegate? { get set }
+    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?)
     
-    func prepareStackDelegate(delegate: FormStackControlElementDelegate)
+//    func prepareStackDelegate(delegate: FormStackControlElementDelegate)
     
 }
 

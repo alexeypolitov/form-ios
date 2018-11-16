@@ -21,7 +21,7 @@ open class FormStackControl: FormControl, FormControlSelectable {
         
         precondition(elements.filter({$0.isMain}).count <= 1, "Only one element could be main")
         
-        elements.forEach({$0.prepareStackDelegate(delegate: self)})
+//        elements.forEach({$0.prepareStackDelegate(delegate: self)})
         self.elements = elements
     }
 
@@ -110,29 +110,30 @@ extension FormStackControl: FormStackControlCellDataSource {
 
 // MARK: - FormStackControlElementDelegate
 
-extension FormStackControl: FormStackControlElementDelegate {
-    
-    func updateControl() {
-        guard let formView = linkedCell?.superview?.superview as? FormView else { return }
-        formView.updateControls()
-    }
-    
-    func buildLayout() {
-        guard let `linkedCell` = linkedCell as? FormStackControlCell else { return }
-        linkedCell.buildLayout()
-        
-        updateControl()
-    }
-    
-}
+//extension FormStackControl: FormStackControlElementDelegate {
+//    
+//    func updateControl() {
+////        guard let formView = linkedCell?.superview?.superview as? FormView else { return }
+////        formView.updateControls()
+//    }
+//    
+//    func buildLayout() {
+//        guard let `linkedCell` = linkedCell as? FormStackControlCell else { return }
+//        linkedCell.buildLayout()
+//        
+////        updateControl()
+//    }
+//    
+//}
 
 // MARK: - FormStackControlElementLayoutDelegate
 
 extension FormStackControl: FormStackControlElementLayoutDelegate {
     
     func updateControlLayout(element: FormStackControlElement) {
-        prepareElements()
-        buildLayout()
+        updateFormView()
+//        prepareElements()
+//        buildLayout()
     }
     
 }
@@ -142,7 +143,8 @@ extension FormStackControl: FormStackControlElementLayoutDelegate {
 extension FormStackControl {
     
     func add(_ element: FormStackControlElement) -> FormStackControl {
-        element.prepareStackDelegate(delegate: self)
+//        element.prepareStackDelegate(delegate: self)
+        element.layoutDelegate(self)
         elements.append(element)
         return self
     }

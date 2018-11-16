@@ -17,6 +17,7 @@ class TestViewController: UIViewController {
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Reload", style: .plain, target: self, action: #selector(self.onReload))
         
+        tableView.register(UINib(nibName: "TestHeaderFooterView", bundle: nil), forCellReuseIdentifier: "TestHeader")
         
     }
     
@@ -46,9 +47,15 @@ extension TestViewController: UITableViewDataSource {
     
 }
 
-//extension TestViewController: UITableViewDelegate {
-//    
+extension TestViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let test = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TestHeader")
+        
+        return test
+    }
+
 //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 //        print("2: \(cell.contentView.constraints)")
 //    }
-//}
+}

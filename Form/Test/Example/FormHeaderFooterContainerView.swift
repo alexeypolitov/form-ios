@@ -25,7 +25,6 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
     override func onUpdateLayout() {
         
         removeStoredConstrains()
-//        contentView.removeConstraints(contentView.constraints)
         
         guard let `dataSource` = dataSource else { return }
         guard let element = dataSource.formHeaderFooterContainerViewElement(self) else { return }
@@ -36,9 +35,7 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
         contentView.addSubview(elementView)
         
         storeConstrain(view: elementView, constrain: elementView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: elementInsets.top))
-        
-//        storeConstrain(view: contentView, constrain: contentView.bottomAnchor.constraint(equalTo: elementView.bottomAnchor, constant: elementInsets.bottom))
-        storeConstrain(view: elementView, constrain: elementView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: elementInsets.bottom * -1))
+        storeConstrain(view: contentView, constrain: contentView.bottomAnchor.constraint(equalTo: elementView.bottomAnchor, constant: elementInsets.bottom), priority: .defaultHigh)
 
         if let elementSizing = element as? FormStackControlElementSizing {
             if let fixedHeigth = elementSizing.fixedHeigth {
@@ -67,7 +64,7 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
 //            if let elementSizing = element as? FormStackControlElementSizing, elementSizing.fixedWidth != nil {
 //                // do noting
 //            } else {
-                storeConstrain(view: elementView, constrain: elementView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: elementInsets.right * -1))
+                storeConstrain(view: elementView, constrain: elementView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: elementInsets.right * -1), priority: .defaultHigh)
 //            }
 //        }
     }

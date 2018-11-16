@@ -43,27 +43,27 @@ class ViewController: UIViewController {
 //                print("did selected")
 //            })
         
-//        let control = FormStackControl("testStackControl")
-//            .add(FormTextViewStackControlElement("textView")
-//                .isMain(true)
-//                .text("Some label 1")
-//                .placeholder("Some placeholder")
-//                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
-//                    guard let `string` = string else { return true }
-//                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
-//                    return newString.count >= 50 ? false : true
-//                }))
-        
         let control = FormStackControl("testStackControl")
-            .add(FormImageStackControlElement("image")
-                .isMain(true)
-                .image(UIImage(named: "lemur1"))
-                .fixedWidth(40)
-                .fixedHeigth(40))
-            .add(FormLabelStackControlElement("textLabel")
+            .add(FormTextViewStackControlElement("textView")
                 .isMain(true)
                 .text("Some label 1")
-                .numberOfLines(0))
+                .placeholder("Some placeholder")
+                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
+                    guard let `string` = string else { return true }
+                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
+                    return newString.count >= 50 ? false : true
+                }))
+        
+//        let control = FormStackControl("testStackControl")
+//            .add(FormImageStackControlElement("image")
+//                .isMain(true)
+//                .image(UIImage(named: "lemur1"))
+//                .fixedWidth(40)
+//                .fixedHeigth(40))
+//            .add(FormLabelStackControlElement("textLabel")
+//                .isMain(true)
+//                .text("Some label 1")
+//                .numberOfLines(0))
 //        let collection = FormCollection()
 //            .add(FormLabelCollectionItem("label1")
 //                .text("Some text1")
@@ -75,24 +75,25 @@ class ViewController: UIViewController {
 //            .add(FormLabelCollectionItem("label4")
 //                .text("Some text4"))
         let header = FormHeaderFooterContainer("header1")
-            .element(FormLabelStackControlElement("textLabel")
-                .isMain(true)
-                .text("Some label 1")
-                .numberOfLines(0))
+//            .element(FormLabelStackControlElement("textLabel")
+//                .isMain(true)
+//                .text("Some label 1")
+//                .numberOfLines(0))
 //            .element(FormImageStackControlElement("image")
 //                .isMain(true)
 //                .image(UIImage(named: "lemur1"))
 //                .fixedWidth(40)
-//                .fixedHeigth(40))
-//            .element(FormTextViewStackControlElement("textView")
-//                .isMain(true)
-//                .text("Some label 1\nrttryry\ntdfgdfgdf\nkhkjhkj")
-//                .placeholder("Some placeholder")
-//                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
-//                    guard let `string` = string else { return true }
-//                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
-//                    return newString.count >= 50 ? false : true
-//                }))
+//                .fixedHeigth(40)
+//                .backgroundColor(UIColor.yellow))
+            .element(FormTextViewStackControlElement("textView")
+                .isMain(true)
+                .text("Some label 1\nrttryry\ntdfgdfgdf\nkhkjhkj")
+                .placeholder("Some placeholder")
+                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
+                    guard let `string` = string else { return true }
+                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
+                    return newString.count >= 50 ? false : true
+                }))
             .insets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
 
         let group = FormGroup(header: header, [control], footer: nil)

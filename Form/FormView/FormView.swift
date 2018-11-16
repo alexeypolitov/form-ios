@@ -28,6 +28,8 @@ class FormView: UIView {
         
 //        tv.estimatedRowHeight = 44.0
 //        tv.rowHeight = UITableView.automaticDimension
+//        tv.estimatedSectionHeaderHeight = 100
+//        tv.sectionHeaderHeight = UITableView.automaticDimension
         
         addSubview(tv)
         
@@ -245,7 +247,6 @@ extension FormView: UITableViewDelegate {
         if storedGroups.count > 0, let collection = storedGroups[section].headerCollection {
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: collection.viewClass)) as! FormHeaderFooterView
             collection.prepare(headerView)
-//            print("\(headerView.contentView.constraints)")
             return headerView
         }
         return nil

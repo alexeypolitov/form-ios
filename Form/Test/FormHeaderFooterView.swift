@@ -13,7 +13,6 @@ open class FormHeaderFooterView: UITableViewHeaderFooterView {
     public override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         translatesAutoresizingMaskIntoConstraints = false
-        print("iiii")
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -42,7 +41,10 @@ open class FormHeaderFooterView: UITableViewHeaderFooterView {
     
     private var storedConstrains: [StoredConstrain] = []
     
-    func storeConstrain(view: UIView, constrain: NSLayoutConstraint) {
+    func storeConstrain(view: UIView, constrain: NSLayoutConstraint, priority: UILayoutPriority? = nil) {
+        if let `priority` = priority {
+            constrain.priority = priority
+        }
         constrain.isActive = true
         if let stored = storedConstrains.first(where: {$0.view == view}) {
             stored.constrains.append(constrain)
