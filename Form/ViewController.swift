@@ -16,107 +16,27 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Actions", style: .plain, target: self, action: #selector(self.onAction(_:)))
-        
-//        let control = FormStackControl("testStackControl")
-//            .add(FormBadgeStackControlElement("badge")
-//                .text("OK"))
-//            .add(FormLabelStackControlElement("textLabel")
-//                .isMain(true)
-//                .text("Some label 1")
-//                .numberOfLines(0))
-//            .add(FormTextFieldStackControlElement("textField")
-//                .text("Some text")
-//                .placeholder("Some placeholder")
-//                .textAlignment(.right)
-//                .onDidBeginEditing({ (element) in
-//                  print("ok 1")
-//                })
-//                .onDidEndEditing({ (element, reason) in
-//                  print("ok 2")
-//                }))
-//            .add(FormSwitchStackControlElement("switch")
-//                .isOn(true)
-//                .onChange({ (element, isOn) in
-//                    print("isOn: \(isOn)")
-//                }))
-//            .onSelect({ (control) in
-//                print("did selected")
-//            })
-        
-//        let header = Form.header("testStackControl")
-//            .element(Form.textView("textView")
-//                .isMain(true)
-//            .text("Some label 1")
-//            .placeholder("Some placeholder")
-//            .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
-//                guard let `string` = string else { return true }
-//                let newString = (string as NSString).replacingCharacters(in: range, with: changes)
-//                return newString.count >= 50 ? false : true
-//            }))
-//
-//        let control = FormCellContainer("testStackControl")
-//            .element(Form.textView("textView")
-//                .isMain(true)
-//                .text("Some label 1")
-//                .placeholder("Some placeholder")
-//                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
-//                    guard let `string` = string else { return true }
-//                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
-//                    return newString.count >= 50 ? false : true
-//                }))
-//            .insets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        
-//        let control = FormStackControl("testStackControl")
-//            .add(FormImageStackControlElement("image")
-//                .isMain(true)
-//                .image(UIImage(named: "lemur1"))
-//                .fixedWidth(40)
-//                .fixedHeigth(40))
-//            .add(FormLabelStackControlElement("textLabel")
-//                .isMain(true)
-//                .text("Some label 1")
-//                .numberOfLines(0))
-//        let collection = FormCollection()
-//            .add(FormLabelCollectionItem("label1")
-//                .text("Some text1")
-//                .insets(UIEdgeInsets(top: 50, left:0, bottom: 60, right: 0)))
-//            .add(FormLabelCollectionItem("label2")
-//                .text("Some text2"))
-//            .add(FormLabelCollectionItem("label3")
-//                .text("Some text3"))
-//            .add(FormLabelCollectionItem("label4")
-//                .text("Some text4"))
-//        let header = Form.header("header1")
-//            .element(FormLabelStackControlElement("textLabel")
-//                .isMain(true)
-//                .text("Some label 1")
-//                .numberOfLines(0))
-//            .element(FormImageStackControlElement("image")
-//                .isMain(true)
-//                .image(UIImage(named: "lemur1"))
-//                .fixedWidth(40)
-//                .fixedHeigth(40)
-//                .backgroundColor(UIColor.yellow))
-//            .element(Form.textView("textView")
-//                .isMain(true)
-//                .text("Some label 1\nrttryry\ntdfgdfgdf\nkhkjhkj")
-//                .placeholder("Some placeholder")
-//                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
-//                    guard let `string` = string else { return true }
-//                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
-//                    return newString.count >= 50 ? false : true
-//                }))
-//            .insets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
 
+        // without container
+//        let group = Form.group()
+//            .header(
+//                Form.label("textLabel1")
+//                    .text("Some label 1")
+//                    .numberOfLines(0))
+//            .add(Form.label("textLabel2").text("Some label 2"))
+//            .add(Form.label("textLabel3").text("Some label 3"))
+//            .add(Form.label("textLabel4").text("Some label 4"))
+        
+        // with container
         let group = Form.group()
             .header(
-                Form.header("header1")
+                Form.header("header")
                     .element(
                         Form.label("textLabel")
                             .text("Some label 1")
                             .numberOfLines(0)))
             .add(
-                Form.row("")
+                Form.row("textRow")
                     .element(
                         Form.label("textLabel")
                             .text("Some label 1")

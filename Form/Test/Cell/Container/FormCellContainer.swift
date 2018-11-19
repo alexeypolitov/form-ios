@@ -14,11 +14,24 @@ class FormCellContainer: FormCell {
     var element: FormControllable?
     var insets: UIEdgeInsets = UIEdgeInsets.zero
     
+    override init(_ name: String = UUID().uuidString) {
+        super.init(name)
+        
+        self.insets = FormHeaderFooterContainer.appearance.insets
+    }
+    
     override func onPrepare(_ view: FormCellView) {
         guard let `view` = view as? FormCellContainerView else { return }
         
         view.dataSource = self
     }
+    
+    class Appearance {
+        var insets: UIEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+    }
+    
+    static let appearance = Appearance()
+    
 }
 
 extension FormCellContainer: FormCellContainerViewDataSource {

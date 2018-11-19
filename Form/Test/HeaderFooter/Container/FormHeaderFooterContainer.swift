@@ -14,11 +14,23 @@ class FormHeaderFooterContainer: FormHeaderFooter {
     var element: FormControllable?
     var insets: UIEdgeInsets = UIEdgeInsets.zero
     
+    override init(_ name: String = UUID().uuidString) {
+        super.init(name)
+        
+        self.insets = FormHeaderFooterContainer.appearance.insets
+    }
+    
     override func onPrepare(_ view: FormHeaderFooterView) {
         guard let `view` = view as? FormHeaderFooterContainerView else { return }
         
         view.dataSource = self
     }
+    
+    class Appearance {
+        var insets: UIEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+    }
+    
+    static let appearance = Appearance()
     
 }
 

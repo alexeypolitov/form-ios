@@ -29,6 +29,11 @@ extension FormGroup {
         return self
     }
     
+    func header(_ control: FormControllable) -> FormGroup {
+        self.header = FormHeaderFooterContainer().element(control)
+        return self
+    }
+    
     func footer(_ container: FormHeaderFooter) -> FormGroup {
         self.footer = container
         return self
@@ -36,6 +41,11 @@ extension FormGroup {
     
     func add(_ container: FormCell) -> FormGroup {
         cells.append(container)
+        return self
+    }
+    
+    func add(_ control: FormControllable) -> FormGroup {
+        cells.append(FormCellContainer().element(control))
         return self
     }
     
