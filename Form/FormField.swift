@@ -17,10 +17,10 @@ open class FormField: NSObject {
     private var _value: Any? {
         didSet {
             if Thread.isMainThread {
-                onChange?(_value)
+                onChange?(_value, .change)
             } else {
                 DispatchQueue.main.async {
-                    self.onChange?(self._value)
+                    self.onChange?(self._value, .change)
                 }
             }
         }
@@ -42,8 +42,13 @@ open class FormField: NSObject {
     }
     var validators: [FormValidator] = []
     var inlineValidators: [FormValidator] = []
-    var onChange: ((Any?) -> Void)?
+    enum ValueStatus {
+        case change
+        case initial
+    }
+    var onChange: ((Any?, ValueStatus) -> Void)?
     var delegate: FormFieldDelegate?
+    var initialOnChangeControls: [String] = []
     
     init(_ name: String) {
         self.name = name
@@ -51,6 +56,12 @@ open class FormField: NSObject {
     
     func setValueFromFormView(_ value: Any?) {
         self._value = value
+    }
+    
+    func processInitialControl(name: String) {
+        if let _ = initialOnChangeControls.first(where: {$0 == name}) {
+            onChange?(_value, .initial)                        
+        }
     }
     
     func validate() -> (Bool, String?) {
@@ -123,11 +134,18 @@ extension FormField {
         return self
     }
     
-    func onChange(_ onChange: ((Any?) -> Void)?) -> FormField {
+    func onChange(controls: [String]? = nil, _ onChange: ((Any?, ValueStatus) -> Void)?) -> FormField {
         self.onChange = onChange
+        if let `controls` = controls {
+            self.initialOnChangeControls = controls
+        }
         return self
     }
     
+    func initialOnChangeControls(_ initialOnChangeControls: [String]) -> FormField {
+        self.initialOnChangeControls = initialOnChangeControls
+        return self
+    }
 }
 
 extension Form {

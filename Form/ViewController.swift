@@ -25,19 +25,29 @@ class ViewController: UIViewController {
                     Former.minLength(minLength: 3, "SignUp.Name.Validation.BetweedLength.Error"),
                     Former.required("SignUp.Name.Validation.Required.Error")])
                 .inlineValidator(Former.maxLength(maxLength: 20, "SignUp.Name.Validation.BetweedLength.Error"))
-                .onChange({ (value) in
-                    print("test: \(value)")
+                .onChange(controls: ["testLabel"], { (value, status) in
+//                    print("test: \(value) - \(status)")
+                    guard let control = self.formView.control("testLabel") as? FormLabelControl else { return }
+                    
+                    let _ = control.text("dddddd")
                 }))
             .add(Form.field("email"))
             .add(Form.field("password"))
-            .add(Form.field("prWay"))
+            .add(Form.field("prWay").onChange(controls: ["prWayLabel"], { (value, status) in
+                guard let control = self.formView.control("prWayLabel") as? FormLabelControl else { return }
+                if value != nil {
+                    let _ = control.text("Value \(value!)")
+                } else {
+                    let _ = control.text("選択してください")
+                }
+            }))
         
         // FormView
         
         let _ = formView.bind(form)
         try? formView.addGroup(Former.group()
-//            .header(Former.label().text("以下をご入力ください"))
-            .header(Former.textField("nameTextField1").bind("name").placeholder("氏名"))
+            .header(Former.label("testLabel").text("以下をご入力ください"))
+//            .header(Former.textField("nameTextField1").bind("name").placeholder("氏名"))
             .add(Former.textField("nameTextField").bind("name").placeholder("氏名"))
             .add(Former.textField("emailTextField").placeholder("メールアドレス"))
 //                .validators([
@@ -52,10 +62,14 @@ class ViewController: UIViewController {
         try? formView.addGroup(Former.group()
             .header(Former.label().text("どこで◯◯を知りましたか？"))
             .add(Former.label("prWayLabel")
-                .text("選択してください")
                 .accessoryType(.disclosureIndicator)
                 .onSelect({ (control) in
-                    print("test")
+                    if self.form.field("prWay")?.value != nil {
+                        self.form.field("prWay")?.value = nil
+                    } else {
+                        self.form.field("prWay")?.value = "TestValue"
+                    }
+                    
                 }))
             .footer(Former.label().text("利用規約にを確認し、同意しました。"))
         )

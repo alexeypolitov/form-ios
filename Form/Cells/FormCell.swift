@@ -25,12 +25,12 @@ open class FormCell {
         self.name = name
     }
     
-    func prepare(_ view: FormCellView) {
+    func prepare(_ view: FormCellView, formView: FormView, initialControls: [String]?) {
         linkedView = view
-        onPrepare(view)
+        onPrepare(view, formView: formView, initialControls: initialControls)
     }
     
-    open func onPrepare(_ view: FormCellView) {
+    func onPrepare(_ view: FormCellView, formView: FormView, initialControls: [String]?) {
         // custom code
     }
     

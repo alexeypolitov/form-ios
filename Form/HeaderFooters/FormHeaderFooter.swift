@@ -19,12 +19,12 @@ open class FormHeaderFooter {
         self.name = name
     }
     
-    func prepare(_ view: FormHeaderFooterView) {
+    func prepare(_ view: FormHeaderFooterView, formView: FormView, initialControls: [String]?) {
         linkedView = view
-        onPrepare(view)
+        onPrepare(view, formView: formView, initialControls: initialControls)
     }
     
-    open func onPrepare(_ view: FormHeaderFooterView) {
+    func onPrepare(_ view: FormHeaderFooterView, formView: FormView, initialControls: [String]?) {
         // custom code
     }
     

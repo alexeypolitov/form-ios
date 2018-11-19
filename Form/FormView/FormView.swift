@@ -81,6 +81,10 @@ class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
         return field.value
     }
     
+    func processInitialContol(name: String) {
+        bindForm?.processInitialControl(name: name)
+    }
+    
     // MARK: - FormBindDelegate
     
     func formBindValueChanged(bindName: String, value: Any?) {
@@ -278,7 +282,7 @@ extension FormView: UITableViewDataSource {
             cell.accessoryType = .none
         }
         
-        row.prepare(cell)
+        row.prepare(cell, formView: self, initialControls: bindForm?.initialOnChangeControls)        
 
         return cell
     }
@@ -294,7 +298,7 @@ extension FormView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if storedGroups.count > 0, let header = storedGroups[section].header {
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: header.viewClass)) as! FormHeaderFooterView
-            header.prepare(headerView)
+            header.prepare(headerView, formView: self, initialControls: bindForm?.initialOnChangeControls)
             return headerView
         }
         return nil
@@ -309,7 +313,7 @@ extension FormView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if storedGroups.count > 0, let footer = storedGroups[section].footer {
             let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: footer.viewClass)) as! FormHeaderFooterView
-            footer.prepare(footerView)
+            footer.prepare(footerView, formView: self, initialControls: bindForm?.initialOnChangeControls)
             return footerView
         }
         return nil

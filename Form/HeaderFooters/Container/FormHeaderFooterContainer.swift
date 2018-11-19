@@ -25,10 +25,18 @@ class FormHeaderFooterContainer: FormHeaderFooter {
 
     }
     
-    override func onPrepare(_ view: FormHeaderFooterView) {
+    override func onPrepare(_ view: FormHeaderFooterView, formView: FormView, initialControls: [String]?) {
         guard let `view` = view as? FormHeaderFooterContainerView else { return }
         
         view.dataSource = self
+        
+        if let `initialControls` = initialControls {
+            for initialControl in initialControls {
+                if let _ = control(initialControl) {
+                    formView.processInitialContol(name: initialControl)
+                }
+            }
+        }
     }
     
     override func onProcessed(_ formView: FormView) {

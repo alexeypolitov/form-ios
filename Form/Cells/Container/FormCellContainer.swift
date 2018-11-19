@@ -21,17 +21,24 @@ class FormCellContainer: FormCell, FormCellSelectable {
         self.insets = FormCellContainer.appearance.insets
     }
     
-    override func onPrepare(_ view: FormCellView) {
+    override func onPrepare(_ view: FormCellView, formView: FormView, initialControls: [String]?) {
         guard let `view` = view as? FormCellContainerView else { return }
         
         view.dataSource = self
         
+        if let `initialControls` = initialControls {
+            for initialControl in initialControls {
+                if let _ = control(initialControl) {
+                    formView.processInitialContol(name: initialControl)
+                }
+            }
+        }
     }
     
     override func onProcessed(_ formView: FormView) {
         if let `bindable` = control as? FormBindable {
             bindable.refreshBindValue()
-        }
+        }        
     }
     
     class Appearance {
