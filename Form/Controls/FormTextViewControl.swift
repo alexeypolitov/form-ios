@@ -12,7 +12,7 @@ open class FormTextViewControl: ExtendedTextView, FormControllable {
     
     var isMain: Bool
     let name: String
-    var layoutDelegate: FormStackControlElementLayoutDelegate?
+    var layoutDelegate: FormLayoutable?
     
     var onChange: ((FormTextViewControl, String?) -> Void)?
     var onEndEditing: ((FormTextViewControl) -> Void)?
@@ -52,7 +52,7 @@ open class FormTextViewControl: ExtendedTextView, FormControllable {
         
     }
     
-    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     

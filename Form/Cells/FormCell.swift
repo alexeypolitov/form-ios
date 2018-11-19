@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol FormCellSelectable {
+    var selectionStyle: UITableViewCell.SelectionStyle { get set }
+    var accessoryType: UITableViewCell.AccessoryType { get set }
+    func formCellOnSelect()
+}
+
 open class FormCell {
     
     open var viewClass: FormCellView.Type { return FormCellView.self }

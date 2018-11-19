@@ -12,7 +12,7 @@ open class FormLabelControl: ExtendedLabel, FormControllable {
     
     var isMain: Bool
     let name: String
-    var layoutDelegate: FormStackControlElementLayoutDelegate?
+    var layoutDelegate: FormLayoutable?
     
     open override var text: String? {
         didSet {
@@ -54,7 +54,7 @@ open class FormLabelControl: ExtendedLabel, FormControllable {
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
     }
     
-    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     

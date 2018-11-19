@@ -12,7 +12,7 @@ open class FormSwitcherControl: UISwitch, FormControllable {
 
     var isMain: Bool
     let name: String
-    var layoutDelegate: FormStackControlElementLayoutDelegate?
+    var layoutDelegate: FormLayoutable?
     
     var onChange: ((FormSwitcherControl, Bool) -> Void)?
     
@@ -40,7 +40,7 @@ open class FormSwitcherControl: UISwitch, FormControllable {
         self.addTarget(self, action: #selector(self.onChangeEvent(_:)), for: .valueChanged)
     }
     
-    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     

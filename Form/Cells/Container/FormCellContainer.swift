@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormCellContainer: FormCell {
+class FormCellContainer: FormCell, FormCellSelectable {
 
     override var viewClass: FormCellView.Type { return FormCellContainerView.self }
     var element: FormControllable?    
@@ -33,6 +33,36 @@ class FormCellContainer: FormCell {
     
     static let appearance = Appearance()
     
+    // MARK: - FormCellSelectable
+    var onSelect: ((FormCellContainer) -> Void)?
+    
+    private var _selectionStyle: UITableViewCell.SelectionStyle = .default
+    var selectionStyle: UITableViewCell.SelectionStyle {
+        get {
+            if onSelect == nil {
+                return .none
+            } else {
+                return _selectionStyle
+            }
+        }
+        set {
+            _selectionStyle = newValue
+        }
+    }
+    private var _accessoryType: UITableViewCell.AccessoryType = .none
+    var accessoryType: UITableViewCell.AccessoryType {
+        get {
+            return _accessoryType
+        }
+        set {
+            _accessoryType = newValue
+        }
+    }
+    
+    func formCellOnSelect() {
+        onSelect?(self)
+    }
+    
 }
 
 extension FormCellContainer: FormCellContainerViewDataSource {
@@ -47,12 +77,28 @@ extension FormCellContainer: FormCellContainerViewDataSource {
     
 }
 
-// MARK: - FormStackControlElementLayoutDelegate
+// MARK: - FormLayoutable
 
-extension FormCellContainer: FormStackControlElementLayoutDelegate {
+extension FormCellContainer: FormLayoutable {
     
     func updateControlLayout(element: FormControllable) {
         updateFormView()
+    }
+    
+}
+
+// MARK: - FormSearchable
+
+extension FormCellContainer: FormSearchable {
+    
+    func control(_ name: String) -> FormControllable? {
+        if element?.name == name {
+            return element
+        }
+        if let `element` = element as? FormSearchable {
+            return element.control(name)
+        }
+        return nil
     }
     
 }
@@ -69,6 +115,11 @@ extension FormCellContainer {
     
     func insets(_ insets: UIEdgeInsets) -> FormCellContainer {
         self.insets = insets
+        return self
+    }
+    
+    func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormCellContainer {
+        onSelect = handler
         return self
     }
 }

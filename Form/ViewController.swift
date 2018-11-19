@@ -17,46 +17,25 @@ class ViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Actions", style: .plain, target: self, action: #selector(self.onAction(_:)))
 
-        // without container
-//        let group = Form.group()
-//            .header(
-//                Form.label("textLabel1")
-//                    .text("Some label 1")
-//                    .numberOfLines(0))
-//            .add(Form.label("textLabel2").text("Some label 2"))
-//            .add(Form.label("textLabel3").text("Some label 3"))
-//            .add(Form.label("textLabel4").text("Some label 4"))
-        
-        // test stackview
-        let horizontalContainer = Form.horizontal()
-            .add(Form.label("test1").text("test 1"))
-            .add(Form.label("test2").text("test 2").isMain(true))
-            .add(Form.label("test3").text("test 3"))
-        
-        let verticalContainer = Form.vertical()
-            .add(horizontalContainer)
-            .add(Form.label("test4").text("test 4").textHorizontalAlignment(.right))
-            .add(Form.label("test5").text("test 5"))
-        
-        
-        
         
         // with container
         let group = Form.group()
-//            .add(Form.textView("textLabel").text("Some label 1"))
-            .add(verticalContainer)
-            .header(
-                Form.vertical()
-                    .add(
-                        Form.horizontal()
-                            .add(Form.label("test1").text("test 1"))
-                            .add(Form.label("test2").text("test 2").isMain(true))
-                            .add(Form.label("test3").text("test 3"))
-                    )
-                    .add(Form.label("test4").text("test 4").textHorizontalAlignment(.right))
-                    .add(Form.label("test5").text("test 5")))
+            .add(Form.vertical()
+                .add(Form.textView("textView").placeholder("Enter some text").onChange({(control, string) in
+                    guard let limitLabel = self.formView.control("testLimit") as? FormLabelControl else { return }
+                    
+                    limitLabel.text("\(string?.count ?? 0)/100")
+                }))
+                .add(Form.label("testLimit").text("0/100").textHorizontalAlignment(.right)))
+        
+        
 
-        try? formView.addGroup(group)
+        
+        do {
+            try formView.addGroup(group)
+        } catch {
+            print("error: \(error)")
+        }
 //        try? formView.addControl(control)
         
     }
@@ -93,17 +72,12 @@ class ViewController: UIViewController {
         
         actionSheet.addAction(UIAlertAction(title: "Change textLabel", style: .default, handler: { [weak self] (action) in
             guard let `self` = self else { return }
-            guard let collection = self.formView.collection("header1") as? FormHeaderFooterContainer else { return }
-            guard let element = collection.element as? FormLabelControl else { return }
+            guard let control = self.formView.control("test1") as? FormLabelControl else { return }
             
-            element.text = "Test\ntest\ntest\ntest"
+//            guard let collection = self.formView.collection("header1") as? FormHeaderFooterContainer else { return }
+//            guard let element = collection.element as? FormLabelControl else { return }
             
-//            guard let control = self.formView.control(name: "testStackControl") as? FormStackControl else { return }
-//            guard let element = control.element(by: "textLabel") as? FormLabelStackControlElement else { return }
-//
-//            element.text = "sdfdsfkldsjflkdsjfdlksjflkfdsjkfjdslkfjdslfjdslfjslfjljfdslfjdslfj"
-            
-//            control.formLabel.text = "Some text"
+            control.text = "Test\ntest\ntest\ntest"
             
         }))
         

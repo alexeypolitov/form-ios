@@ -12,7 +12,9 @@ open class FormButtonControl: ExtendedButton, FormControllable, FormSizeable {
     
     var isMain: Bool
     let name: String
-    var layoutDelegate: FormStackControlElementLayoutDelegate?
+    var layoutDelegate: FormLayoutable?
+    
+     var onAction: ((FormButtonControl) -> Void)?
     
     public override init(frame: CGRect) {
         fatalError("Use init()")
@@ -32,10 +34,18 @@ open class FormButtonControl: ExtendedButton, FormControllable, FormSizeable {
         super.init(frame: CGRect.zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.setTitleColor(UIColor.black, for: .normal)
+        self.addTarget(self, action: #selector(self.onActionEvent(_:)), for: .touchUpInside)
     }
     
-    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func onActionEvent(_ sender: Any) {
+        onAction?(self)
     }
     
     // MARK: - FormStackControlElementSizing
@@ -101,6 +111,11 @@ extension FormButtonControl {
 
     func isEnabled(_ isEnabled: Bool) -> FormButtonControl {
         self.isEnabled = isEnabled
+        return self
+    }
+    
+    func onAction(_ handler: ((FormButtonControl) -> Void)?) -> FormButtonControl {
+        onAction = handler
         return self
     }
     

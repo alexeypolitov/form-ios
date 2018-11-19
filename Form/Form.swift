@@ -34,6 +34,10 @@ class Form {
         return FormImageControl(name)
     }
     
+    static func button(_ name: String = UUID().uuidString) -> FormButtonControl {
+        return FormButtonControl(name)
+    }
+    
     static func vertical(_ name: String = UUID().uuidString) -> FormVerticalContainerControl {
         return FormVerticalContainerControl(name)
     }

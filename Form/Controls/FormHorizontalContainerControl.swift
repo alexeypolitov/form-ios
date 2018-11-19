@@ -1,5 +1,5 @@
 //
-//  FormVerticalContainerControl.swift
+//  FormHorizontalContainerControl.swift
 //  Form
 //
 //  Created by Alexey Politov on 2018/11/19.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class FormVerticalContainerControl: UIView, FormControllable {
+class FormHorizontalContainerControl: UIView, FormControllable {
     
     var isMain: Bool
     let name: String
-    var layoutDelegate: FormStackControlElementLayoutDelegate?
+    var layoutDelegate: FormLayoutable?
     var controls: [FormControllable] = []
     var insets: UIEdgeInsets = UIEdgeInsets.zero
     var minimalInset: CGFloat = 8
-
+    
     init(_ name: String = UUID().uuidString, isMain: Bool = false) {
         self.name = name
         self.isMain = isMain
@@ -31,7 +31,7 @@ class FormVerticalContainerControl: UIView, FormControllable {
         fatalError("Use init()")
     }
     
-    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
@@ -49,9 +49,9 @@ class FormVerticalContainerControl: UIView, FormControllable {
             
             addSubview(controlView)
             
-            storeConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: insets.top))
-            storeConstrain(view: controlView, constrain: controlView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: insets.bottom * -1))
-
+            storeConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: self.topAnchor, constant: insets.top))
+            storeConstrain(view: controlView, constrain: controlView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: insets.bottom * -1))
+            
             if let controlSizeable = control as? FormSizeable {
                 if let fixedHeigth = controlSizeable.fixedHeigth {
                     storeConstrain(view: controlView, constrain: controlView.heightAnchor.constraint(equalToConstant: fixedHeigth))
@@ -60,28 +60,28 @@ class FormVerticalContainerControl: UIView, FormControllable {
                     storeConstrain(view: controlView, constrain: controlView.widthAnchor.constraint(equalToConstant: fixedWidth))
                 }
             }
-
+            
             if let lastControlView = lastControl as? UIView {
-                storeConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: lastControlView.bottomAnchor, constant: minimalInset))
+                storeConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: lastControlView.rightAnchor, constant: minimalInset))
             } else {
-                storeConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: self.topAnchor, constant: insets.left))
+                storeConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: insets.left))
             }
-
+            
             if control.isMain {
-                controlView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
+                controlView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
             } else {
-                controlView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
+                controlView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
             }
-
+            
             // is last
             if controls.count - 1 == controlIndex {
-                if let controlSizeable = control as? FormSizeable, controlSizeable.fixedHeigth != nil {
+                if let controlSizeable = control as? FormSizeable, controlSizeable.fixedWidth != nil {
                     // do noting
                 } else {
-                    storeConstrain(view: controlView, constrain: controlView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: insets.right * -1))
+                    storeConstrain(view: controlView, constrain: controlView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: insets.right * -1))
                 }
             }
-
+            
             lastControl = control
             
         }
@@ -127,29 +127,65 @@ class FormVerticalContainerControl: UIView, FormControllable {
         storedConstrains = []
         
     }
+    
+    
+}
 
+// MARK: - FormLayoutable
+
+extension FormHorizontalContainerControl: FormLayoutable {
+    
+    func updateControlLayout(element: FormControllable) {
+        layoutDelegate?.updateControlLayout(element: element)
+    }
+    
+}
+
+// MARK: - FormSearchable
+
+extension FormHorizontalContainerControl: FormSearchable {
+    
+    func control(_ name: String) -> FormControllable? {
+        for control in controls {
+            if control.name == name {
+                return control
+            }
+            if let `control` = control as? FormSearchable {
+                if let result = control.control(name) {
+                    return result
+                }
+            }
+        }
+        
+        return nil
+    }
     
 }
 
 // MARK: - Setters
 
-extension FormVerticalContainerControl {
+extension FormHorizontalContainerControl {
     
-    func isMain(_ isMain: Bool) -> FormVerticalContainerControl {
+    func isMain(_ isMain: Bool) -> FormHorizontalContainerControl {
         self.isMain = isMain
         return self
     }
     
-    func add(_ control: FormControllable) -> FormVerticalContainerControl {
+    func add(_ control: FormControllable) -> FormHorizontalContainerControl {
+        control.layoutDelegate(self)
         self.controls.append(control)
         self.buildLayout()
         return self
     }
     
-    func add(_ controls: [FormControllable]) -> FormVerticalContainerControl {
+    func add(_ controls: [FormControllable]) -> FormHorizontalContainerControl {
+        for control in controls {
+            control.layoutDelegate(self)
+        }
         self.controls.append(contentsOf: controls)
         self.buildLayout()
         return self
     }
     
 }
+

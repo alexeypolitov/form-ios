@@ -12,7 +12,7 @@ class FormImageControl: UIImageView, FormControllable, FormSizeable {
 
     var isMain: Bool
     let name: String
-    var layoutDelegate: FormStackControlElementLayoutDelegate?
+    var layoutDelegate: FormLayoutable?
     
     open override var image: UIImage? {
         didSet {
@@ -43,7 +43,7 @@ class FormImageControl: UIImageView, FormControllable, FormSizeable {
         self.contentMode = .scaleAspectFit        
     }
     
-    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     

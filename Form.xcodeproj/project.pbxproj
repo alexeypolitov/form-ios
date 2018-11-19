@@ -17,10 +17,6 @@
 		291E3D11217A39BD006C3D4D /* ExtendedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E3D0E217A39BD006C3D4D /* ExtendedLabel.swift */; };
 		291E3D14217A3A7B006C3D4D /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E3D13217A3A7B006C3D4D /* FormView.swift */; };
 		291E3D16217A3B13006C3D4D /* FormGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E3D15217A3B13006C3D4D /* FormGroup.swift */; };
-		291E3D1F217A3BDC006C3D4D /* OldFormControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E3D1D217A3BDC006C3D4D /* OldFormControlCell.swift */; };
-		291E3D20217A3BDC006C3D4D /* OldFormControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E3D1E217A3BDC006C3D4D /* OldFormControl.swift */; };
-		291E3D24217A3CBD006C3D4D /* FormStackControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E3D22217A3CBD006C3D4D /* FormStackControl.swift */; };
-		291E3D25217A3CBD006C3D4D /* FormStackControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E3D23217A3CBD006C3D4D /* FormStackControlCell.swift */; };
 		299040FE219E525D007DF31F /* FormHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299040FD219E525D007DF31F /* FormHeaderFooterView.swift */; };
 		29904102219E5283007DF31F /* FormHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29904101219E5283007DF31F /* FormHeaderFooter.swift */; };
 		29904105219E56DC007DF31F /* FormHeaderFooterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29904104219E56DC007DF31F /* FormHeaderFooterContainer.swift */; };
@@ -57,10 +53,6 @@
 		291E3D0E217A39BD006C3D4D /* ExtendedLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtendedLabel.swift; sourceTree = "<group>"; };
 		291E3D13217A3A7B006C3D4D /* FormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 		291E3D15217A3B13006C3D4D /* FormGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormGroup.swift; sourceTree = "<group>"; };
-		291E3D1D217A3BDC006C3D4D /* OldFormControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldFormControlCell.swift; sourceTree = "<group>"; };
-		291E3D1E217A3BDC006C3D4D /* OldFormControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldFormControl.swift; sourceTree = "<group>"; };
-		291E3D22217A3CBD006C3D4D /* FormStackControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormStackControl.swift; sourceTree = "<group>"; };
-		291E3D23217A3CBD006C3D4D /* FormStackControlCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormStackControlCell.swift; sourceTree = "<group>"; };
 		299040FD219E525D007DF31F /* FormHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormHeaderFooterView.swift; sourceTree = "<group>"; };
 		29904101219E5283007DF31F /* FormHeaderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormHeaderFooter.swift; sourceTree = "<group>"; };
 		29904104219E56DC007DF31F /* FormHeaderFooterContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormHeaderFooterContainer.swift; sourceTree = "<group>"; };
@@ -115,10 +107,9 @@
 			isa = PBXGroup;
 			children = (
 				29904112219E771F007DF31F /* Form.swift */,
-				2990410C219E7549007DF31F /* Control */,
-				2990410B219E753E007DF31F /* Cell */,
-				2990410A219E752F007DF31F /* HeaderFooter */,
-				291E3D21217A3C9F006C3D4D /* Stack */,
+				2990410C219E7549007DF31F /* Controls */,
+				2990410B219E753E007DF31F /* Cells */,
+				2990410A219E752F007DF31F /* HeaderFooters */,
 				291E3D12217A3A48006C3D4D /* FormView */,
 				291E3D05217A3959006C3D4D /* Libraries */,
 				291E3CF3217A3942006C3D4D /* AppDelegate.swift */,
@@ -146,21 +137,10 @@
 		291E3D12217A3A48006C3D4D /* FormView */ = {
 			isa = PBXGroup;
 			children = (
-				291E3D1E217A3BDC006C3D4D /* OldFormControl.swift */,
-				291E3D1D217A3BDC006C3D4D /* OldFormControlCell.swift */,
 				291E3D15217A3B13006C3D4D /* FormGroup.swift */,
 				291E3D13217A3A7B006C3D4D /* FormView.swift */,
 			);
 			path = FormView;
-			sourceTree = "<group>";
-		};
-		291E3D21217A3C9F006C3D4D /* Stack */ = {
-			isa = PBXGroup;
-			children = (
-				291E3D22217A3CBD006C3D4D /* FormStackControl.swift */,
-				291E3D23217A3CBD006C3D4D /* FormStackControlCell.swift */,
-			);
-			path = Stack;
 			sourceTree = "<group>";
 		};
 		29904103219E56BC007DF31F /* Container */ = {
@@ -172,27 +152,27 @@
 			path = Container;
 			sourceTree = "<group>";
 		};
-		2990410A219E752F007DF31F /* HeaderFooter */ = {
+		2990410A219E752F007DF31F /* HeaderFooters */ = {
 			isa = PBXGroup;
 			children = (
 				29904103219E56BC007DF31F /* Container */,
 				299040FD219E525D007DF31F /* FormHeaderFooterView.swift */,
 				29904101219E5283007DF31F /* FormHeaderFooter.swift */,
 			);
-			path = HeaderFooter;
+			path = HeaderFooters;
 			sourceTree = "<group>";
 		};
-		2990410B219E753E007DF31F /* Cell */ = {
+		2990410B219E753E007DF31F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				2990410D219E7576007DF31F /* Container */,
 				2990410E219E75AB007DF31F /* FormCell.swift */,
 				29904110219E75B4007DF31F /* FormCellView.swift */,
 			);
-			path = Cell;
+			path = Cells;
 			sourceTree = "<group>";
 		};
-		2990410C219E7549007DF31F /* Control */ = {
+		2990410C219E7549007DF31F /* Controls */ = {
 			isa = PBXGroup;
 			children = (
 				299FD94F219D5AA900A1CE48 /* FormLabelControl.swift */,
@@ -206,7 +186,7 @@
 				29AF404D21A283E70054360B /* FormButtonControl.swift */,
 				299FD94D219D5A5F00A1CE48 /* FormControllable.swift */,
 			);
-			path = Control;
+			path = Controls;
 			sourceTree = "<group>";
 		};
 		2990410D219E7576007DF31F /* Container */ = {
@@ -306,20 +286,16 @@
 				299FD95A219D611000A1CE48 /* FormSwitcherControl.swift in Sources */,
 				29904117219E7B9B007DF31F /* FormCellContainerView.swift in Sources */,
 				291E3D0F217A39BD006C3D4D /* ExtendedButton.swift in Sources */,
-				291E3D25217A3CBD006C3D4D /* FormStackControlCell.swift in Sources */,
 				29904102219E5283007DF31F /* FormHeaderFooter.swift in Sources */,
 				29904111219E75B4007DF31F /* FormCellView.swift in Sources */,
 				29904113219E771F007DF31F /* Form.swift in Sources */,
 				29AF404E21A283E70054360B /* FormButtonControl.swift in Sources */,
 				299FD950219D5AA900A1CE48 /* FormLabelControl.swift in Sources */,
 				291E3D10217A39BD006C3D4D /* ExtendedTextView.swift in Sources */,
-				291E3D20217A3BDC006C3D4D /* OldFormControl.swift in Sources */,
-				291E3D24217A3CBD006C3D4D /* FormStackControl.swift in Sources */,
 				291E3D11217A39BD006C3D4D /* ExtendedLabel.swift in Sources */,
 				291E3D16217A3B13006C3D4D /* FormGroup.swift in Sources */,
 				291E3CF4217A3942006C3D4D /* AppDelegate.swift in Sources */,
 				299040FE219E525D007DF31F /* FormHeaderFooterView.swift in Sources */,
-				291E3D1F217A3BDC006C3D4D /* OldFormControlCell.swift in Sources */,
 				299FD954219D5AE400A1CE48 /* FormTextFieldControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

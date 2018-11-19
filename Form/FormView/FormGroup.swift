@@ -10,12 +10,12 @@ import Foundation
 
 open class FormGroup {
     var header: FormHeaderFooter?
-    var cells: [FormCell] = []
+    var rows: [FormCell] = []
     var footer: FormHeaderFooter?
     
-    init(header: FormHeaderFooter? = nil, _ cells: [FormCell] = [], footer: FormHeaderFooter? = nil) {
+    init(header: FormHeaderFooter? = nil, _ rows: [FormCell] = [], footer: FormHeaderFooter? = nil) {
         self.header = header
-        self.cells = cells
+        self.rows = rows
         self.footer = footer
     }
 }
@@ -45,12 +45,12 @@ extension FormGroup {
     }
     
     func add(_ container: FormCell) -> FormGroup {
-        cells.append(container)
+        rows.append(container)
         return self
     }
     
     func add(_ control: FormControllable) -> FormGroup {
-        cells.append(FormCellContainer().element(control))
+        rows.append(FormCellContainer().element(control))
         return self
     }
     

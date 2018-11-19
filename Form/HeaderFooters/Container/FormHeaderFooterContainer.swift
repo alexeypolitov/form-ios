@@ -34,6 +34,8 @@ class FormHeaderFooterContainer: FormHeaderFooter {
     
 }
 
+// MARK: - FormHeaderFooterContainerViewDataSource
+
 extension FormHeaderFooterContainer: FormHeaderFooterContainerViewDataSource {
     
     func formHeaderFooterContainerViewElement(_ view: FormHeaderFooterContainerView) -> FormControllable? {
@@ -46,12 +48,28 @@ extension FormHeaderFooterContainer: FormHeaderFooterContainerViewDataSource {
     
 }
 
-// MARK: - FormStackControlElementLayoutDelegate
+// MARK: - FormLayoutable
 
-extension FormHeaderFooterContainer: FormStackControlElementLayoutDelegate {
+extension FormHeaderFooterContainer: FormLayoutable {
     
     func updateControlLayout(element: FormControllable) {
         updateFormView()
+    }
+    
+}
+
+// MARK: - FormSearchable
+
+extension FormHeaderFooterContainer: FormSearchable {
+    
+    func control(_ name: String) -> FormControllable? {
+        if element?.name == name {
+            return element
+        }
+        if let `element` = element as? FormSearchable {
+            return element.control(name)
+        }        
+        return nil
     }
     
 }

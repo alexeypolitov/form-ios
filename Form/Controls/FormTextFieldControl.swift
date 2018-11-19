@@ -12,7 +12,7 @@ open class FormTextFieldControl: UITextField, FormControllable { //, UITextField
     
     var isMain: Bool
     let name: String
-    var layoutDelegate: FormStackControlElementLayoutDelegate?
+    var layoutDelegate: FormLayoutable?
     
     var onChange: ((FormTextFieldControl, String?) -> Void)?
     var onBeginEditing: ((FormTextFieldControl) -> Void)?
@@ -46,7 +46,7 @@ open class FormTextFieldControl: UITextField, FormControllable { //, UITextField
         
     }
     
-    func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
+    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     

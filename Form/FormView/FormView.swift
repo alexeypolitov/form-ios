@@ -26,11 +26,6 @@ class FormView: UIView {
         tv.delegate = self
         tv.dataSource = self
         
-//        tv.estimatedRowHeight = 44.0
-//        tv.rowHeight = UITableView.automaticDimension
-//        tv.estimatedSectionHeaderHeight = 100
-//        tv.sectionHeaderHeight = UITableView.automaticDimension
-        
         addSubview(tv)
         
         tv.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
@@ -72,15 +67,7 @@ extension FormView {
     
     private func isControlNameDuplicate(name: String) -> Bool {
         
-        if let _ = storedGroups.first(where: { (group) -> Bool in
-            
-            if let _ = group.cells.first(where: {$0.name == name}) {
-                return true
-            } else {
-                return false
-            }
-            
-        }) {
+        if let _ = control(name) {
             return true
         } else {
             return false
@@ -116,14 +103,17 @@ extension FormView {
             registerHeaderFooter(collection.viewClass)
         }
         
-        try group.cells.forEach { (control) in
-            
-            if isControlNameDuplicate(name: control.name) {
-                throw FormViewError.controlDuplication(name: control.name)
+        // Check duplications
+
+        try group.rows.forEach { (row) in
+
+            if isControlNameDuplicate(name: row.name) {
+                throw FormViewError.controlDuplication(name: row.name)
             }
-            
-            register(control.viewClass)
+
+            register(row.viewClass)
         }
+        
         storedGroups.append(group)
         
         tableView?.reloadData()
@@ -149,29 +139,46 @@ extension FormView {
 //
 //    }
     
-    func control(name: String) -> FormCell? {
+    func control(_ name: String) -> FormControllable? {
         
         for group in storedGroups {
-            if let control = group.cells.first(where: {$0.name == name }) {
-                return control
+            if let header = group.header as? FormSearchable {
+                if let control = header.control(name) {
+                    return control
+                }
+            }
+            
+            for row in group.rows {
+                if let `row` = row as? FormSearchable {
+                    if let control = row.control(name) {
+                        return control
+                    }
+                }
+                
+            }
+
+            if let footer = group.footer as? FormSearchable {
+                if let control = footer.control(name) {
+                    return control
+                }
             }
         }
 
         return nil
     }
     
-    func collection(_ name: String) -> FormHeaderFooter? {
-        
-        for group in storedGroups {
-            if let header = group.header {
-                if header.name == name {
-                    return header
-                }
-            }
-        }
-        
-        return nil
-    }
+//    func collection(_ name: String) -> FormHeaderFooter? {
+//
+//        for group in storedGroups {
+//            if let header = group.header {
+//                if header.name == name {
+//                    return header
+//                }
+//            }
+//        }
+//
+//        return nil
+//    }
     
 //    func collectionItem(name: String) -> FormCollectionItem? {
 //
@@ -220,22 +227,22 @@ extension FormView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storedGroups.count > 0 ? storedGroups[section].cells.count : 0
+        return storedGroups.count > 0 ? storedGroups[section].rows.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let control = storedGroups[indexPath.section].cells [indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: control.viewClass), for: indexPath) as! FormCellView
+        let row = storedGroups[indexPath.section].rows [indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: row.viewClass), for: indexPath) as! FormCellView
 
-        if let `control` = control as? FormControlSelectable {
-            cell.selectionStyle = control.selectionStyle
-            cell.accessoryType = control.accessoryType
+        if let row = row as? FormCellSelectable {
+            cell.selectionStyle = row.selectionStyle
+            cell.accessoryType = row.accessoryType
         } else {
             cell.selectionStyle = .none
             cell.accessoryType = .none
         }
         
-        control.prepare(cell)
+        row.prepare(cell)
 
         return cell
     }
@@ -262,10 +269,10 @@ extension FormView: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let control = storedGroups[indexPath.section].cells [indexPath.row]
+        let row = storedGroups[indexPath.section].rows[indexPath.row]
         
-        if let `control` = control as? FormControlSelectable {
-            control.formControlOnSelect()
+        if let row = row as? FormCellSelectable {
+            row.formCellOnSelect()
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
