@@ -254,11 +254,22 @@ extension FormTextViewControl {
         return self
     }
     
+    func validator(_ validator: FormValidator) -> FormTextViewControl {
+        self.validators = [validator]
+        return self
+    }
+    
     func inlineValidators(_ validators: [FormValidator]) -> FormTextViewControl {
         for validator in validators {
             validator.inline = true
         }
         self.inlineValidators = validators
+        return self
+    }
+    
+    func inlineValidator(_ validator: FormValidator) -> FormTextViewControl {
+        validator.inline = true
+        self.inlineValidators = [validator]
         return self
     }
 

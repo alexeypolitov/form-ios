@@ -224,6 +224,30 @@ extension FormTextFieldControl {
         shouldReturn = handler
         return self
     }
+    
+    func validators(_ validators: [FormValidator]) -> FormTextFieldControl {
+        self.validators = validators
+        return self
+    }
+    
+    func validator(_ validator: FormValidator) -> FormTextFieldControl {
+        self.validators = [validator]
+        return self
+    }
+    
+    func inlineValidators(_ validators: [FormValidator]) -> FormTextFieldControl {
+        for validator in validators {
+            validator.inline = true
+        }
+        self.inlineValidators = validators
+        return self
+    }
+    
+    func inlineValidator(_ validator: FormValidator) -> FormTextFieldControl {
+        validator.inline = true
+        self.inlineValidators = [validator]
+        return self
+    }
 }
 
 // MARK: - UITextFieldDelegate
