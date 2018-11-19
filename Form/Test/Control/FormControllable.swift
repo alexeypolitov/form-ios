@@ -14,7 +14,7 @@ import UIKit
 //}
 
 protocol FormStackControlElementLayoutDelegate {
-    func updateControlLayout(element: FormStackControlElement) //, withoutReload: Bool)
+    func updateControlLayout(element: FormControllable) //, withoutReload: Bool)
 }
 
 protocol FormStackControlElementSizing {
@@ -22,15 +22,11 @@ protocol FormStackControlElementSizing {
     var fixedHeigth: CGFloat? { get set }
 }
 
-protocol FormStackControlElement {
-    
+protocol FormControllable {    
     var isMain: Bool { get set }
     var name: String { get }
-//    var stackDelegate: FormStackControlElementDelegate? { get set }
+
     var layoutDelegate: FormStackControlElementLayoutDelegate? { get set }
     func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?)
-    
-//    func prepareStackDelegate(delegate: FormStackControlElementDelegate)
-    
 }
 

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FormHeaderFooterContainerViewDataSource {
-    func formHeaderFooterContainerViewElement(_ view: FormHeaderFooterContainerView) -> FormStackControlElement?
+    func formHeaderFooterContainerViewElement(_ view: FormHeaderFooterContainerView) -> FormControllable?
     func formHeaderFooterContainerViewInsets(_ view: FormHeaderFooterContainerView) -> UIEdgeInsets?
 }
 

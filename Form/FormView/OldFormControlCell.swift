@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormControlCell: UITableViewCell {
+open class OldFormControlCell: UITableViewCell {
 
     // MARK: - Init
     

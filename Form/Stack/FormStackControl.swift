@@ -8,15 +8,15 @@
 
 import UIKit
 
-open class FormStackControl: FormControl, FormControlSelectable {
+open class FormStackControl: OldFormControl, FormControlSelectable {
     
     var insets: UIEdgeInsets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
     var minimalInset: CGFloat = 8
     
-    var elements: [FormStackControlElement] = []
+    var elements: [FormControllable] = []
     var onSelect: ((FormStackControl) -> Void)?
     
-    init(_ name: String = UUID().uuidString, elements: [FormStackControlElement] = []) {
+    init(_ name: String = UUID().uuidString, elements: [FormControllable] = []) {
         super.init(name: name)
         
         precondition(elements.filter({$0.isMain}).count <= 1, "Only one element could be main")
@@ -46,7 +46,7 @@ open class FormStackControl: FormControl, FormControlSelectable {
     
     // MARK: - Accessories
     
-    func element(by name: String) -> FormStackControlElement? {
+    func element(by name: String) -> FormControllable? {
         return elements.first(where: {$0.name == name})
     }
     
@@ -94,7 +94,7 @@ extension FormStackControl: FormStackControlCellDataSource {
         return elements.count
     }
     
-    func element(at index: Int) -> FormStackControlElement {
+    func element(at index: Int) -> FormControllable {
         return elements[index]
     }
     
@@ -130,7 +130,7 @@ extension FormStackControl: FormStackControlCellDataSource {
 
 extension FormStackControl: FormStackControlElementLayoutDelegate {
     
-    func updateControlLayout(element: FormStackControlElement) {
+    func updateControlLayout(element: FormControllable) {
         updateFormView()
 //        prepareElements()
 //        buildLayout()
@@ -142,7 +142,7 @@ extension FormStackControl: FormStackControlElementLayoutDelegate {
 
 extension FormStackControl {
     
-    func add(_ element: FormStackControlElement) -> FormStackControl {
+    func add(_ element: FormControllable) -> FormStackControl {
 //        element.prepareStackDelegate(delegate: self)
         element.layoutDelegate(self)
         elements.append(element)

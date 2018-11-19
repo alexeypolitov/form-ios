@@ -160,7 +160,7 @@ class ViewController: UIViewController {
         actionSheet.addAction(UIAlertAction(title: "Change textLabel", style: .default, handler: { [weak self] (action) in
             guard let `self` = self else { return }
             guard let collection = self.formView.collection("header1") as? FormHeaderFooterContainer else { return }
-            guard let element = collection.element as? FormLabelStackControlElement else { return }
+            guard let element = collection.element as? FormLabelControl else { return }
             
             element.text = "Test\ntest\ntest\ntest"
             

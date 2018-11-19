@@ -14,7 +14,7 @@ import UIKit
     @objc func formControlOnSelect()
 }
 
-open class FormControl: NSObject {
+open class OldFormControl: NSObject {
     
     open var cellClass: UITableViewCell.Type { return UITableViewCell.self }
     open weak var linkedCell: UITableViewCell?

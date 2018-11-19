@@ -10,12 +10,12 @@ import UIKit
 
 protocol FormStackControlCellDataSource {
     func numberOfElements() -> Int
-    func element(at index: Int) -> FormStackControlElement
+    func element(at index: Int) -> FormControllable
     func elementsInsets() -> UIEdgeInsets
     func minimalInsetBetweenElements() -> CGFloat
 }
 
-class FormStackControlCell: FormControlCell {
+class FormStackControlCell: OldFormControlCell {
 
     class StoredConstrain {
         let view: UIView
@@ -47,7 +47,7 @@ class FormStackControlCell: FormControlCell {
         let insets = dataSource.elementsInsets()
         let minimalInset = dataSource.minimalInsetBetweenElements()
         
-        var lastElement: FormStackControlElement?
+        var lastElement: FormControllable?
         for index in 0...dataSource.numberOfElements() - 1 {
             let element = dataSource.element(at: index)
             

@@ -11,7 +11,7 @@ import UIKit
 class FormHeaderFooterContainer: FormHeaderFooter {
 
     override var viewClass: FormHeaderFooterView.Type { return FormHeaderFooterContainerView.self }
-    var element: FormStackControlElement?
+    var element: FormControllable?
     var insets: UIEdgeInsets = UIEdgeInsets.zero
     
     override func onPrepare(_ view: FormHeaderFooterView) {
@@ -24,7 +24,7 @@ class FormHeaderFooterContainer: FormHeaderFooter {
 
 extension FormHeaderFooterContainer: FormHeaderFooterContainerViewDataSource {
     
-    func formHeaderFooterContainerViewElement(_ view: FormHeaderFooterContainerView) -> FormStackControlElement? {
+    func formHeaderFooterContainerViewElement(_ view: FormHeaderFooterContainerView) -> FormControllable? {
         return element
     }
     
@@ -38,7 +38,7 @@ extension FormHeaderFooterContainer: FormHeaderFooterContainerViewDataSource {
 
 extension FormHeaderFooterContainer: FormStackControlElementLayoutDelegate {
     
-    func updateControlLayout(element: FormStackControlElement) {
+    func updateControlLayout(element: FormControllable) {
         updateFormView()
     }
     
@@ -48,7 +48,7 @@ extension FormHeaderFooterContainer: FormStackControlElementLayoutDelegate {
 
 extension FormHeaderFooterContainer {
     
-    func element(_ element: FormStackControlElement?) -> FormHeaderFooterContainer {
+    func element(_ element: FormControllable?) -> FormHeaderFooterContainer {
         self.element = element
         self.element?.layoutDelegate = self
         return self

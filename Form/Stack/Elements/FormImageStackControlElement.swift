@@ -8,16 +8,14 @@
 
 import UIKit
 
-class FormImageStackControlElement: UIImageView, FormStackControlElement, FormStackControlElementSizing {
+class FormImageControl: UIImageView, FormControllable, FormStackControlElementSizing {
 
     var isMain: Bool
     let name: String
-//    var stackDelegate: FormStackControlElementDelegate?
     var layoutDelegate: FormStackControlElementLayoutDelegate?
     
     open override var image: UIImage? {
         didSet {
-//            stackDelegate?.updateControl()
             layoutDelegate?.updateControlLayout(element: self)
         }
     }
@@ -49,10 +47,6 @@ class FormImageStackControlElement: UIImageView, FormStackControlElement, FormSt
         self.layoutDelegate = layoutDelegate
     }
     
-//    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-//        stackDelegate = delegate
-//    }
-
     // MARK: - FormStackControlElementSizing
     private var _fixedWidth:CGFloat?
     var fixedWidth: CGFloat? {
@@ -77,29 +71,29 @@ class FormImageStackControlElement: UIImageView, FormStackControlElement, FormSt
 
 // MARK: - Setters
 
-extension FormImageStackControlElement {
+extension FormImageControl {
     
-    func isMain(_ isMain: Bool) -> FormImageStackControlElement {
+    func isMain(_ isMain: Bool) -> FormImageControl {
         self.isMain = isMain
         return self
     }
     
-    func image(_ image: UIImage?) -> FormImageStackControlElement {
+    func image(_ image: UIImage?) -> FormImageControl {
         self.image = image
         return self
     }
     
-    func fixedWidth(_ width: CGFloat?) -> FormImageStackControlElement {
+    func fixedWidth(_ width: CGFloat?) -> FormImageControl {
         self.fixedWidth = width
         return self
     }
     
-    func fixedHeigth(_ height: CGFloat?) -> FormImageStackControlElement {
+    func fixedHeigth(_ height: CGFloat?) -> FormImageControl {
         self.fixedHeigth = height
         return self
     }
     
-    func backgroundColor(_ backgroundColor: UIColor?) -> FormImageStackControlElement {
+    func backgroundColor(_ backgroundColor: UIColor?) -> FormImageControl {
         self.backgroundColor = backgroundColor
         return self
     }

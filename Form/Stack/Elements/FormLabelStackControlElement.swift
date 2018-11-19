@@ -8,23 +8,20 @@
 
 import UIKit
 
-open class FormLabelStackControlElement: ExtendedLabel, FormStackControlElement {
+open class FormLabelControl: ExtendedLabel, FormControllable {
     
     var isMain: Bool
     let name: String
-//    var stackDelegate: FormStackControlElementDelegate?
     var layoutDelegate: FormStackControlElementLayoutDelegate?
     
     open override var text: String? {
         didSet {
-//            stackDelegate?.updateControl()
             layoutDelegate?.updateControlLayout(element: self)
         }
     }
     
     open override var attributedText: NSAttributedString? {
         didSet {
-//            stackDelegate?.updateControl()
             layoutDelegate?.updateControlLayout(element: self)
         }
     }
@@ -68,44 +65,44 @@ open class FormLabelStackControlElement: ExtendedLabel, FormStackControlElement 
 
 // MARK: - Setters
 
-extension FormLabelStackControlElement {
+extension FormLabelControl {
     
-    func isMain(_ isMain: Bool) -> FormLabelStackControlElement {
+    func isMain(_ isMain: Bool) -> FormLabelControl {
         self.isMain = isMain
         return self
     }
     
-    func textHorizontalAlignment(_ textAlignment: NSTextAlignment) -> FormLabelStackControlElement {
+    func textHorizontalAlignment(_ textAlignment: NSTextAlignment) -> FormLabelControl {
         self.textAlignment = textAlignment
         return self
     }
     
-    func textVerticalAlignment(_ textAlignment: ExtendedLabel.TextVerticalAlignment) -> FormLabelStackControlElement {
+    func textVerticalAlignment(_ textAlignment: ExtendedLabel.TextVerticalAlignment) -> FormLabelControl {
         self.textVerticalAlignment = textAlignment
         return self
     }
     
-    func text(_ text: String?) -> FormLabelStackControlElement {
+    func text(_ text: String?) -> FormLabelControl {
         self.text = text
         return self
     }
     
-    func attributedText(_ text: NSAttributedString?) -> FormLabelStackControlElement {
+    func attributedText(_ text: NSAttributedString?) -> FormLabelControl {
         self.attributedText = text
         return self
     }
     
-    func font(_ font: UIFont) -> FormLabelStackControlElement {
+    func font(_ font: UIFont) -> FormLabelControl {
         self.font = font
         return self
     }
     
-    func numberOfLines(_ numberOfLines: Int) -> FormLabelStackControlElement {
+    func numberOfLines(_ numberOfLines: Int) -> FormLabelControl {
         self.numberOfLines = numberOfLines
         return self
     }
     
-    func backgroundColor(_ backgroundColor: UIColor?) -> FormLabelStackControlElement {
+    func backgroundColor(_ backgroundColor: UIColor?) -> FormLabelControl {
         self.backgroundColor = backgroundColor
         return self
     }

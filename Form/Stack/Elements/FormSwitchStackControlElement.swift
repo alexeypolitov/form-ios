@@ -8,14 +8,13 @@
 
 import UIKit
 
-open class FormSwitchStackControlElement: UISwitch, FormStackControlElement {
+open class FormSwitcherControl: UISwitch, FormControllable {
 
     var isMain: Bool
     let name: String
-//    var stackDelegate: FormStackControlElementDelegate?
     var layoutDelegate: FormStackControlElementLayoutDelegate?
     
-    var onChange: ((FormSwitchStackControlElement, Bool) -> Void)?
+    var onChange: ((FormSwitcherControl, Bool) -> Void)?
     
     public override init(frame: CGRect) {
         fatalError("Use init()")
@@ -45,11 +44,8 @@ open class FormSwitchStackControlElement: UISwitch, FormStackControlElement {
         self.layoutDelegate = layoutDelegate
     }
     
-//    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-//        stackDelegate = delegate
-//    }
-        
     // MARK: - Actions
+    
     @objc private func onChangeEvent(_ sender: Any) {
         onChange?(self, isOn)
     }
@@ -57,24 +53,24 @@ open class FormSwitchStackControlElement: UISwitch, FormStackControlElement {
 
 // MARK: - Setters
 
-extension FormSwitchStackControlElement {
+extension FormSwitcherControl {
 
-    func isMain(_ isMain: Bool) -> FormSwitchStackControlElement {
+    func isMain(_ isMain: Bool) -> FormSwitcherControl {
         self.isMain = isMain
         return self
     }
     
-    func isOn(_ isOn: Bool) -> FormSwitchStackControlElement {
+    func isOn(_ isOn: Bool) -> FormSwitcherControl {
         self.isOn = isOn
         return self
     }
     
-    func onChange(_ handler: ((FormSwitchStackControlElement, Bool) -> Void)?) -> FormSwitchStackControlElement {
+    func onChange(_ handler: ((FormSwitcherControl, Bool) -> Void)?) -> FormSwitcherControl {
         onChange = handler
         return self
     }
     
-    func backgroundColor(_ backgroundColor: UIColor?) -> FormSwitchStackControlElement {
+    func backgroundColor(_ backgroundColor: UIColor?) -> FormSwitcherControl {
         self.backgroundColor = backgroundColor
         return self
     }

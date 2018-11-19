@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormBadgeStackControlElement: FormLabelStackControlElement {
+open class FormBadgeControl: FormLabelControl {
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Use init()")

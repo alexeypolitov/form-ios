@@ -8,22 +8,21 @@
 
 import UIKit
 
-open class FormTextViewStackControlElement: ExtendedTextView, FormStackControlElement {
+open class FormTextViewControl: ExtendedTextView, FormControllable {
     
     var isMain: Bool
     let name: String
-//    var stackDelegate: FormStackControlElementDelegate?
     var layoutDelegate: FormStackControlElementLayoutDelegate?
     
-    var onChange: ((FormTextViewStackControlElement, String?) -> Void)?
-    var onEndEditing: ((FormTextViewStackControlElement) -> Void)?
-    var onBeginEditing: ((FormTextViewStackControlElement) -> Void)?
-    var onChangeSelection: ((FormTextViewStackControlElement) -> Void)?
-    var shouldEndEditing: ((FormTextViewStackControlElement) -> Bool)?
-    var shouldBeginEditing: ((FormTextViewStackControlElement) -> Bool)?
-    var shouldChangeCharacters: ((FormTextViewStackControlElement, String?, NSRange, String) -> Bool)?
-    var shouldInteractWithURL: ((FormTextViewStackControlElement, URL, NSRange, UITextItemInteraction) -> Bool)?
-    var shouldInteractWithAttachment: ((FormTextViewStackControlElement, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)?
+    var onChange: ((FormTextViewControl, String?) -> Void)?
+    var onEndEditing: ((FormTextViewControl) -> Void)?
+    var onBeginEditing: ((FormTextViewControl) -> Void)?
+    var onChangeSelection: ((FormTextViewControl) -> Void)?
+    var shouldEndEditing: ((FormTextViewControl) -> Bool)?
+    var shouldBeginEditing: ((FormTextViewControl) -> Bool)?
+    var shouldChangeCharacters: ((FormTextViewControl, String?, NSRange, String) -> Bool)?
+    var shouldInteractWithURL: ((FormTextViewControl, URL, NSRange, UITextItemInteraction) -> Bool)?
+    var shouldInteractWithAttachment: ((FormTextViewControl, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)?
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Use init()")
@@ -68,7 +67,6 @@ open class FormTextViewStackControlElement: ExtendedTextView, FormStackControlEl
         // Resize the cell only when cell's size is changed
         if size.height != newSize.height {
             layoutDelegate?.updateControlLayout(element: self)
-//            self.stackDelegate?.updateControl()
         }
 
     }
@@ -77,78 +75,78 @@ open class FormTextViewStackControlElement: ExtendedTextView, FormStackControlEl
 
 // MARK: - Setters
 
-extension FormTextViewStackControlElement {
+extension FormTextViewControl {
 
-    func isMain(_ isMain: Bool) -> FormTextViewStackControlElement {
+    func isMain(_ isMain: Bool) -> FormTextViewControl {
         self.isMain = isMain
         return self
     }
     
-    func textAlignment(_ textAlignment: NSTextAlignment) -> FormTextViewStackControlElement {
+    func textAlignment(_ textAlignment: NSTextAlignment) -> FormTextViewControl {
         self.textAlignment = textAlignment
         return self
     }
     
-    func text(_ text: String?) -> FormTextViewStackControlElement {
+    func text(_ text: String?) -> FormTextViewControl {
         self.text = text
         return self
     }
     
-    func font(_ font: UIFont) -> FormTextViewStackControlElement {
+    func font(_ font: UIFont) -> FormTextViewControl {
         self.font = font
         return self
     }
     
-    func placeholder(_ placeholder: String) -> FormTextViewStackControlElement {
+    func placeholder(_ placeholder: String) -> FormTextViewControl {
         self.placeholder = placeholder
         return self
     }
     
-    func backgroundColor(_ backgroundColor: UIColor?) -> FormTextViewStackControlElement {
+    func backgroundColor(_ backgroundColor: UIColor?) -> FormTextViewControl {
         self.backgroundColor = backgroundColor
         return self
     }
     
-    func onChange(_ handler: ((FormTextViewStackControlElement, String?) -> Void)?) -> FormTextViewStackControlElement {
+    func onChange(_ handler: ((FormTextViewControl, String?) -> Void)?) -> FormTextViewControl {
         onChange = handler
         return self
     }
-    func onEndEditing(_ handler: ((FormTextViewStackControlElement) -> Void)?) -> FormTextViewStackControlElement {
+    func onEndEditing(_ handler: ((FormTextViewControl) -> Void)?) -> FormTextViewControl {
         onEndEditing = handler
         return self
     }
 
-    func onBeginEditing(_ handler: ((FormTextViewStackControlElement) -> Void)?) -> FormTextViewStackControlElement {
+    func onBeginEditing(_ handler: ((FormTextViewControl) -> Void)?) -> FormTextViewControl {
         onBeginEditing = handler
         return self
     }
 
-    func onChangeSelection(_ handler: ((FormTextViewStackControlElement) -> Void)?) -> FormTextViewStackControlElement {
+    func onChangeSelection(_ handler: ((FormTextViewControl) -> Void)?) -> FormTextViewControl {
         onChangeSelection = handler
         return self
     }
     
-    func shouldEndEditing(_ handler: ((FormTextViewStackControlElement) -> Bool)?) -> FormTextViewStackControlElement {
+    func shouldEndEditing(_ handler: ((FormTextViewControl) -> Bool)?) -> FormTextViewControl {
         shouldEndEditing = handler
         return self
     }
 
-    func shouldBeginEditing(_ handler: ((FormTextViewStackControlElement) -> Bool)?) -> FormTextViewStackControlElement {
+    func shouldBeginEditing(_ handler: ((FormTextViewControl) -> Bool)?) -> FormTextViewControl {
         shouldBeginEditing = handler
         return self
     }
 
-    func shouldChangeCharacters(_ handler: ((FormTextViewStackControlElement, String?, NSRange, String) -> Bool)?) -> FormTextViewStackControlElement {
+    func shouldChangeCharacters(_ handler: ((FormTextViewControl, String?, NSRange, String) -> Bool)?) -> FormTextViewControl {
         shouldChangeCharacters = handler
         return self
     }
 
-    func shouldInteractWithURL(_ handler: ((FormTextViewStackControlElement, URL, NSRange, UITextItemInteraction) -> Bool)?) -> FormTextViewStackControlElement {
+    func shouldInteractWithURL(_ handler: ((FormTextViewControl, URL, NSRange, UITextItemInteraction) -> Bool)?) -> FormTextViewControl {
         shouldInteractWithURL = handler
         return self
     }
 
-    func shouldInteractWithAttachment(_ handler: ((FormTextViewStackControlElement, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)?) -> FormTextViewStackControlElement {
+    func shouldInteractWithAttachment(_ handler: ((FormTextViewControl, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)?) -> FormTextViewControl {
         shouldInteractWithAttachment = handler
         return self
     }
@@ -157,7 +155,7 @@ extension FormTextViewStackControlElement {
 
 // MARK: - UITextViewDelegate
 
-extension FormTextViewStackControlElement: UITextViewDelegate {
+extension FormTextViewControl: UITextViewDelegate {
     
     public func textViewDidChange(_ textView: UITextView) {
         onChange?(self, textView.text.count > 0 ? textView.text : nil)

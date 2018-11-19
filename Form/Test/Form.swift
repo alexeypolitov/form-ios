@@ -10,28 +10,28 @@ import Foundation
 
 class Form {
     
-    static func label(_ name: String = UUID().uuidString) -> FormLabelStackControlElement {
-        return FormLabelStackControlElement(name)
+    static func label(_ name: String = UUID().uuidString) -> FormLabelControl {
+        return FormLabelControl(name)
     }
     
-    static func badge(_ name: String = UUID().uuidString) -> FormBadgeStackControlElement {
-        return FormBadgeStackControlElement(name)
+    static func badge(_ name: String = UUID().uuidString) -> FormBadgeControl {
+        return FormBadgeControl(name)
     }
     
-    static func textField(_ name: String = UUID().uuidString) -> FormTextFieldStackControlElement {
-        return FormTextFieldStackControlElement(name)
+    static func textField(_ name: String = UUID().uuidString) -> FormTextFieldControl {
+        return FormTextFieldControl(name)
     }
     
-    static func textView(_ name: String = UUID().uuidString) -> FormTextViewStackControlElement {
-        return FormTextViewStackControlElement(name)
+    static func textView(_ name: String = UUID().uuidString) -> FormTextViewControl {
+        return FormTextViewControl(name)
     }
     
-    static func switcher(_ name: String = UUID().uuidString) -> FormSwitchStackControlElement {
-        return FormSwitchStackControlElement(name)
+    static func switcher(_ name: String = UUID().uuidString) -> FormSwitcherControl {
+        return FormSwitcherControl(name)
     }
     
-    static func image(_ name: String = UUID().uuidString) -> FormImageStackControlElement {
-        return FormImageStackControlElement(name)
+    static func image(_ name: String = UUID().uuidString) -> FormImageControl {
+        return FormImageControl(name)
     }
     
     static func group(_ name: String = UUID().uuidString) -> FormGroup {

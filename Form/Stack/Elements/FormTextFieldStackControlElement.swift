@@ -8,21 +8,20 @@
 
 import UIKit
 
-open class FormTextFieldStackControlElement: UITextField, FormStackControlElement { //, UITextFieldDelegate {
+open class FormTextFieldControl: UITextField, FormControllable { //, UITextFieldDelegate {
     
     var isMain: Bool
     let name: String
-//    var stackDelegate: FormStackControlElementDelegate?
     var layoutDelegate: FormStackControlElementLayoutDelegate?
     
-    var onChange: ((FormTextFieldStackControlElement, String?) -> Void)?
-    var onBeginEditing: ((FormTextFieldStackControlElement) -> Void)?
-    var onEndEditing: ((FormTextFieldStackControlElement, UITextField.DidEndEditingReason) -> Void)?
-    var shouldBeginEditing: ((FormTextFieldStackControlElement) -> Bool)?
-    var shouldEndEditing: ((FormTextFieldStackControlElement) -> Bool)?
-    var shouldClear: ((FormTextFieldStackControlElement) -> Bool)?
-    var shouldReturn: ((FormTextFieldStackControlElement) -> Bool)?
-    var shouldChangeCharacters: ((FormTextFieldStackControlElement, String?, NSRange, String) -> Bool)?
+    var onChange: ((FormTextFieldControl, String?) -> Void)?
+    var onBeginEditing: ((FormTextFieldControl) -> Void)?
+    var onEndEditing: ((FormTextFieldControl, UITextField.DidEndEditingReason) -> Void)?
+    var shouldBeginEditing: ((FormTextFieldControl) -> Bool)?
+    var shouldEndEditing: ((FormTextFieldControl) -> Bool)?
+    var shouldClear: ((FormTextFieldControl) -> Bool)?
+    var shouldReturn: ((FormTextFieldControl) -> Bool)?
+    var shouldChangeCharacters: ((FormTextFieldControl, String?, NSRange, String) -> Bool)?
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Use init()")
@@ -50,82 +49,79 @@ open class FormTextFieldStackControlElement: UITextField, FormStackControlElemen
     func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
         self.layoutDelegate = layoutDelegate
     }
-//    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-//        stackDelegate = delegate
-//    }
     
 }
 
 // MARK: - Setters
 
-extension FormTextFieldStackControlElement {
+extension FormTextFieldControl {
     
-    func isMain(_ isMain: Bool) -> FormTextFieldStackControlElement {
+    func isMain(_ isMain: Bool) -> FormTextFieldControl {
         self.isMain = isMain
         return self
     }
     
-    func textAlignment(_ textAlignment: NSTextAlignment) -> FormTextFieldStackControlElement {
+    func textAlignment(_ textAlignment: NSTextAlignment) -> FormTextFieldControl {
         self.textAlignment = textAlignment
         return self
     }
     
-    func text(_ text: String?) -> FormTextFieldStackControlElement {
+    func text(_ text: String?) -> FormTextFieldControl {
         self.text = text
         return self
     }
     
-    func font(_ font: UIFont) -> FormTextFieldStackControlElement {
+    func font(_ font: UIFont) -> FormTextFieldControl {
         self.font = font
         return self
     }
     
-    func placeholder(_ placeholder: String) -> FormTextFieldStackControlElement {
+    func placeholder(_ placeholder: String) -> FormTextFieldControl {
         self.placeholder = placeholder
         return self
     }
     
-    func backgroundColor(_ backgroundColor: UIColor?) -> FormTextFieldStackControlElement {
+    func backgroundColor(_ backgroundColor: UIColor?) -> FormTextFieldControl {
         self.backgroundColor = backgroundColor
         return self
     }
     
-    func onChange(_ handler: ((FormTextFieldStackControlElement, String?) -> Void)?) -> FormTextFieldStackControlElement {
+    func onChange(_ handler: ((FormTextFieldControl, String?) -> Void)?) -> FormTextFieldControl {
         onChange = handler
         return self
     }
     
-    func onBeginEditing(_ handler: ((FormTextFieldStackControlElement) -> Void)?) -> FormTextFieldStackControlElement {
+    func onBeginEditing(_ handler: ((FormTextFieldControl) -> Void)?) -> FormTextFieldControl {
         onBeginEditing = handler
         return self
     }
     
-    func onEndEditing(_ handler: ((FormTextFieldStackControlElement, UITextField.DidEndEditingReason) -> Void)?) -> FormTextFieldStackControlElement {
+    func onEndEditing(_ handler: ((FormTextFieldControl, UITextField.DidEndEditingReason) -> Void)?) -> FormTextFieldControl {
         onEndEditing = handler
         return self
     }
     
-    func shouldBeginEditing(_ handler: ((FormTextFieldStackControlElement) -> Bool)?) -> FormTextFieldStackControlElement {
+    func shouldBeginEditing(_ handler: ((FormTextFieldControl) -> Bool)?) -> FormTextFieldControl {
         shouldBeginEditing = handler
         return self
     }
     
-    func shouldEndEditing(_ handler: ((FormTextFieldStackControlElement) -> Bool)?) -> FormTextFieldStackControlElement {
+    func shouldEndEditing(_ handler: ((FormTextFieldControl) -> Bool)?) -> FormTextFieldControl {
         shouldEndEditing = handler
         return self
     }
     
-    func shouldChangeCharacters(_ handler: ((FormTextFieldStackControlElement, String?, NSRange, String) -> Bool)?) -> FormTextFieldStackControlElement {
+    func shouldChangeCharacters(_ handler: ((FormTextFieldControl, String?, NSRange, String) -> Bool)?) -> FormTextFieldControl {
         shouldChangeCharacters = handler
         return self
     }
     
-    func shouldClear(_ handler: ((FormTextFieldStackControlElement) -> Bool)?) -> FormTextFieldStackControlElement {
+    func shouldClear(_ handler: ((FormTextFieldControl) -> Bool)?) -> FormTextFieldControl {
         shouldClear = handler
         return self
     }
     
-    func shouldReturn(_ handler: ((FormTextFieldStackControlElement) -> Bool)?) -> FormTextFieldStackControlElement {
+    func shouldReturn(_ handler: ((FormTextFieldControl) -> Bool)?) -> FormTextFieldControl {
         shouldReturn = handler
         return self
     }
@@ -133,7 +129,7 @@ extension FormTextFieldStackControlElement {
 
 // MARK: - UITextFieldDelegate
 
-extension FormTextFieldStackControlElement: UITextFieldDelegate {
+extension FormTextFieldControl: UITextFieldDelegate {
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         onBeginEditing?(self)

@@ -11,7 +11,7 @@ import UIKit
 class FormCellContainer: FormCell {
 
     override var viewClass: FormCellView.Type { return FormCellContainerView.self }
-    var element: FormStackControlElement?
+    var element: FormControllable?
     var insets: UIEdgeInsets = UIEdgeInsets.zero
     
     override func onPrepare(_ view: FormCellView) {
@@ -23,7 +23,7 @@ class FormCellContainer: FormCell {
 
 extension FormCellContainer: FormCellContainerViewDataSource {
     
-    func formCellContainerViewElement(_ view: FormCellContainerView) -> FormStackControlElement? {
+    func formCellContainerViewElement(_ view: FormCellContainerView) -> FormControllable? {
         return element
     }
     
@@ -37,7 +37,7 @@ extension FormCellContainer: FormCellContainerViewDataSource {
 
 extension FormCellContainer: FormStackControlElementLayoutDelegate {
     
-    func updateControlLayout(element: FormStackControlElement) {
+    func updateControlLayout(element: FormControllable) {
         updateFormView()
     }
     
@@ -47,7 +47,7 @@ extension FormCellContainer: FormStackControlElementLayoutDelegate {
 
 extension FormCellContainer {
     
-    func element(_ element: FormStackControlElement?) -> FormCellContainer {
+    func element(_ element: FormControllable?) -> FormCellContainer {
         self.element = element
         self.element?.layoutDelegate = self
         return self
