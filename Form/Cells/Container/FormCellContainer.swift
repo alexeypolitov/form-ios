@@ -18,7 +18,7 @@ class FormCellContainer: FormCell, FormCellSelectable {
     override init(_ name: String = UUID().uuidString) {
         super.init(name)
         
-        self.insets = FormHeaderFooterContainer.appearance.insets
+        self.insets = FormCellContainer.appearance.insets
     }
     
     override func onPrepare(_ view: FormCellView) {

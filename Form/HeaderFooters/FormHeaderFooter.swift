@@ -14,7 +14,7 @@ open class FormHeaderFooter {
     open weak var linkedView: FormHeaderFooterView?
     let name: String
     
-    init(_ name: String = UUID().uuidString) {
+    init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
         self.name = name
     }
     

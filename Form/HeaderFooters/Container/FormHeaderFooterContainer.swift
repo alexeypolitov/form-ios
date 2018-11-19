@@ -14,10 +14,15 @@ class FormHeaderFooterContainer: FormHeaderFooter {
     var control: FormControllable?
     var insets: UIEdgeInsets = UIEdgeInsets.zero
     
-    override init(_ name: String = UUID().uuidString) {
+    override init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
         super.init(name)
-        
-        self.insets = FormHeaderFooterContainer.appearance.insets
+
+        if isFooter {
+            self.insets = FormHeaderFooterContainer.appearanceFooter.insets
+        } else {
+            self.insets = FormHeaderFooterContainer.appearanceHeader.insets
+        }
+
     }
     
     override func onPrepare(_ view: FormHeaderFooterView) {
@@ -27,10 +32,15 @@ class FormHeaderFooterContainer: FormHeaderFooter {
     }
     
     class Appearance {
-        var insets: UIEdgeInsets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+        
+        var insets: UIEdgeInsets
+        init(_ insets:UIEdgeInsets = UIEdgeInsets.zero) {
+            self.insets = insets
+        }        
     }
     
-    static let appearance = Appearance()
+    static let appearanceHeader = Appearance(UIEdgeInsets(top: 20, left: 16, bottom: 8, right: 16))
+    static let appearanceFooter = Appearance(UIEdgeInsets(top: 8, left: 16, bottom: 20, right: 16))
     
 }
 
