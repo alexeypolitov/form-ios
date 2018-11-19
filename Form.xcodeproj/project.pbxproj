@@ -24,7 +24,7 @@
 		29904109219E6A24007DF31F /* TestHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29904108219E6A24007DF31F /* TestHeaderFooterView.xib */; };
 		2990410F219E75AB007DF31F /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2990410E219E75AB007DF31F /* FormCell.swift */; };
 		29904111219E75B4007DF31F /* FormCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29904110219E75B4007DF31F /* FormCellView.swift */; };
-		29904113219E771F007DF31F /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29904112219E771F007DF31F /* Form.swift */; };
+		29904113219E771F007DF31F /* Former.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29904112219E771F007DF31F /* Former.swift */; };
 		29904115219E7B3A007DF31F /* FormCellContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29904114219E7B3A007DF31F /* FormCellContainer.swift */; };
 		29904117219E7B9B007DF31F /* FormCellContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29904116219E7B9B007DF31F /* FormCellContainerView.swift */; };
 		299FD8CC219D076400A1CE48 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD8CB219D076400A1CE48 /* TestViewController.swift */; };
@@ -42,6 +42,8 @@
 		29AF405321A298B90054360B /* FormLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF405221A298B90054360B /* FormLengthValidator.swift */; };
 		29AF405521A2AFE10054360B /* FormRequiredValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF405421A2AFE10054360B /* FormRequiredValidator.swift */; };
 		29AF405721A2B0330054360B /* FormEmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF405621A2B0330054360B /* FormEmailValidator.swift */; };
+		29AF40BA21A2E2160054360B /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF40B821A2E2160054360B /* Form.swift */; };
+		29AF40BB21A2E2160054360B /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF40B921A2E2160054360B /* FormField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +66,7 @@
 		29904108219E6A24007DF31F /* TestHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestHeaderFooterView.xib; sourceTree = "<group>"; };
 		2990410E219E75AB007DF31F /* FormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
 		29904110219E75B4007DF31F /* FormCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCellView.swift; sourceTree = "<group>"; };
-		29904112219E771F007DF31F /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		29904112219E771F007DF31F /* Former.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Former.swift; sourceTree = "<group>"; };
 		29904114219E7B3A007DF31F /* FormCellContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCellContainer.swift; sourceTree = "<group>"; };
 		29904116219E7B9B007DF31F /* FormCellContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCellContainerView.swift; sourceTree = "<group>"; };
 		299FD8CB219D076400A1CE48 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,8 @@
 		29AF405221A298B90054360B /* FormLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormLengthValidator.swift; sourceTree = "<group>"; };
 		29AF405421A2AFE10054360B /* FormRequiredValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRequiredValidator.swift; sourceTree = "<group>"; };
 		29AF405621A2B0330054360B /* FormEmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEmailValidator.swift; sourceTree = "<group>"; };
+		29AF40B821A2E2160054360B /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		29AF40B921A2E2160054360B /* FormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +118,9 @@
 		291E3CF2217A3942006C3D4D /* Form */ = {
 			isa = PBXGroup;
 			children = (
-				29904112219E771F007DF31F /* Form.swift */,
+				29AF40B821A2E2160054360B /* Form.swift */,
+				29AF40B921A2E2160054360B /* FormField.swift */,
+				29904112219E771F007DF31F /* Former.swift */,
 				29AF404F21A297BD0054360B /* Validators */,
 				2990410C219E7549007DF31F /* Controls */,
 				2990410B219E753E007DF31F /* Cells */,
@@ -312,9 +318,11 @@
 				291E3D0F217A39BD006C3D4D /* ExtendedButton.swift in Sources */,
 				29904102219E5283007DF31F /* FormHeaderFooter.swift in Sources */,
 				29904111219E75B4007DF31F /* FormCellView.swift in Sources */,
-				29904113219E771F007DF31F /* Form.swift in Sources */,
+				29904113219E771F007DF31F /* Former.swift in Sources */,
 				29AF404E21A283E70054360B /* FormButtonControl.swift in Sources */,
+				29AF40BB21A2E2160054360B /* FormField.swift in Sources */,
 				299FD950219D5AA900A1CE48 /* FormLabelControl.swift in Sources */,
+				29AF40BA21A2E2160054360B /* Form.swift in Sources */,
 				291E3D10217A39BD006C3D4D /* ExtendedTextView.swift in Sources */,
 				291E3D11217A39BD006C3D4D /* ExtendedLabel.swift in Sources */,
 				291E3D16217A3B13006C3D4D /* FormGroup.swift in Sources */,

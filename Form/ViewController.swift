@@ -11,37 +11,76 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var formView: FormView!
+    var form: Form = Form()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Actions", style: .plain, target: self, action: #selector(self.onAction(_:)))
         
-        let group = Form.group()
-            .add(Form.vertical()
-                .add(Form.textView("textView").placeholder("Enter some text").onChange({(control, string) in
-                    guard let limitLabel = self.formView.control("testLimit") as? FormLabelControl else { return }
-                    
-                    limitLabel.text("\(string?.count ?? 0)/100")
-                }).inlineValidators([FormMaxLengthValidator(maxLength: 50, message: "Max length is 50 characters")]))
-                .add(Form.label("testLimit").text("0/100").textHorizontalAlignment(.right)))
+        let _ = form
+            .add(Form.field("name")
+                .value("Some name")
+                .validators([
+                    Former.minLength(minLength: 3, "SignUp.Name.Validation.BetweedLength.Error"),
+                    Former.required("SignUp.Name.Validation.Required.Error")])
+                .inlineValidator(Former.maxLength(maxLength: 20, "SignUp.Name.Validation.BetweedLength.Error")))
+            .add(Form.field("email"))
+            .add(Form.field("password"))
+            .add(Form.field("prWay"))
         
+        // FormView
         
-        do {
-            try formView.addGroup(group)
-        } catch {
-            print("error: \(error)")
-        }
+        let _ = formView.bind(form)
+        try? formView.addGroup(Former.group()
+            .header(Former.label().text("以下をご入力ください"))
+            .add(Former.textField("name").placeholder("氏名"))
+            .add(Former.textField("email").placeholder("メールアドレス"))
+//                .validators([
+//                    Former.required("SignUp.Email.Validation.Required.Error"),
+//                    Former.email("SignUp.Email.Validation.Email.Error")]))
+            .add(Former.textField("password").placeholder("パスワード（半角英数字6字以上）"))
+//                .validator(Former.required("SignUp.Name.Validation.Required.Error"))
+//                .inlineValidator(Former.minLength(minLength: 6, "SignUp.Password.Validation.MinLength.Error")))
+            .footer(Former.label().text("パスワードは忘れないようにメモしましょう！").textHorizontalAlignment(.center))
+        )
         
-        
-        try? formView.addGroup(Form.group()
-            .add(Form.label("prWay")
+        try? formView.addGroup(Former.group()
+            .header(Former.label().text("どこで◯◯を知りましたか？"))
+            .add(Former.label("prWay")
                 .text("選択してください")
                 .accessoryType(.disclosureIndicator)
-                .onSelect({(control) in
-                print("dddd")
-            }))
+                .onSelect({ (control) in
+                    print("test")
+                }))
+            .footer(Former.label().text("利用規約にを確認し、同意しました。"))
         )
+        
+//        let group = Form.group()
+//            .add(Form.vertical()
+//                .add(Form.textView("textView").placeholder("Enter some text").onChange({(control, string) in
+//                    guard let limitLabel = self.formView.control("testLimit") as? FormLabelControl else { return }
+//
+//                    limitLabel.text("\(string?.count ?? 0)/100")
+//                }).inlineValidators([FormMaxLengthValidator(maxLength: 50, message: "Max length is 50 characters")]))
+//                .add(Form.label("testLimit").text("0/100").textHorizontalAlignment(.right)))
+//
+//
+//        do {
+//            try formView.addGroup(group)
+//        } catch {
+//            print("error: \(error)")
+//        }
+//
+//
+//        try? formView.addGroup(Form.group()
+//            .add(Form.label("prWay")
+//                .text("選択してください")
+//                .accessoryType(.disclosureIndicator)
+//                .onSelect({(control) in
+//                print("dddd")
+//            }))
+//        )
     }
     
 //    func editLabelDetailText(control: FormLabelControl) {

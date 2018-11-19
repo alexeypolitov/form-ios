@@ -61,6 +61,15 @@ class FormView: UIView {
         }
     }
     
+    // MARK: - Binding
+    
+    private var bindedForm: Form?
+    
+    func bind(_ form: Form?) -> FormView {
+        self.bindedForm = form
+        return self
+    }
+    
 }
 
 extension FormView {
