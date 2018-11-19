@@ -117,14 +117,14 @@ class ViewController: UIViewController {
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: "Change textLabel", style: .default, handler: { [weak self] (action) in
+        actionSheet.addAction(UIAlertAction(title: "Change textView", style: .default, handler: { [weak self] (action) in
             guard let `self` = self else { return }
-            guard let control = self.formView.control("test1") as? FormLabelControl else { return }
+//            guard let control = self.formView.control("test1") as? FormLabelControl else { return }
+//            control.text = "Test\ntest\ntest\ntest"
             
-//            guard let collection = self.formView.collection("header1") as? FormHeaderFooterContainer else { return }
-//            guard let element = collection.element as? FormLabelControl else { return }
+            guard let field = self.form.field("name") else { return }
             
-            control.text = "Test\ntest\ntest\ntest"
+            field.value = "test"
             
         }))
         

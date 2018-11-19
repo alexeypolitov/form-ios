@@ -40,10 +40,12 @@ protocol FormBindable {
     var bindDelegate: FormBindDelegate? { get set }
     var bindName: String? { get set }
     func bindDelegate(_ bindDelegate: FormBindDelegate?)
+    func refreshBindValue()
 }
 
 protocol FormBindDelegate {
     func bindValueChanged(bindName: String, value: Any?)
+    func bindValue(_ bindName: String) -> Any?
 }
 
 protocol FormControllable {

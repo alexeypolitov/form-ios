@@ -25,6 +25,13 @@ class FormCellContainer: FormCell, FormCellSelectable {
         guard let `view` = view as? FormCellContainerView else { return }
         
         view.dataSource = self
+        
+    }
+    
+    override func onProcessed(_ formView: FormView) {
+        if let `bindable` = control as? FormBindable {
+            bindable.refreshBindValue()
+        }
     }
     
     class Appearance {
@@ -149,6 +156,10 @@ extension FormCellContainer: FormBindDelegate {
     
     func bindValueChanged(bindName: String, value: Any?) {
         formView?.bindValueChanged(bindName: bindName, value: value)
+    }
+    
+    func bindValue(_ bindName: String) -> Any? {
+        return formView?.bindValue(bindName)
     }
     
 }

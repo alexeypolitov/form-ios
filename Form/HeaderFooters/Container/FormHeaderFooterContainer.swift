@@ -31,6 +31,12 @@ class FormHeaderFooterContainer: FormHeaderFooter {
         view.dataSource = self
     }
     
+    override func onProcessed(_ formView: FormView) {
+        if let `bindable` = control as? FormBindable {
+            bindable.refreshBindValue()
+        }
+    }
+    
     class Appearance {
         
         var insets: UIEdgeInsets
@@ -90,6 +96,10 @@ extension FormHeaderFooterContainer: FormBindDelegate {
     
     func bindValueChanged(bindName: String, value: Any?) {
         formView?.bindValueChanged(bindName: bindName, value: value)
+    }
+    
+    func bindValue(_ bindName: String) -> Any? {
+        return formView?.bindValue(bindName)
     }
     
 }

@@ -10,13 +10,8 @@ import Foundation
 
 open class FormField: NSObject {
     var name: String
-    private var _value: Any?
-    var value: Any? {
-        get {
-            return _value
-        }
-        set {
-            _value = newValue
+    private var _value: Any? {
+        didSet {
             if Thread.isMainThread {
                 onChange?(_value)
             } else {
@@ -26,12 +21,24 @@ open class FormField: NSObject {
             }
         }
     }
+    var value: Any? {
+        get {
+            return _value
+        }
+        set {
+            _value = newValue            
+        }
+    }
     var validators: [FormValidator] = []
     var inlineValidators: [FormValidator] = []
     var onChange: ((Any?) -> Void)?
     
     init(_ name: String) {
         self.name = name
+    }
+    
+    func setValueFromFormView(_ value: Any?) {
+        self._value = value
     }
     
     func validate() -> (Bool, String?) {

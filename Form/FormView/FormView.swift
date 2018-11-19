@@ -72,7 +72,12 @@ class FormView: UIView, FormBindDelegate {
     
     func bindValueChanged(bindName: String, value: Any?) {
         guard let field = bindForm?.field(bindName) else { return }
-        field.value = value
+        field.setValueFromFormView(value)
+    }
+    
+    func bindValue(_ bindName: String) -> Any? {
+        guard let field = bindForm?.field(bindName) else { return nil }
+        return field.value
     }
     
 }
@@ -244,7 +249,7 @@ extension FormView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = storedGroups[indexPath.section].rows [indexPath.row]
+        let row = storedGroups[indexPath.section].rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: row.viewClass), for: indexPath) as! FormCellView
 
         if let row = row as? FormCellSelectable {
@@ -259,26 +264,43 @@ extension FormView: UITableViewDataSource {
 
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let row = storedGroups[indexPath.section].rows[indexPath.row]
+        row.processed(self)
+    }
 }
 
 extension FormView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if storedGroups.count > 0, let collection = storedGroups[section].header {
-            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: collection.viewClass)) as! FormHeaderFooterView
-            collection.prepare(headerView)
+        if storedGroups.count > 0, let header = storedGroups[section].header {
+            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: header.viewClass)) as! FormHeaderFooterView
+            header.prepare(headerView)
             return headerView
         }
         return nil
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if storedGroups.count > 0, let header = storedGroups[section].header {
+            header.processed(self)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if storedGroups.count > 0, let collection = storedGroups[section].footer {
-            let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: collection.viewClass)) as! FormHeaderFooterView
-            collection.prepare(footerView)
+        if storedGroups.count > 0, let footer = storedGroups[section].footer {
+            let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: footer.viewClass)) as! FormHeaderFooterView
+            footer.prepare(footerView)
             return footerView
         }
         return nil
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if storedGroups.count > 0, let footer = storedGroups[section].footer {
+            footer.processed(self)
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

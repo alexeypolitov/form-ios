@@ -59,13 +59,7 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
     
     // MARK: - FormValuable
     
-    private var _value: Any? {
-        didSet {
-            if let `bindName` = bindName {
-                bindDelegate?.bindValueChanged(bindName: bindName, value: _value)
-            }
-        }
-    }
+    private var _value: Any?
     var value: Any? {
         get {
             return _value
@@ -164,6 +158,13 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
     
     func bindDelegate(_ bindDelegate: FormBindDelegate?) {
         self.bindDelegate = bindDelegate
+    }
+    
+    func refreshBindValue() {
+        guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
+        guard let bindValue = bindDelegate.bindValue(bindName) as? String else { return }
+        
+        let _ = text(bindValue)
     }
     
 }
@@ -321,6 +322,11 @@ extension FormTextFieldControl: UITextFieldDelegate {
         } else {
             _value = textField.text
         }
+        
+        if let `bindName` = bindName {
+            bindDelegate?.bindValueChanged(bindName: bindName, value: _value)
+        }
+        
         return result
     }
     

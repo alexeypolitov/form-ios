@@ -12,6 +12,7 @@ open class FormHeaderFooter {
     
     open var viewClass: FormHeaderFooterView.Type { return FormHeaderFooterView.self }
     open weak var linkedView: FormHeaderFooterView?
+    weak var linkedFormView: FormView?
     let name: String
     
     init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
@@ -27,13 +28,22 @@ open class FormHeaderFooter {
         // custom code
     }
     
+    func processed(_ formView: FormView) {
+        linkedFormView = formView
+        onProcessed(formView)
+    }
+    
+    func onProcessed(_ formView: FormView) {
+        // custom code
+    }
+    
     func updateFormView() {
-        guard let formView = linkedView?.superview?.superview as? FormView else { return }
-        formView.updateControls()
+//        guard let formView = linkedView?.superview?.superview as? FormView else { return }
+        formView?.updateControls()
     }
     
     var formView: FormView? {
-        guard let formView = linkedView?.superview?.superview as? FormView else { return nil }
-        return formView
+//        guard let formView = linkedView?.superview?.superview as? FormView else { return nil }
+        return linkedFormView
     }
 }
