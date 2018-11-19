@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol FormFieldDelegate {
+    func valueChanged(field: FormField, value: Any?)
+}
+
 open class FormField: NSObject {
     var name: String
     private var _value: Any? {
@@ -26,12 +30,20 @@ open class FormField: NSObject {
             return _value
         }
         set {
-            _value = newValue            
+            _value = newValue
+            if Thread.isMainThread {
+                delegate?.valueChanged(field: self, value: _value)
+            } else {
+                DispatchQueue.main.async {
+                    self.delegate?.valueChanged(field: self, value: self._value)
+                }
+            }
         }
     }
     var validators: [FormValidator] = []
     var inlineValidators: [FormValidator] = []
     var onChange: ((Any?) -> Void)?
+    var delegate: FormFieldDelegate?
     
     init(_ name: String) {
         self.name = name

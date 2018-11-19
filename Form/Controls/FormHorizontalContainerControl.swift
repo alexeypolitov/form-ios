@@ -160,6 +160,22 @@ extension FormHorizontalContainerControl: FormSearchable {
         return nil
     }
     
+    func bindableControls(_ bindName: String) -> [FormBindable] {
+        var list: [FormBindable] = []
+        for control in controls {
+            if let `control` = control as? FormBindable {
+                if control.bindName == bindName {
+                    list.append(control)
+                }
+            }
+            if let `control` = control as? FormSearchable {
+                list.append(contentsOf: control.bindableControls(bindName))
+            }
+        }
+        
+        return list
+    }
+    
 }
 
 // MARK: - FormValidatable

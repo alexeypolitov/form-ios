@@ -12,7 +12,7 @@ enum FormViewError: Error {
     case controlDuplication(name: String)
 }
 
-class FormView: UIView, FormBindDelegate {
+class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     fileprivate var tableView: UITableView?
     fileprivate var storedGroups: [FormGroup] = []
@@ -67,6 +67,7 @@ class FormView: UIView, FormBindDelegate {
     
     func bind(_ form: Form?) -> FormView {
         self.bindForm = form
+        self.bindForm?.bindDelegate = self
         return self
     }
     
@@ -78,6 +79,15 @@ class FormView: UIView, FormBindDelegate {
     func bindValue(_ bindName: String) -> Any? {
         guard let field = bindForm?.field(bindName) else { return nil }
         return field.value
+    }
+    
+    // MARK: - FormBindDelegate
+    
+    func formBindValueChanged(bindName: String, value: Any?) {
+        let constols = bindableControls(bindName)
+        for control in constols {
+            control.refreshBindValue()
+        }
     }
     
 }
@@ -167,6 +177,14 @@ extension FormView {
         }
 
         return nil
+    }
+    
+    func bindableControls(_ bindName: String) -> [FormBindable] {
+        var list: [FormBindable] = []
+        for group in storedGroups {
+            list.append(contentsOf: group.bindableControls(bindName))
+        }
+        return list
     }
     
 //    func collection(_ name: String) -> FormHeaderFooter? {

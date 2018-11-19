@@ -8,15 +8,17 @@
 
 import Foundation
 
+protocol FormBindDelegate {
+    func formBindValueChanged(bindName: String, value: Any?)
+}
+
 class Form {
     
-    var fields: [FormField]
-    
-    init(_ fields: [FormField] = []) {
-        self.fields = fields        
-    }
+    var fields: [FormField] = []
+    var bindDelegate: FormBindDelegate?
     
     func add(_ field: FormField) -> Form {
+        field.delegate = self
         fields.append(field)
         return self
     }
@@ -33,6 +35,16 @@ class Form {
             }
         }
         return (true, nil)
+    }
+    
+}
+
+// MARK: - FormFieldDelegate
+
+extension Form : FormFieldDelegate {
+    
+    func valueChanged(field: FormField, value: Any?) {
+        bindDelegate?.formBindValueChanged(bindName: field.name, value: value)
     }
     
 }

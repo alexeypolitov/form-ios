@@ -153,10 +153,10 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
     
     // MARK: - FormBindable
     
-    var bindDelegate: FormBindDelegate?
+    var bindDelegate: FormViewBindDelegate?
     var bindName: String?
     
-    func bindDelegate(_ bindDelegate: FormBindDelegate?) {
+    func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
         self.bindDelegate = bindDelegate
     }
     

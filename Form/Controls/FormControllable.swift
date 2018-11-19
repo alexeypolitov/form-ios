@@ -19,6 +19,7 @@ protocol FormSizeable {
 
 protocol FormSearchable {
     func control(_ name: String) -> FormControllable?
+    func bindableControls(_ bindName: String) -> [FormBindable]
 }
 
 protocol FormValuable {
@@ -37,13 +38,13 @@ protocol FormSelectable {
 }
 
 protocol FormBindable {
-    var bindDelegate: FormBindDelegate? { get set }
+    var bindDelegate: FormViewBindDelegate? { get set }
     var bindName: String? { get set }
-    func bindDelegate(_ bindDelegate: FormBindDelegate?)
+    func bindDelegate(_ bindDelegate: FormViewBindDelegate?)
     func refreshBindValue()
 }
 
-protocol FormBindDelegate {
+protocol FormViewBindDelegate {
     func bindValueChanged(bindName: String, value: Any?)
     func bindValue(_ bindName: String) -> Any?
 }

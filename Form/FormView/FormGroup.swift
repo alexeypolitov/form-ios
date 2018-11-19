@@ -50,6 +50,27 @@ extension FormGroup: FormSearchable {
         return nil
     }
     
+    func bindableControls(_ bindName: String) -> [FormBindable] {
+        var list: [FormBindable] = []
+        
+        if let `header` = header as? FormSearchable {
+            list.append(contentsOf: header.bindableControls(bindName))
+        }
+
+        for row in rows {
+            if let `row` = row as? FormSearchable {
+                list.append(contentsOf: row.bindableControls(bindName))
+            }
+            
+        }
+        
+        if let `footer` = footer as? FormSearchable {
+            list.append(contentsOf: footer.bindableControls(bindName))
+        }
+        
+        return list
+    }
+    
 }
 
 // MARK: - FormValidatable
