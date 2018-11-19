@@ -57,9 +57,6 @@ open class FormLabelControl: ExtendedLabel, FormControllable {
     func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
         self.layoutDelegate = layoutDelegate
     }
-//    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-//        stackDelegate = delegate
-//    }
     
 }
 

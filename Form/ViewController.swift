@@ -27,20 +27,34 @@ class ViewController: UIViewController {
 //            .add(Form.label("textLabel3").text("Some label 3"))
 //            .add(Form.label("textLabel4").text("Some label 4"))
         
+        // test stackview
+        let horizontalContainer = Form.horizontal()
+            .add(Form.label("test1").text("test 1"))
+            .add(Form.label("test2").text("test 2").isMain(true))
+            .add(Form.label("test3").text("test 3"))
+        
+        let verticalContainer = Form.vertical()
+            .add(horizontalContainer)
+            .add(Form.label("test4").text("test 4").textHorizontalAlignment(.right))
+            .add(Form.label("test5").text("test 5"))
+        
+        
+        
+        
         // with container
         let group = Form.group()
+//            .add(Form.textView("textLabel").text("Some label 1"))
+            .add(verticalContainer)
             .header(
-                Form.header("header")
-                    .element(
-                        Form.label("textLabel")
-                            .text("Some label 1")
-                            .numberOfLines(0)))
-            .add(
-                Form.row("textRow")
-                    .element(
-                        Form.label("textLabel")
-                            .text("Some label 1")
-                            .numberOfLines(0)))
+                Form.vertical()
+                    .add(
+                        Form.horizontal()
+                            .add(Form.label("test1").text("test 1"))
+                            .add(Form.label("test2").text("test 2").isMain(true))
+                            .add(Form.label("test3").text("test 3"))
+                    )
+                    .add(Form.label("test4").text("test 4").textHorizontalAlignment(.right))
+                    .add(Form.label("test5").text("test 5")))
 
         try? formView.addGroup(group)
 //        try? formView.addControl(control)

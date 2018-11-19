@@ -36,7 +36,7 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
         storeConstrain(view: elementView, constrain: elementView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: elementInsets.top))
         storeConstrain(view: contentView, constrain: contentView.bottomAnchor.constraint(equalTo: elementView.bottomAnchor, constant: elementInsets.bottom), priority: .defaultHigh)
 
-        if let elementSizing = element as? FormStackControlElementSizing {
+        if let elementSizing = element as? FormSizeable {
             if let fixedHeigth = elementSizing.fixedHeigth {
                 storeConstrain(view: elementView, constrain: elementView.heightAnchor.constraint(equalToConstant: fixedHeigth))
             }

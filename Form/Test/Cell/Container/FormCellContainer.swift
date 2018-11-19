@@ -11,8 +11,9 @@ import UIKit
 class FormCellContainer: FormCell {
 
     override var viewClass: FormCellView.Type { return FormCellContainerView.self }
-    var element: FormControllable?
+    var element: FormControllable?    
     var insets: UIEdgeInsets = UIEdgeInsets.zero
+    var minimalInset: CGFloat = 8
     
     override init(_ name: String = UUID().uuidString) {
         super.init(name)
@@ -27,7 +28,7 @@ class FormCellContainer: FormCell {
     }
     
     class Appearance {
-        var insets: UIEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+        var insets: UIEdgeInsets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
     }
     
     static let appearance = Appearance()

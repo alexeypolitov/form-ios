@@ -27,7 +27,7 @@ class FormHeaderFooterContainer: FormHeaderFooter {
     }
     
     class Appearance {
-        var insets: UIEdgeInsets = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+        var insets: UIEdgeInsets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
     }
     
     static let appearance = Appearance()

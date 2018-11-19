@@ -47,6 +47,7 @@ open class FormTextViewControl: ExtendedTextView, FormControllable {
         self.textContainer.lineFragmentPadding = 0
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
         self.isScrollEnabled = false
+        self.backgroundColor = UIColor.clear
         self.delegate = self        
         
     }
@@ -54,9 +55,6 @@ open class FormTextViewControl: ExtendedTextView, FormControllable {
     func layoutDelegate(_ layoutDelegate: FormStackControlElementLayoutDelegate?) {
         self.layoutDelegate = layoutDelegate
     }
-//    func prepareStackDelegate(delegate: FormStackControlElementDelegate) {
-//        stackDelegate = delegate
-//    }
     
     open override func onTextDidChange(notification: Notification) {
         super.onTextDidChange(notification: notification)

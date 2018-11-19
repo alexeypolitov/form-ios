@@ -34,6 +34,14 @@ class Form {
         return FormImageControl(name)
     }
     
+    static func vertical(_ name: String = UUID().uuidString) -> FormVerticalContainerControl {
+        return FormVerticalContainerControl(name)
+    }
+    
+    static func horizontal(_ name: String = UUID().uuidString) -> FormHorizontalContainerControl {
+        return FormHorizontalContainerControl(name)
+    }
+    
     static func group(_ name: String = UUID().uuidString) -> FormGroup {
         return FormGroup()
     }

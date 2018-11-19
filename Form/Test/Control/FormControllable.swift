@@ -17,7 +17,7 @@ protocol FormStackControlElementLayoutDelegate {
     func updateControlLayout(element: FormControllable) //, withoutReload: Bool)
 }
 
-protocol FormStackControlElementSizing {
+protocol FormSizeable {
     var fixedWidth: CGFloat? { get set }
     var fixedHeigth: CGFloat? { get set }
 }

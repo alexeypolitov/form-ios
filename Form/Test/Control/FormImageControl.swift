@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormImageControl: UIImageView, FormControllable, FormStackControlElementSizing {
+class FormImageControl: UIImageView, FormControllable, FormSizeable {
 
     var isMain: Bool
     let name: String
