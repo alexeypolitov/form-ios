@@ -43,16 +43,28 @@ class ViewController: UIViewController {
 //                print("did selected")
 //            })
         
-        let control = FormStackControl("testStackControl")
-            .add(FormTextViewStackControlElement("textView")
-                .isMain(true)
-                .text("Some label 1")
-                .placeholder("Some placeholder")
-                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
-                    guard let `string` = string else { return true }
-                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
-                    return newString.count >= 50 ? false : true
-                }))
+//        let header = Form.header("testStackControl")
+//            .element(Form.textView("textView")
+//                .isMain(true)
+//            .text("Some label 1")
+//            .placeholder("Some placeholder")
+//            .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
+//                guard let `string` = string else { return true }
+//                let newString = (string as NSString).replacingCharacters(in: range, with: changes)
+//                return newString.count >= 50 ? false : true
+//            }))
+//
+//        let control = FormCellContainer("testStackControl")
+//            .element(Form.textView("textView")
+//                .isMain(true)
+//                .text("Some label 1")
+//                .placeholder("Some placeholder")
+//                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
+//                    guard let `string` = string else { return true }
+//                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
+//                    return newString.count >= 50 ? false : true
+//                }))
+//            .insets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         
 //        let control = FormStackControl("testStackControl")
 //            .add(FormImageStackControlElement("image")
@@ -74,7 +86,7 @@ class ViewController: UIViewController {
 //                .text("Some text3"))
 //            .add(FormLabelCollectionItem("label4")
 //                .text("Some text4"))
-        let header = FormHeaderFooterContainer("header1")
+//        let header = Form.header("header1")
 //            .element(FormLabelStackControlElement("textLabel")
 //                .isMain(true)
 //                .text("Some label 1")
@@ -85,18 +97,30 @@ class ViewController: UIViewController {
 //                .fixedWidth(40)
 //                .fixedHeigth(40)
 //                .backgroundColor(UIColor.yellow))
-            .element(FormTextViewStackControlElement("textView")
-                .isMain(true)
-                .text("Some label 1\nrttryry\ntdfgdfgdf\nkhkjhkj")
-                .placeholder("Some placeholder")
-                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
-                    guard let `string` = string else { return true }
-                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
-                    return newString.count >= 50 ? false : true
-                }))
-            .insets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+//            .element(Form.textView("textView")
+//                .isMain(true)
+//                .text("Some label 1\nrttryry\ntdfgdfgdf\nkhkjhkj")
+//                .placeholder("Some placeholder")
+//                .shouldChangeCharacters({ (element, string, range, changes) -> Bool in
+//                    guard let `string` = string else { return true }
+//                    let newString = (string as NSString).replacingCharacters(in: range, with: changes)
+//                    return newString.count >= 50 ? false : true
+//                }))
+//            .insets(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
 
-        let group = FormGroup(header: header, [control], footer: nil)
+        let group = Form.group()
+            .header(
+                Form.header("header1")
+                    .element(
+                        Form.label("textLabel")
+                            .text("Some label 1")
+                            .numberOfLines(0)))
+            .add(
+                Form.row("")
+                    .element(
+                        Form.label("textLabel")
+                            .text("Some label 1")
+                            .numberOfLines(0)))
 
         try? formView.addGroup(group)
 //        try? formView.addControl(control)

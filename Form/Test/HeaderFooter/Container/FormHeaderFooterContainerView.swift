@@ -11,7 +11,6 @@ import UIKit
 protocol FormHeaderFooterContainerViewDataSource {
     func formHeaderFooterContainerViewElement(_ view: FormHeaderFooterContainerView) -> FormStackControlElement?
     func formHeaderFooterContainerViewInsets(_ view: FormHeaderFooterContainerView) -> UIEdgeInsets?
-    //    func minimalInsetBetweenElements() -> CGFloat
 }
 
 class FormHeaderFooterContainerView: FormHeaderFooterView {
@@ -46,27 +45,8 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
             }
         }
 
-
-//        if let lastElementView = lastElement as? UIView {
-//            storeConstrain(view: elementView, constrain: elementView.leftAnchor.constraint(equalTo: lastElementView.rightAnchor, constant: minimalInset))
-//        } else {
-            storeConstrain(view: elementView, constrain: elementView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: elementInsets.left))
-//        }
-//
-//        if element.isMain {
-//            elementView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
-//        } else {
-//            elementView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
-//        }
-//
-//        // is last
-//        if dataSource.numberOfElements() - 1 == index {
-//            if let elementSizing = element as? FormStackControlElementSizing, elementSizing.fixedWidth != nil {
-//                // do noting
-//            } else {
-                storeConstrain(view: elementView, constrain: elementView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: elementInsets.right * -1), priority: .defaultHigh)
-//            }
-//        }
+        storeConstrain(view: elementView, constrain: elementView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: elementInsets.left))
+        storeConstrain(view: elementView, constrain: elementView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: elementInsets.right * -1), priority: .defaultHigh)
     }
 
 }

@@ -74,7 +74,7 @@ extension FormView {
         
         if let _ = storedGroups.first(where: { (group) -> Bool in
             
-            if let _ = group.controls.first(where: {$0.name == name}) {
+            if let _ = group.cells.first(where: {$0.name == name}) {
                 return true
             } else {
                 return false
@@ -88,41 +88,41 @@ extension FormView {
         
     }
     
-    func addControl(_ control: FormControl, inGroup group: FormGroup? = nil) throws {
-        
-        if isControlNameDuplicate(name: control.name) {
-            throw FormViewError.controlDuplication(name: control.name)
-        }
-
-        if let `group` = group {
-            group.controls.append(control)
-        } else if let `group` = storedGroups.last as? FormDefaultGroup {
-            group.controls.append(control)
-        } else {
-            storedGroups.append(FormDefaultGroup([control]))
-        }
-
-        register(control.cellClass)
-        tableView?.reloadData()
-    
-    }
+//    func addControl(_ control: FormControl, inGroup group: FormGroup? = nil) throws {
+//
+//        if isControlNameDuplicate(name: control.name) {
+//            throw FormViewError.controlDuplication(name: control.name)
+//        }
+//
+//        if let `group` = group {
+//            group.controls.append(control)
+//        } else if let `group` = storedGroups.last as? FormDefaultGroup {
+//            group.controls.append(control)
+//        } else {
+//            storedGroups.append(FormDefaultGroup([control]))
+//        }
+//
+//        register(control.cellClass)
+//        tableView?.reloadData()
+//
+//    }
     
     func addGroup(_ group: FormGroup) throws {
         
-        if let collection = group.headerCollection {
+        if let collection = group.header {
             registerHeaderFooter(collection.viewClass)
         }
-        if let collection = group.footerCollection {
+        if let collection = group.footer {
             registerHeaderFooter(collection.viewClass)
         }
         
-        try group.controls.forEach { (control) in
+        try group.cells.forEach { (control) in
             
             if isControlNameDuplicate(name: control.name) {
                 throw FormViewError.controlDuplication(name: control.name)
             }
             
-            register(control.cellClass)
+            register(control.viewClass)
         }
         storedGroups.append(group)
         
@@ -130,29 +130,29 @@ extension FormView {
         
     }
     
-    func addControls(_ controls: [FormControl], inGroup group: FormGroup? = nil) throws {
-        
-        if let `group` = group {
-            try controls.forEach { (control) in
-                try addControl(control, inGroup: group)
-            }
-            
-            tableView?.reloadData()
-        } else if let `group` = storedGroups.last as? FormDefaultGroup {
-            try addControls(controls, inGroup: group)
-        } else {
-            let `group` = FormDefaultGroup()
-            storedGroups.append(group)
-            
-            try addControls(controls, inGroup: group)
-        }
-
-    }
+//    func addControls(_ controls: [FormControl], inGroup group: FormGroup? = nil) throws {
+//
+//        if let `group` = group {
+//            try controls.forEach { (control) in
+//                try addControl(control, inGroup: group)
+//            }
+//
+//            tableView?.reloadData()
+//        } else if let `group` = storedGroups.last as? FormDefaultGroup {
+//            try addControls(controls, inGroup: group)
+//        } else {
+//            let `group` = FormDefaultGroup()
+//            storedGroups.append(group)
+//
+//            try addControls(controls, inGroup: group)
+//        }
+//
+//    }
     
-    func control(name: String) -> FormControl? {
+    func control(name: String) -> FormCell? {
         
         for group in storedGroups {
-            if let control = group.controls.first(where: {$0.name == name }) {
+            if let control = group.cells.first(where: {$0.name == name }) {
                 return control
             }
         }
@@ -163,7 +163,7 @@ extension FormView {
     func collection(_ name: String) -> FormHeaderFooter? {
         
         for group in storedGroups {
-            if let header = group.headerCollection {
+            if let header = group.header {
                 if header.name == name {
                     return header
                 }
@@ -173,18 +173,18 @@ extension FormView {
         return nil
     }
     
-    func collectionItem(name: String) -> FormCollectionItem? {
-        
-//        for group in storedGroups {
-//            if let item = group.headerCollection?.item(name: name) {
-//                return item
-//            } else if let item = group.footerCollection?.item(name: name) {
-//                return item
-//            }
-//        }
-        
-        return nil
-    }
+//    func collectionItem(name: String) -> FormCollectionItem? {
+//
+////        for group in storedGroups {
+////            if let item = group.headerCollection?.item(name: name) {
+////                return item
+////            } else if let item = group.footerCollection?.item(name: name) {
+////                return item
+////            }
+////        }
+//
+//        return nil
+//    }
     
     func removeControl(name: String) {
 //        guard let index = storedControls.firstIndex(where: {$0.name == name}) else {
@@ -220,12 +220,12 @@ extension FormView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storedGroups.count > 0 ? storedGroups[section].controls.count : 0
+        return storedGroups.count > 0 ? storedGroups[section].cells.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let control = storedGroups[indexPath.section].controls [indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: control.cellClass), for: indexPath)
+        let control = storedGroups[indexPath.section].cells [indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: control.viewClass), for: indexPath) as! FormCellView
 
         if let `control` = control as? FormControlSelectable {
             cell.selectionStyle = control.selectionStyle
@@ -235,7 +235,7 @@ extension FormView: UITableViewDataSource {
             cell.accessoryType = .none
         }
         
-        control.prepare(cell: cell)
+        control.prepare(cell)
 
         return cell
     }
@@ -244,7 +244,7 @@ extension FormView: UITableViewDataSource {
 extension FormView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if storedGroups.count > 0, let collection = storedGroups[section].headerCollection {
+        if storedGroups.count > 0, let collection = storedGroups[section].header {
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: collection.viewClass)) as! FormHeaderFooterView
             collection.prepare(headerView)
             return headerView
@@ -252,36 +252,17 @@ extension FormView: UITableViewDelegate {
         return nil
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if storedGroups.count > 0, let collection = storedGroups[section].headerCollection {
-//            return collection.height(maxWidth: tableView.frame.width)
-//        }
-//        return 0
-//    }
-    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if storedGroups.count > 0, let collection = storedGroups[section].footerCollection {
-            let collectionView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: collection.viewClass)) as! FormCollectionView
-            collection.prepare(collectionView: collectionView)
-            
-            return collectionView
+        if storedGroups.count > 0, let collection = storedGroups[section].footer {
+            let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: collection.viewClass)) as! FormHeaderFooterView
+            collection.prepare(footerView)
+            return footerView
         }
         return nil
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if storedGroups.count > 0, let collection = storedGroups[section].footerCollection {
-            return collection.height(maxWidth: tableView.frame.width)
-        }
-        return 0
-    }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return storedGroups[indexPath.section].controls [indexPath.row].height(maxWidth: tableView.frame.width)
-//    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let control = storedGroups[indexPath.section].controls [indexPath.row]
+        let control = storedGroups[indexPath.section].cells [indexPath.row]
         
         if let `control` = control as? FormControlSelectable {
             control.formControlOnSelect()

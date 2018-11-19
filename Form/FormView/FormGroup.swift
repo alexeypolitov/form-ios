@@ -9,15 +9,36 @@
 import Foundation
 
 open class FormGroup {
-    var headerCollection: FormHeaderFooter?
-    var controls: [FormControl] = []
-    var footerCollection: FormCollection?
+    var header: FormHeaderFooter?
+    var cells: [FormCell] = []
+    var footer: FormHeaderFooter?
     
-    init(header: FormHeaderFooter? = nil, _ controls: [FormControl] = [], footer: FormCollection? = nil) {
-        self.headerCollection = header
-        self.controls = controls
-        self.footerCollection = footer
+    init(header: FormHeaderFooter? = nil, _ cells: [FormCell] = [], footer: FormHeaderFooter? = nil) {
+        self.header = header
+        self.cells = cells
+        self.footer = footer
     }
+}
+
+// MARK: - Setters
+
+extension FormGroup {
+    
+    func header(_ container: FormHeaderFooter) -> FormGroup {
+        self.header = container
+        return self
+    }
+    
+    func footer(_ container: FormHeaderFooter) -> FormGroup {
+        self.footer = container
+        return self
+    }
+    
+    func add(_ container: FormCell) -> FormGroup {
+        cells.append(container)
+        return self
+    }
+    
 }
 
 class FormDefaultGroup: FormGroup {
