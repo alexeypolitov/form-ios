@@ -32,4 +32,8 @@ open class FormHeaderFooter {
         formView.updateControls()
     }
     
+    var formView: FormView? {
+        guard let formView = linkedView?.superview?.superview as? FormView else { return nil }
+        return formView
+    }
 }

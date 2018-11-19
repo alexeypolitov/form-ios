@@ -16,16 +16,12 @@ class Form {
         self.fields = fields        
     }
     
-//    func add(_ field: FormField) {
-//        fields.append(field)
-//    }
-    
     func add(_ field: FormField) -> Form {
         fields.append(field)
         return self
     }
     
-    func field(name: String) -> FormField? {
+    func field(_ name: String) -> FormField? {
         return fields.first(where: {$0.name == name})
     }
     

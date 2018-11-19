@@ -36,6 +36,16 @@ protocol FormSelectable {
     var onSelect: ((FormCellContainer) -> Void)? { get set }
 }
 
+protocol FormBindable {
+    var bindDelegate: FormBindDelegate? { get set }
+    var bindName: String? { get set }
+    func bindDelegate(_ bindDelegate: FormBindDelegate?)
+}
+
+protocol FormBindDelegate {
+    func bindValueChanged(bindName: String, value: Any?)
+}
+
 protocol FormControllable {
     var isMain: Bool { get set }
     var name: String { get }

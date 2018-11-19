@@ -24,7 +24,10 @@ class ViewController: UIViewController {
                 .validators([
                     Former.minLength(minLength: 3, "SignUp.Name.Validation.BetweedLength.Error"),
                     Former.required("SignUp.Name.Validation.Required.Error")])
-                .inlineValidator(Former.maxLength(maxLength: 20, "SignUp.Name.Validation.BetweedLength.Error")))
+                .inlineValidator(Former.maxLength(maxLength: 20, "SignUp.Name.Validation.BetweedLength.Error"))
+                .onChange({ (value) in
+                    print("test: \(value)")
+                }))
             .add(Form.field("email"))
             .add(Form.field("password"))
             .add(Form.field("prWay"))
@@ -33,13 +36,14 @@ class ViewController: UIViewController {
         
         let _ = formView.bind(form)
         try? formView.addGroup(Former.group()
-            .header(Former.label().text("以下をご入力ください"))
-            .add(Former.textField("name").placeholder("氏名"))
-            .add(Former.textField("email").placeholder("メールアドレス"))
+//            .header(Former.label().text("以下をご入力ください"))
+            .header(Former.textField("nameTextField1").bind("name").placeholder("氏名"))
+            .add(Former.textField("nameTextField").bind("name").placeholder("氏名"))
+            .add(Former.textField("emailTextField").placeholder("メールアドレス"))
 //                .validators([
 //                    Former.required("SignUp.Email.Validation.Required.Error"),
 //                    Former.email("SignUp.Email.Validation.Email.Error")]))
-            .add(Former.textField("password").placeholder("パスワード（半角英数字6字以上）"))
+            .add(Former.textField("passwordTextField").placeholder("パスワード（半角英数字6字以上）"))
 //                .validator(Former.required("SignUp.Name.Validation.Required.Error"))
 //                .inlineValidator(Former.minLength(minLength: 6, "SignUp.Password.Validation.MinLength.Error")))
             .footer(Former.label().text("パスワードは忘れないようにメモしましょう！").textHorizontalAlignment(.center))
@@ -47,7 +51,7 @@ class ViewController: UIViewController {
         
         try? formView.addGroup(Former.group()
             .header(Former.label().text("どこで◯◯を知りましたか？"))
-            .add(Former.label("prWay")
+            .add(Former.label("prWayLabel")
                 .text("選択してください")
                 .accessoryType(.disclosureIndicator)
                 .onSelect({ (control) in

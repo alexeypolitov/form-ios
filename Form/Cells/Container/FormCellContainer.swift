@@ -88,6 +88,8 @@ class FormCellContainer: FormCell, FormCellSelectable {
     
 }
 
+// MARK: - FormCellContainerViewDataSource
+
 extension FormCellContainer: FormCellContainerViewDataSource {
     
     func formCellContainerViewControl(_ view: FormCellContainerView) -> FormControllable? {
@@ -141,6 +143,16 @@ extension FormCellContainer: FormValidatable {
     
 }
 
+// MARK: - FormBindDelegate
+
+extension FormCellContainer: FormBindDelegate {
+    
+    func bindValueChanged(bindName: String, value: Any?) {
+        formView?.bindValueChanged(bindName: bindName, value: value)
+    }
+    
+}
+
 // MARK: - Setters
 
 extension FormCellContainer {
@@ -148,6 +160,9 @@ extension FormCellContainer {
     func control(_ control: FormControllable?) -> FormCellContainer {
         self.control = control
         self.control?.layoutDelegate = self
+        if let bindable = control as? FormBindable {
+            bindable.bindDelegate(self)
+        }        
         return self
     }
     

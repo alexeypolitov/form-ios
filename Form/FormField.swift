@@ -18,17 +18,17 @@ open class FormField: NSObject {
         set {
             _value = newValue
             if Thread.isMainThread {
-                onChange?(self)
+                onChange?(_value)
             } else {
                 DispatchQueue.main.async {
-                    self.onChange?(self)
+                    self.onChange?(self._value)
                 }
             }
         }
     }
     var validators: [FormValidator] = []
     var inlineValidators: [FormValidator] = []
-    var onChange: ((FormField) -> Void)?
+    var onChange: ((Any?) -> Void)?
     
     init(_ name: String) {
         self.name = name
@@ -104,7 +104,7 @@ extension FormField {
         return self
     }
     
-    func onChange(_ onChange: ((FormField) -> Void)?) -> FormField {
+    func onChange(_ onChange: ((Any?) -> Void)?) -> FormField {
         self.onChange = onChange
         return self
     }

@@ -17,7 +17,7 @@ protocol FormCellSelectable {
 open class FormCell {
     
     open var viewClass: FormCellView.Type { return FormCellView.self }
-    open weak var linkedview: FormCellView?
+    open weak var linkedView: FormCellView?
     let name: String
     
     init(_ name: String = UUID().uuidString) {
@@ -25,7 +25,7 @@ open class FormCell {
     }
     
     func prepare(_ view: FormCellView) {
-        linkedview = view
+        linkedView = view
         onPrepare(view)
     }
     
@@ -34,7 +34,12 @@ open class FormCell {
     }
     
     func updateFormView() {
-        guard let formView = linkedview?.superview?.superview as? FormView else { return }
+        guard let formView = linkedView?.superview?.superview as? FormView else { return }
         formView.updateControls()
+    }
+    
+    var formView: FormView? {
+        guard let formView = linkedView?.superview?.superview as? FormView else { return nil }
+        return formView
     }
 }

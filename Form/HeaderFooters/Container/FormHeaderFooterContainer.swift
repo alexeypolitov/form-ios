@@ -84,6 +84,16 @@ extension FormHeaderFooterContainer: FormSearchable {
     
 }
 
+// MARK: - FormBindDelegate
+
+extension FormHeaderFooterContainer: FormBindDelegate {
+    
+    func bindValueChanged(bindName: String, value: Any?) {
+        formView?.bindValueChanged(bindName: bindName, value: value)
+    }
+    
+}
+
 // MARK: - Setters
 
 extension FormHeaderFooterContainer {
@@ -91,6 +101,9 @@ extension FormHeaderFooterContainer {
     func control(_ control: FormControllable?) -> FormHeaderFooterContainer {
         self.control = control
         self.control?.layoutDelegate = self
+        if let bindable = control as? FormBindable {
+            bindable.bindDelegate(self)
+        }  
         return self
     }
     

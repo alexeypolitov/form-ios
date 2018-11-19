@@ -315,7 +315,11 @@ extension FormTextViewControl: UITextViewDelegate {
         // Other validation
         let result = shouldChangeCharacters?(self, textView.text, range, text) ?? true
         _pandingValue = nil
-        _value = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        if result {
+            _value = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        } else {
+            _value = textView.text
+        }
         return result
     }
 

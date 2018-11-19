@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormTextFieldControl: UITextField, FormControllable, FormValuable, FormValidatable {
+open class FormTextFieldControl: UITextField, FormControllable, FormValuable, FormValidatable, FormBindable {
     
     var isMain: Bool
     let name: String
@@ -59,17 +59,24 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
     
     // MARK: - FormValuable
     
-    private var _value: Any?
+    private var _value: Any? {
+        didSet {
+            if let `bindName` = bindName {
+                bindDelegate?.bindValueChanged(bindName: bindName, value: _value)
+            }
+        }
+    }
     var value: Any? {
         get {
             return _value
         }
         set {
-            _value = newValue
             if let `stringValue` = newValue as? String {
                 let _ = text(stringValue)
+                _value = newValue
             } else {
                 let _ = text(nil)
+                _value = nil
             }
         }
     }
@@ -149,6 +156,16 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
         
         return nil
     }
+    
+    // MARK: - FormBindable
+    
+    var bindDelegate: FormBindDelegate?
+    var bindName: String?
+    
+    func bindDelegate(_ bindDelegate: FormBindDelegate?) {
+        self.bindDelegate = bindDelegate
+    }
+    
 }
 
 // MARK: - Setters
@@ -187,6 +204,11 @@ extension FormTextFieldControl {
     
     func onChange(_ handler: ((FormTextFieldControl, String?) -> Void)?) -> FormTextFieldControl {
         onChange = handler
+        return self
+    }
+    
+    func bind(_ bindName: String?) -> FormTextFieldControl {
+        self.bindName = bindName
         return self
     }
     
@@ -290,17 +312,15 @@ extension FormTextFieldControl: UITextFieldDelegate {
         if !success {
             _pandingValue = nil
             return false
-            
         }
         // Other validation
         let result = shouldChangeCharacters?(self, textField.text, range, string) ?? true
         _pandingValue = nil
-        if let text = textField.text {
-            _value = (text as NSString).replacingCharacters(in: range, with: text)
+        if result, let text = textField.text {
+            _value = (text as NSString).replacingCharacters(in: range, with: string)
         } else {
-            _value = nil
+            _value = textField.text
         }
-        
         return result
     }
     
