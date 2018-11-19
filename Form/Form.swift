@@ -9,6 +9,8 @@
 import Foundation
 
 class Form {
+
+    // Control
     
     static func label(_ name: String = UUID().uuidString) -> FormLabelControl {
         return FormLabelControl(name)
@@ -46,10 +48,14 @@ class Form {
         return FormHorizontalContainerControl(name)
     }
     
+    // Group
+    
     static func group(_ name: String = UUID().uuidString) -> FormGroup {
         return FormGroup()
     }
 
+    // Container
+    
     static func header(_ name: String = UUID().uuidString) -> FormHeaderFooterContainer {
         return FormHeaderFooterContainer(name)
     }
@@ -60,6 +66,28 @@ class Form {
     
     static func row(_ name: String = UUID().uuidString) -> FormCellContainer {
         return FormCellContainer(name)
+    }
+    
+    // Validator
+    
+    static func required(_ message: String) -> FormRequiredValidator {
+        return FormRequiredValidator(message)
+    }
+    
+    static func email(_ message: String) -> FormEmailValidator {
+        return FormEmailValidator(message)
+    }
+    
+    static func maxLength(maxLength: Int,_ message: String) -> FormMaxLengthValidator {
+        return FormMaxLengthValidator(maxLength: maxLength, message)
+    }
+    
+    static func minLength(minLength: Int,_ message: String) -> FormMinLengthValidator {
+        return FormMinLengthValidator(minLength: minLength, message)
+    }
+    
+    static func between(minLength: Int, maxLength: Int,_ message: String) -> FormBetweenLengthValidator {
+        return FormBetweenLengthValidator(minLength: minLength, maxLength: maxLength, message)
     }
     
     
