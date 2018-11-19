@@ -269,8 +269,6 @@ extension FormTextViewControl {
 extension FormTextViewControl: UITextViewDelegate {
     
     public func textViewDidChange(_ textView: UITextView) {
-        _value = textView.text
-        _pandingValue = nil
         onChange?(self, textView.text.count > 0 ? textView.text : nil)
     }
     

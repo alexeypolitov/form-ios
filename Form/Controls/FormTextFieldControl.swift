@@ -8,11 +8,18 @@
 
 import UIKit
 
-open class FormTextFieldControl: UITextField, FormControllable { //, UITextFieldDelegate {
+open class FormTextFieldControl: UITextField, FormControllable, FormValuable, FormValidatable {
     
     var isMain: Bool
     let name: String
     var layoutDelegate: FormLayoutable?
+    
+    open override var text: String? {
+        didSet {
+            _value = text
+            _pandingValue = nil
+        }
+    }
     
     var onChange: ((FormTextFieldControl, String?) -> Void)?
     var onBeginEditing: ((FormTextFieldControl) -> Void)?
@@ -50,6 +57,98 @@ open class FormTextFieldControl: UITextField, FormControllable { //, UITextField
         self.layoutDelegate = layoutDelegate
     }
     
+    // MARK: - FormValuable
+    
+    private var _value: Any?
+    var value: Any? {
+        get {
+            return _value
+        }
+        set {
+            _value = newValue
+            if let `stringValue` = newValue as? String {
+                let _ = text(stringValue)
+            } else {
+                let _ = text(nil)
+            }
+        }
+    }
+    private var _pandingValue: Any?
+    var pandingValue: Any? {
+        get {
+            return _pandingValue
+        }
+        set {
+            _pandingValue = newValue
+        }
+    }
+    
+    // MARK: - FormValidatable
+    
+    var validators: [FormValidator] = []
+    var inlineValidators: [FormValidator] = []
+    
+    func validate() -> (Bool, String?) {
+        
+        if validators.count  == 0 { return (true, nil) }
+        
+        if let message = prepareValidateByPriority(priority: .high, validators) {
+            return (false, message)
+        }
+        
+        if let message = prepareValidateByPriority(priority: .medium, validators) {
+            return (false, message)
+        }
+        
+        if let message = prepareValidateByPriority(priority: .low, validators) {
+            return (false, message)
+        }
+        
+        return (true, nil)
+    }
+    
+    private func validateInline() -> (Bool, String?) {
+        
+        if inlineValidators.count  == 0 { return (true, nil) }
+        
+        if let message = prepareValidateByPriority(priority: .high, inlineValidators) {
+            return (false, message)
+        }
+        
+        if let message = prepareValidateByPriority(priority: .medium, inlineValidators) {
+            return (false, message)
+        }
+        
+        if let message = prepareValidateByPriority(priority: .low, inlineValidators) {
+            return (false, message)
+        }
+        
+        return (true, nil)
+    }
+    
+    
+//    func validate(priority: FormValidator.Priority) -> (Bool, String?) {
+//
+//        if let message = prepareValidateByPriority(priority: priority) {
+//            return (false, message)
+//        }
+//
+//        return (true, nil)
+//    }
+
+    private func prepareValidateByPriority(priority: FormValidator.Priority,_ validators: [FormValidator]) -> String? {
+        let localValidators = validators.filter { (validator) -> Bool in
+            return validator.priority == priority
+        }
+        
+        for validator in localValidators {
+            if !validator.validate(self) {
+                return validator.message
+            }
+        }
+        
+        return nil
+    }
 }
 
 // MARK: - Setters
@@ -156,11 +255,28 @@ extension FormTextFieldControl: UITextFieldDelegate {
     }
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let result = shouldChangeCharacters?(self, textField.text, range, string) ?? true
-        
-        if result, let text = textField.text {
-            onChange?(self, (text as NSString).replacingCharacters(in: range, with: string))
+        if let text = textField.text {
+            _pandingValue = (text as NSString).replacingCharacters(in: range, with: text)
+        } else {
+            _pandingValue = nil
         }
+        
+        // Inline validation
+        let (success, _ ) = validateInline()
+        if !success {
+            _pandingValue = nil
+            return false
+            
+        }
+        // Other validation
+        let result = shouldChangeCharacters?(self, textField.text, range, string) ?? true
+        _pandingValue = nil
+        if let text = textField.text {
+            _value = (text as NSString).replacingCharacters(in: range, with: text)
+        } else {
+            _value = nil
+        }
+        
         return result
     }
     
