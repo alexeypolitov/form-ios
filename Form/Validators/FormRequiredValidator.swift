@@ -10,7 +10,7 @@ import Foundation
 
 class FormRequiredValidator: FormValidator {
     
-    init(message: String) {
+    init(_ message: String) {
         super.init(priority: .high, message: message)
     }
     
