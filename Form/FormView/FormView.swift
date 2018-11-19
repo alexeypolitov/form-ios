@@ -142,25 +142,8 @@ extension FormView {
     func control(_ name: String) -> FormControllable? {
         
         for group in storedGroups {
-            if let header = group.header as? FormSearchable {
-                if let control = header.control(name) {
-                    return control
-                }
-            }
-            
-            for row in group.rows {
-                if let `row` = row as? FormSearchable {
-                    if let control = row.control(name) {
-                        return control
-                    }
-                }
-                
-            }
-
-            if let footer = group.footer as? FormSearchable {
-                if let control = footer.control(name) {
-                    return control
-                }
+            if let control = group.control(name) {
+                return control
             }
         }
 
@@ -193,14 +176,14 @@ extension FormView {
 //        return nil
 //    }
     
-    func removeControl(name: String) {
-//        guard let index = storedControls.firstIndex(where: {$0.name == name}) else {
-//            return
-//        }
-//
-//        storedControls.remove(at: index)
-//        tableView?.reloadData()
-    }
+//    func removeControl(name: String) {
+////        guard let index = storedControls.firstIndex(where: {$0.name == name}) else {
+////            return
+////        }
+////
+////        storedControls.remove(at: index)
+////        tableView?.reloadData()
+//    }
     
     func removeAllControls() {
         storedGroups.removeAll()
@@ -216,6 +199,22 @@ extension FormView {
     
     func reloadData() {
         tableView?.reloadData()
+    }
+    
+}
+
+extension FormView {
+    
+    func validate() -> (Bool, String?) {
+        
+        for group in storedGroups {
+            let (success, message) = group.validate()
+            if !success {
+                return (success, message)
+            }
+        }
+        
+        return (true, nil)
     }
     
 }

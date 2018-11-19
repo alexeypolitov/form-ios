@@ -25,7 +25,7 @@ class ViewController: UIViewController {
                     guard let limitLabel = self.formView.control("testLimit") as? FormLabelControl else { return }
                     
                     limitLabel.text("\(string?.count ?? 0)/100")
-                }))
+                }).inlineValidators([FormMaxLengthValidator(maxLength: 50, message: "Max length is 50 characters")]))
                 .add(Form.label("testLimit").text("0/100").textHorizontalAlignment(.right)))
         
         
@@ -88,6 +88,17 @@ class ViewController: UIViewController {
 //            control.formLabel.text = nil
 //
 //        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Validate", style: .default, handler: { [weak self] (action) in
+            guard let `self` = self else { return }
+            
+            let (success, message) = self.formView.validate()
+            if success {
+                print("Validation: OK")
+            } else {
+                print("Validation Error: \(message ?? "Unknown")")
+            }
+        }))
         
         actionSheet.addAction(UIAlertAction(title: "Reload", style: .default, handler: { [weak self] (action) in
             guard let `self` = self else { return }

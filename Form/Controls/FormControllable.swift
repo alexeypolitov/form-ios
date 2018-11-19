@@ -21,7 +21,17 @@ protocol FormSearchable {
     func control(_ name: String) -> FormControllable?
 }
 
-protocol FormControllable {    
+protocol FormValuable {
+    var value: Any? { get set }
+    var pandingValue: Any? { get set }
+}
+
+protocol FormValidatable {
+//    var validators: [FormValidator]? { get set }
+    func validate() -> (Bool, String?)
+}
+
+protocol FormControllable {
     var isMain: Bool { get set }
     var name: String { get }
 

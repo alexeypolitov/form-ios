@@ -162,6 +162,26 @@ extension FormHorizontalContainerControl: FormSearchable {
     
 }
 
+// MARK: - FormValidatable
+
+extension FormHorizontalContainerControl: FormValidatable {
+    
+    func validate() -> (Bool, String?) {
+        
+        for control in controls {
+            if let `control` = control as? FormValidatable {
+                let (success, message) = `control`.validate()
+                if !success {
+                    return (success, message)
+                }
+            }
+        }
+        
+        return (true, nil)
+    }
+    
+}
+
 // MARK: - Setters
 
 extension FormHorizontalContainerControl {

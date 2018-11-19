@@ -38,6 +38,10 @@
 		29AF404A21A279730054360B /* FormVerticalContainerControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404921A279730054360B /* FormVerticalContainerControl.swift */; };
 		29AF404C21A27D950054360B /* FormHorizontalContainerControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404B21A27D950054360B /* FormHorizontalContainerControl.swift */; };
 		29AF404E21A283E70054360B /* FormButtonControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404D21A283E70054360B /* FormButtonControl.swift */; };
+		29AF405121A297E20054360B /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF405021A297E20054360B /* FormValidator.swift */; };
+		29AF405321A298B90054360B /* FormLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF405221A298B90054360B /* FormLengthValidator.swift */; };
+		29AF405521A2AFE10054360B /* FormRequiredValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF405421A2AFE10054360B /* FormRequiredValidator.swift */; };
+		29AF405721A2B0330054360B /* FormEmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF405621A2B0330054360B /* FormEmailValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +78,10 @@
 		29AF404921A279730054360B /* FormVerticalContainerControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormVerticalContainerControl.swift; sourceTree = "<group>"; };
 		29AF404B21A27D950054360B /* FormHorizontalContainerControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormHorizontalContainerControl.swift; sourceTree = "<group>"; };
 		29AF404D21A283E70054360B /* FormButtonControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtonControl.swift; sourceTree = "<group>"; };
+		29AF405021A297E20054360B /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
+		29AF405221A298B90054360B /* FormLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormLengthValidator.swift; sourceTree = "<group>"; };
+		29AF405421A2AFE10054360B /* FormRequiredValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRequiredValidator.swift; sourceTree = "<group>"; };
+		29AF405621A2B0330054360B /* FormEmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEmailValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				29904112219E771F007DF31F /* Form.swift */,
+				29AF404F21A297BD0054360B /* Validators */,
 				2990410C219E7549007DF31F /* Controls */,
 				2990410B219E753E007DF31F /* Cells */,
 				2990410A219E752F007DF31F /* HeaderFooters */,
@@ -198,6 +207,17 @@
 			path = Container;
 			sourceTree = "<group>";
 		};
+		29AF404F21A297BD0054360B /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				29AF405021A297E20054360B /* FormValidator.swift */,
+				29AF405221A298B90054360B /* FormLengthValidator.swift */,
+				29AF405421A2AFE10054360B /* FormRequiredValidator.swift */,
+				29AF405621A2B0330054360B /* FormEmailValidator.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -270,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29AF405121A297E20054360B /* FormValidator.swift in Sources */,
 				29AF404A21A279730054360B /* FormVerticalContainerControl.swift in Sources */,
 				291E3D14217A3A7B006C3D4D /* FormView.swift in Sources */,
 				299FD94E219D5A5F00A1CE48 /* FormControllable.swift in Sources */,
@@ -277,6 +298,9 @@
 				29904105219E56DC007DF31F /* FormHeaderFooterContainer.swift in Sources */,
 				299FD952219D5ACC00A1CE48 /* FormBadgeControl.swift in Sources */,
 				299FD95E219DAAE600A1CE48 /* FormImageControl.swift in Sources */,
+				29AF405321A298B90054360B /* FormLengthValidator.swift in Sources */,
+				29AF405721A2B0330054360B /* FormEmailValidator.swift in Sources */,
+				29AF405521A2AFE10054360B /* FormRequiredValidator.swift in Sources */,
 				299FD956219D5AFC00A1CE48 /* FormTextViewControl.swift in Sources */,
 				291E3CF6217A3942006C3D4D /* ViewController.swift in Sources */,
 				29904115219E7B3A007DF31F /* FormCellContainer.swift in Sources */,

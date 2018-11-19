@@ -103,6 +103,21 @@ extension FormCellContainer: FormSearchable {
     
 }
 
+// MARK: - FormValidatable
+
+extension FormCellContainer: FormValidatable {
+    
+    func validate() -> (Bool, String?) {
+        
+        if let `element` = element as? FormValidatable {
+            return element.validate()
+        }
+        
+        return (true, nil)
+    }
+    
+}
+
 // MARK: - Setters
 
 extension FormCellContainer {
