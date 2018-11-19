@@ -48,6 +48,7 @@ class FormImageControl: UIImageView, FormControllable, FormSizeable {
     }
     
     // MARK: - FormStackControlElementSizing
+    
     private var _fixedWidth:CGFloat?
     var fixedWidth: CGFloat? {
         get {
