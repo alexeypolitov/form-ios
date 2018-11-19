@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FormHeaderFooterContainerViewDataSource {
-    func formHeaderFooterContainerViewElement(_ view: FormHeaderFooterContainerView) -> FormControllable?
+    func formHeaderFooterContainerViewControl(_ view: FormHeaderFooterContainerView) -> FormControllable?
     func formHeaderFooterContainerViewInsets(_ view: FormHeaderFooterContainerView) -> UIEdgeInsets?
 }
 
@@ -26,27 +26,27 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
         removeStoredConstrains()
         
         guard let `dataSource` = dataSource else { return }
-        guard let element = dataSource.formHeaderFooterContainerViewElement(self) else { return }
-        guard let elementView = element as? UIView else { return }
+        guard let control = dataSource.formHeaderFooterContainerViewControl(self) else { return }
+        guard let controlView = control as? UIView else { return }
         
-        let elementInsets = dataSource.formHeaderFooterContainerViewInsets(self) ?? UIEdgeInsets.zero
+        let controlInsets = dataSource.formHeaderFooterContainerViewInsets(self) ?? UIEdgeInsets.zero
         
-        contentView.addSubview(elementView)
+        contentView.addSubview(controlView)
         
-        storeConstrain(view: elementView, constrain: elementView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: elementInsets.top))
-        storeConstrain(view: contentView, constrain: contentView.bottomAnchor.constraint(equalTo: elementView.bottomAnchor, constant: elementInsets.bottom), priority: .defaultHigh)
+        storeConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: controlInsets.top))
+        storeConstrain(view: controlView, constrain: contentView.bottomAnchor.constraint(equalTo: controlView.bottomAnchor, constant: controlInsets.bottom), priority: .defaultHigh)
 
-        if let elementSizing = element as? FormSizeable {
-            if let fixedHeigth = elementSizing.fixedHeigth {
-                storeConstrain(view: elementView, constrain: elementView.heightAnchor.constraint(equalToConstant: fixedHeigth))
+        if let controlSizing = control as? FormSizeable {
+            if let fixedHeigth = controlSizing.fixedHeigth {
+                storeConstrain(view: controlView, constrain: controlView.heightAnchor.constraint(equalToConstant: fixedHeigth))
             }
-            if let fixedWidth = elementSizing.fixedWidth {
-                storeConstrain(view: elementView, constrain: elementView.widthAnchor.constraint(equalToConstant: fixedWidth))
+            if let fixedWidth = controlSizing.fixedWidth {
+                storeConstrain(view: controlView, constrain: controlView.widthAnchor.constraint(equalToConstant: fixedWidth))
             }
         }
 
-        storeConstrain(view: elementView, constrain: elementView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: elementInsets.left))
-        storeConstrain(view: elementView, constrain: elementView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: elementInsets.right * -1), priority: .defaultHigh)
+        storeConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: controlInsets.left))
+        storeConstrain(view: controlView, constrain: controlView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: controlInsets.right * -1), priority: .defaultHigh)
     }
 
 }

@@ -11,7 +11,7 @@ import UIKit
 class FormHeaderFooterContainer: FormHeaderFooter {
 
     override var viewClass: FormHeaderFooterView.Type { return FormHeaderFooterContainerView.self }
-    var element: FormControllable?
+    var control: FormControllable?
     var insets: UIEdgeInsets = UIEdgeInsets.zero
     
     override init(_ name: String = UUID().uuidString) {
@@ -38,8 +38,8 @@ class FormHeaderFooterContainer: FormHeaderFooter {
 
 extension FormHeaderFooterContainer: FormHeaderFooterContainerViewDataSource {
     
-    func formHeaderFooterContainerViewElement(_ view: FormHeaderFooterContainerView) -> FormControllable? {
-        return element
+    func formHeaderFooterContainerViewControl(_ view: FormHeaderFooterContainerView) -> FormControllable? {
+        return control
     }
     
     func formHeaderFooterContainerViewInsets(_ view: FormHeaderFooterContainerView) -> UIEdgeInsets? {
@@ -63,11 +63,11 @@ extension FormHeaderFooterContainer: FormLayoutable {
 extension FormHeaderFooterContainer: FormSearchable {
     
     func control(_ name: String) -> FormControllable? {
-        if element?.name == name {
-            return element
+        if control?.name == name {
+            return control
         }
-        if let `element` = element as? FormSearchable {
-            return element.control(name)
+        if let `control` = control as? FormSearchable {
+            return control.control(name)
         }        
         return nil
     }
@@ -78,9 +78,9 @@ extension FormHeaderFooterContainer: FormSearchable {
 
 extension FormHeaderFooterContainer {
     
-    func element(_ element: FormControllable?) -> FormHeaderFooterContainer {
-        self.element = element
-        self.element?.layoutDelegate = self
+    func control(_ control: FormControllable?) -> FormHeaderFooterContainer {
+        self.control = control
+        self.control?.layoutDelegate = self
         return self
     }
     

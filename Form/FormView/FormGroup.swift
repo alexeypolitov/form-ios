@@ -95,7 +95,7 @@ extension FormGroup {
     }
     
     func header(_ control: FormControllable) -> FormGroup {
-        self.header = FormHeaderFooterContainer().element(control)
+        self.header = FormHeaderFooterContainer().control(control)
         return self
     }
     
@@ -105,7 +105,7 @@ extension FormGroup {
     }
     
     func footer(_ control: FormControllable) -> FormGroup {
-        self.footer = FormHeaderFooterContainer().element(control)
+        self.footer = FormHeaderFooterContainer().control(control)
         return self
     }
     
@@ -115,7 +115,7 @@ extension FormGroup {
     }
     
     func add(_ control: FormControllable) -> FormGroup {
-        rows.append(FormCellContainer().element(control))
+        rows.append(FormCellContainer().control(control))
         return self
     }
     

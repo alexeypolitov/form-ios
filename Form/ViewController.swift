@@ -16,9 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Actions", style: .plain, target: self, action: #selector(self.onAction(_:)))
-
         
-        // with container
         let group = Form.group()
             .add(Form.vertical()
                 .add(Form.textView("textView").placeholder("Enter some text").onChange({(control, string) in
@@ -29,15 +27,21 @@ class ViewController: UIViewController {
                 .add(Form.label("testLimit").text("0/100").textHorizontalAlignment(.right)))
         
         
-
-        
         do {
             try formView.addGroup(group)
         } catch {
             print("error: \(error)")
         }
-//        try? formView.addControl(control)
         
+        
+        try? formView.addGroup(Form.group()
+            .add(Form.label("prWay")
+                .text("選択してください")
+                .accessoryType(.disclosureIndicator)
+                .onSelect({(control) in
+                print("dddd")
+            }))
+        )
     }
     
 //    func editLabelDetailText(control: FormLabelControl) {

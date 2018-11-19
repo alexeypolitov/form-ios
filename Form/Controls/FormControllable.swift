@@ -27,8 +27,13 @@ protocol FormValuable {
 }
 
 protocol FormValidatable {
-//    var validators: [FormValidator]? { get set }
     func validate() -> (Bool, String?)
+}
+
+protocol FormSelectable {
+    var selectionStyle: UITableViewCell.SelectionStyle? { get set }
+    var accessoryType: UITableViewCell.AccessoryType? { get set }
+    var onSelect: ((FormCellContainer) -> Void)? { get set }
 }
 
 protocol FormControllable {

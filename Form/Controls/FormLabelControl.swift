@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormLabelControl: ExtendedLabel, FormControllable {
+open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable {
     
     var isMain: Bool
     let name: String
@@ -58,6 +58,12 @@ open class FormLabelControl: ExtendedLabel, FormControllable {
         self.layoutDelegate = layoutDelegate
     }
     
+    // MARK: - FormSelectable
+    
+    var selectionStyle: UITableViewCell.SelectionStyle?
+    var accessoryType: UITableViewCell.AccessoryType?
+    var onSelect: ((FormCellContainer) -> Void)?
+    
 }
 
 // MARK: - Setters
@@ -101,6 +107,21 @@ extension FormLabelControl {
     
     func backgroundColor(_ backgroundColor: UIColor?) -> FormLabelControl {
         self.backgroundColor = backgroundColor
+        return self
+    }
+    
+    func selectionStyle(_ selectionStyle: UITableViewCell.SelectionStyle?) -> FormLabelControl {
+        self.selectionStyle = selectionStyle
+        return self
+    }
+    
+    func accessoryType(_ accessoryType: UITableViewCell.AccessoryType?) -> FormLabelControl {
+        self.accessoryType = accessoryType
+        return self
+    }
+    
+    func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormLabelControl {
+        self.onSelect = handler
         return self
     }
     

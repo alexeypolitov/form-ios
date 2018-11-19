@@ -234,8 +234,8 @@ extension FormView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: row.viewClass), for: indexPath) as! FormCellView
 
         if let row = row as? FormCellSelectable {
-            cell.selectionStyle = row.selectionStyle
-            cell.accessoryType = row.accessoryType
+            cell.selectionStyle = row.selectionStyle ?? .none
+            cell.accessoryType = row.accessoryType ?? .none
         } else {
             cell.selectionStyle = .none
             cell.accessoryType = .none

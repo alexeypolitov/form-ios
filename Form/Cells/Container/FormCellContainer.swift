@@ -11,7 +11,7 @@ import UIKit
 class FormCellContainer: FormCell, FormCellSelectable {
 
     override var viewClass: FormCellView.Type { return FormCellContainerView.self }
-    var element: FormControllable?    
+    var control: FormControllable?
     var insets: UIEdgeInsets = UIEdgeInsets.zero
     var minimalInset: CGFloat = 8
     
@@ -34,25 +34,48 @@ class FormCellContainer: FormCell, FormCellSelectable {
     static let appearance = Appearance()
     
     // MARK: - FormCellSelectable
-    var onSelect: ((FormCellContainer) -> Void)?
     
-    private var _selectionStyle: UITableViewCell.SelectionStyle = .default
-    var selectionStyle: UITableViewCell.SelectionStyle {
+    private var _onSelect: ((FormCellContainer) -> Void)?
+    var onSelect: ((FormCellContainer) -> Void)? {
         get {
-            if onSelect == nil {
-                return .none
-            } else {
-                return _selectionStyle
+            if let `_onSelect` = _onSelect {
+                return _onSelect
+            } else if let `control` = control as? FormSelectable, let `onSelect` = control.onSelect {
+                return onSelect
             }
+            return nil
+        }
+        set {
+            _onSelect = newValue
+        }
+    }    
+    private var _selectionStyle: UITableViewCell.SelectionStyle?
+    var selectionStyle: UITableViewCell.SelectionStyle? {
+        get {
+            if let `_selectionStyle` = _selectionStyle {
+                return _selectionStyle
+            } else if let `control` = control as? FormSelectable, let `selectionStyle` = control.selectionStyle {
+                return selectionStyle
+            } else if let _ = onSelect {
+                return .default
+            } else if let `control` = control as? FormSelectable, let _ = control.onSelect {
+                return .default
+            }
+            return nil
         }
         set {
             _selectionStyle = newValue
         }
     }
-    private var _accessoryType: UITableViewCell.AccessoryType = .none
-    var accessoryType: UITableViewCell.AccessoryType {
+    private var _accessoryType: UITableViewCell.AccessoryType?
+    var accessoryType: UITableViewCell.AccessoryType? {
         get {
-            return _accessoryType
+            if let `_accessoryType` = _accessoryType {
+                return _accessoryType
+            } else if let `control` = control as? FormSelectable, let `accessoryType` = control.accessoryType {
+                return accessoryType
+            }
+            return nil
         }
         set {
             _accessoryType = newValue
@@ -67,8 +90,8 @@ class FormCellContainer: FormCell, FormCellSelectable {
 
 extension FormCellContainer: FormCellContainerViewDataSource {
     
-    func formCellContainerViewElement(_ view: FormCellContainerView) -> FormControllable? {
-        return element
+    func formCellContainerViewControl(_ view: FormCellContainerView) -> FormControllable? {
+        return control
     }
     
     func formCellContainerViewInsets(_ view: FormCellContainerView) -> UIEdgeInsets? {
@@ -92,11 +115,11 @@ extension FormCellContainer: FormLayoutable {
 extension FormCellContainer: FormSearchable {
     
     func control(_ name: String) -> FormControllable? {
-        if element?.name == name {
-            return element
+        if control?.name == name {
+            return control
         }
-        if let `element` = element as? FormSearchable {
-            return element.control(name)
+        if let `control` = control as? FormSearchable {
+            return control.control(name)
         }
         return nil
     }
@@ -109,8 +132,8 @@ extension FormCellContainer: FormValidatable {
     
     func validate() -> (Bool, String?) {
         
-        if let `element` = element as? FormValidatable {
-            return element.validate()
+        if let `control` = control as? FormValidatable {
+            return control.validate()
         }
         
         return (true, nil)
@@ -122,9 +145,9 @@ extension FormCellContainer: FormValidatable {
 
 extension FormCellContainer {
     
-    func element(_ element: FormControllable?) -> FormCellContainer {
-        self.element = element
-        self.element?.layoutDelegate = self
+    func control(_ control: FormControllable?) -> FormCellContainer {
+        self.control = control
+        self.control?.layoutDelegate = self
         return self
     }
     
