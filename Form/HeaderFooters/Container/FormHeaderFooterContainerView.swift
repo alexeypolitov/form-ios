@@ -22,7 +22,7 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
     }
     
     override func onUpdateLayout() {
-        
+
         removeStoredConstrains()
         
         guard let `dataSource` = dataSource else { return }
@@ -33,7 +33,7 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
         
         contentView.addSubview(controlView)
         
-        storeConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: controlInsets.top))
+        storeConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: controlInsets.top))
         storeConstrain(view: controlView, constrain: contentView.bottomAnchor.constraint(equalTo: controlView.bottomAnchor, constant: controlInsets.bottom), priority: .defaultHigh)
 
         if let controlSizing = control as? FormSizeable {
@@ -45,8 +45,9 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
             }
         }
 
-        storeConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: controlInsets.left))
-        storeConstrain(view: controlView, constrain: controlView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: controlInsets.right * -1), priority: .defaultHigh)
+        storeConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: controlInsets.left))
+        storeConstrain(view: controlView, constrain: controlView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: controlInsets.right * -1), priority: .defaultHigh)
+        
     }
 
 }
