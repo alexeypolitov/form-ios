@@ -9,7 +9,7 @@
 import Foundation
 
 protocol FormFieldDelegate {
-    func valueChanged(field: FormField, value: Any?)
+    func valueChanged(field: FormField, value: Any?, exclude: [String])
 }
 
 open class FormField: NSObject {
@@ -32,10 +32,10 @@ open class FormField: NSObject {
         set {
             _value = newValue
             if Thread.isMainThread {
-                delegate?.valueChanged(field: self, value: _value)
+                delegate?.valueChanged(field: self, value: _value, exclude: [])
             } else {
                 DispatchQueue.main.async {
-                    self.delegate?.valueChanged(field: self, value: self._value)
+                    self.delegate?.valueChanged(field: self, value: self._value, exclude: [])
                 }
             }
         }
@@ -53,8 +53,15 @@ open class FormField: NSObject {
         self.name = name
     }
     
-    func setValueFromFormView(_ value: Any?) {
+    func setValueFromFormView(_ value: Any?, controlName: String) {
         self._value = value
+        if Thread.isMainThread {
+            delegate?.valueChanged(field: self, value: _value, exclude: [controlName])
+        } else {
+            DispatchQueue.main.async {
+                self.delegate?.valueChanged(field: self, value: self._value, exclude: [controlName])
+            }
+        }
     }
     
     func validate() -> (Bool, String?) {

@@ -107,8 +107,8 @@ extension FormHeaderFooterContainer: FormSearchable {
 
 extension FormHeaderFooterContainer: FormViewBindDelegate {
     
-    func bindValueChanged(bindName: String, value: Any?) {
-        formView?.bindValueChanged(bindName: bindName, value: value)
+    func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
+        formView?.bindValueChanged(control: control, bindName: bindName, value: value)
     }
     
     func bindValue(_ bindName: String) -> Any? {

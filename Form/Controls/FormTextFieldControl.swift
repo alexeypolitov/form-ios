@@ -324,7 +324,7 @@ extension FormTextFieldControl: UITextFieldDelegate {
         }
         
         if let `bindName` = bindName {
-            bindDelegate?.bindValueChanged(bindName: bindName, value: _value)
+            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: _value)
         }
         
         return result

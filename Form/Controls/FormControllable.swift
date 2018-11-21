@@ -45,7 +45,7 @@ protocol FormBindable {
 }
 
 protocol FormViewBindDelegate {
-    func bindValueChanged(bindName: String, value: Any?)
+    func bindValueChanged(control: FormControllable, bindName: String, value: Any?)
     func bindValue(_ bindName: String) -> Any?
 }
 

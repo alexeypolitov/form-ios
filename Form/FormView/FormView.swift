@@ -71,9 +71,9 @@ class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
         return self
     }
     
-    func bindValueChanged(bindName: String, value: Any?) {
+    func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
         guard let field = bindForm?.field(bindName) else { return }
-        field.setValueFromFormView(value)
+        field.setValueFromFormView(value, controlName: control.name)
     }
     
     func bindValue(_ bindName: String) -> Any? {
@@ -84,9 +84,10 @@ class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     // MARK: - FormBindDelegate
     
-    func formBindValueChanged(bindName: String, value: Any?) {
+    func formBindValueChanged(bindName: String, value: Any?, exclude: [String]) {
         let constols = bindableControls(bindName)
         for control in constols {
+            if let `control` = control as? FormControllable, let _ = exclude.first(where: {$0 == control.name}) { continue }
             control.refreshBindValue()
         }
     }

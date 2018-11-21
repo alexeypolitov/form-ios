@@ -9,7 +9,7 @@
 import Foundation
 
 protocol FormBindDelegate {
-    func formBindValueChanged(bindName: String, value: Any?)
+    func formBindValueChanged(bindName: String, value: Any?, exclude: [String])
 }
 
 class Form {
@@ -43,8 +43,8 @@ class Form {
 
 extension Form : FormFieldDelegate {
     
-    func valueChanged(field: FormField, value: Any?) {
-        bindDelegate?.formBindValueChanged(bindName: field.name, value: value)
+    func valueChanged(field: FormField, value: Any?, exclude: [String]) {
+        bindDelegate?.formBindValueChanged(bindName: field.name, value: value, exclude: exclude)
     }
     
 }
