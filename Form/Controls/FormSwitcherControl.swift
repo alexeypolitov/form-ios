@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormSwitcherControl: UISwitch, FormControllable {
+open class FormSwitcherControl: UISwitch, FormControllable, FormBindable {
 
     var isMain: Bool
     let name: String
@@ -48,6 +48,26 @@ open class FormSwitcherControl: UISwitch, FormControllable {
     
     @objc private func onChangeEvent(_ sender: Any) {
         onChange?(self, isOn)
+        
+        if let `bindName` = bindName {
+            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: isOn)
+        }
+    }
+    
+    // MARK: - FormBindable
+    
+    var bindDelegate: FormViewBindDelegate?
+    var bindName: String?
+    
+    func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
+        self.bindDelegate = bindDelegate
+    }
+    
+    func refreshBindValue() {
+        guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
+        guard let bindValue = bindDelegate.bindValue(bindName) as? Bool else { return }
+        
+        let _ = isOn(bindValue)
     }
 }
 
@@ -75,4 +95,8 @@ extension FormSwitcherControl {
         return self
     }
     
+    func bind(_ bindName: String?) -> FormSwitcherControl {
+        self.bindName = bindName
+        return self
+    }
 }

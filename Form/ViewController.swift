@@ -30,6 +30,9 @@ class ViewController: UIViewController {
                     let _ = control.text("dddddd")
                 })
             )
+            .add(Form.field("test").value(true).onChange({ (value, status) in
+                print("ddd: \(value)")
+            }))
             .add(Form.field("email"))
             .add(Form.field("password"))
             .add(Form.field("prWay")
@@ -51,7 +54,7 @@ class ViewController: UIViewController {
             .header(Former.label("testLabel1").text("1以下をご入力ください").numberOfLines(0).backgroundColor(UIColor.yellow))
             .add(Former.textField("nameTextField1").bind("name").placeholder("1氏名"))
             .add(Former.textView("emailTextField1").bind("name").placeholder("1メールアドレス"))
-            .add(Former.switcher("passwordTextField1"))
+            .add(Former.switcher("passwordTextField1").bind("test"))
             .footer(Former.label().text("1パスワードは忘れないようにメモしましょう！").numberOfLines(0))
         )
         
@@ -178,9 +181,13 @@ class ViewController: UIViewController {
 //            guard let control = self.formView.control("test1") as? FormLabelControl else { return }
 //            control.text = "Test\ntest\ntest\ntest"
 
-            guard let field = self.form.field("name") else { return }
+            guard let field = self.form.field("test") else { return }
 
-            field.value = "test\n\n"
+            if let `value` = field.value as? Bool {
+                field.value = !value
+            } else {
+                field.value = true
+            }
 
         }))
         
