@@ -77,6 +77,7 @@ class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     }
     
     func bindValue(_ bindName: String) -> Any? {
+        precondition(bindForm != nil, "Form has not binding, but bindValue did called")        
         guard let field = bindForm?.field(bindName) else { return nil }
         return field.value
     }

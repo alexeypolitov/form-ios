@@ -25,28 +25,28 @@ class ViewController: UIViewController {
                     Former.minLength(minLength: 3, "SignUp.Name.Validation.BetweedLength.Error"),
                     Former.required("SignUp.Name.Validation.Required.Error")])
                 .inlineValidator(Former.maxLength(maxLength: 20, "SignUp.Name.Validation.BetweedLength.Error"))
-//                .onChange(controls: ["testLabel4"], { (value, status) in
-//                    guard let control = self.formView.control("testLabel4") as? FormLabelControl else { return }
-//                    let _ = control.text("dddddd")
-//                })
+                .onChange({ (value, status) in
+                    guard let control = self.formView.control("testLabel4") as? FormLabelControl else { return }
+                    let _ = control.text("dddddd")
+                })
             )
             .add(Form.field("email"))
             .add(Form.field("password"))
             .add(Form.field("prWay")
-//                .onChange(controls: ["prWayLabel"], { (value, status) in
-//                    guard let control = self.formView.control("prWayLabel") as? FormLabelControl else { return }
-//                    if value != nil {
-//                        let _ = control.text("Value \(value!)")
-//                    } else {
-//                        let _ = control.text("選択してください")
-//                    }
-//
-//                })
+                .onChange({ (value, status) in
+                    guard let control = self.formView.control("prWayLabel") as? FormLabelControl else { return }
+                    if value != nil {
+                        let _ = control.text("Value \(value!)")
+                    } else {
+                        let _ = control.text("選択してください")
+                    }
+
+                })
             )
         
         // FormView
         
-//        let _ = formView.bind(form)
+        let _ = formView.bind(form)
         try? formView.addGroup(Former.group()
             .header(Former.label("testLabel1").text("1以下をご入力ください").numberOfLines(0).backgroundColor(UIColor.yellow))
             .add(Former.textField("nameTextField1").bind("name").placeholder("1氏名"))
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
         
         try? formView.addGroup(Former.group()
             .header(Former.label("testLabel2").text("2以下をご入力ください"))
-            .add(Former.textField("nameTextField2").placeholder("2氏名"))
+            .add(Former.textField("nameTextField2").bind("name").placeholder("2氏名"))
             .add(Former.textField("emailTextField2").placeholder("2メールアドレス"))
             .add(Former.textField("passwordTextField2").placeholder("2パスワード（半角英数字6字以上）"))
             .footer(Former.label().text("2パスワードは忘れないようにメモしましょう！"))
@@ -65,7 +65,7 @@ class ViewController: UIViewController {
 
         try? formView.addGroup(Former.group()
             .header(Former.label("testLabel3").text("3以下をご入力ください"))
-            .add(Former.textField("nameTextField3").placeholder("3氏名"))
+            .add(Former.textField("nameTextField3").bind("name").placeholder("3氏名"))
             .add(Former.textField("emailTextField3").placeholder("3メールアドレス"))
             .add(Former.textField("passwordTextField3").placeholder("3パスワード（半角英数字6字以上）"))
             .footer(Former.label().text("3パスワードは忘れないようにメモしましょう！"))
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
 
         try? formView.addGroup(Former.group()
             .header(Former.label("testLabel4").text("4以下をご入力ください"))
-            .add(Former.textField("nameTextField4").placeholder("4氏名"))
+            .add(Former.textField("nameTextField4").bind("name").placeholder("4氏名"))
             .add(Former.textField("emailTextField4").placeholder("4メールアドレス"))
             .add(Former.textField("passwordTextField4").placeholder("4パスワード（半角英数字6字以上）"))
             .footer(Former.label().text("4パスワードは忘れないようにメモしましょう！"))
@@ -81,14 +81,14 @@ class ViewController: UIViewController {
 
         try? formView.addGroup(Former.group()
             .header(Former.label("testLabel5").text("5以下をご入力ください"))
-            .add(Former.textField("nameTextField5").placeholder("5氏名"))
+            .add(Former.textField("nameTextField5").bind("name").placeholder("5氏名"))
             .add(Former.textField("emailTextField5").placeholder("5メールアドレス"))
             .add(Former.textField("passwordTextField5").placeholder("5パスワード（半角英数字6字以上）"))
             .footer(Former.label().text("5パスワードは忘れないようにメモしましょう！"))
         )
         try? formView.addGroup(Former.group()
             .header(Former.label("testLabel6").text("6以下をご入力ください"))
-            .add(Former.textField("nameTextField6").placeholder("6氏名"))
+            .add(Former.textField("nameTextField6").bind("name").placeholder("6氏名"))
             .add(Former.textField("emailTextField6").placeholder("6メールアドレス"))
             .add(Former.textField("passwordTextField6").placeholder("6パスワード（半角英数字6字以上）"))
             .footer(Former.label().text("6パスワードは忘れないようにメモしましょう！"))
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
 
         try? formView.addGroup(Former.group()
             .header(Former.label("testLabel7").text("7以下をご入力ください"))
-            .add(Former.textField("nameTextField7").placeholder("7氏名"))
+            .add(Former.textField("nameTextField7").bind("name").placeholder("7氏名"))
             .add(Former.textField("emailTextField7").placeholder("7メールアドレス"))
             .add(Former.textField("passwordTextField7").placeholder("7パスワード（半角英数字6字以上）"))
             .footer(Former.label().text("7パスワードは忘れないようにメモしましょう！"))
