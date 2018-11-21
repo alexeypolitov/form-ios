@@ -81,10 +81,6 @@ class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
         return field.value
     }
     
-    func processInitialContol(name: String) {
-        bindForm?.processInitialControl(name: name)
-    }
-    
     // MARK: - FormBindDelegate
     
     func formBindValueChanged(bindName: String, value: Any?) {
@@ -285,14 +281,14 @@ extension FormView: UITableViewDataSource {
             cell.accessoryType = .none
         }
         
-        row.prepare(cell, formView: self, initialControls: bindForm?.initialOnChangeControls)        
+        row.prepare(cell, formView: self)        
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let row = storedGroups[indexPath.section].rows[indexPath.row]
-        row.processed(self)
+        row.processed()
     }
 }
 
@@ -301,7 +297,7 @@ extension FormView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if storedGroups.count > 0, let header = storedGroups[section].header {            
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: header.viewClass)) as! FormHeaderFooterView
-            header.prepare(headerView, formView: self, initialControls: bindForm?.initialOnChangeControls)
+            header.prepare(headerView, formView: self)
             return headerView
         }
         return nil
@@ -309,14 +305,14 @@ extension FormView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if storedGroups.count > 0, let header = storedGroups[section].header {
-            header.processed(self)
+            header.processed()
         }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if storedGroups.count > 0, let footer = storedGroups[section].footer {
             let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: footer.viewClass)) as! FormHeaderFooterView
-            footer.prepare(footerView, formView: self, initialControls: bindForm?.initialOnChangeControls)
+            footer.prepare(footerView, formView: self)
             return footerView
         }
         return nil
@@ -324,7 +320,7 @@ extension FormView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         if storedGroups.count > 0, let footer = storedGroups[section].footer {
-            footer.processed(self)
+            footer.processed()
         }
     }
     

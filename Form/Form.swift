@@ -37,24 +37,6 @@ class Form {
         return (true, nil)
     }
     
-    var initialOnChangeControls: [String] {
-        var list: [String] = []
-        for field in fields {
-            for control in field.initialOnChangeControls {
-                if list.first(where: {$0 == control}) == nil {
-                    list.append(control)
-                }
-            }
-        }
-        return list
-    }
-    
-    func processInitialControl(name: String) {
-        for field in fields {
-            field.processInitialControl(name: name)
-        }
-    }
-    
 }
 
 // MARK: - FormFieldDelegate
