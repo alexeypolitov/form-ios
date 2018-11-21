@@ -46,28 +46,32 @@ open class FormHeaderFooterView: UITableViewHeaderFooterView {
             constrain.priority = priority
         }
         constrain.isActive = true
-        if let stored = storedConstrains.first(where: {$0.view == view}) {
-            stored.constrains.append(constrain)
-        } else {
-            storedConstrains.append(StoredConstrain(view: view, constrains: [constrain]))
-        }
+//        if let stored = storedConstrains.first(where: {$0.view == view}) {
+//            stored.constrains.append(constrain)
+//        } else {
+//            storedConstrains.append(StoredConstrain(view: view, constrains: [constrain]))
+//        }
     }
     
     func removeStoredConstrains() {
         
-        for storedConstrain in storedConstrains {
-            
-            for constrain in storedConstrain.constrains {
-                storedConstrain.view.removeConstraint(constrain)
-            }
-            
-            if storedConstrain.view != self.contentView {
-                storedConstrain.view.removeFromSuperview()
-            }
-            
+        for subview in contentView.subviews {
+            subview.removeFromSuperview()
         }
-        
-        storedConstrains = []
+
+//        for storedConstrain in storedConstrains {
+//
+//            for constrain in storedConstrain.constrains {
+//                storedConstrain.view.removeConstraint(constrain)
+//            }
+//
+//            if storedConstrain.view != self.contentView {
+//                storedConstrain.view.removeFromSuperview()
+//            }
+//
+//        }
+//
+//        storedConstrains = []
         
     }
 }

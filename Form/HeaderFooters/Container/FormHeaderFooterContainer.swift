@@ -25,21 +25,13 @@ class FormHeaderFooterContainer: FormHeaderFooter {
 
     }
     
-    override func onPrepare(_ view: FormHeaderFooterView, formView: FormView, initialControls: [String]?) {
-        guard let `view` = view as? FormHeaderFooterContainerView else { return }
+    override func onPrepare() {
+        guard let `linkedView` = linkedView as? FormHeaderFooterContainerView else { return }
         
-        view.dataSource = self
-        
-        if let `initialControls` = initialControls {
-            for initialControl in initialControls {
-                if let _ = control(initialControl) {
-                    formView.processInitialContol(name: initialControl)
-                }
-            }
-        }
+        linkedView.dataSource = self
     }
     
-    override func onProcessed(_ formView: FormView) {
+    override func onProcessed() {
         if let `bindable` = control as? FormBindable {
             bindable.refreshBindValue()
         }
