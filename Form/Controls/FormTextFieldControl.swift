@@ -49,6 +49,7 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
         self.text = text
         self.placeholder = placeholder
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+        self.backgroundColor = UIColor.clear
         self.delegate = self
         
     }
@@ -314,6 +315,7 @@ extension FormTextFieldControl: UITextFieldDelegate {
             _pandingValue = nil
             return false
         }
+        
         // Other validation
         let result = shouldChangeCharacters?(self, textField.text, range, string) ?? true
         _pandingValue = nil

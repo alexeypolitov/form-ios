@@ -50,72 +50,72 @@ class ViewController: UIViewController {
         try? formView.addGroup(Former.group()
             .header(Former.label("testLabel1").text("1以下をご入力ください").numberOfLines(0).backgroundColor(UIColor.yellow))
             .add(Former.textField("nameTextField1").bind("name").placeholder("1氏名"))
-            .add(Former.textField("emailTextField1").placeholder("1メールアドレス"))
-            .add(Former.textField("passwordTextField1").placeholder("1パスワード（半角英数字6字以上）"))
+            .add(Former.textView("emailTextField1").bind("name").placeholder("1メールアドレス"))
+            .add(Former.switcher("passwordTextField1"))
             .footer(Former.label().text("1パスワードは忘れないようにメモしましょう！").numberOfLines(0))
         )
         
-        try? formView.addGroup(Former.group()
-            .header(Former.label("testLabel2").text("2以下をご入力ください"))
-            .add(Former.textField("nameTextField2").bind("name").placeholder("2氏名"))
-            .add(Former.textField("emailTextField2").placeholder("2メールアドレス"))
-            .add(Former.textField("passwordTextField2").placeholder("2パスワード（半角英数字6字以上）"))
-            .footer(Former.label().text("2パスワードは忘れないようにメモしましょう！"))
-        )
-
-        try? formView.addGroup(Former.group()
-            .header(Former.label("testLabel3").text("3以下をご入力ください"))
-            .add(Former.textField("nameTextField3").bind("name").placeholder("3氏名"))
-            .add(Former.textField("emailTextField3").placeholder("3メールアドレス"))
-            .add(Former.textField("passwordTextField3").placeholder("3パスワード（半角英数字6字以上）"))
-            .footer(Former.label().text("3パスワードは忘れないようにメモしましょう！"))
-        )
-
-        try? formView.addGroup(Former.group()
-            .header(Former.label("testLabel4").text("4以下をご入力ください"))
-            .add(Former.textField("nameTextField4").bind("name").placeholder("4氏名"))
-            .add(Former.textField("emailTextField4").placeholder("4メールアドレス"))
-            .add(Former.textField("passwordTextField4").placeholder("4パスワード（半角英数字6字以上）"))
-            .footer(Former.label().text("4パスワードは忘れないようにメモしましょう！"))
-        )
-
-        try? formView.addGroup(Former.group()
-            .header(Former.label("testLabel5").text("5以下をご入力ください"))
-            .add(Former.textField("nameTextField5").bind("name").placeholder("5氏名"))
-            .add(Former.textField("emailTextField5").placeholder("5メールアドレス"))
-            .add(Former.textField("passwordTextField5").placeholder("5パスワード（半角英数字6字以上）"))
-            .footer(Former.label().text("5パスワードは忘れないようにメモしましょう！"))
-        )
-        try? formView.addGroup(Former.group()
-            .header(Former.label("testLabel6").text("6以下をご入力ください"))
-            .add(Former.textField("nameTextField6").bind("name").placeholder("6氏名"))
-            .add(Former.textField("emailTextField6").placeholder("6メールアドレス"))
-            .add(Former.textField("passwordTextField6").placeholder("6パスワード（半角英数字6字以上）"))
-            .footer(Former.label().text("6パスワードは忘れないようにメモしましょう！"))
-        )
-
-        try? formView.addGroup(Former.group()
-            .header(Former.label("testLabel7").text("7以下をご入力ください"))
-            .add(Former.textField("nameTextField7").bind("name").placeholder("7氏名"))
-            .add(Former.textField("emailTextField7").placeholder("7メールアドレス"))
-            .add(Former.textField("passwordTextField7").placeholder("7パスワード（半角英数字6字以上）"))
-            .footer(Former.label().text("7パスワードは忘れないようにメモしましょう！"))
-        )
-        
-        try? formView.addGroup(Former.group()
-            .header(Former.label().text("どこで◯◯を知りましたか？"))
-            .add(Former.label("prWayLabel")
-                .accessoryType(.disclosureIndicator)
-                .onSelect({ (control) in
-                    if self.form.field("prWay")?.value != nil {
-                        self.form.field("prWay")?.value = nil
-                    } else {
-                        self.form.field("prWay")?.value = "TestValue"
-                    }
-
-                }))
-            .footer(Former.label().text("利用規約にを確認し、同意しました。"))
-        )
+//        try? formView.addGroup(Former.group()
+//            .header(Former.label("testLabel2").text("2以下をご入力ください"))
+//            .add(Former.textField("nameTextField2").bind("name").placeholder("2氏名"))
+//            .add(Former.textField("emailTextField2").placeholder("2メールアドレス"))
+//            .add(Former.textField("passwordTextField2").placeholder("2パスワード（半角英数字6字以上）"))
+//            .footer(Former.label().text("2パスワードは忘れないようにメモしましょう！"))
+//        )
+//
+//        try? formView.addGroup(Former.group()
+//            .header(Former.label("testLabel3").text("3以下をご入力ください"))
+//            .add(Former.textField("nameTextField3").bind("name").placeholder("3氏名"))
+//            .add(Former.textField("emailTextField3").placeholder("3メールアドレス"))
+//            .add(Former.textField("passwordTextField3").placeholder("3パスワード（半角英数字6字以上）"))
+//            .footer(Former.label().text("3パスワードは忘れないようにメモしましょう！"))
+//        )
+//
+//        try? formView.addGroup(Former.group()
+//            .header(Former.label("testLabel4").text("4以下をご入力ください"))
+//            .add(Former.textField("nameTextField4").bind("name").placeholder("4氏名"))
+//            .add(Former.textField("emailTextField4").placeholder("4メールアドレス"))
+//            .add(Former.textField("passwordTextField4").placeholder("4パスワード（半角英数字6字以上）"))
+//            .footer(Former.label().text("4パスワードは忘れないようにメモしましょう！"))
+//        )
+//
+//        try? formView.addGroup(Former.group()
+//            .header(Former.label("testLabel5").text("5以下をご入力ください"))
+//            .add(Former.textField("nameTextField5").bind("name").placeholder("5氏名"))
+//            .add(Former.textField("emailTextField5").placeholder("5メールアドレス"))
+//            .add(Former.textField("passwordTextField5").placeholder("5パスワード（半角英数字6字以上）"))
+//            .footer(Former.label().text("5パスワードは忘れないようにメモしましょう！"))
+//        )
+//        try? formView.addGroup(Former.group()
+//            .header(Former.label("testLabel6").text("6以下をご入力ください"))
+//            .add(Former.textField("nameTextField6").bind("name").placeholder("6氏名"))
+//            .add(Former.textField("emailTextField6").placeholder("6メールアドレス"))
+//            .add(Former.textField("passwordTextField6").placeholder("6パスワード（半角英数字6字以上）"))
+//            .footer(Former.label().text("6パスワードは忘れないようにメモしましょう！"))
+//        )
+//
+//        try? formView.addGroup(Former.group()
+//            .header(Former.label("testLabel7").text("7以下をご入力ください"))
+//            .add(Former.textField("nameTextField7").bind("name").placeholder("7氏名"))
+//            .add(Former.textField("emailTextField7").placeholder("7メールアドレス"))
+//            .add(Former.textField("passwordTextField7").placeholder("7パスワード（半角英数字6字以上）"))
+//            .footer(Former.label().text("7パスワードは忘れないようにメモしましょう！"))
+//        )
+//
+//        try? formView.addGroup(Former.group()
+//            .header(Former.label().text("どこで◯◯を知りましたか？"))
+//            .add(Former.label("prWayLabel")
+//                .accessoryType(.disclosureIndicator)
+//                .onSelect({ (control) in
+//                    if self.form.field("prWay")?.value != nil {
+//                        self.form.field("prWay")?.value = nil
+//                    } else {
+//                        self.form.field("prWay")?.value = "TestValue"
+//                    }
+//
+//                }))
+//            .footer(Former.label().text("利用規約にを確認し、同意しました。"))
+//        )
         
 //        let group = Form.group()
 //            .add(Form.vertical()
@@ -180,7 +180,7 @@ class ViewController: UIViewController {
 
             guard let field = self.form.field("name") else { return }
 
-            field.value = "test"
+            field.value = "test\n\n"
 
         }))
         

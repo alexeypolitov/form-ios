@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable, FormValidatable {
+open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable, FormValidatable, FormBindable {
     
     var isMain: Bool
     let name: String
@@ -66,14 +66,17 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable
     open override func onTextDidChange(notification: Notification) {
         super.onTextDidChange(notification: notification)
 
+        updateLayout()
+    }
+    
+    func updateLayout() {
         let size = self.bounds.size
         let newSize = self.sizeThatFits(CGSize(width: size.width, height: CGFloat.greatestFiniteMagnitude))
-
+        
         // Resize the cell only when cell's size is changed
         if size.height != newSize.height {
             layoutDelegate?.updateControlLayout(element: self)
         }
-
     }
     
     // MARK: - FormValuable
@@ -87,8 +90,10 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable
             _value = newValue
             if let `stringValue` = newValue as? String {
                 let _ = text(stringValue)
+                _value = newValue
             } else {
                 let _ = text(nil)
+                _value = nil
             }
         }
     }
@@ -169,6 +174,21 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable
         return nil
     }
     
+    // MARK: - FormBindable
+    
+    var bindDelegate: FormViewBindDelegate?
+    var bindName: String?
+    
+    func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
+        self.bindDelegate = bindDelegate
+    }
+    
+    func refreshBindValue() {
+        guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
+        guard let bindValue = bindDelegate.bindValue(bindName) as? String else { return }
+        
+        let _ = text(bindValue)
+    }
 }
 
 // MARK: - Setters
@@ -187,6 +207,7 @@ extension FormTextViewControl {
     
     func text(_ text: String?) -> FormTextViewControl {
         self.text = text
+        updateLayout()
         return self
     }
     
@@ -202,6 +223,11 @@ extension FormTextViewControl {
     
     func backgroundColor(_ backgroundColor: UIColor?) -> FormTextViewControl {
         self.backgroundColor = backgroundColor
+        return self
+    }
+    
+    func bind(_ bindName: String?) -> FormTextViewControl {
+        self.bindName = bindName
         return self
     }
     
@@ -305,13 +331,15 @@ extension FormTextViewControl: UITextViewDelegate {
     
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         _pandingValue = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        
         // Inline validation
         let (success, _ ) = validateInline()
         if !success {
             _pandingValue = nil
             return false
             
-        }        
+        }
+        
         // Other validation
         let result = shouldChangeCharacters?(self, textView.text, range, text) ?? true
         _pandingValue = nil
@@ -320,6 +348,11 @@ extension FormTextViewControl: UITextViewDelegate {
         } else {
             _value = textView.text
         }
+        
+        if let `bindName` = bindName {
+            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: _value)
+        }
+        
         return result
     }
 
