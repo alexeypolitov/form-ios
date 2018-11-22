@@ -25,12 +25,10 @@ class FormCellContainer: FormCell, FormCellSelectable {
         guard let `linkedView` = linkedView as? FormCellContainerView else { return }
         
         linkedView.dataSource = self
-    }
-    
-    override func onProcessed() {
+        
         if let `bindable` = control as? FormBindable {
             bindable.refreshBindValue()
-        }        
+        } 
     }
     
     class Appearance {

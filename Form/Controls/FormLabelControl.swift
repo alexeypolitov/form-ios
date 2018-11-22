@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable {
+open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, FormBindable {
     
     var isMain: Bool
     let name: String
@@ -63,6 +63,24 @@ open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable {
     var selectionStyle: UITableViewCell.SelectionStyle?
     var accessoryType: UITableViewCell.AccessoryType?
     var onSelect: ((FormCellContainer) -> Void)?
+    
+    // MARK: - FormBindable
+    
+    var bindDelegate: FormViewBindDelegate?
+    var bindName: String?
+    
+    func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
+        self.bindDelegate = bindDelegate
+    }
+    
+    func refreshBindValue() {
+        guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
+        if let bindValue = bindDelegate.bindValue(bindName) as? String {
+            let _ = text(bindValue)
+        } else if let bindValue = bindDelegate.bindValue(bindName) as? NSAttributedString {
+            let _ = attributedText(bindValue)
+        }
+    }
     
 }
 
@@ -125,4 +143,8 @@ extension FormLabelControl {
         return self
     }
     
+    func bind(_ bindName: String?) -> FormLabelControl {
+        self.bindName = bindName
+        return self
+    }
 }

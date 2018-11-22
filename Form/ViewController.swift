@@ -30,7 +30,7 @@ class ViewController: UIViewController {
                     let _ = control.text("dddddd")
                 })
             )
-            .add(Form.field("test").value(true).onChange({ (value, status) in
+            .add(Form.field("test").value(UIImage(named: "lemur1")).onChange({ (value, status) in
                 print("ddd: \(value)")
             }))
             .add(Form.field("email"))
@@ -51,11 +51,14 @@ class ViewController: UIViewController {
         
         let _ = formView.bind(form)
         try? formView.addGroup(Former.group()
-            .header(Former.label("testLabel1").text("1以下をご入力ください").numberOfLines(0).backgroundColor(UIColor.yellow))
-            .add(Former.textField("nameTextField1").bind("name").placeholder("1氏名"))
-            .add(Former.textView("emailTextField1").bind("name").placeholder("1メールアドレス"))
-            .add(Former.switcher("passwordTextField1").bind("test"))
-            .footer(Former.label().text("1パスワードは忘れないようにメモしましょう！").numberOfLines(0))
+            .header(Former.image("testImage").bind("test").fixedWidth(50).fixedHeigth(50))
+//            .add(Former.label("testLabel").numberOfLines(0))
+//            .add(Former.badge("testBadge"))
+            .add(Former.image("testImage").bind("test").fixedWidth(50).fixedHeigth(50))
+            .add(Former.textField("nameTextField1").placeholder("1氏名"))
+            .add(Former.textView("emailTextField1").placeholder("1メールアドレス"))
+            .add(Former.switcher("passwordTextField1"))
+//            .footer(Former.label().text("1パスワードは忘れないようにメモしましょう！").numberOfLines(0))
         )
         
 //        try? formView.addGroup(Former.group()
@@ -183,11 +186,7 @@ class ViewController: UIViewController {
 
             guard let field = self.form.field("test") else { return }
 
-            if let `value` = field.value as? Bool {
-                field.value = !value
-            } else {
-                field.value = true
-            }
+                field.value = UIImage(named: "lemur2")
 
         }))
         

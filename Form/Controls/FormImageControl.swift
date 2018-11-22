@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormImageControl: UIImageView, FormControllable, FormSizeable {
+class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBindable {
 
     var isMain: Bool
     let name: String
@@ -40,7 +40,7 @@ class FormImageControl: UIImageView, FormControllable, FormSizeable {
         
         self.translatesAutoresizingMaskIntoConstraints = false
         self.image = image
-        self.contentMode = .scaleAspectFit        
+        self.contentMode = .scaleAspectFit
     }
     
     func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
@@ -66,6 +66,22 @@ class FormImageControl: UIImageView, FormControllable, FormSizeable {
         set {
             _fixedHeigth = newValue
         }
+    }
+    
+    // MARK: - FormBindable
+    
+    var bindDelegate: FormViewBindDelegate?
+    var bindName: String?
+    
+    func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
+        self.bindDelegate = bindDelegate
+    }
+    
+    func refreshBindValue() {
+        guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
+        guard let bindValue = bindDelegate.bindValue(bindName) as? UIImage else { return }
+        
+        let _ = image(bindValue)
     }
 }
 
@@ -96,6 +112,11 @@ extension FormImageControl {
     
     func backgroundColor(_ backgroundColor: UIColor?) -> FormImageControl {
         self.backgroundColor = backgroundColor
+        return self
+    }
+    
+    func bind(_ bindName: String?) -> FormImageControl {
+        self.bindName = bindName
         return self
     }
     
