@@ -47,8 +47,8 @@ class ViewController: UIViewController {
         // FormView
         
         let _ = formView.bind(form)
-        try? formView.addGroup(Former.group().add(Former.textField("testLabelRow6").placeholder("test").bind("name")))
-//        try? formView.addGroup(Former.group()
+//        try? formView.addGroup(Former.group().add(Former.textField("testLabelRow6").placeholder("test").bind("name")))
+        try? formView.addGroup(Former.group()
 //            .header(Former.vertical().add(
 //                [
 //                    Former.horizontal().add([
@@ -60,17 +60,21 @@ class ViewController: UIViewController {
 //                        Former.textField("testLabelRow4").placeholder("test").bind("name")
 //                    ])
 //                ]))
-//            .add(Former.vertical().add(
-//                [
-//                    Former.horizontal().add([
-//                        Former.label("testLabelRow5").text("test 1").bind("name").isMain(true),
-//                        Former.textField("testLabelRow6").placeholder("test").bind("name")
-//                        ]),
-//                    Former.horizontal().add([
-//                        Former.label("testLabelRow7").text("test 1").bind("name").isMain(true),
-//                        Former.textField("testLabelRow8").placeholder("test").bind("name")
-//                        ])
-//                ]))
+            .add(
+                Former.vertical().add([
+                    Former.horizontal().add([
+                        Former.label("testLabelRow5").text("test 1").bind("name").isMain(true),
+                        Former.textField("testLabelRow6").placeholder("test").bind("name")
+                        ]),
+                    Former.horizontal().add([
+                        Former.label("testLabelRow7").text("test 1").bind("name").isMain(true),
+                        Former.textField("testLabelRow8").placeholder("test").bind("name")
+                        ])
+                ]
+                    ).onSelect({ (container) in
+                        print("dddd")
+                    })
+            )
 //            .footer(Former.vertical().add(
 //                [
 //                    Former.horizontal().add([
@@ -82,7 +86,7 @@ class ViewController: UIViewController {
 //                        Former.textField("testLabelRow12").placeholder("test").bind("name")
 //                        ])
 //                ]))
-//        )
+        )
     }
     
 //    func editLabelDetailText(control: FormLabelControl) {

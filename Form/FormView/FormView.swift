@@ -189,41 +189,6 @@ extension FormView {
         return list
     }
     
-//    func collection(_ name: String) -> FormHeaderFooter? {
-//
-//        for group in storedGroups {
-//            if let header = group.header {
-//                if header.name == name {
-//                    return header
-//                }
-//            }
-//        }
-//
-//        return nil
-//    }
-    
-//    func collectionItem(name: String) -> FormCollectionItem? {
-//
-////        for group in storedGroups {
-////            if let item = group.headerCollection?.item(name: name) {
-////                return item
-////            } else if let item = group.footerCollection?.item(name: name) {
-////                return item
-////            }
-////        }
-//
-//        return nil
-//    }
-    
-//    func removeControl(name: String) {
-////        guard let index = storedControls.firstIndex(where: {$0.name == name}) else {
-////            return
-////        }
-////
-////        storedControls.remove(at: index)
-////        tableView?.reloadData()
-//    }
-    
     func removeAllControls() {
         storedGroups.removeAll()
         tableView?.reloadData()
@@ -284,11 +249,7 @@ extension FormView: UITableViewDataSource {
 
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let row = storedGroups[indexPath.section].rows[indexPath.row]
-//        row.processed()
-//    }
+
 }
 
 extension FormView: UITableViewDelegate {
@@ -302,12 +263,6 @@ extension FormView: UITableViewDelegate {
         return nil
     }
     
-//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-//        if storedGroups.count > 0, let header = storedGroups[section].header {
-//            header.processed()
-//        }
-//    }
-    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if storedGroups.count > 0, let footer = storedGroups[section].footer {
             let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: footer.viewClass)) as! FormHeaderFooterView
@@ -316,12 +271,6 @@ extension FormView: UITableViewDelegate {
         }
         return nil
     }
-    
-//    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-//        if storedGroups.count > 0, let footer = storedGroups[section].footer {
-//            footer.processed()
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = storedGroups[indexPath.section].rows[indexPath.row]
