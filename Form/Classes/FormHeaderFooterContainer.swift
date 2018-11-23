@@ -8,9 +8,9 @@
 
 import UIKit
 
-class FormHeaderFooterContainer: FormHeaderFooter {
+open class FormHeaderFooterContainer: FormHeaderFooter {
 
-    override var viewClass: FormHeaderFooterView.Type { return FormHeaderFooterContainerView.self }
+    open override var viewClass: FormHeaderFooterView.Type { return FormHeaderFooterContainerView.self }
     var control: FormControllable?
     var insets: UIEdgeInsets = UIEdgeInsets.zero
     

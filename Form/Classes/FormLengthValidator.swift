@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FormMaxLengthValidator: FormValidator {
+public class FormMaxLengthValidator: FormValidator {
     
     var maxLength: Int
     
@@ -26,7 +26,7 @@ class FormMaxLengthValidator: FormValidator {
     
 }
 
-class FormMinLengthValidator: FormValidator {
+public class FormMinLengthValidator: FormValidator {
     
     var minLength: Int
     
@@ -43,7 +43,7 @@ class FormMinLengthValidator: FormValidator {
     
 }
 
-class FormBetweenLengthValidator: FormValidator {
+public class FormBetweenLengthValidator: FormValidator {
     
     var minLength: Int
     var maxLength: Int

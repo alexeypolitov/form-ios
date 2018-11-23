@@ -10,16 +10,16 @@ import UIKit
 
 open class ExtendedLabel: UILabel {
 
-    enum TextVerticalAlignment {
+    public enum TextVerticalAlignment {
         case top
         case center
         case bottom
     }
     
-    var insets: UIEdgeInsets = UIEdgeInsets.zero
-    var textVerticalAlignment: TextVerticalAlignment = .center
-    var backgroundRectColor: UIColor?
-    var backgroundRectCornerRadius: CGFloat = 0
+    open var insets: UIEdgeInsets = UIEdgeInsets.zero
+    open var textVerticalAlignment: TextVerticalAlignment = .center
+    open var backgroundRectColor: UIColor?
+    open var backgroundRectCornerRadius: CGFloat = 0
     
     open override func drawText(in rect: CGRect) {
         var newRect = rect

@@ -10,7 +10,7 @@ import UIKit
 
 open class ExtendedTextView: UITextView {
 
-    lazy var placeholderLabel: UILabel = {
+    open lazy var placeholderLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -19,13 +19,13 @@ open class ExtendedTextView: UITextView {
         return label
     }()
     
-    var placeholder: String? {
+    open var placeholder: String? {
         didSet {
             placeholderLabel.text = placeholder
         }
     }
     
-    var placeholderColor:UIColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
+    open var placeholderColor:UIColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
     
     // MARK: - LifeCycle
     

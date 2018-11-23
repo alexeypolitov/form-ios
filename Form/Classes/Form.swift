@@ -12,7 +12,7 @@ protocol FormBindDelegate {
     func formBindValueChanged(bindName: String, value: Any?, exclude: [String])
 }
 
-class Form {
+open class Form {
     
     var fields: [FormField] = []
     var bindDelegate: FormBindDelegate?

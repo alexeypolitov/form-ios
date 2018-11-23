@@ -8,9 +8,9 @@
 
 import UIKit
 
-class FormCellContainer: FormCell, FormCellSelectable {
+open class FormCellContainer: FormCell, FormCellSelectable {
 
-    override var viewClass: FormCellView.Type { return FormCellContainerView.self }
+    open override var viewClass: FormCellView.Type { return FormCellContainerView.self }
     var control: FormControllable?
     var insets: UIEdgeInsets = UIEdgeInsets.zero
     var minimalInset: CGFloat = 8

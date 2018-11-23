@@ -40,11 +40,11 @@ open class ExtendedButton: UIButton {
         backgroundColor = backgroundColors[state.rawValue] ?? backgroundColors[UIControl.State.normal.rawValue] ?? nil
     }
 
-    func backgroundColor(for state: UIControl.State) -> UIColor? {
+    open func backgroundColor(for state: UIControl.State) -> UIColor? {
         return backgroundColors[state.rawValue] ?? nil
     }
     
-    func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
+    open func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
         backgroundColors[state.rawValue] = color
         updateBackgroundColors()
     }
@@ -55,11 +55,11 @@ open class ExtendedButton: UIButton {
         layer.cornerRadius = cornerRadius[state.rawValue] ?? cornerRadius[UIControl.State.normal.rawValue] ?? 0
     }
     
-    func cornerRadius(for state: UIControl.State) -> CGFloat {
+    open func cornerRadius(for state: UIControl.State) -> CGFloat {
         return cornerRadius[state.rawValue] ?? 0
     }
     
-    func setCornerRadius(_ radius: CGFloat?, for state: UIControl.State) {
+    open func setCornerRadius(_ radius: CGFloat?, for state: UIControl.State) {
         if let `radius` = radius {
             cornerRadius[state.rawValue] = radius
         } else {
@@ -74,11 +74,11 @@ open class ExtendedButton: UIButton {
         layer.borderWidth = borderWidths[state.rawValue] ?? borderWidths[UIControl.State.normal.rawValue] ?? 0
     }
     
-    func borderWidth(for state: UIControl.State) -> CGFloat {
+    open func borderWidth(for state: UIControl.State) -> CGFloat {
         return borderWidths[state.rawValue] ?? 0
     }
     
-    func setBorderWidth(_ width: CGFloat?, for state: UIControl.State) {
+    open func setBorderWidth(_ width: CGFloat?, for state: UIControl.State) {
         if let width = width {
             borderWidths[state.rawValue] = width
         } else {
@@ -93,11 +93,11 @@ open class ExtendedButton: UIButton {
         layer.borderColor = (borderColors[state.rawValue] ?? borderColors[UIControl.State.normal.rawValue] ?? UIColor.clear)?.cgColor
     }
     
-    func borderColor(for state: UIControl.State) -> UIColor? {
+    open func borderColor(for state: UIControl.State) -> UIColor? {
         return borderColors[state.rawValue] ?? nil
     }
     
-    func setBorderColor(_ color: UIColor?, for state: UIControl.State) {
+    open func setBorderColor(_ color: UIColor?, for state: UIControl.State) {
         borderColors[state.rawValue] = color
         updateBorderColors()
     }

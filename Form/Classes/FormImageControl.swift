@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBindable, FormOnLoad {
+open class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBindable, FormOnLoad {
 
     var isMain: Bool
     let name: String

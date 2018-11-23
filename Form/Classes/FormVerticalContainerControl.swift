@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormVerticalContainerControl: UIView, FormControllable, FormBindable, FormSelectable, FormOnLoad {
+open class FormVerticalContainerControl: UIView, FormControllable, FormBindable, FormSelectable, FormOnLoad {
     
     var isMain: Bool
     let name: String

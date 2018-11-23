@@ -12,14 +12,14 @@ enum FormViewError: Error {
     case controlDuplication(name: String)
 }
 
-class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
+open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     fileprivate var tableView: UITableView?
     fileprivate var storedGroups: [FormGroup] = []
     fileprivate var registredIdentifiers: [String: AnyClass] = [:]
     fileprivate var registredNames: [String] = []
     
-    override func awakeFromNib() {
+    open override func awakeFromNib() {
         
         let tv = UITableView(frame: .zero, style: .grouped)
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -181,15 +181,15 @@ extension FormView {
 
 extension FormView: UITableViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return storedGroups.count > 0 ? storedGroups.count : 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return storedGroups.count > 0 ? storedGroups[section].rows.count : 0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = storedGroups[indexPath.section].rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: row.viewClass), for: indexPath) as! FormCellView
         

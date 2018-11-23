@@ -13,7 +13,7 @@ protocol FormCellContainerViewDataSource {
     func formCellContainerViewInsets(_ view: FormCellContainerView) -> UIEdgeInsets?
 }
 
-class FormCellContainerView: FormCellView {
+open class FormCellContainerView: FormCellView {
 
     var dataSource:FormCellContainerViewDataSource? {
         didSet {
@@ -21,7 +21,7 @@ class FormCellContainerView: FormCellView {
         }
     }
 
-    override func onUpdateLayout() {
+    open override func onUpdateLayout() {
         
         removeStoredConstrains()
         

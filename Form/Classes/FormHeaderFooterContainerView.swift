@@ -13,7 +13,7 @@ protocol FormHeaderFooterContainerViewDataSource {
     func formHeaderFooterContainerViewInsets(_ view: FormHeaderFooterContainerView) -> UIEdgeInsets?
 }
 
-class FormHeaderFooterContainerView: FormHeaderFooterView {
+open class FormHeaderFooterContainerView: FormHeaderFooterView {
 
     var dataSource:FormHeaderFooterContainerViewDataSource? {
         didSet {
@@ -21,7 +21,7 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
         }
     }
     
-    override func onUpdateLayout() {
+    open override func onUpdateLayout() {
         
         removeStoredConstrains()
         

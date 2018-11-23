@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormHorizontalContainerControl: UIView, FormControllable, FormBindable, FormSelectable, FormOnLoad {
+open class FormHorizontalContainerControl: UIView, FormControllable, FormBindable, FormSelectable, FormOnLoad {
     
     var isMain: Bool
     let name: String
