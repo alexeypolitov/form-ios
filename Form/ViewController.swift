@@ -33,8 +33,8 @@ class ViewController: UIViewController {
                 .value("Name")
                 .validators([
                     Former.minLength(minLength: 3, "SignUp.Name.Validation.BetweedLength.Error"),
-                    Former.required("SignUp.Name.Validation.Required.Error")])
-                .inlineValidator(Former.maxLength(maxLength: 6, "SignUp.Name.Validation.BetweedLength.Error"))
+                    Former.required("SignUp.Name.Validation.Required.Error"),
+                    Former.maxLength(maxLength: 6, "SignUp.Name.Validation.BetweedLength.Error")])
                 .onChange({ (value) in
 //                    print("value: \(value ?? "{NIL}")")
                 })
@@ -73,11 +73,11 @@ class ViewController: UIViewController {
             .add(
                 Former.horizontal().add([
                     Former.label("label3").bind("name").isMain(true),
-                    Former.textView("test3")
+                    Former.textField("test3")
                         .placeholder("Enter name")
                         .textAlignment(.right)
                         .bind("name")
-                        .inlineValidator(Former.maxLength(maxLength: 6, "SignUp.Name.Validation.BetweedLength.Error"))
+                        .validator(Former.maxLength(maxLength: 6, "SignUp.Name.Validation.BetweedLength.Error"))
                     ])
 
             )

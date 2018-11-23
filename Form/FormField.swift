@@ -41,7 +41,6 @@ open class FormField: NSObject {
         }
     }
     var validators: [FormValidator] = []
-    var inlineValidators: [FormValidator] = []
     var onChange: ((Any?) -> Void)?
     var delegate: FormFieldDelegate?
     
@@ -117,16 +116,6 @@ extension FormField {
     
     func validator(_ validator: FormValidator) -> FormField {
         self.validators = [validator]
-        return self
-    }
-    
-    func inlineValidators(_ inlineValidators: [FormValidator]) -> FormField {
-        self.inlineValidators = inlineValidators
-        return self
-    }
-    
-    func inlineValidator(_ inlineValidator: FormValidator) -> FormField {
-        self.inlineValidators = [inlineValidator]
         return self
     }
     

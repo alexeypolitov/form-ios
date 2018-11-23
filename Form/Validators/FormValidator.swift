@@ -18,12 +18,10 @@ open class FormValidator {
     
     var priority: Priority
     var message: String
-    var inline: Bool
     
-    init(priority: Priority, message: String, inline: Bool = false) {
+    init(priority: Priority, message: String) {
         self.priority = priority
         self.message = message
-        self.inline = inline
     }
     
     func validate(_ control: FormValuable) -> Bool {

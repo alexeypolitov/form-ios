@@ -90,7 +90,6 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
     // MARK: - FormValidatable
     
     var validators: [FormValidator] = []
-    var inlineValidators: [FormValidator] = []
     
     func validate() -> (Bool, String?) {
         
@@ -105,25 +104,6 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
         }
         
         if let message = prepareValidateByPriority(priority: .low, validators) {
-            return (false, message)
-        }
-        
-        return (true, nil)
-    }
-    
-    private func validateInline() -> (Bool, String?) {
-        
-        if inlineValidators.count  == 0 { return (true, nil) }
-        
-        if let message = prepareValidateByPriority(priority: .high, inlineValidators) {
-            return (false, message)
-        }
-        
-        if let message = prepareValidateByPriority(priority: .medium, inlineValidators) {
-            return (false, message)
-        }
-        
-        if let message = prepareValidateByPriority(priority: .low, inlineValidators) {
             return (false, message)
         }
         
@@ -258,19 +238,6 @@ extension FormTextFieldControl {
         return self
     }
     
-    func inlineValidators(_ validators: [FormValidator]) -> FormTextFieldControl {
-        for validator in validators {
-            validator.inline = true
-        }
-        self.inlineValidators = validators
-        return self
-    }
-    
-    func inlineValidator(_ validator: FormValidator) -> FormTextFieldControl {
-        validator.inline = true
-        self.inlineValidators = [validator]
-        return self
-    }
 }
 
 // MARK: - UITextFieldDelegate

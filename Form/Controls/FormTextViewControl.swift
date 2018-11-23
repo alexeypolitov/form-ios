@@ -110,8 +110,7 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable
     // MARK: - FormValidatable
     
     var validators: [FormValidator] = []
-    var inlineValidators: [FormValidator] = []
-    
+
     func validate() -> (Bool, String?) {
         
         if validators.count  == 0 { return (true, nil) }
@@ -130,35 +129,6 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable
         
         return (true, nil)
     }
-    
-    private func validateInline() -> (Bool, String?) {
-        
-        if inlineValidators.count  == 0 { return (true, nil) }
-        
-        if let message = prepareValidateByPriority(priority: .high, inlineValidators) {
-            return (false, message)
-        }
-        
-        if let message = prepareValidateByPriority(priority: .medium, inlineValidators) {
-            return (false, message)
-        }
-        
-        if let message = prepareValidateByPriority(priority: .low, inlineValidators) {
-            return (false, message)
-        }
-        
-        return (true, nil)
-    }
-    
-    
-//    func validate(priority: FormValidator.Priority) -> (Bool, String?) {
-//
-//        if let message = prepareValidateByPriority(priority: priority) {
-//            return (false, message)
-//        }
-//
-//        return (true, nil)
-//    }
     
     private func prepareValidateByPriority(priority: FormValidator.Priority,_ validators: [FormValidator]) -> String? {
         let localValidators = validators.filter { (validator) -> Bool in
@@ -290,20 +260,6 @@ extension FormTextViewControl {
     
     func validator(_ validator: FormValidator) -> FormTextViewControl {
         self.validators = [validator]
-        return self
-    }
-    
-    func inlineValidators(_ validators: [FormValidator]) -> FormTextViewControl {
-        for validator in validators {
-            validator.inline = true
-        }
-        self.inlineValidators = validators
-        return self
-    }
-    
-    func inlineValidator(_ validator: FormValidator) -> FormTextViewControl {
-        validator.inline = true
-        self.inlineValidators = [validator]
         return self
     }
 
