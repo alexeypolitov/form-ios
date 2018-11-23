@@ -139,17 +139,6 @@ class ViewController: UIViewController {
 
         }))
         
-//        actionSheet.addAction(UIAlertAction(title: "Test", style: .default, handler: { [weak self] (action) in
-//            guard let `self` = self else { return }
-//            guard let group = self.formView.storedGroups.first else { return }
-//            guard let header = group.header as? FormHeaderFooterContainer else { return }
-//            print("ppp 3: header:\(header); linkedView:\(header.linkedView)")
-//            guard let headerView = header.linkedView as? FormHeaderFooterContainerView else { return }
-//
-////            print("ddd: \(headerView)\n\(headerView.contentView.subviews)")
-//
-//        }))
-        
 //        actionSheet.addAction(UIAlertAction(title: "Validate", style: .default, handler: { [weak self] (action) in
 //            guard let `self` = self else { return }
 //

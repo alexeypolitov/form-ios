@@ -15,9 +15,9 @@ enum FormViewError: Error {
 class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     fileprivate var tableView: UITableView?
-    var storedGroups: [FormGroup] = [] // fileprivate
-    
+    fileprivate var storedGroups: [FormGroup] = []
     fileprivate var registredIdentifiers: [String: AnyClass] = [:]
+    fileprivate var registredNames: [String] = []
     
     override func awakeFromNib() {
         
@@ -106,25 +106,6 @@ extension FormView {
         
     }
     
-//    func addControl(_ control: FormControl, inGroup group: FormGroup? = nil) throws {
-//
-//        if isControlNameDuplicate(name: control.name) {
-//            throw FormViewError.controlDuplication(name: control.name)
-//        }
-//
-//        if let `group` = group {
-//            group.controls.append(control)
-//        } else if let `group` = storedGroups.last as? FormDefaultGroup {
-//            group.controls.append(control)
-//        } else {
-//            storedGroups.append(FormDefaultGroup([control]))
-//        }
-//
-//        register(control.cellClass)
-//        tableView?.reloadData()
-//
-//    }
-    
     func addGroup(_ group: FormGroup) throws {
         
         if let container = group.header {
@@ -150,25 +131,6 @@ extension FormView {
         tableView?.reloadData()
         
     }
-    
-//    func addControls(_ controls: [FormControl], inGroup group: FormGroup? = nil) throws {
-//
-//        if let `group` = group {
-//            try controls.forEach { (control) in
-//                try addControl(control, inGroup: group)
-//            }
-//
-//            tableView?.reloadData()
-//        } else if let `group` = storedGroups.last as? FormDefaultGroup {
-//            try addControls(controls, inGroup: group)
-//        } else {
-//            let `group` = FormDefaultGroup()
-//            storedGroups.append(group)
-//
-//            try addControls(controls, inGroup: group)
-//        }
-//
-//    }
     
     func control(_ name: String) -> FormControllable? {
         
