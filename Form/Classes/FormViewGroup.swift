@@ -20,20 +20,20 @@ open class FormViewGroup {
     }
 }
 
-// MARK: - FormSearchable
+// MARK: - FormViewSearchable
 
-extension FormViewGroup: FormSearchable {
+extension FormViewGroup: FormViewSearchable {
     
-    open func control(_ name: String) -> FormControllable? {
+    open func control(_ name: String) -> FormViewControllable? {
         
-        if let `header` = header as? FormSearchable {
+        if let `header` = header as? FormViewSearchable {
             if let control = header.control(name) {
                 return control
             }
         }
             
         for row in rows {
-            if let `row` = row as? FormSearchable {
+            if let `row` = row as? FormViewSearchable {
                 if let control = row.control(name) {
                     return control
                 }
@@ -41,7 +41,7 @@ extension FormViewGroup: FormSearchable {
             
         }
             
-        if let `footer` = footer as? FormSearchable {
+        if let `footer` = footer as? FormViewSearchable {
             if let control = footer.control(name) {
                 return control
             }
@@ -50,21 +50,21 @@ extension FormViewGroup: FormSearchable {
         return nil
     }
     
-    open func bindableControls(_ bindName: String) -> [FormBindable] {
-        var list: [FormBindable] = []
+    open func bindableControls(_ bindName: String) -> [FormViewBindable] {
+        var list: [FormViewBindable] = []
         
-        if let `header` = header as? FormSearchable {
+        if let `header` = header as? FormViewSearchable {
             list.append(contentsOf: header.bindableControls(bindName))
         }
 
         for row in rows {
-            if let `row` = row as? FormSearchable {
+            if let `row` = row as? FormViewSearchable {
                 list.append(contentsOf: row.bindableControls(bindName))
             }
             
         }
         
-        if let `footer` = footer as? FormSearchable {
+        if let `footer` = footer as? FormViewSearchable {
             list.append(contentsOf: footer.bindableControls(bindName))
         }
         
@@ -82,7 +82,7 @@ extension FormViewGroup {
         return self
     }
     
-    open func header(_ control: FormControllable) -> FormViewGroup {
+    open func header(_ control: FormViewControllable) -> FormViewGroup {
         self.header = FormViewHeaderFooterContainer().control(control)
         return self
     }
@@ -92,7 +92,7 @@ extension FormViewGroup {
         return self
     }
     
-    open func footer(_ control: FormControllable) -> FormViewGroup {
+    open func footer(_ control: FormViewControllable) -> FormViewGroup {
         self.footer = FormViewHeaderFooterContainer().control(control)
         return self
     }
@@ -102,7 +102,7 @@ extension FormViewGroup {
         return self
     }
     
-    open func add(_ control: FormControllable) -> FormViewGroup {
+    open func add(_ control: FormViewControllable) -> FormViewGroup {
         rows.append(FormViewCellContainer().control(control))
         return self
     }

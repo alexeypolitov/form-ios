@@ -10,27 +10,27 @@ import UIKit
 
 // MARK: - Layoutable
 
-public protocol FormLayoutable {
-    func updateControlLayout(element: FormControllable)
+public protocol FormViewLayoutable {
+    func updateControlLayout(element: FormViewControllable)
 }
 
 // MARK: - Sizeable
 
-public protocol FormSizeable {
+public protocol FormViewSizeable {
     var fixedWidth: CGFloat? { get set }
     var fixedHeigth: CGFloat? { get set }
 }
 
 // MARK: - Searchable
 
-public protocol FormSearchable {
-    func control(_ name: String) -> FormControllable?
-    func bindableControls(_ bindName: String) -> [FormBindable]
+public protocol FormViewSearchable {
+    func control(_ name: String) -> FormViewControllable?
+    func bindableControls(_ bindName: String) -> [FormViewBindable]
 }
 
 // MARK: - Selectable
 
-public protocol FormSelectable {
+public protocol FormViewSelectable {
     var selectionStyle: UITableViewCell.SelectionStyle? { get set }
     var accessoryType: UITableViewCell.AccessoryType? { get set }
     var onSelect: ((FormViewCellContainer) -> Void)? { get set }
@@ -38,7 +38,7 @@ public protocol FormSelectable {
 
 // MARK: - Binding
 
-public protocol FormBindable {
+public protocol FormViewBindable {
     var bindDelegate: FormViewBindDelegate? { get set }
     var bindName: String? { get set }
     func bindDelegate(_ bindDelegate: FormViewBindDelegate?)
@@ -46,27 +46,27 @@ public protocol FormBindable {
 }
 
 public protocol FormViewBindDelegate {
-    func bindValueChanged(control: FormControllable, bindName: String, value: Any?)
+    func bindValueChanged(control: FormViewControllable, bindName: String, value: Any?)
     func bindValue(_ bindName: String) -> Any?
 }
 
 // MARK: - OnLoad
 
-public protocol FormOnLoad {
-    var onLoad: ((FormControllable) -> Void)? { get set }
+public protocol FormViewOnLoad {
+    var onLoad: ((FormViewControllable) -> Void)? { get set }
     func prepareOnLoad() -> Void
 }
 
-extension FormOnLoad {
+extension FormViewOnLoad {
     public func prepareOnLoad() -> Void {  }
 }
 
 // MARK: - Subscontrols
-public protocol FormContainerable {
+public protocol FormViewContainerable {
     func controlsNames() -> [String]
 }
 
-extension FormContainerable {
+extension FormViewContainerable {
     public func controlsNames() -> [String] {
         return []
     }
@@ -74,11 +74,11 @@ extension FormContainerable {
 
 // MARK: - Controllable
 
-public protocol FormControllable {
+public protocol FormViewControllable {
     var isMain: Bool { get set }
     var name: String { get }
 
-    var layoutDelegate: FormLayoutable? { get set }
-    func layoutDelegate(_ layoutDelegate: FormLayoutable?)
+    var layoutDelegate: FormViewLayoutable? { get set }
+    func layoutDelegate(_ layoutDelegate: FormViewLayoutable?)
 }
 

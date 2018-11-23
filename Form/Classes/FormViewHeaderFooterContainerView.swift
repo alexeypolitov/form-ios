@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol FormViewHeaderFooterContainerViewDataSource {
-    func formViewHeaderFooterContainerViewControl(_ view: FormViewHeaderFooterContainerView) -> FormControllable?
+    func formViewHeaderFooterContainerViewControl(_ view: FormViewHeaderFooterContainerView) -> FormViewControllable?
     func formViewHeaderFooterContainerViewInsets(_ view: FormViewHeaderFooterContainerView) -> UIEdgeInsets?
 }
 
@@ -36,7 +36,7 @@ open class FormViewHeaderFooterContainerView: FormViewHeaderFooterView {
         addFormConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: controlInsets.top))
         addFormConstrain(view: self.contentView, constrain: self.contentView.bottomAnchor.constraint(equalTo: controlView.bottomAnchor, constant: controlInsets.bottom), priority: .defaultHigh)
 
-        if let controlSizing = control as? FormSizeable {
+        if let controlSizing = control as? FormViewSizeable {
             if let fixedHeigth = controlSizing.fixedHeigth {
                 addFormConstrain(view: controlView, constrain: controlView.heightAnchor.constraint(equalToConstant: fixedHeigth))
             }
@@ -47,7 +47,7 @@ open class FormViewHeaderFooterContainerView: FormViewHeaderFooterView {
 
         addFormConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: controlInsets.left))
         
-        if let controlSizeable = control as? FormSizeable, controlSizeable.fixedWidth != nil {
+        if let controlSizeable = control as? FormViewSizeable, controlSizeable.fixedWidth != nil {
             // do noting
         } else {
             addFormConstrain(view: controlView, constrain: controlView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: controlInsets.right * -1))

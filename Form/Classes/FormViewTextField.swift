@@ -8,11 +8,11 @@
 
 import UIKit
 
-open class FormViewTextField: UITextField, FormControllable, FormBindable, FormOnLoad {
+open class FormViewTextField: UITextField, FormViewControllable, FormViewBindable, FormViewOnLoad {
     
     public var isMain: Bool
     public let name: String
-    public var layoutDelegate: FormLayoutable?
+    public var layoutDelegate: FormViewLayoutable?
     
     open var onChange: ((FormViewTextField, String?) -> Void)?
     open var onBeginEditing: ((FormViewTextField) -> Void)?
@@ -49,11 +49,11 @@ open class FormViewTextField: UITextField, FormControllable, FormBindable, FormO
         
     }
     
-    open func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
+    open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
-    // MARK: - FormBindable
+    // MARK: - FormViewBindable
     
     open var bindDelegate: FormViewBindDelegate?
     open var bindName: String?
@@ -69,8 +69,8 @@ open class FormViewTextField: UITextField, FormControllable, FormBindable, FormO
         let _ = text(bindValue)
     }
     
-    // MARK: - FormOnLoad
-    open var onLoad: ((FormControllable) -> Void)?
+    // MARK: - FormViewOnLoad
+    open var onLoad: ((FormViewControllable) -> Void)?
 }
 
 // MARK: - Setters
@@ -132,7 +132,7 @@ extension FormViewTextField {
         return self
     }
     
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewTextField {
+    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewTextField {
         self.onLoad = handler
         return self
     }

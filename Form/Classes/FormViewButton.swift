@@ -8,11 +8,11 @@
 
 import UIKit
 
-open class FormViewButton: ExtendedButton, FormControllable, FormSizeable, FormOnLoad {
+open class FormViewButton: ExtendedButton, FormViewControllable, FormViewSizeable, FormViewOnLoad {
     
     public var isMain: Bool
     public let name: String
-    public var layoutDelegate: FormLayoutable?
+    public var layoutDelegate: FormViewLayoutable?
     
     open var onAction: ((FormViewButton) -> Void)?
     
@@ -38,7 +38,7 @@ open class FormViewButton: ExtendedButton, FormControllable, FormSizeable, FormO
         self.addTarget(self, action: #selector(self.onActionEvent(_:)), for: .touchUpInside)
     }
     
-    open func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
+    open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
@@ -69,8 +69,8 @@ open class FormViewButton: ExtendedButton, FormControllable, FormSizeable, FormO
         }
     }
     
-    // MARK: - FormOnLoad
-    open var onLoad: ((FormControllable) -> Void)?
+    // MARK: - FormViewOnLoad
+    open var onLoad: ((FormViewControllable) -> Void)?
 }
 
 // MARK: - Setters
@@ -132,7 +132,7 @@ extension FormViewButton {
         return self
     }
 
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewButton {
+    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewButton {
         self.onLoad = handler
         return self
     }

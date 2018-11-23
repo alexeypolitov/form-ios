@@ -78,7 +78,7 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
         return self
     }
     
-    open func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
+    open func bindValueChanged(control: FormViewControllable, bindName: String, value: Any?) {
         guard let field = bindForm?.field(bindName) else { return }
         field.setValueFromFormView(value, controlName: control.name)
     }
@@ -94,7 +94,7 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     open func formBindValueChanged(bindName: String, value: Any?, exclude: [String]) {
         let constols = bindableControls(bindName)
         for control in constols {
-            if let `control` = control as? FormControllable, let _ = exclude.first(where: {$0 == control.name}) { continue }
+            if let `control` = control as? FormViewControllable, let _ = exclude.first(where: {$0 == control.name}) { continue }
             control.refreshBindValue()
         }
     }
@@ -107,7 +107,7 @@ extension FormView {
         
         if let container = group.header {
             try registerName(container.name)
-            if let `containerable` = container as? FormContainerable {
+            if let `containerable` = container as? FormViewContainerable {
                 for controlName in containerable.controlsNames() {
                     try registerName(controlName)
                 }
@@ -116,7 +116,7 @@ extension FormView {
         }
         if let container = group.footer {
             try registerName(container.name)
-            if let `containerable` = container as? FormContainerable {
+            if let `containerable` = container as? FormViewContainerable {
                 for controlName in containerable.controlsNames() {
                     try registerName(controlName)
                 }
@@ -128,7 +128,7 @@ extension FormView {
 
         for row in group.rows {
             try registerName(row.name)
-            if let `containerable` = row as? FormContainerable {
+            if let `containerable` = row as? FormViewContainerable {
                 for controlName in containerable.controlsNames() {
                     try registerName(controlName)
                 }
@@ -142,7 +142,7 @@ extension FormView {
         
     }
     
-    open func control(_ name: String) -> FormControllable? {
+    open func control(_ name: String) -> FormViewControllable? {
         
         for group in groups {
             if let control = group.control(name) {
@@ -153,8 +153,8 @@ extension FormView {
         return nil
     }
     
-    open func bindableControls(_ bindName: String) -> [FormBindable] {
-        var list: [FormBindable] = []
+    open func bindableControls(_ bindName: String) -> [FormViewBindable] {
+        var list: [FormViewBindable] = []
         for group in groups {
             list.append(contentsOf: group.bindableControls(bindName))
         }

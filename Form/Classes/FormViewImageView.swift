@@ -8,11 +8,11 @@
 
 import UIKit
 
-open class FormViewImageView: UIImageView, FormControllable, FormSizeable, FormBindable, FormOnLoad {
+open class FormViewImageView: UIImageView, FormViewControllable, FormViewSizeable, FormViewBindable, FormViewOnLoad {
 
     public var isMain: Bool
     public let name: String
-    public var layoutDelegate: FormLayoutable?
+    public var layoutDelegate: FormViewLayoutable?
     
     public override init(frame: CGRect) {
         fatalError("Use init()")
@@ -37,7 +37,7 @@ open class FormViewImageView: UIImageView, FormControllable, FormSizeable, FormB
         self.contentMode = .scaleAspectFit
     }
     
-    open func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
+    open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
@@ -62,7 +62,7 @@ open class FormViewImageView: UIImageView, FormControllable, FormSizeable, FormB
         }
     }
     
-    // MARK: - FormBindable
+    // MARK: - FormViewBindable
     
     open var bindDelegate: FormViewBindDelegate?
     open var bindName: String?
@@ -78,8 +78,8 @@ open class FormViewImageView: UIImageView, FormControllable, FormSizeable, FormB
         self.image = bindValue
     }
     
-    // MARK: - FormOnLoad
-    open var onLoad: ((FormControllable) -> Void)?
+    // MARK: - FormViewOnLoad
+    open var onLoad: ((FormViewControllable) -> Void)?
 }
 
 
@@ -118,7 +118,7 @@ extension FormViewImageView {
         return self
     }
     
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewImageView {
+    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewImageView {
         self.onLoad = handler
         return self
     }

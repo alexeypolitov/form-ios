@@ -8,11 +8,11 @@
 
 import UIKit
 
-open class FormViewLabel: ExtendedLabel, FormControllable, FormSelectable, FormBindable, FormOnLoad {
+open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectable, FormViewBindable, FormViewOnLoad {
     
     public var isMain: Bool
     public let name: String
-    public var layoutDelegate: FormLayoutable?
+    public var layoutDelegate: FormViewLayoutable?
 
     open override var text: String? {
         didSet {
@@ -56,17 +56,17 @@ open class FormViewLabel: ExtendedLabel, FormControllable, FormSelectable, FormB
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
     }
     
-    open func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
+    open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
-    // MARK: - FormSelectable
+    // MARK: - FormViewSelectable
     
     open var selectionStyle: UITableViewCell.SelectionStyle?
     open var accessoryType: UITableViewCell.AccessoryType?
     open var onSelect: ((FormViewCellContainer) -> Void)?
     
-    // MARK: - FormBindable
+    // MARK: - FormViewBindable
     
     open var bindDelegate: FormViewBindDelegate?
     open var bindName: String?
@@ -84,8 +84,8 @@ open class FormViewLabel: ExtendedLabel, FormControllable, FormSelectable, FormB
         }
     }
     
-    // MARK: - FormOnLoad
-    open var onLoad: ((FormControllable) -> Void)?
+    // MARK: - FormViewOnLoad
+    open var onLoad: ((FormViewControllable) -> Void)?
     
 }
 
@@ -153,7 +153,7 @@ extension FormViewLabel {
         return self
     }
     
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewLabel {
+    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewLabel {
         self.onLoad = handler
         return self
     }

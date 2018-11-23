@@ -11,7 +11,7 @@ import UIKit
 open class FormViewHeaderFooterContainer: FormViewHeaderFooter {
 
     open override var viewClass: FormViewHeaderFooterView.Type { return FormViewHeaderFooterContainerView.self }
-    open var control: FormControllable?
+    open var control: FormViewControllable?
     open var insets: UIEdgeInsets = UIEdgeInsets.zero
     
     override init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
@@ -26,11 +26,11 @@ open class FormViewHeaderFooterContainer: FormViewHeaderFooter {
     }
     
     open override func onPrepare() {
-        if let `bindable` = control as? FormBindable {
+        if let `bindable` = control as? FormViewBindable {
             bindable.refreshBindValue()
         }
 
-        if let `onLoad` = control as? FormOnLoad, let control = control {
+        if let `onLoad` = control as? FormViewOnLoad, let control = control {
             onLoad.prepareOnLoad()
             onLoad.onLoad?(control)
         }
@@ -52,9 +52,9 @@ open class FormViewHeaderFooterContainer: FormViewHeaderFooter {
     
 }
 
-// MARK: - FormContainerable
+// MARK: - FormViewContainerable
 
-extension FormViewHeaderFooterContainer: FormContainerable {
+extension FormViewHeaderFooterContainer: FormViewContainerable {
     
     // MARK: - Containerable
     open func controlsNames() -> [String] {
@@ -62,7 +62,7 @@ extension FormViewHeaderFooterContainer: FormContainerable {
         if let controlnName = control?.name {
             list.append(controlnName)
         }
-        if let `control` = control as? FormContainerable {
+        if let `control` = control as? FormViewContainerable {
             list.append(contentsOf: control.controlsNames())
         }
         return list
@@ -75,7 +75,7 @@ extension FormViewHeaderFooterContainer: FormContainerable {
 
 extension FormViewHeaderFooterContainer: FormViewHeaderFooterContainerViewDataSource {
     
-    open func formViewHeaderFooterContainerViewControl(_ view: FormViewHeaderFooterContainerView) -> FormControllable? {
+    open func formViewHeaderFooterContainerViewControl(_ view: FormViewHeaderFooterContainerView) -> FormViewControllable? {
         return control
     }
     
@@ -85,38 +85,38 @@ extension FormViewHeaderFooterContainer: FormViewHeaderFooterContainerViewDataSo
     
 }
 
-// MARK: - FormLayoutable
+// MARK: - FormViewLayoutable
 
-extension FormViewHeaderFooterContainer: FormLayoutable {
+extension FormViewHeaderFooterContainer: FormViewLayoutable {
     
-    open func updateControlLayout(element: FormControllable) {
+    open func updateControlLayout(element: FormViewControllable) {
         updateFormView()
     }
     
 }
 
-// MARK: - FormSearchable
+// MARK: - FormViewSearchable
 
-extension FormViewHeaderFooterContainer: FormSearchable {
+extension FormViewHeaderFooterContainer: FormViewSearchable {
     
-    open func control(_ name: String) -> FormControllable? {
+    open func control(_ name: String) -> FormViewControllable? {
         if control?.name == name {
             return control
         }
-        if let `control` = control as? FormSearchable {
+        if let `control` = control as? FormViewSearchable {
             return control.control(name)
         }        
         return nil
     }
     
-    open func bindableControls(_ bindName: String) -> [FormBindable] {
-        var list: [FormBindable] = []
-        if let `control` = control as? FormBindable {
+    open func bindableControls(_ bindName: String) -> [FormViewBindable] {
+        var list: [FormViewBindable] = []
+        if let `control` = control as? FormViewBindable {
             if control.bindName == bindName {
                 list.append(control)
             }            
         }
-        if let `control` = control as? FormSearchable {
+        if let `control` = control as? FormViewSearchable {
             list.append(contentsOf: control.bindableControls(bindName))
         }
         return list
@@ -128,7 +128,7 @@ extension FormViewHeaderFooterContainer: FormSearchable {
 
 extension FormViewHeaderFooterContainer: FormViewBindDelegate {
     
-    open func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
+    open func bindValueChanged(control: FormViewControllable, bindName: String, value: Any?) {
         formView?.bindValueChanged(control: control, bindName: bindName, value: value)
     }
     
@@ -142,10 +142,10 @@ extension FormViewHeaderFooterContainer: FormViewBindDelegate {
 
 extension FormViewHeaderFooterContainer {
     
-    open func control(_ control: FormControllable?) -> FormViewHeaderFooterContainer {
+    open func control(_ control: FormViewControllable?) -> FormViewHeaderFooterContainer {
         self.control = control
         self.control?.layoutDelegate = self
-        if let bindable = control as? FormBindable {
+        if let bindable = control as? FormViewBindable {
             bindable.bindDelegate(self)
         }  
         return self

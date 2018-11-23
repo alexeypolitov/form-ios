@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol FormViewCellContainerViewDataSource {
-    func formViewCellContainerViewControl(_ view: FormViewCellContainerView) -> FormControllable?
+    func formViewCellContainerViewControl(_ view: FormViewCellContainerView) -> FormViewControllable?
     func formViewCellContainerViewInsets(_ view: FormViewCellContainerView) -> UIEdgeInsets?
 }
 
@@ -36,7 +36,7 @@ open class FormViewCellContainerView: FormViewCellView {
         addFormConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: controlInsets.top))
         addFormConstrain(view: self.contentView, constrain: self.contentView.bottomAnchor.constraint(equalTo: controlView.bottomAnchor, constant: controlInsets.bottom), priority: .defaultHigh)
         
-        if let controlSizing = control as? FormSizeable {
+        if let controlSizing = control as? FormViewSizeable {
             if let fixedHeigth = controlSizing.fixedHeigth {
                 addFormConstrain(view: controlView, constrain: controlView.heightAnchor.constraint(equalToConstant: fixedHeigth))
             }
@@ -47,7 +47,7 @@ open class FormViewCellContainerView: FormViewCellView {
         
         addFormConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: controlInsets.left))
         
-        if let controlSizeable = control as? FormSizeable, controlSizeable.fixedWidth != nil {
+        if let controlSizeable = control as? FormViewSizeable, controlSizeable.fixedWidth != nil {
             // do noting
         } else {
             addFormConstrain(view: controlView, constrain: controlView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: controlInsets.right * -1))

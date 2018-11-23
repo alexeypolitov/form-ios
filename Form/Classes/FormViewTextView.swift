@@ -8,11 +8,11 @@
 
 import UIKit
 
-open class FormViewTextView: ExtendedTextView, FormControllable, FormBindable, FormOnLoad {
+open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBindable, FormViewOnLoad {
     
     public var isMain: Bool
     public let name: String
-    public var layoutDelegate: FormLayoutable?
+    public var layoutDelegate: FormViewLayoutable?
     
     open var onChange: ((FormViewTextView, String?) -> Void)?
     open var onEndEditing: ((FormViewTextView) -> Void)?
@@ -52,7 +52,7 @@ open class FormViewTextView: ExtendedTextView, FormControllable, FormBindable, F
         
     }
     
-    open func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
+    open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
@@ -72,7 +72,7 @@ open class FormViewTextView: ExtendedTextView, FormControllable, FormBindable, F
         }
     }
     
-    // MARK: - FormBindable
+    // MARK: - FormViewBindable
     
     open var bindDelegate: FormViewBindDelegate?
     open var bindName: String?
@@ -88,8 +88,8 @@ open class FormViewTextView: ExtendedTextView, FormControllable, FormBindable, F
         let _ = text(bindValue)
     }
     
-    // MARK: - FormOnLoad
-    open var onLoad: ((FormControllable) -> Void)?
+    // MARK: - FormViewOnLoad
+    open var onLoad: ((FormViewControllable) -> Void)?
 }
 
 // MARK: - Setters
@@ -147,7 +147,7 @@ extension FormViewTextView {
         return self
     }
     
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewTextView {
+    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewTextView {
         self.onLoad = handler
         return self
     }

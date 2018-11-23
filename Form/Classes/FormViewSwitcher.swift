@@ -8,11 +8,11 @@
 
 import UIKit
 
-open class FormViewSwitcher: UISwitch, FormControllable, FormBindable, FormOnLoad {
+open class FormViewSwitcher: UISwitch, FormViewControllable, FormViewBindable, FormViewOnLoad {
 
     public var isMain: Bool
     public let name: String
-    public var layoutDelegate: FormLayoutable?
+    public var layoutDelegate: FormViewLayoutable?
     
     open var onChange: ((FormViewSwitcher, Bool) -> Void)?
     
@@ -40,7 +40,7 @@ open class FormViewSwitcher: UISwitch, FormControllable, FormBindable, FormOnLoa
         self.addTarget(self, action: #selector(self.onChangeEvent(_:)), for: .valueChanged)
     }
     
-    open func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
+    open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
@@ -54,7 +54,7 @@ open class FormViewSwitcher: UISwitch, FormControllable, FormBindable, FormOnLoa
         }
     }
     
-    // MARK: - FormBindable
+    // MARK: - FormViewBindable
     
     open var bindDelegate: FormViewBindDelegate?
     open var bindName: String?
@@ -70,8 +70,8 @@ open class FormViewSwitcher: UISwitch, FormControllable, FormBindable, FormOnLoa
         let _ = isOn(bindValue)
     }
     
-    // MARK: - FormOnLoad
-    open var onLoad: ((FormControllable) -> Void)?
+    // MARK: - FormViewOnLoad
+    open var onLoad: ((FormViewControllable) -> Void)?
 }
 
 // MARK: - Setters
@@ -103,7 +103,7 @@ extension FormViewSwitcher {
         return self
     }
     
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewSwitcher {
+    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewSwitcher {
         self.onLoad = handler
         return self
     }
