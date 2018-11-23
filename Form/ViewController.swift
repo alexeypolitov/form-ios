@@ -36,8 +36,7 @@ class ViewController: UIViewController {
                     Former.required("SignUp.Name.Validation.Required.Error")])
                 .inlineValidator(Former.maxLength(maxLength: 6, "SignUp.Name.Validation.BetweedLength.Error"))
                 .onChange({ (value) in
-                    //                    guard let control = self.formView.control("testLabel4") as? FormLabelControl else { return }
-                    //                    let _ = control.text("dddddd")
+//                    print("value: \(value ?? "{NIL}")")
                 })
             )
             .add(Form.field("email").value("email 1"))
@@ -59,47 +58,52 @@ class ViewController: UIViewController {
         let _ = formView.bind(form)
         //        try? formView.addGroup(Former.group().add(Former.textField("testLabelRow6").placeholder("test").bind("name")))
         try formView.addGroup(Former.group("g1")
-            .header(
-                Former.vertical().add([
-                    Former.horizontal().add([
-                        Former.label("testLabelRow1").isMain(true).onLoad({ (control) in
-                            guard let `control` = control as? FormLabelControl else { return }
-                            control.text = "pppp 1"
-                        }),
-                        Former.textField("testLabelRow2").placeholder("test")
-                        ]),
-                    Former.horizontal().add([
-                        Former.label("testLabelRow3-1").text("test 1").bind("name").isMain(true),
-                        Former.textField("testLabelRow4-1").placeholder("test").bind("name")
-                        ])
-                    ]).onLoad({ (_) in
-                        guard let control = self.formView.control("testLabelRow1") as? FormLabelControl else { return }
-                        control.text = "pppp 2"
-                    })
-            )
+//            .header(
+//                Former.vertical().add([
+//                    Former.horizontal().add([
+//                        Former.label("label1").isMain(true),
+//                        Former.textField("text1").placeholder("test")
+//                        ]),
+//                    Former.horizontal().add([
+//                        Former.label("label2").text("test 1").bind("name").isMain(true),
+//                        Former.textField("test2").placeholder("test").bind("name")
+//                        ])
+//                    ])
+//            )
             .add(
-                Former.vertical("g1:r1:v1").add([
-                    Former.horizontal("g1:r1:v1:h1").add([
-                        Former.label("testLabelRow1").text("test 1").isMain(true),
-                        Former.textField("testLabelRow4").text("test 2").placeholder("test")
-                        ]),
-                    Former.horizontal("g1:r1:v1:h2").add([
-                        Former.label("testLabelRow2").text("test 3").isMain(true),
-                        Former.textField("testLabelRow6").placeholder("test").text("test 4")
-                        ])
+                Former.horizontal().add([
+                    Former.label("label3").bind("name").isMain(true),
+                    Former.textView("test3")
+                        .placeholder("Enter name")
+                        .textAlignment(.right)
+                        .bind("name")
+                        .inlineValidator(Former.maxLength(maxLength: 6, "SignUp.Name.Validation.BetweedLength.Error"))
                     ])
+
             )
-            //            .footer(Former.vertical().add(
-            //                [
-            //                    Former.horizontal().add([
-            //                        Former.label("testLabelRow9").text("test 1").bind("name").isMain(true),
-            //                        Former.textField("testLabelRow10").placeholder("test").bind("name")
-            //                        ]),
-            //                    Former.horizontal().add([
-            //                        Former.label("testLabelRow11").text("test 1").bind("name").isMain(true),
-            //                        Former.textField("testLabelRow12").placeholder("test").bind("name")
-            //                        ])
-            //                ]))
+//            .add(
+//                Former.vertical().add([
+//                    Former.horizontal().add([
+//                        Former.label("label3").text("test 1").isMain(true),
+//                        Former.textField("test3").text("test 2").placeholder("test")
+//                        ]),
+//                    Former.horizontal().add([
+//                        Former.label("label4").text("test 3").isMain(true),
+//                        Former.textField("test4").placeholder("test").text("test 4")
+//                        ])
+//                    ])
+//            )
+//            .footer(Former.vertical().add(
+//                [
+//                    Former.horizontal().add([
+//                        Former.label("testLabelRow9").text("test 1").bind("name").isMain(true),
+//                        Former.textField("testLabelRow10").placeholder("test").bind("name")
+//                        ]),
+//                    Former.horizontal().add([
+//                        Former.label("testLabelRow11").text("test 1").bind("name").isMain(true),
+//                        Former.textField("testLabelRow12").placeholder("test").bind("name")
+//                        ])
+//                ]))
         )
         
     }

@@ -17,7 +17,7 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable
     open override var text: String! {
         didSet {
             _value = text
-            _pandingValue = nil
+//            _pandingValue = nil
         }
     }
     
@@ -97,15 +97,15 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable
             }
         }
     }
-    private var _pandingValue: Any?
-    var pandingValue: Any? {
-        get {
-            return _pandingValue
-        }
-        set {
-            _pandingValue = newValue
-        }
-    }
+//    private var _pandingValue: Any?
+//    var pandingValue: Any? {
+//        get {
+//            return _pandingValue
+//        }
+//        set {
+//            _pandingValue = newValue
+//        }
+//    }
     
     // MARK: - FormValidatable
     
@@ -314,7 +314,13 @@ extension FormTextViewControl {
 extension FormTextViewControl: UITextViewDelegate {
     
     public func textViewDidChange(_ textView: UITextView) {
-        onChange?(self, textView.text.count > 0 ? textView.text : nil)
+        value = text
+        
+        onChange?(self, textView.text)
+        
+        if let `bindName` = bindName {
+            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: _value)
+        }
     }
     
     public func textViewDidEndEditing(_ textView: UITextView) {
@@ -338,30 +344,35 @@ extension FormTextViewControl: UITextViewDelegate {
     }
     
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        _pandingValue = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        return shouldChangeCharacters?(self, textView.text, range, text) ?? true
         
-        // Inline validation
-        let (success, _ ) = validateInline()
-        if !success {
-            _pandingValue = nil
-            return false
-            
-        }
-        
-        // Other validation
-        let result = shouldChangeCharacters?(self, textView.text, range, text) ?? true
-        _pandingValue = nil
-        if result {
-            _value = (textView.text as NSString).replacingCharacters(in: range, with: text)
-        } else {
-            _value = textView.text
-        }
-        
-        if let `bindName` = bindName {
-            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: _value)
-        }
-        
-        return result
+//        _pandingValue = (textView.text as NSString).replacingCharacters(in: range, with: text)
+//        print("ddd: \(_pandingValue)")
+//
+////        self.textStorage.delegate
+//
+//        // Inline validation
+//        let (success, _ ) = validateInline()
+//        if !success {
+//            _pandingValue = nil
+//            return false
+//
+//        }
+//
+//        // Other validation
+//        let result = shouldChangeCharacters?(self, textView.text, range, text) ?? true
+//        _pandingValue = nil
+//        if result {
+//            _value = (textView.text as NSString).replacingCharacters(in: range, with: text)
+//        } else {
+//            _value = textView.text
+//        }
+//
+//        if let `bindName` = bindName {
+//            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: _value)
+//        }
+//
+//        return result
     }
 
     public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {

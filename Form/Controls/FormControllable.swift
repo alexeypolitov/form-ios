@@ -32,7 +32,7 @@ protocol FormSearchable {
 
 protocol FormValuable {
     var value: Any? { get set }
-    var pandingValue: Any? { get set }
+//    var pandingValue: Any? { get set }
 }
 
 // MARK: - Validatable

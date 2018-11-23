@@ -19,12 +19,9 @@ class FormMaxLengthValidator: FormValidator {
     }
     
     override func validate(_ valuable: FormValuable) -> Bool {
-        if let pandingValue = valuable.pandingValue as? String {
-            return pandingValue.count <= maxLength
-        } else if let value = valuable.value as? String {
-            return value.count <= maxLength
-        }
-        return true
+        guard let value = valuable.value as? String else { return true }
+        
+        return value.count <= maxLength
     }
     
 }

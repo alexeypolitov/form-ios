@@ -17,7 +17,7 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
     open override var text: String? {
         didSet {
             _value = text
-            _pandingValue = nil
+//            _pandingValue = nil
         }
     }
     
@@ -52,6 +52,8 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
         self.backgroundColor = UIColor.clear
         self.delegate = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onTextDidChange(notification:)), name: UITextField.textDidChangeNotification, object: self)
+        
     }
     
     func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
@@ -75,15 +77,15 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
             }
         }
     }
-    private var _pandingValue: Any?
-    var pandingValue: Any? {
-        get {
-            return _pandingValue
-        }
-        set {
-            _pandingValue = newValue
-        }
-    }
+//    private var _pandingValue: Any?
+//    var pandingValue: Any? {
+//        get {
+//            return _pandingValue
+//        }
+//        set {
+//            _pandingValue = newValue
+//        }
+//    }
     
     // MARK: - FormValidatable
     
@@ -275,6 +277,16 @@ extension FormTextFieldControl {
 
 extension FormTextFieldControl: UITextFieldDelegate {
     
+    @objc open func onTextDidChange(notification: Notification) {
+        value = text
+        
+        onChange?(self, text)
+        
+        if let `bindName` = bindName {
+            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: _value)
+        }
+    }
+    
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         onBeginEditing?(self)
     }
@@ -300,33 +312,34 @@ extension FormTextFieldControl: UITextFieldDelegate {
     }
     
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let text = textField.text {
-            _pandingValue = (text as NSString).replacingCharacters(in: range, with: text)
-        } else {
-            _pandingValue = nil
-        }
-        
-        // Inline validation
-        let (success, _ ) = validateInline()
-        if !success {
-            _pandingValue = nil
-            return false
-        }
-        
-        // Other validation
-        let result = shouldChangeCharacters?(self, textField.text, range, string) ?? true
-        _pandingValue = nil
-        if result, let text = textField.text {
-            _value = (text as NSString).replacingCharacters(in: range, with: string)
-        } else {
-            _value = textField.text
-        }
-        
-        if let `bindName` = bindName {
-            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: _value)
-        }
-        
-        return result
+        return shouldChangeCharacters?(self, textField.text, range, string) ?? true
+//        if let text = textField.text {
+//            _pandingValue = (text as NSString).replacingCharacters(in: range, with: text)
+//        } else {
+//            _pandingValue = nil
+//        }
+//
+//        // Inline validation
+//        let (success, _ ) = validateInline()
+//        if !success {
+//            _pandingValue = nil
+//            return false
+//        }
+//
+//        // Other validation
+//        let result = shouldChangeCharacters?(self, textField.text, range, string) ?? true
+//        _pandingValue = nil
+//        if result, let text = textField.text {
+//            _value = (text as NSString).replacingCharacters(in: range, with: string)
+//        } else {
+//            _value = textField.text
+//        }
+//
+//        if let `bindName` = bindName {
+//            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: _value)
+//        }
+//
+//        return result
     }
     
 }
