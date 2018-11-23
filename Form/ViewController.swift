@@ -25,7 +25,7 @@ class ViewController: UIViewController {
                     Former.minLength(minLength: 3, "SignUp.Name.Validation.BetweedLength.Error"),
                     Former.required("SignUp.Name.Validation.Required.Error")])
                 .inlineValidator(Former.maxLength(maxLength: 6, "SignUp.Name.Validation.BetweedLength.Error"))
-                .onChange({ (value, status) in
+                .onChange({ (value) in
 //                    guard let control = self.formView.control("testLabel4") as? FormLabelControl else { return }
 //                    let _ = control.text("dddddd")
                 })
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
             .add(Form.field("email").value("email 1"))
             .add(Form.field("password").value("password 1"))
             .add(Form.field("prWay")
-                .onChange({ (value, status) in
+                .onChange({ (value) in
                     guard let control = self.formView.control("prWayLabel") as? FormLabelControl else { return }
                     if value != nil {
                         let _ = control.text("Value \(value!)")
@@ -47,41 +47,42 @@ class ViewController: UIViewController {
         // FormView
         
         let _ = formView.bind(form)
-        try? formView.addGroup(Former.group()
-            .header(Former.vertical().add(
-                [
-                    Former.horizontal().add([
-                        Former.label("testLabelRow1").text("test 1").bind("name").isMain(true),
-                        Former.textField("testLabelRow2").placeholder("test").bind("name")
-                    ]),
-                    Former.horizontal().add([
-                        Former.label("testLabelRow3").text("test 1").bind("name").isMain(true),
-                        Former.textField("testLabelRow4").placeholder("test").bind("name")
-                    ])
-                ]))
-            .add(Former.vertical().add(
-                [
-                    Former.horizontal().add([
-                        Former.label("testLabelRow5").text("test 1").bind("name").isMain(true),
-                        Former.textField("testLabelRow6").placeholder("test").bind("name")
-                        ]),
-                    Former.horizontal().add([
-                        Former.label("testLabelRow7").text("test 1").bind("name").isMain(true),
-                        Former.textField("testLabelRow8").placeholder("test").bind("name")
-                        ])
-                ]))
-            .footer(Former.vertical().add(
-                [
-                    Former.horizontal().add([
-                        Former.label("testLabelRow9").text("test 1").bind("name").isMain(true),
-                        Former.textField("testLabelRow10").placeholder("test").bind("name")
-                        ]),
-                    Former.horizontal().add([
-                        Former.label("testLabelRow11").text("test 1").bind("name").isMain(true),
-                        Former.textField("testLabelRow12").placeholder("test").bind("name")
-                        ])
-                ]))
-        )
+        try? formView.addGroup(Former.group().add(Former.textField("testLabelRow6").placeholder("test").bind("name")))
+//        try? formView.addGroup(Former.group()
+//            .header(Former.vertical().add(
+//                [
+//                    Former.horizontal().add([
+//                        Former.label("testLabelRow1").text("test 1").bind("name").isMain(true),
+//                        Former.textField("testLabelRow2").placeholder("test").bind("name")
+//                    ]),
+//                    Former.horizontal().add([
+//                        Former.label("testLabelRow3").text("test 1").bind("name").isMain(true),
+//                        Former.textField("testLabelRow4").placeholder("test").bind("name")
+//                    ])
+//                ]))
+//            .add(Former.vertical().add(
+//                [
+//                    Former.horizontal().add([
+//                        Former.label("testLabelRow5").text("test 1").bind("name").isMain(true),
+//                        Former.textField("testLabelRow6").placeholder("test").bind("name")
+//                        ]),
+//                    Former.horizontal().add([
+//                        Former.label("testLabelRow7").text("test 1").bind("name").isMain(true),
+//                        Former.textField("testLabelRow8").placeholder("test").bind("name")
+//                        ])
+//                ]))
+//            .footer(Former.vertical().add(
+//                [
+//                    Former.horizontal().add([
+//                        Former.label("testLabelRow9").text("test 1").bind("name").isMain(true),
+//                        Former.textField("testLabelRow10").placeholder("test").bind("name")
+//                        ]),
+//                    Former.horizontal().add([
+//                        Former.label("testLabelRow11").text("test 1").bind("name").isMain(true),
+//                        Former.textField("testLabelRow12").placeholder("test").bind("name")
+//                        ])
+//                ]))
+//        )
     }
     
 //    func editLabelDetailText(control: FormLabelControl) {
