@@ -30,7 +30,7 @@ class ViewController: UIViewController {
                     let _ = control.text("dddddd")
                 })
             )
-            .add(Form.field("test").value(UIImage(named: "lemur1")).onChange({ (value, status) in
+            .add(Form.field("test").value("Some test 1").onChange({ (value, status) in
                 print("ddd: \(value)")
             }))
             .add(Form.field("email"))
@@ -51,14 +51,21 @@ class ViewController: UIViewController {
         
         let _ = formView.bind(form)
         try? formView.addGroup(Former.group()
-            .header(Former.image("testImage").bind("test").fixedWidth(50).fixedHeigth(50))
-//            .add(Former.label("testLabel").numberOfLines(0))
+            .header(Former.label("testLabel1").bind("test").numberOfLines(0).onLoad({ (control) in
+                guard let `control` = control as? FormLabelControl else { return }
+                control.text = "test 1"
+            })) //
+//            .header(Former.image("testImage1").image(UIImage(named: "lemur1")).fixedWidth(50).fixedHeigth(50)) //
+            .add(Former.label("testLabel2").bind("test").numberOfLines(0).onLoad({ (control) in
+//                guard let `control` = control as? FormLabelControl else { return }
+//                control.text = "test 2"
+            }))
 //            .add(Former.badge("testBadge"))
-            .add(Former.image("testImage").bind("test").fixedWidth(50).fixedHeigth(50))
-            .add(Former.textField("nameTextField1").placeholder("1氏名"))
-            .add(Former.textView("emailTextField1").placeholder("1メールアドレス"))
-            .add(Former.switcher("passwordTextField1"))
-//            .footer(Former.label().text("1パスワードは忘れないようにメモしましょう！").numberOfLines(0))
+//            .add(Former.image("testImage2").bind("test").fixedWidth(50).fixedHeigth(50))
+//            .add(Former.textField("nameTextField1").placeholder("1氏名"))
+//            .add(Former.textView("emailTextField1").placeholder("1メールアドレス"))
+//            .add(Former.switcher("passwordTextField1"))
+//            .footer(Former.image("testImage3").bind("test").fixedWidth(50).fixedHeigth(50))
         )
         
 //        try? formView.addGroup(Former.group()
@@ -186,7 +193,7 @@ class ViewController: UIViewController {
 
             guard let field = self.form.field("test") else { return }
 
-                field.value = UIImage(named: "lemur2")
+                field.value = "ddddd"
 
         }))
         
@@ -194,9 +201,10 @@ class ViewController: UIViewController {
 //            guard let `self` = self else { return }
 //            guard let group = self.formView.storedGroups.first else { return }
 //            guard let header = group.header as? FormHeaderFooterContainer else { return }
+//            print("ppp 3: header:\(header); linkedView:\(header.linkedView)")
 //            guard let headerView = header.linkedView as? FormHeaderFooterContainerView else { return }
 //
-//            print("ddd: \(headerView)\n\(headerView.contentView.subviews)")
+////            print("ddd: \(headerView)\n\(headerView.contentView.subviews)")
 //
 //        }))
         

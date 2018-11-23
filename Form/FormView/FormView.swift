@@ -15,7 +15,7 @@ enum FormViewError: Error {
 class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     fileprivate var tableView: UITableView?
-    fileprivate var storedGroups: [FormGroup] = []
+    var storedGroups: [FormGroup] = [] // fileprivate
     
     fileprivate var registredIdentifiers: [String: AnyClass] = [:]
     
@@ -129,11 +129,9 @@ extension FormView {
         
         if let container = group.header {
             registerHeaderFooter(container.viewClass, name: container.name)
-//            registerHeaderFooter(header.viewClass)
         }
         if let container = group.footer {
             registerHeaderFooter(container.viewClass, name: container.name)
-//            registerHeaderFooter(collection.viewClass)
         }
         
         // Check duplications
@@ -145,7 +143,6 @@ extension FormView {
             }
 
             register(row.viewClass, name: row.name)
-//            register(row.viewClass)
         }
         
         storedGroups.append(group)
@@ -288,10 +285,10 @@ extension FormView: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let row = storedGroups[indexPath.section].rows[indexPath.row]
-        row.processed()
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let row = storedGroups[indexPath.section].rows[indexPath.row]
+//        row.processed()
+//    }
 }
 
 extension FormView: UITableViewDelegate {
@@ -300,16 +297,17 @@ extension FormView: UITableViewDelegate {
         if storedGroups.count > 0, let header = storedGroups[section].header {            
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: header.viewClass)) as! FormHeaderFooterView
             header.prepare(headerView, formView: self)
+            print(headerView)
             return headerView
         }
         return nil
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        if storedGroups.count > 0, let header = storedGroups[section].header {
-            header.processed()
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        if storedGroups.count > 0, let header = storedGroups[section].header {
+//            header.processed()
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if storedGroups.count > 0, let footer = storedGroups[section].footer {
@@ -320,11 +318,11 @@ extension FormView: UITableViewDelegate {
         return nil
     }
     
-    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        if storedGroups.count > 0, let footer = storedGroups[section].footer {
-            footer.processed()
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+//        if storedGroups.count > 0, let footer = storedGroups[section].footer {
+//            footer.processed()
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = storedGroups[indexPath.section].rows[indexPath.row]

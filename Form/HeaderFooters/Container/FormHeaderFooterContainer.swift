@@ -26,13 +26,16 @@ class FormHeaderFooterContainer: FormHeaderFooter {
     }
     
     override func onPrepare() {
-        guard let `linkedView` = linkedView as? FormHeaderFooterContainerView else { return }
-        
-        linkedView.dataSource = self
-        
         if let `bindable` = control as? FormBindable {
             bindable.refreshBindValue()
         }
+
+        if let `controlOnLoad` = control as? FormOnLoad, let control = control {
+            controlOnLoad.onLoad?(control)
+        }
+
+        guard let `linkedView` = linkedView as? FormHeaderFooterContainerView else { return }
+        linkedView.dataSource = self
     }
     
     class Appearance {

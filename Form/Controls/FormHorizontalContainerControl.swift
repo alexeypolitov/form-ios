@@ -12,7 +12,7 @@ class FormHorizontalContainerControl: UIView, FormControllable {
     
     var isMain: Bool
     let name: String
-    var layoutDelegate: FormLayoutable?
+    var layoutDelegate: FormLayoutable?    
     var controls: [FormControllable] = []
     var insets: UIEdgeInsets = UIEdgeInsets.zero
     var minimalInset: CGFloat = 8

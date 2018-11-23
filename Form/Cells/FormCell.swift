@@ -20,30 +20,29 @@ open class FormCell {
     open weak var linkedView: FormCellView?
     weak var linkedFormView: FormView?
     let name: String
+    private var _prepareInProgress: Bool = false
+    var prepareInProgress: Bool {
+        return _prepareInProgress
+    }
     
     init(_ name: String = UUID().uuidString) {
         self.name = name
     }
     
     func prepare(_ view: FormCellView, formView: FormView) {
+        _prepareInProgress = true
         linkedView = view
         linkedFormView = formView
         onPrepare()
+        _prepareInProgress = false
     }
     
     func onPrepare() {
         // custom code
     }
     
-    func processed() {
-        onProcessed()
-    }
-    
-    func onProcessed() {
-        // custom code
-    }
-    
     func updateFormView() {
+        guard !_prepareInProgress else { return }
 //        guard let formView = linkedView?.superview?.superview as? FormView else { return }
         formView?.updateControls()
     }

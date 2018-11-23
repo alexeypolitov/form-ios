@@ -22,7 +22,7 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
     }
     
     override func onUpdateLayout() {
-
+        
         removeStoredConstrains()
         
         guard let `dataSource` = dataSource else { return }
@@ -52,7 +52,7 @@ class FormHeaderFooterContainerView: FormHeaderFooterView {
         } else {
             storeConstrain(view: controlView, constrain: controlView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: controlInsets.right * -1))
         }
-        
+                
     }
 
 }

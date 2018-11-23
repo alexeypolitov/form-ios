@@ -16,7 +16,7 @@ class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBindabl
     
     open override var image: UIImage? {
         didSet {
-            layoutDelegate?.updateControlLayout(element: self)
+            
         }
     }
     
@@ -81,7 +81,7 @@ class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBindabl
         guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
         guard let bindValue = bindDelegate.bindValue(bindName) as? UIImage else { return }
         
-        let _ = image(bindValue)
+        self.image = bindValue
     }
 }
 
@@ -97,6 +97,7 @@ extension FormImageControl {
     
     func image(_ image: UIImage?) -> FormImageControl {
         self.image = image
+        layoutDelegate?.updateControlLayout(element: self)
         return self
     }
     

@@ -31,7 +31,7 @@ class FormCellContainerView: FormCellView {
         
         let controlInsets = dataSource.formCellContainerViewInsets(self) ?? UIEdgeInsets.zero
         
-        contentView.addSubview(controlView)
+        self.contentView.addSubview(controlView)
         
         storeConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: controlInsets.top))
         storeConstrain(view: self.contentView, constrain: self.contentView.bottomAnchor.constraint(equalTo: controlView.bottomAnchor, constant: controlInsets.bottom), priority: .defaultHigh)

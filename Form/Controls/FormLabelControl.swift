@@ -8,12 +8,12 @@
 
 import UIKit
 
-open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, FormBindable {
+open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, FormBindable, FormOnLoad {
     
     var isMain: Bool
     let name: String
     var layoutDelegate: FormLayoutable?
-    
+
     open override var text: String? {
         didSet {
             layoutDelegate?.updateControlLayout(element: self)
@@ -47,7 +47,9 @@ open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, Fo
         super.init(frame: CGRect.zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.text = text
+        if text != nil {
+            self.text = text
+        }        
         self.numberOfLines = 1
         self.textVerticalAlignment = textVerticalAlignment
         self.textAlignment = textHorizontalAlignment
@@ -81,6 +83,9 @@ open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, Fo
             let _ = attributedText(bindValue)
         }
     }
+    
+    // MARK: - FormOnLoad
+    var onLoad: ((FormControllable) -> Void)?
     
 }
 
@@ -135,6 +140,11 @@ extension FormLabelControl {
     
     func accessoryType(_ accessoryType: UITableViewCell.AccessoryType?) -> FormLabelControl {
         self.accessoryType = accessoryType
+        return self
+    }
+    
+    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormLabelControl {
+        self.onLoad = handler
         return self
     }
     

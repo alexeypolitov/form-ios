@@ -49,11 +49,16 @@ protocol FormViewBindDelegate {
     func bindValue(_ bindName: String) -> Any?
 }
 
+protocol FormOnLoad {
+    var onLoad: ((FormControllable) -> Void)? { get set }
+}
 protocol FormControllable {
     var isMain: Bool { get set }
     var name: String { get }
 
     var layoutDelegate: FormLayoutable? { get set }
     func layoutDelegate(_ layoutDelegate: FormLayoutable?)
+    
+    
 }
 
