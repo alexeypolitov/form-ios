@@ -19,7 +19,7 @@ open class FormCellView: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    func updateLayout() {
+    public func updateLayout() {
         onUpdateLayout()
     }
     
@@ -29,7 +29,7 @@ open class FormCellView: UITableViewCell {
     
     // MARK: - Constrains
     
-    class StoredConstrain {
+    public class StoredConstrain {
         let view: UIView
         var constrains: [NSLayoutConstraint]
         
@@ -41,7 +41,7 @@ open class FormCellView: UITableViewCell {
     
     private var storedConstrains: [StoredConstrain] = []
     
-    func storeConstrain(view: UIView, constrain: NSLayoutConstraint, priority: UILayoutPriority? = nil) {
+    public func storeConstrain(view: UIView, constrain: NSLayoutConstraint, priority: UILayoutPriority? = nil) {
         if let `priority` = priority {
             constrain.priority = priority
         }
@@ -53,7 +53,7 @@ open class FormCellView: UITableViewCell {
 //        }
     }
     
-    func removeStoredConstrains() {
+    public func removeStoredConstrains() {
         
         for subview in contentView.subviews {
             subview.removeFromSuperview()

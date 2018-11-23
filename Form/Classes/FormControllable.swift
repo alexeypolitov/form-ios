@@ -10,34 +10,27 @@ import UIKit
 
 // MARK: - Layoutable
 
-protocol FormLayoutable {
+public protocol FormLayoutable {
     func updateControlLayout(element: FormControllable)
 }
 
 // MARK: - Sizeable
 
-protocol FormSizeable {
+public protocol FormSizeable {
     var fixedWidth: CGFloat? { get set }
     var fixedHeigth: CGFloat? { get set }
 }
 
 // MARK: - Searchable
 
-protocol FormSearchable {
+public protocol FormSearchable {
     func control(_ name: String) -> FormControllable?
     func bindableControls(_ bindName: String) -> [FormBindable]
 }
 
-// MARK: - Valuable
-
-protocol FormValuable {
-    var value: Any? { get set }
-//    var pandingValue: Any? { get set }
-}
-
 // MARK: - Selectable
 
-protocol FormSelectable {
+public protocol FormSelectable {
     var selectionStyle: UITableViewCell.SelectionStyle? { get set }
     var accessoryType: UITableViewCell.AccessoryType? { get set }
     var onSelect: ((FormCellContainer) -> Void)? { get set }
@@ -45,43 +38,43 @@ protocol FormSelectable {
 
 // MARK: - Binding
 
-protocol FormBindable {
+public protocol FormBindable {
     var bindDelegate: FormViewBindDelegate? { get set }
     var bindName: String? { get set }
     func bindDelegate(_ bindDelegate: FormViewBindDelegate?)
     func refreshBindValue()
 }
 
-protocol FormViewBindDelegate {
+public protocol FormViewBindDelegate {
     func bindValueChanged(control: FormControllable, bindName: String, value: Any?)
     func bindValue(_ bindName: String) -> Any?
 }
 
 // MARK: - OnLoad
 
-protocol FormOnLoad {
+public protocol FormOnLoad {
     var onLoad: ((FormControllable) -> Void)? { get set }
     func prepareOnLoad() -> Void
 }
 
 extension FormOnLoad {
-    func prepareOnLoad() -> Void {  }
+    public func prepareOnLoad() -> Void {  }
 }
 
 // MARK: - Subscontrols
-protocol FormContainerable {
+public protocol FormContainerable {
     func controlsNames() -> [String]
 }
 
 extension FormContainerable {
-    func controlsNames() -> [String] {
+    public func controlsNames() -> [String] {
         return []
     }
 }
 
 // MARK: - Controllable
 
-protocol FormControllable {
+public protocol FormControllable {
     var isMain: Bool { get set }
     var name: String { get }
 

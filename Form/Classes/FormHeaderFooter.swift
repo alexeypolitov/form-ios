@@ -10,12 +10,12 @@ import UIKit
 
 open class FormHeaderFooter {
     
-    open var viewClass: FormHeaderFooterView.Type { return FormHeaderFooterView.self }
-    open weak var linkedView: FormHeaderFooterView?
-    weak var linkedFormView: FormView?
-    let name: String
+    public var viewClass: FormHeaderFooterView.Type { return FormHeaderFooterView.self }
+    public weak var linkedView: FormHeaderFooterView?
+    public weak var linkedFormView: FormView?
+    public let name: String
     private var _prepareInProgress: Bool = false
-    var prepareInProgress: Bool {
+    public var prepareInProgress: Bool {
         return _prepareInProgress
     }
     
@@ -23,7 +23,7 @@ open class FormHeaderFooter {
         self.name = name
     }
     
-    func prepare(_ view: FormHeaderFooterView, formView: FormView) {
+    public func prepare(_ view: FormHeaderFooterView, formView: FormView) {
         _prepareInProgress = true
         linkedView = view
         linkedFormView = formView
@@ -31,16 +31,16 @@ open class FormHeaderFooter {
         _prepareInProgress = false
     }
     
-    func onPrepare() {
+    open func onPrepare() {
         // custom code
     }
     
-    func updateFormView() {
+    public func updateFormView() {
         guard !_prepareInProgress else { return }
         formView?.updateControls()
     }
     
-    var formView: FormView? {
+    public var formView: FormView? {
         return linkedFormView
     }
 }

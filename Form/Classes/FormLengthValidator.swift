@@ -18,8 +18,8 @@ public class FormMaxLengthValidator: FormValidator {
         super.init(priority: .medium, message: message)
     }
     
-    override func validate(_ valuable: FormValuable) -> Bool {
-        guard let value = valuable.value as? String else { return true }
+    override func validate(_ field: FormField) -> Bool {
+        guard let value = field.value as? String else { return true }
         
         return value.count <= maxLength
     }
@@ -36,8 +36,8 @@ public class FormMinLengthValidator: FormValidator {
         super.init(priority: .medium, message: message)
     }
     
-    override func validate(_ control: FormValuable) -> Bool {
-        guard let value = control.value as? String else { return true }
+    override func validate(_ field: FormField) -> Bool {
+        guard let value = field.value as? String else { return true }
         return value.count >= minLength
     }
     
@@ -55,8 +55,8 @@ public class FormBetweenLengthValidator: FormValidator {
         super.init(priority: .medium, message: message)
     }
     
-    override func validate(_ control: FormValuable) -> Bool {
-        guard let value = control.value as? String else { return true }
+    override func validate(_ field: FormField) -> Bool {
+        guard let value = field.value as? String else { return true }
         return value.count >= minLength && value.count <= maxLength
     }
     

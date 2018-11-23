@@ -14,11 +14,11 @@ public class FormRequiredValidator: FormValidator {
         super.init(priority: .high, message: message)
     }
     
-    override func validate(_ valuable: FormValuable) -> Bool {
-        if let value = valuable.value as? Bool {
+    override func validate(_ field: FormField) -> Bool {
+        if let value = field.value as? Bool {
             return value
         } else {
-            return valuable.value != nil
+            return field.value != nil
         }
     }
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol FormCellContainerViewDataSource {
+public protocol FormCellContainerViewDataSource {
     func formCellContainerViewControl(_ view: FormCellContainerView) -> FormControllable?
     func formCellContainerViewInsets(_ view: FormCellContainerView) -> UIEdgeInsets?
 }

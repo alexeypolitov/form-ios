@@ -10,9 +10,9 @@ import UIKit
 
 open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, FormBindable, FormOnLoad {
     
-    var isMain: Bool
-    let name: String
-    var layoutDelegate: FormLayoutable?
+    public var isMain: Bool
+    public let name: String
+    public var layoutDelegate: FormLayoutable?
 
     open override var text: String? {
         didSet {
@@ -56,26 +56,26 @@ open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, Fo
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
     }
     
-    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
+    open func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
     // MARK: - FormSelectable
     
-    var selectionStyle: UITableViewCell.SelectionStyle?
-    var accessoryType: UITableViewCell.AccessoryType?
-    var onSelect: ((FormCellContainer) -> Void)?
+    open var selectionStyle: UITableViewCell.SelectionStyle?
+    open var accessoryType: UITableViewCell.AccessoryType?
+    open var onSelect: ((FormCellContainer) -> Void)?
     
     // MARK: - FormBindable
     
-    var bindDelegate: FormViewBindDelegate?
-    var bindName: String?
+    open var bindDelegate: FormViewBindDelegate?
+    open var bindName: String?
     
-    func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
+    open func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
         self.bindDelegate = bindDelegate
     }
     
-    func refreshBindValue() {
+    open func refreshBindValue() {
         guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
         if let bindValue = bindDelegate.bindValue(bindName) as? String {
             let _ = text(bindValue)
@@ -85,7 +85,7 @@ open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, Fo
     }
     
     // MARK: - FormOnLoad
-    var onLoad: ((FormControllable) -> Void)?
+    open var onLoad: ((FormControllable) -> Void)?
     
 }
 
@@ -93,67 +93,67 @@ open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, Fo
 
 extension FormLabelControl {
     
-    func isMain(_ isMain: Bool) -> FormLabelControl {
+    open func isMain(_ isMain: Bool) -> FormLabelControl {
         self.isMain = isMain
         return self
     }
     
-    func textHorizontalAlignment(_ textAlignment: NSTextAlignment) -> FormLabelControl {
+    open func textHorizontalAlignment(_ textAlignment: NSTextAlignment) -> FormLabelControl {
         self.textAlignment = textAlignment
         return self
     }
     
-    func textVerticalAlignment(_ textAlignment: ExtendedLabel.TextVerticalAlignment) -> FormLabelControl {
+    open func textVerticalAlignment(_ textAlignment: ExtendedLabel.TextVerticalAlignment) -> FormLabelControl {
         self.textVerticalAlignment = textAlignment
         return self
     }
     
-    func text(_ text: String?) -> FormLabelControl {
+    open func text(_ text: String?) -> FormLabelControl {
         self.text = text
         return self
     }
     
-    func attributedText(_ text: NSAttributedString?) -> FormLabelControl {
+    open func attributedText(_ text: NSAttributedString?) -> FormLabelControl {
         self.attributedText = text
         return self
     }
     
-    func font(_ font: UIFont) -> FormLabelControl {
+    open func font(_ font: UIFont) -> FormLabelControl {
         self.font = font
         return self
     }
     
-    func numberOfLines(_ numberOfLines: Int) -> FormLabelControl {
+    open func numberOfLines(_ numberOfLines: Int) -> FormLabelControl {
         self.numberOfLines = numberOfLines
         return self
     }
     
-    func backgroundColor(_ backgroundColor: UIColor?) -> FormLabelControl {
+    open func backgroundColor(_ backgroundColor: UIColor?) -> FormLabelControl {
         self.backgroundColor = backgroundColor
         return self
     }
     
-    func selectionStyle(_ selectionStyle: UITableViewCell.SelectionStyle?) -> FormLabelControl {
+    open func selectionStyle(_ selectionStyle: UITableViewCell.SelectionStyle?) -> FormLabelControl {
         self.selectionStyle = selectionStyle
         return self
     }
     
-    func accessoryType(_ accessoryType: UITableViewCell.AccessoryType?) -> FormLabelControl {
+    open func accessoryType(_ accessoryType: UITableViewCell.AccessoryType?) -> FormLabelControl {
         self.accessoryType = accessoryType
         return self
     }
     
-    func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormLabelControl {
+    open func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormLabelControl {
         self.onSelect = handler
         return self
     }
     
-    func bind(_ bindName: String?) -> FormLabelControl {
+    open func bind(_ bindName: String?) -> FormLabelControl {
         self.bindName = bindName
         return self
     }
     
-    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormLabelControl {
+    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormLabelControl {
         self.onLoad = handler
         return self
     }

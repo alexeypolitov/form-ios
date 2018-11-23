@@ -11,8 +11,8 @@ import UIKit
 open class FormHeaderFooterContainer: FormHeaderFooter {
 
     open override var viewClass: FormHeaderFooterView.Type { return FormHeaderFooterContainerView.self }
-    var control: FormControllable?
-    var insets: UIEdgeInsets = UIEdgeInsets.zero
+    open var control: FormControllable?
+    open var insets: UIEdgeInsets = UIEdgeInsets.zero
     
     override init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
         super.init(name)
@@ -25,7 +25,7 @@ open class FormHeaderFooterContainer: FormHeaderFooter {
 
     }
     
-    override func onPrepare() {
+    open override func onPrepare() {
         if let `bindable` = control as? FormBindable {
             bindable.refreshBindValue()
         }
@@ -39,7 +39,7 @@ open class FormHeaderFooterContainer: FormHeaderFooter {
         linkedView.dataSource = self
     }
     
-    class Appearance {
+    open class Appearance {
         
         var insets: UIEdgeInsets
         init(_ insets:UIEdgeInsets = UIEdgeInsets.zero) {
@@ -47,8 +47,8 @@ open class FormHeaderFooterContainer: FormHeaderFooter {
         }        
     }
     
-    static let appearanceHeader = Appearance(UIEdgeInsets(top: 20, left: 16, bottom: 8, right: 16))
-    static let appearanceFooter = Appearance(UIEdgeInsets(top: 8, left: 16, bottom: 20, right: 16))
+    public static let appearanceHeader = Appearance(UIEdgeInsets(top: 20, left: 16, bottom: 8, right: 16))
+    public static let appearanceFooter = Appearance(UIEdgeInsets(top: 8, left: 16, bottom: 20, right: 16))
     
 }
 
@@ -57,7 +57,7 @@ open class FormHeaderFooterContainer: FormHeaderFooter {
 extension FormHeaderFooterContainer: FormContainerable {
     
     // MARK: - Containerable
-    func controlsNames() -> [String] {
+    open func controlsNames() -> [String] {
         var list: [String] = []
         if let controlnName = control?.name {
             list.append(controlnName)
@@ -75,11 +75,11 @@ extension FormHeaderFooterContainer: FormContainerable {
 
 extension FormHeaderFooterContainer: FormHeaderFooterContainerViewDataSource {
     
-    func formHeaderFooterContainerViewControl(_ view: FormHeaderFooterContainerView) -> FormControllable? {
+    open func formHeaderFooterContainerViewControl(_ view: FormHeaderFooterContainerView) -> FormControllable? {
         return control
     }
     
-    func formHeaderFooterContainerViewInsets(_ view: FormHeaderFooterContainerView) -> UIEdgeInsets? {
+    open func formHeaderFooterContainerViewInsets(_ view: FormHeaderFooterContainerView) -> UIEdgeInsets? {
         return insets
     }
     
@@ -89,7 +89,7 @@ extension FormHeaderFooterContainer: FormHeaderFooterContainerViewDataSource {
 
 extension FormHeaderFooterContainer: FormLayoutable {
     
-    func updateControlLayout(element: FormControllable) {
+    open func updateControlLayout(element: FormControllable) {
         updateFormView()
     }
     
@@ -99,7 +99,7 @@ extension FormHeaderFooterContainer: FormLayoutable {
 
 extension FormHeaderFooterContainer: FormSearchable {
     
-    func control(_ name: String) -> FormControllable? {
+    open func control(_ name: String) -> FormControllable? {
         if control?.name == name {
             return control
         }
@@ -109,7 +109,7 @@ extension FormHeaderFooterContainer: FormSearchable {
         return nil
     }
     
-    func bindableControls(_ bindName: String) -> [FormBindable] {
+    open func bindableControls(_ bindName: String) -> [FormBindable] {
         var list: [FormBindable] = []
         if let `control` = control as? FormBindable {
             if control.bindName == bindName {
@@ -128,11 +128,11 @@ extension FormHeaderFooterContainer: FormSearchable {
 
 extension FormHeaderFooterContainer: FormViewBindDelegate {
     
-    func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
+    open func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
         formView?.bindValueChanged(control: control, bindName: bindName, value: value)
     }
     
-    func bindValue(_ bindName: String) -> Any? {
+    open func bindValue(_ bindName: String) -> Any? {
         return formView?.bindValue(bindName)
     }
     
@@ -142,7 +142,7 @@ extension FormHeaderFooterContainer: FormViewBindDelegate {
 
 extension FormHeaderFooterContainer {
     
-    func control(_ control: FormControllable?) -> FormHeaderFooterContainer {
+    open func control(_ control: FormControllable?) -> FormHeaderFooterContainer {
         self.control = control
         self.control?.layoutDelegate = self
         if let bindable = control as? FormBindable {
@@ -151,7 +151,7 @@ extension FormHeaderFooterContainer {
         return self
     }
     
-    func insets(_ insets: UIEdgeInsets) -> FormHeaderFooterContainer {
+    open func insets(_ insets: UIEdgeInsets) -> FormHeaderFooterContainer {
         self.insets = insets
         return self
     }

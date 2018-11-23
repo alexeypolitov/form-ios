@@ -10,19 +10,19 @@ import UIKit
 
 open class FormTextViewControl: ExtendedTextView, FormControllable, FormBindable, FormOnLoad {
     
-    var isMain: Bool
-    let name: String
-    var layoutDelegate: FormLayoutable?
+    public var isMain: Bool
+    public let name: String
+    public var layoutDelegate: FormLayoutable?
     
-    var onChange: ((FormTextViewControl, String?) -> Void)?
-    var onEndEditing: ((FormTextViewControl) -> Void)?
-    var onBeginEditing: ((FormTextViewControl) -> Void)?
-    var onChangeSelection: ((FormTextViewControl) -> Void)?
-    var shouldEndEditing: ((FormTextViewControl) -> Bool)?
-    var shouldBeginEditing: ((FormTextViewControl) -> Bool)?
-    var shouldChangeCharacters: ((FormTextViewControl, String?, NSRange, String) -> Bool)?
-    var shouldInteractWithURL: ((FormTextViewControl, URL, NSRange, UITextItemInteraction) -> Bool)?
-    var shouldInteractWithAttachment: ((FormTextViewControl, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)?
+    open var onChange: ((FormTextViewControl, String?) -> Void)?
+    open var onEndEditing: ((FormTextViewControl) -> Void)?
+    open var onBeginEditing: ((FormTextViewControl) -> Void)?
+    open var onChangeSelection: ((FormTextViewControl) -> Void)?
+    open var shouldEndEditing: ((FormTextViewControl) -> Bool)?
+    open var shouldBeginEditing: ((FormTextViewControl) -> Bool)?
+    open var shouldChangeCharacters: ((FormTextViewControl, String?, NSRange, String) -> Bool)?
+    open var shouldInteractWithURL: ((FormTextViewControl, URL, NSRange, UITextItemInteraction) -> Bool)?
+    open var shouldInteractWithAttachment: ((FormTextViewControl, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)?
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Use init()")
@@ -52,7 +52,7 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormBindable
         
     }
     
-    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
+    open func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
@@ -62,7 +62,7 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormBindable
         updateLayout()
     }
     
-    func updateLayout() {
+    open func updateLayout() {
         let size = self.bounds.size
         let newSize = self.sizeThatFits(CGSize(width: size.width, height: CGFloat.greatestFiniteMagnitude))
         
@@ -74,14 +74,14 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormBindable
     
     // MARK: - FormBindable
     
-    var bindDelegate: FormViewBindDelegate?
-    var bindName: String?
+    open var bindDelegate: FormViewBindDelegate?
+    open var bindName: String?
     
-    func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
+    open func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
         self.bindDelegate = bindDelegate
     }
     
-    func refreshBindValue() {
+    open func refreshBindValue() {
         guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
         guard let bindValue = bindDelegate.bindValue(bindName) as? String else { return }
         
@@ -89,94 +89,95 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormBindable
     }
     
     // MARK: - FormOnLoad
-    var onLoad: ((FormControllable) -> Void)?
+    open var onLoad: ((FormControllable) -> Void)?
 }
 
 // MARK: - Setters
 
 extension FormTextViewControl {
 
-    func isMain(_ isMain: Bool) -> FormTextViewControl {
+    open func isMain(_ isMain: Bool) -> FormTextViewControl {
         self.isMain = isMain
         return self
     }
     
-    func textAlignment(_ textAlignment: NSTextAlignment) -> FormTextViewControl {
+    open func textAlignment(_ textAlignment: NSTextAlignment) -> FormTextViewControl {
         self.textAlignment = textAlignment
         return self
     }
     
-    func text(_ text: String?) -> FormTextViewControl {
+    open func text(_ text: String?) -> FormTextViewControl {
         self.text = text
         updateLayout()
         return self
     }
     
-    func font(_ font: UIFont) -> FormTextViewControl {
+    open func font(_ font: UIFont) -> FormTextViewControl {
         self.font = font
         return self
     }
     
-    func placeholder(_ placeholder: String) -> FormTextViewControl {
+    open func placeholder(_ placeholder: String) -> FormTextViewControl {
         self.placeholder = placeholder
         return self
     }
     
-    func backgroundColor(_ backgroundColor: UIColor?) -> FormTextViewControl {
+    open func backgroundColor(_ backgroundColor: UIColor?) -> FormTextViewControl {
         self.backgroundColor = backgroundColor
         return self
     }
     
-    func bind(_ bindName: String?) -> FormTextViewControl {
+    open func bind(_ bindName: String?) -> FormTextViewControl {
         self.bindName = bindName
         return self
     }
     
-    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormTextViewControl {
+    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormTextViewControl {
         self.onLoad = handler
         return self
     }
     
-    func onChange(_ handler: ((FormTextViewControl, String?) -> Void)?) -> FormTextViewControl {
+    open func onChange(_ handler: ((FormTextViewControl, String?) -> Void)?) -> FormTextViewControl {
         onChange = handler
         return self
     }
-    func onEndEditing(_ handler: ((FormTextViewControl) -> Void)?) -> FormTextViewControl {
+    
+    open func onEndEditing(_ handler: ((FormTextViewControl) -> Void)?) -> FormTextViewControl {
         onEndEditing = handler
         return self
     }
 
-    func onBeginEditing(_ handler: ((FormTextViewControl) -> Void)?) -> FormTextViewControl {
+    open func onBeginEditing(_ handler: ((FormTextViewControl) -> Void)?) -> FormTextViewControl {
         onBeginEditing = handler
         return self
     }
 
-    func onChangeSelection(_ handler: ((FormTextViewControl) -> Void)?) -> FormTextViewControl {
+    open func onChangeSelection(_ handler: ((FormTextViewControl) -> Void)?) -> FormTextViewControl {
         onChangeSelection = handler
         return self
     }
     
-    func shouldEndEditing(_ handler: ((FormTextViewControl) -> Bool)?) -> FormTextViewControl {
+    open func shouldEndEditing(_ handler: ((FormTextViewControl) -> Bool)?) -> FormTextViewControl {
         shouldEndEditing = handler
         return self
     }
 
-    func shouldBeginEditing(_ handler: ((FormTextViewControl) -> Bool)?) -> FormTextViewControl {
+    open func shouldBeginEditing(_ handler: ((FormTextViewControl) -> Bool)?) -> FormTextViewControl {
         shouldBeginEditing = handler
         return self
     }
 
-    func shouldChangeCharacters(_ handler: ((FormTextViewControl, String?, NSRange, String) -> Bool)?) -> FormTextViewControl {
+    open func shouldChangeCharacters(_ handler: ((FormTextViewControl, String?, NSRange, String) -> Bool)?) -> FormTextViewControl {
         shouldChangeCharacters = handler
         return self
     }
 
-    func shouldInteractWithURL(_ handler: ((FormTextViewControl, URL, NSRange, UITextItemInteraction) -> Bool)?) -> FormTextViewControl {
+    open func shouldInteractWithURL(_ handler: ((FormTextViewControl, URL, NSRange, UITextItemInteraction) -> Bool)?) -> FormTextViewControl {
         shouldInteractWithURL = handler
         return self
     }
 
-    func shouldInteractWithAttachment(_ handler: ((FormTextViewControl, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)?) -> FormTextViewControl {
+    open func shouldInteractWithAttachment(_ handler: ((FormTextViewControl, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)?) -> FormTextViewControl {
         shouldInteractWithAttachment = handler
         return self
     }

@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol FormHeaderFooterContainerViewDataSource {
+public protocol FormHeaderFooterContainerViewDataSource {
     func formHeaderFooterContainerViewControl(_ view: FormHeaderFooterContainerView) -> FormControllable?
     func formHeaderFooterContainerViewInsets(_ view: FormHeaderFooterContainerView) -> UIEdgeInsets?
 }
 
 open class FormHeaderFooterContainerView: FormHeaderFooterView {
 
-    var dataSource:FormHeaderFooterContainerViewDataSource? {
+    open var dataSource:FormHeaderFooterContainerViewDataSource? {
         didSet {
             updateLayout()
         }

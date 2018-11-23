@@ -14,8 +14,8 @@ public class FormEmailValidator: FormValidator {
         super.init(priority: .high, message: message)
     }
     
-    override func validate(_ valuable: FormValuable) -> Bool {
-        guard let value = valuable.value as? String else {
+    override func validate(_ field: FormField) -> Bool {
+        guard let value = field.value as? String else {
             return true
         }
         let regExp = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
