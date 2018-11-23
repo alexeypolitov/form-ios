@@ -62,7 +62,6 @@ class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     }
     
     private func registerName(_ name: String) throws {
-        print("name: \(name); \(registredNames)")
         if let _ = registredNames.first(where: {$0 == name}) {
             throw FormViewError.controlDuplication(name: name)
         }
@@ -108,10 +107,20 @@ extension FormView {
         
         if let container = group.header {
             try registerName(container.name)
+            if let `containerable` = container as? FormContainerable {
+                for controlName in containerable.controlsNames() {
+                    try registerName(controlName)
+                }
+            }
             registerHeaderFooter(container.viewClass, name: container.name)
         }
         if let container = group.footer {
             try registerName(container.name)
+            if let `containerable` = container as? FormContainerable {
+                for controlName in containerable.controlsNames() {
+                    try registerName(controlName)
+                }
+            }
             registerHeaderFooter(container.viewClass, name: container.name)
         }
         
@@ -124,7 +133,6 @@ extension FormView {
                     try registerName(controlName)
                 }
             }
-
             register(row.viewClass, name: row.name)
         }
         

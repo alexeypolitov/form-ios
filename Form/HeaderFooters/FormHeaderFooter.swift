@@ -37,12 +37,10 @@ open class FormHeaderFooter {
     
     func updateFormView() {
         guard !_prepareInProgress else { return }
-//        guard let formView = linkedView?.superview?.superview as? FormView else { return }
         formView?.updateControls()
     }
     
     var formView: FormView? {
-//        guard let formView = linkedView?.superview?.superview as? FormView else { return nil }
         return linkedFormView
     }
 }
