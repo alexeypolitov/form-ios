@@ -20,21 +20,18 @@ class ViewController: UIViewController {
         
         let _ = form
             .add(Form.field("name")
-                .value("Some name")
+                .value("Name")
                 .validators([
                     Former.minLength(minLength: 3, "SignUp.Name.Validation.BetweedLength.Error"),
                     Former.required("SignUp.Name.Validation.Required.Error")])
-                .inlineValidator(Former.maxLength(maxLength: 20, "SignUp.Name.Validation.BetweedLength.Error"))
+                .inlineValidator(Former.maxLength(maxLength: 6, "SignUp.Name.Validation.BetweedLength.Error"))
                 .onChange({ (value, status) in
-                    guard let control = self.formView.control("testLabel4") as? FormLabelControl else { return }
-                    let _ = control.text("dddddd")
+//                    guard let control = self.formView.control("testLabel4") as? FormLabelControl else { return }
+//                    let _ = control.text("dddddd")
                 })
             )
-            .add(Form.field("test").value("Some test 1").onChange({ (value, status) in
-                print("ddd: \(value)")
-            }))
-            .add(Form.field("email"))
-            .add(Form.field("password"))
+            .add(Form.field("email").value("email 1"))
+            .add(Form.field("password").value("password 1"))
             .add(Form.field("prWay")
                 .onChange({ (value, status) in
                     guard let control = self.formView.control("prWayLabel") as? FormLabelControl else { return }
@@ -51,115 +48,40 @@ class ViewController: UIViewController {
         
         let _ = formView.bind(form)
         try? formView.addGroup(Former.group()
-            .header(Former.switcher("nameTextField1").onLoad({ (control) in
-                guard let `control` = control as? FormSwitcherControl else { return }
-                control.isOn = false
-            })) //
-//            .header(Former.image("testImage1").image(UIImage(named: "lemur1")).fixedWidth(50).fixedHeigth(50)) //
-//            .add(Former.label("testLabelRow").numberOfLines(0).onLoad({ (control) in
-////                guard let `control` = control as? FormLabelControl else { return }
-////                control.text = "test 2"
-//            }))
-//            .add(Former.badge("testBadgeRow").onLoad({ (control) in
-//                guard let `control` = control as? FormLabelControl else { return }
-//                control.text = "Row Badge"
-//            }))
-//            .add(Former.image("testImage2").bind("test").fixedWidth(50).fixedHeigth(50))
-            .add(Former.switcher("nameTextField1").onLoad({ (control) in
-                guard let `control` = control as? FormSwitcherControl else { return }
-                control.isOn = true
-            }))
-//            .add(Former.textView("emailTextField1").placeholder("1メールアドレス"))
-//            .add(Former.switcher("passwordTextField1"))
-//            .footer(Former.image("testImage3").bind("test").fixedWidth(50).fixedHeigth(50))
+            .header(Former.vertical().add(
+                [
+                    Former.horizontal().add([
+                        Former.label("testLabelRow1").text("test 1").bind("name").isMain(true),
+                        Former.textField("testLabelRow2").placeholder("test").bind("name")
+                    ]),
+                    Former.horizontal().add([
+                        Former.label("testLabelRow3").text("test 1").bind("name").isMain(true),
+                        Former.textField("testLabelRow4").placeholder("test").bind("name")
+                    ])
+                ]))
+            .add(Former.vertical().add(
+                [
+                    Former.horizontal().add([
+                        Former.label("testLabelRow5").text("test 1").bind("name").isMain(true),
+                        Former.textField("testLabelRow6").placeholder("test").bind("name")
+                        ]),
+                    Former.horizontal().add([
+                        Former.label("testLabelRow7").text("test 1").bind("name").isMain(true),
+                        Former.textField("testLabelRow8").placeholder("test").bind("name")
+                        ])
+                ]))
+            .footer(Former.vertical().add(
+                [
+                    Former.horizontal().add([
+                        Former.label("testLabelRow9").text("test 1").bind("name").isMain(true),
+                        Former.textField("testLabelRow10").placeholder("test").bind("name")
+                        ]),
+                    Former.horizontal().add([
+                        Former.label("testLabelRow11").text("test 1").bind("name").isMain(true),
+                        Former.textField("testLabelRow12").placeholder("test").bind("name")
+                        ])
+                ]))
         )
-        
-//        try? formView.addGroup(Former.group()
-//            .header(Former.label("testLabel2").text("2以下をご入力ください"))
-//            .add(Former.textField("nameTextField2").bind("name").placeholder("2氏名"))
-//            .add(Former.textField("emailTextField2").placeholder("2メールアドレス"))
-//            .add(Former.textField("passwordTextField2").placeholder("2パスワード（半角英数字6字以上）"))
-//            .footer(Former.label().text("2パスワードは忘れないようにメモしましょう！"))
-//        )
-//
-//        try? formView.addGroup(Former.group()
-//            .header(Former.label("testLabel3").text("3以下をご入力ください"))
-//            .add(Former.textField("nameTextField3").bind("name").placeholder("3氏名"))
-//            .add(Former.textField("emailTextField3").placeholder("3メールアドレス"))
-//            .add(Former.textField("passwordTextField3").placeholder("3パスワード（半角英数字6字以上）"))
-//            .footer(Former.label().text("3パスワードは忘れないようにメモしましょう！"))
-//        )
-//
-//        try? formView.addGroup(Former.group()
-//            .header(Former.label("testLabel4").text("4以下をご入力ください"))
-//            .add(Former.textField("nameTextField4").bind("name").placeholder("4氏名"))
-//            .add(Former.textField("emailTextField4").placeholder("4メールアドレス"))
-//            .add(Former.textField("passwordTextField4").placeholder("4パスワード（半角英数字6字以上）"))
-//            .footer(Former.label().text("4パスワードは忘れないようにメモしましょう！"))
-//        )
-//
-//        try? formView.addGroup(Former.group()
-//            .header(Former.label("testLabel5").text("5以下をご入力ください"))
-//            .add(Former.textField("nameTextField5").bind("name").placeholder("5氏名"))
-//            .add(Former.textField("emailTextField5").placeholder("5メールアドレス"))
-//            .add(Former.textField("passwordTextField5").placeholder("5パスワード（半角英数字6字以上）"))
-//            .footer(Former.label().text("5パスワードは忘れないようにメモしましょう！"))
-//        )
-//        try? formView.addGroup(Former.group()
-//            .header(Former.label("testLabel6").text("6以下をご入力ください"))
-//            .add(Former.textField("nameTextField6").bind("name").placeholder("6氏名"))
-//            .add(Former.textField("emailTextField6").placeholder("6メールアドレス"))
-//            .add(Former.textField("passwordTextField6").placeholder("6パスワード（半角英数字6字以上）"))
-//            .footer(Former.label().text("6パスワードは忘れないようにメモしましょう！"))
-//        )
-//
-//        try? formView.addGroup(Former.group()
-//            .header(Former.label("testLabel7").text("7以下をご入力ください"))
-//            .add(Former.textField("nameTextField7").bind("name").placeholder("7氏名"))
-//            .add(Former.textField("emailTextField7").placeholder("7メールアドレス"))
-//            .add(Former.textField("passwordTextField7").placeholder("7パスワード（半角英数字6字以上）"))
-//            .footer(Former.label().text("7パスワードは忘れないようにメモしましょう！"))
-//        )
-//
-//        try? formView.addGroup(Former.group()
-//            .header(Former.label().text("どこで◯◯を知りましたか？"))
-//            .add(Former.label("prWayLabel")
-//                .accessoryType(.disclosureIndicator)
-//                .onSelect({ (control) in
-//                    if self.form.field("prWay")?.value != nil {
-//                        self.form.field("prWay")?.value = nil
-//                    } else {
-//                        self.form.field("prWay")?.value = "TestValue"
-//                    }
-//
-//                }))
-//            .footer(Former.label().text("利用規約にを確認し、同意しました。"))
-//        )
-        
-//        let group = Form.group()
-//            .add(Form.vertical()
-//                .add(Form.textView("textView").placeholder("Enter some text").onChange({(control, string) in
-//                    guard let limitLabel = self.formView.control("testLimit") as? FormLabelControl else { return }
-//
-//                    limitLabel.text("\(string?.count ?? 0)/100")
-//                }).inlineValidators([FormMaxLengthValidator(maxLength: 50, message: "Max length is 50 characters")]))
-//                .add(Form.label("testLimit").text("0/100").textHorizontalAlignment(.right)))
-//
-//
-//        do {
-//            try formView.addGroup(group)
-//        } catch {
-//            print("error: \(error)")
-//        }
-//
-//
-//        try? formView.addGroup(Form.group()
-//            .add(Form.label("prWay")
-//                .text("選択してください")
-//                .accessoryType(.disclosureIndicator)
-//                .onSelect({(control) in
-//            }))
-//        )
     }
     
 //    func editLabelDetailText(control: FormLabelControl) {
@@ -194,12 +116,11 @@ class ViewController: UIViewController {
         
         actionSheet.addAction(UIAlertAction(title: "Change textView", style: .default, handler: { [weak self] (action) in
             guard let `self` = self else { return }
-//            guard let control = self.formView.control("test1") as? FormLabelControl else { return }
-//            control.text = "Test\ntest\ntest\ntest"
+            guard let emailField = self.form.field("email") else { return }
+            guard let passwordField = self.form.field("password") else { return }
 
-            guard let field = self.form.field("test") else { return }
-
-                field.value = "ddddd"
+            emailField.value = "email 2"
+            passwordField.value = "password 2"
 
         }))
         
@@ -214,16 +135,16 @@ class ViewController: UIViewController {
 //
 //        }))
         
-        actionSheet.addAction(UIAlertAction(title: "Validate", style: .default, handler: { [weak self] (action) in
-            guard let `self` = self else { return }
-            
-            let (success, message) = self.formView.validate()
-            if success {
-                print("Validation: OK")
-            } else {
-                print("Validation Error: \(message ?? "Unknown")")
-            }
-        }))
+//        actionSheet.addAction(UIAlertAction(title: "Validate", style: .default, handler: { [weak self] (action) in
+//            guard let `self` = self else { return }
+//
+//            let (success, message) = self.formView.validate()
+//            if success {
+//                print("Validation: OK")
+//            } else {
+//                print("Validation Error: \(message ?? "Unknown")")
+//            }
+//        }))
         
         actionSheet.addAction(UIAlertAction(title: "Reload", style: .default, handler: { [weak self] (action) in
             guard let `self` = self else { return }

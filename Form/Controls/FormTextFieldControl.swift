@@ -127,16 +127,6 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
         
         return (true, nil)
     }
-    
-    
-//    func validate(priority: FormValidator.Priority) -> (Bool, String?) {
-//
-//        if let message = prepareValidateByPriority(priority: priority) {
-//            return (false, message)
-//        }
-//
-//        return (true, nil)
-//    }
 
     private func prepareValidateByPriority(priority: FormValidator.Priority,_ validators: [FormValidator]) -> String? {
         let localValidators = validators.filter { (validator) -> Bool in

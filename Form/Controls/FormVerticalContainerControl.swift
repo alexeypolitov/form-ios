@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormVerticalContainerControl: UIView, FormControllable {
+class FormVerticalContainerControl: UIView, FormControllable, FormBindable {
     
     var isMain: Bool
     let name: String
@@ -103,31 +103,56 @@ class FormVerticalContainerControl: UIView, FormControllable {
     
     private func storeConstrain(view: UIView, constrain: NSLayoutConstraint) {
         constrain.isActive = true
-        if let stored = storedConstrains.first(where: {$0.view == view}) {
-            stored.constrains.append(constrain)
-        } else {
-            storedConstrains.append(StoredConstrain(view: view, constrains: [constrain]))
-        }
+//        if let stored = storedConstrains.first(where: {$0.view == view}) {
+//            stored.constrains.append(constrain)
+//        } else {
+//            storedConstrains.append(StoredConstrain(view: view, constrains: [constrain]))
+//        }
     }
     
     private func removeStoredConstrains() {
         
-        for storedConstrain in storedConstrains {
-            
-            for constrain in storedConstrain.constrains {
-                storedConstrain.view.removeConstraint(constrain)
-            }
-            
-            if storedConstrain.view != self {
-                storedConstrain.view.removeFromSuperview()
-            }
-            
+        for subview in subviews {
+            subview.removeFromSuperview()
         }
-        
-        storedConstrains = []
+//        for storedConstrain in storedConstrains {
+//            
+//            for constrain in storedConstrain.constrains {
+//                storedConstrain.view.removeConstraint(constrain)
+//            }
+//            
+//            if storedConstrain.view != self {
+//                storedConstrain.view.removeFromSuperview()
+//            }
+//            
+//        }
+//        
+//        storedConstrains = []
         
     }
 
+    // MARK: - FormBindable
+    
+    var bindDelegate: FormViewBindDelegate?
+    var bindName: String? {
+        get {
+            return nil
+        }
+        set {
+            preconditionFailure("Could not be used on horizontal contsainer")
+        }
+    }
+    
+    func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
+        self.bindDelegate = bindDelegate
+    }
+    
+    func refreshBindValue() {
+        for control in controls {
+            guard let `bindable` = control as? FormBindable else { continue }
+            bindable.refreshBindValue()
+        }
+    }
     
 }
 
@@ -198,6 +223,20 @@ extension FormVerticalContainerControl: FormValidatable {
     
 }
 
+// MARK: - FormViewBindDelegate
+
+extension FormVerticalContainerControl: FormViewBindDelegate {
+    
+    func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
+        bindDelegate?.bindValueChanged(control: control, bindName: bindName, value: value)
+    }
+    
+    func bindValue(_ bindName: String) -> Any? {
+        return bindDelegate?.bindValue(bindName)
+    }
+    
+}
+
 // MARK: - Setters
 
 extension FormVerticalContainerControl {
@@ -209,6 +248,9 @@ extension FormVerticalContainerControl {
     
     func add(_ control: FormControllable) -> FormVerticalContainerControl {
         control.layoutDelegate(self)
+        if let `bindable` = control as? FormBindable {
+            bindable.bindDelegate(self)
+        }
         self.controls.append(control)
         self.buildLayout()
         return self
@@ -217,6 +259,9 @@ extension FormVerticalContainerControl {
     func add(_ controls: [FormControllable]) -> FormVerticalContainerControl {
         for control in controls {
             control.layoutDelegate(self)
+            if let `bindable` = control as? FormBindable {
+                bindable.bindDelegate(self)
+            }
         }
         self.controls.append(contentsOf: controls)
         self.buildLayout()
