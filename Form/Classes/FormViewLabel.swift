@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, FormBindable, FormOnLoad {
+open class FormViewLabel: ExtendedLabel, FormControllable, FormSelectable, FormBindable, FormOnLoad {
     
     public var isMain: Bool
     public let name: String
@@ -91,69 +91,69 @@ open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, Fo
 
 // MARK: - Setters
 
-extension FormLabelControl {
+extension FormViewLabel {
     
-    open func isMain(_ isMain: Bool) -> FormLabelControl {
+    open func isMain(_ isMain: Bool) -> FormViewLabel {
         self.isMain = isMain
         return self
     }
     
-    open func textHorizontalAlignment(_ textAlignment: NSTextAlignment) -> FormLabelControl {
+    open func textHorizontalAlignment(_ textAlignment: NSTextAlignment) -> FormViewLabel {
         self.textAlignment = textAlignment
         return self
     }
     
-    open func textVerticalAlignment(_ textAlignment: ExtendedLabel.TextVerticalAlignment) -> FormLabelControl {
+    open func textVerticalAlignment(_ textAlignment: ExtendedLabel.TextVerticalAlignment) -> FormViewLabel {
         self.textVerticalAlignment = textAlignment
         return self
     }
     
-    open func text(_ text: String?) -> FormLabelControl {
+    open func text(_ text: String?) -> FormViewLabel {
         self.text = text
         return self
     }
     
-    open func attributedText(_ text: NSAttributedString?) -> FormLabelControl {
+    open func attributedText(_ text: NSAttributedString?) -> FormViewLabel {
         self.attributedText = text
         return self
     }
     
-    open func font(_ font: UIFont) -> FormLabelControl {
+    open func font(_ font: UIFont) -> FormViewLabel {
         self.font = font
         return self
     }
     
-    open func numberOfLines(_ numberOfLines: Int) -> FormLabelControl {
+    open func numberOfLines(_ numberOfLines: Int) -> FormViewLabel {
         self.numberOfLines = numberOfLines
         return self
     }
     
-    open func backgroundColor(_ backgroundColor: UIColor?) -> FormLabelControl {
+    open func backgroundColor(_ backgroundColor: UIColor?) -> FormViewLabel {
         self.backgroundColor = backgroundColor
         return self
     }
     
-    open func selectionStyle(_ selectionStyle: UITableViewCell.SelectionStyle?) -> FormLabelControl {
+    open func selectionStyle(_ selectionStyle: UITableViewCell.SelectionStyle?) -> FormViewLabel {
         self.selectionStyle = selectionStyle
         return self
     }
     
-    open func accessoryType(_ accessoryType: UITableViewCell.AccessoryType?) -> FormLabelControl {
+    open func accessoryType(_ accessoryType: UITableViewCell.AccessoryType?) -> FormViewLabel {
         self.accessoryType = accessoryType
         return self
     }
     
-    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormLabelControl {
+    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormViewLabel {
         self.onSelect = handler
         return self
     }
     
-    open func bind(_ bindName: String?) -> FormLabelControl {
+    open func bind(_ bindName: String?) -> FormViewLabel {
         self.bindName = bindName
         return self
     }
     
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormLabelControl {
+    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewLabel {
         self.onLoad = handler
         return self
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBindable, FormOnLoad {
+open class FormViewImageView: UIImageView, FormControllable, FormSizeable, FormBindable, FormOnLoad {
 
     public var isMain: Bool
     public let name: String
@@ -85,40 +85,40 @@ open class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBi
 
 // MARK: - Setters
 
-extension FormImageControl {
+extension FormViewImageView {
     
-    open func isMain(_ isMain: Bool) -> FormImageControl {
+    open func isMain(_ isMain: Bool) -> FormViewImageView {
         self.isMain = isMain
         return self
     }
     
-    open func image(_ image: UIImage?) -> FormImageControl {
+    open func image(_ image: UIImage?) -> FormViewImageView {
         self.image = image
         layoutDelegate?.updateControlLayout(element: self)
         return self
     }
     
-    open func fixedWidth(_ width: CGFloat?) -> FormImageControl {
+    open func fixedWidth(_ width: CGFloat?) -> FormViewImageView {
         self.fixedWidth = width
         return self
     }
     
-    open func fixedHeigth(_ height: CGFloat?) -> FormImageControl {
+    open func fixedHeigth(_ height: CGFloat?) -> FormViewImageView {
         self.fixedHeigth = height
         return self
     }
     
-    open func backgroundColor(_ backgroundColor: UIColor?) -> FormImageControl {
+    open func backgroundColor(_ backgroundColor: UIColor?) -> FormViewImageView {
         self.backgroundColor = backgroundColor
         return self
     }
     
-    open func bind(_ bindName: String?) -> FormImageControl {
+    open func bind(_ bindName: String?) -> FormViewImageView {
         self.bindName = bindName
         return self
     }
     
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormImageControl {
+    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewImageView {
         self.onLoad = handler
         return self
     }

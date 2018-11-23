@@ -8,13 +8,13 @@
 
 import UIKit
 
-open class FormSwitcherControl: UISwitch, FormControllable, FormBindable, FormOnLoad {
+open class FormViewSwitcher: UISwitch, FormControllable, FormBindable, FormOnLoad {
 
     public var isMain: Bool
     public let name: String
     public var layoutDelegate: FormLayoutable?
     
-    open var onChange: ((FormSwitcherControl, Bool) -> Void)?
+    open var onChange: ((FormViewSwitcher, Bool) -> Void)?
     
     public override init(frame: CGRect) {
         fatalError("Use init()")
@@ -76,34 +76,34 @@ open class FormSwitcherControl: UISwitch, FormControllable, FormBindable, FormOn
 
 // MARK: - Setters
 
-extension FormSwitcherControl {
+extension FormViewSwitcher {
 
-    open func isMain(_ isMain: Bool) -> FormSwitcherControl {
+    open func isMain(_ isMain: Bool) -> FormViewSwitcher {
         self.isMain = isMain
         return self
     }
     
-    open func isOn(_ isOn: Bool) -> FormSwitcherControl {
+    open func isOn(_ isOn: Bool) -> FormViewSwitcher {
         self.isOn = isOn
         return self
     }
     
-    open func onChange(_ handler: ((FormSwitcherControl, Bool) -> Void)?) -> FormSwitcherControl {
+    open func onChange(_ handler: ((FormViewSwitcher, Bool) -> Void)?) -> FormViewSwitcher {
         onChange = handler
         return self
     }
     
-    open func backgroundColor(_ backgroundColor: UIColor?) -> FormSwitcherControl {
+    open func backgroundColor(_ backgroundColor: UIColor?) -> FormViewSwitcher {
         self.backgroundColor = backgroundColor
         return self
     }
     
-    open func bind(_ bindName: String?) -> FormSwitcherControl {
+    open func bind(_ bindName: String?) -> FormViewSwitcher {
         self.bindName = bindName
         return self
     }
     
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormSwitcherControl {
+    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewSwitcher {
         self.onLoad = handler
         return self
     }

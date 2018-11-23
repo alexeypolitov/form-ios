@@ -8,20 +8,20 @@
 
 import UIKit
 
-open class FormTextFieldControl: UITextField, FormControllable, FormBindable, FormOnLoad {
+open class FormViewTextField: UITextField, FormControllable, FormBindable, FormOnLoad {
     
     public var isMain: Bool
     public let name: String
     public var layoutDelegate: FormLayoutable?
     
-    open var onChange: ((FormTextFieldControl, String?) -> Void)?
-    open var onBeginEditing: ((FormTextFieldControl) -> Void)?
-    open var onEndEditing: ((FormTextFieldControl, UITextField.DidEndEditingReason) -> Void)?
-    open var shouldBeginEditing: ((FormTextFieldControl) -> Bool)?
-    open var shouldEndEditing: ((FormTextFieldControl) -> Bool)?
-    open var shouldClear: ((FormTextFieldControl) -> Bool)?
-    open var shouldReturn: ((FormTextFieldControl) -> Bool)?
-    open var shouldChangeCharacters: ((FormTextFieldControl, String?, NSRange, String) -> Bool)?
+    open var onChange: ((FormViewTextField, String?) -> Void)?
+    open var onBeginEditing: ((FormViewTextField) -> Void)?
+    open var onEndEditing: ((FormViewTextField, UITextField.DidEndEditingReason) -> Void)?
+    open var shouldBeginEditing: ((FormViewTextField) -> Bool)?
+    open var shouldEndEditing: ((FormViewTextField) -> Bool)?
+    open var shouldClear: ((FormViewTextField) -> Bool)?
+    open var shouldReturn: ((FormViewTextField) -> Bool)?
+    open var shouldChangeCharacters: ((FormViewTextField, String?, NSRange, String) -> Bool)?
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Use init()")
@@ -75,99 +75,99 @@ open class FormTextFieldControl: UITextField, FormControllable, FormBindable, Fo
 
 // MARK: - Setters
 
-extension FormTextFieldControl {
+extension FormViewTextField {
     
-    open func isMain(_ isMain: Bool) -> FormTextFieldControl {
+    open func isMain(_ isMain: Bool) -> FormViewTextField {
         self.isMain = isMain
         return self
     }
     
-    open func textAlignment(_ textAlignment: NSTextAlignment) -> FormTextFieldControl {
+    open func textAlignment(_ textAlignment: NSTextAlignment) -> FormViewTextField {
         self.textAlignment = textAlignment
         return self
     }
     
-    open func text(_ text: String?) -> FormTextFieldControl {
+    open func text(_ text: String?) -> FormViewTextField {
         self.text = text
         return self
     }
     
-    open func font(_ font: UIFont) -> FormTextFieldControl {
+    open func font(_ font: UIFont) -> FormViewTextField {
         self.font = font
         return self
     }
     
-    open func placeholder(_ placeholder: String) -> FormTextFieldControl {
+    open func placeholder(_ placeholder: String) -> FormViewTextField {
         self.placeholder = placeholder
         return self
     }
     
-    open func backgroundColor(_ backgroundColor: UIColor?) -> FormTextFieldControl {
+    open func backgroundColor(_ backgroundColor: UIColor?) -> FormViewTextField {
         self.backgroundColor = backgroundColor
         return self
     }
     
-    open func keyboardType(_ keyboardType: UIKeyboardType) -> FormTextFieldControl {
+    open func keyboardType(_ keyboardType: UIKeyboardType) -> FormViewTextField {
         self.keyboardType = keyboardType
         return self
     }
     
-    open func returnKeyType(_ returnKeyType: UIReturnKeyType) -> FormTextFieldControl {
+    open func returnKeyType(_ returnKeyType: UIReturnKeyType) -> FormViewTextField {
         self.returnKeyType = returnKeyType
         return self
     }
     
-    open func isSecureTextEntry(_ isSecureTextEntry: Bool) -> FormTextFieldControl {
+    open func isSecureTextEntry(_ isSecureTextEntry: Bool) -> FormViewTextField {
         self.isSecureTextEntry = isSecureTextEntry
         return self
     }
     
-    open func onChange(_ handler: ((FormTextFieldControl, String?) -> Void)?) -> FormTextFieldControl {
+    open func onChange(_ handler: ((FormViewTextField, String?) -> Void)?) -> FormViewTextField {
         onChange = handler
         return self
     }
     
-    open func bind(_ bindName: String?) -> FormTextFieldControl {
+    open func bind(_ bindName: String?) -> FormViewTextField {
         self.bindName = bindName
         return self
     }
     
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormTextFieldControl {
+    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewTextField {
         self.onLoad = handler
         return self
     }
     
-    open func onBeginEditing(_ handler: ((FormTextFieldControl) -> Void)?) -> FormTextFieldControl {
+    open func onBeginEditing(_ handler: ((FormViewTextField) -> Void)?) -> FormViewTextField {
         onBeginEditing = handler
         return self
     }
     
-    open func onEndEditing(_ handler: ((FormTextFieldControl, UITextField.DidEndEditingReason) -> Void)?) -> FormTextFieldControl {
+    open func onEndEditing(_ handler: ((FormViewTextField, UITextField.DidEndEditingReason) -> Void)?) -> FormViewTextField {
         onEndEditing = handler
         return self
     }
     
-    open func shouldBeginEditing(_ handler: ((FormTextFieldControl) -> Bool)?) -> FormTextFieldControl {
+    open func shouldBeginEditing(_ handler: ((FormViewTextField) -> Bool)?) -> FormViewTextField {
         shouldBeginEditing = handler
         return self
     }
     
-    open func shouldEndEditing(_ handler: ((FormTextFieldControl) -> Bool)?) -> FormTextFieldControl {
+    open func shouldEndEditing(_ handler: ((FormViewTextField) -> Bool)?) -> FormViewTextField {
         shouldEndEditing = handler
         return self
     }
     
-    open func shouldChangeCharacters(_ handler: ((FormTextFieldControl, String?, NSRange, String) -> Bool)?) -> FormTextFieldControl {
+    open func shouldChangeCharacters(_ handler: ((FormViewTextField, String?, NSRange, String) -> Bool)?) -> FormViewTextField {
         shouldChangeCharacters = handler
         return self
     }
     
-    open func shouldClear(_ handler: ((FormTextFieldControl) -> Bool)?) -> FormTextFieldControl {
+    open func shouldClear(_ handler: ((FormViewTextField) -> Bool)?) -> FormViewTextField {
         shouldClear = handler
         return self
     }
     
-    open func shouldReturn(_ handler: ((FormTextFieldControl) -> Bool)?) -> FormTextFieldControl {
+    open func shouldReturn(_ handler: ((FormViewTextField) -> Bool)?) -> FormViewTextField {
         shouldReturn = handler
         return self
     }
@@ -176,7 +176,7 @@ extension FormTextFieldControl {
 
 // MARK: - UITextFieldDelegate
 
-extension FormTextFieldControl: UITextFieldDelegate {
+extension FormViewTextField: UITextFieldDelegate {
     
     @objc open func onTextDidChange(notification: Notification) {
         onChange?(self, text)

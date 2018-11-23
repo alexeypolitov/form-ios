@@ -1,5 +1,5 @@
 //
-//  FormHorizontalContainerControl.swift
+//  FormVerticalContainerControl.swift
 //  Form
 //
 //  Created by Alexey Politov on 2018/11/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormHorizontalContainerControl: UIView, FormControllable, FormBindable, FormSelectable, FormOnLoad {
+open class FormViewVerticalContainer: UIView, FormControllable, FormBindable, FormSelectable, FormOnLoad {
     
     public var isMain: Bool
     public let name: String
@@ -16,7 +16,7 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
     open var controls: [FormControllable] = []
     open var insets: UIEdgeInsets = UIEdgeInsets.zero
     open var minimalInset: CGFloat = 8
-    
+
     init(_ name: String = UUID().uuidString, isMain: Bool = false) {
         self.name = name
         self.isMain = isMain
@@ -37,7 +37,7 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
     
     open func buildLayout() {
         
-        removeStoredConstrains()
+        removeFormConstrains()
         
         var lastControl: FormControllable?
         for (controlIndex, control) in controls.enumerated() {
@@ -49,39 +49,39 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
             
             addSubview(controlView)
             
-            storeConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: self.topAnchor, constant: insets.top))
-            storeConstrain(view: controlView, constrain: controlView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: insets.bottom * -1))
-            
+            addFormConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: insets.top))
+            addFormConstrain(view: controlView, constrain: controlView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: insets.bottom * -1))
+
             if let controlSizeable = control as? FormSizeable {
                 if let fixedHeigth = controlSizeable.fixedHeigth {
-                    storeConstrain(view: controlView, constrain: controlView.heightAnchor.constraint(equalToConstant: fixedHeigth))
+                    addFormConstrain(view: controlView, constrain: controlView.heightAnchor.constraint(equalToConstant: fixedHeigth))
                 }
                 if let fixedWidth = controlSizeable.fixedWidth {
-                    storeConstrain(view: controlView, constrain: controlView.widthAnchor.constraint(equalToConstant: fixedWidth))
+                    addFormConstrain(view: controlView, constrain: controlView.widthAnchor.constraint(equalToConstant: fixedWidth))
                 }
             }
-            
+
             if let lastControlView = lastControl as? UIView {
-                storeConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: lastControlView.rightAnchor, constant: minimalInset))
+                addFormConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: lastControlView.bottomAnchor, constant: minimalInset))
             } else {
-                storeConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: insets.left))
+                addFormConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: self.topAnchor, constant: insets.left))
             }
-            
+
             if control.isMain {
-                controlView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
+                controlView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
             } else {
-                controlView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+                controlView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
             }
-            
+
             // is last
             if controls.count - 1 == controlIndex {
-                if let controlSizeable = control as? FormSizeable, controlSizeable.fixedWidth != nil {
+                if let controlSizeable = control as? FormSizeable, controlSizeable.fixedHeigth != nil {
                     // do noting
                 } else {
-                    storeConstrain(view: controlView, constrain: controlView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: insets.right * -1))
+                    addFormConstrain(view: controlView, constrain: controlView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: insets.right * -1))
                 }
             }
-            
+
             lastControl = control
             
         }
@@ -90,47 +90,19 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
     
     // MARK: - Constains
     
-    private class StoredConstrain {
-        let view: UIView
-        var constrains: [NSLayoutConstraint]
-        
-        init(view: UIView, constrains: [NSLayoutConstraint]) {
-            self.view = view
-            self.constrains = constrains
+    public func addFormConstrain(view: UIView, constrain: NSLayoutConstraint, priority: UILayoutPriority? = nil) {
+        if let `priority` = priority {
+            constrain.priority = priority
         }
-    }
-    private var storedConstrains:[StoredConstrain] = []
-    
-    private func storeConstrain(view: UIView, constrain: NSLayoutConstraint) {
         constrain.isActive = true
-//        if let stored = storedConstrains.first(where: {$0.view == view}) {
-//            stored.constrains.append(constrain)
-//        } else {
-//            storedConstrains.append(StoredConstrain(view: view, constrains: [constrain]))
-//        }
     }
     
-    private func removeStoredConstrains() {
-        
+    public func removeFormConstrains() {
         for subview in subviews {
             subview.removeFromSuperview()
         }
-//        for storedConstrain in storedConstrains {
-//
-//            for constrain in storedConstrain.constrains {
-//                storedConstrain.view.removeConstraint(constrain)
-//            }
-//
-//            if storedConstrain.view != self {
-//                storedConstrain.view.removeFromSuperview()
-//            }
-//
-//        }
-//
-//        storedConstrains = []
-        
     }
-    
+
     // MARK: - FormBindable
     
     open var bindDelegate: FormViewBindDelegate?
@@ -139,7 +111,7 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
             return nil
         }
         set {
-          preconditionFailure("Could not be used on horizontal contsainer")
+            preconditionFailure("Could not be used on horizontal contsainer")
         }
     }
     
@@ -159,7 +131,7 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
     open var selectionStyle: UITableViewCell.SelectionStyle?
     open var accessoryType: UITableViewCell.AccessoryType?
     open var onSelect: ((FormViewCellContainer) -> Void)?
-    
+ 
     // MARK: - FormOnLoad
     open var onLoad: ((FormControllable) -> Void)?
     
@@ -176,7 +148,7 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
 
 // MARK: - FormLayoutable
 
-extension FormHorizontalContainerControl: FormLayoutable {
+extension FormViewVerticalContainer: FormLayoutable {
     
     open func updateControlLayout(element: FormControllable) {
         layoutDelegate?.updateControlLayout(element: element)
@@ -186,7 +158,7 @@ extension FormHorizontalContainerControl: FormLayoutable {
 
 // MARK: - FormSearchable
 
-extension FormHorizontalContainerControl: FormSearchable {
+extension FormViewVerticalContainer: FormSearchable {
     
     open func control(_ name: String) -> FormControllable? {
         for control in controls {
@@ -205,7 +177,7 @@ extension FormHorizontalContainerControl: FormSearchable {
     
     open func bindableControls(_ bindName: String) -> [FormBindable] {
         var list: [FormBindable] = []
-        for control in controls {
+        for control in controls {            
             if let `control` = control as? FormBindable {
                 if control.bindName == bindName {
                     list.append(control)
@@ -223,21 +195,21 @@ extension FormHorizontalContainerControl: FormSearchable {
 
 // MARK: - FormViewBindDelegate
 
-extension FormHorizontalContainerControl: FormViewBindDelegate {
-
+extension FormViewVerticalContainer: FormViewBindDelegate {
+    
     open func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
         bindDelegate?.bindValueChanged(control: control, bindName: bindName, value: value)
     }
-
+    
     open func bindValue(_ bindName: String) -> Any? {
         return bindDelegate?.bindValue(bindName)
     }
-
+    
 }
 
 // MARK: - FormContainerable
 
-extension FormHorizontalContainerControl: FormContainerable {
+extension FormViewVerticalContainer: FormContainerable {
     
     // MARK: - Containerable
     open func controlsNames() -> [String] {
@@ -248,21 +220,21 @@ extension FormHorizontalContainerControl: FormContainerable {
                 list.append(contentsOf: control.controlsNames())
             }
         }
-        return list
+        return list        
     }
     
 }
 
 // MARK: - Setters
 
-extension FormHorizontalContainerControl {
+extension FormViewVerticalContainer {
     
-    open func isMain(_ isMain: Bool) -> FormHorizontalContainerControl {
+    open func isMain(_ isMain: Bool) -> FormViewVerticalContainer {
         self.isMain = isMain
         return self
     }
     
-    open func add(_ control: FormControllable) -> FormHorizontalContainerControl {
+    open func add(_ control: FormControllable) -> FormViewVerticalContainer {
         control.layoutDelegate(self)
         if let `bindable` = control as? FormBindable {
             bindable.bindDelegate(self)
@@ -272,7 +244,7 @@ extension FormHorizontalContainerControl {
         return self
     }
     
-    open func add(_ controls: [FormControllable]) -> FormHorizontalContainerControl {
+    open func add(_ controls: [FormControllable]) -> FormViewVerticalContainer {
         for control in controls {
             control.layoutDelegate(self)
             if let `bindable` = control as? FormBindable {
@@ -284,15 +256,14 @@ extension FormHorizontalContainerControl {
         return self
     }
     
-    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormHorizontalContainerControl {
+    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormViewVerticalContainer {
         self.onSelect = handler
         return self
     }
     
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormHorizontalContainerControl {
+    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewVerticalContainer {
         self.onLoad = handler
         return self
     }
     
 }
-

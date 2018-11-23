@@ -30,15 +30,15 @@
 		299227BD21A85547007869E9 /* FromViewConstrainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299227BC21A85547007869E9 /* FromViewConstrainable.swift */; };
 		299FD8CC219D076400A1CE48 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD8CB219D076400A1CE48 /* TestViewController.swift */; };
 		299FD94E219D5A5F00A1CE48 /* FormControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD94D219D5A5F00A1CE48 /* FormControllable.swift */; };
-		299FD950219D5AA900A1CE48 /* FormLabelControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD94F219D5AA900A1CE48 /* FormLabelControl.swift */; };
-		299FD952219D5ACC00A1CE48 /* FormBadgeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD951219D5ACC00A1CE48 /* FormBadgeControl.swift */; };
-		299FD954219D5AE400A1CE48 /* FormTextFieldControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD953219D5AE400A1CE48 /* FormTextFieldControl.swift */; };
-		299FD956219D5AFC00A1CE48 /* FormTextViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD955219D5AFC00A1CE48 /* FormTextViewControl.swift */; };
-		299FD95A219D611000A1CE48 /* FormSwitcherControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD959219D611000A1CE48 /* FormSwitcherControl.swift */; };
-		299FD95E219DAAE600A1CE48 /* FormImageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD95D219DAAE600A1CE48 /* FormImageControl.swift */; };
-		29AF404A21A279730054360B /* FormVerticalContainerControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404921A279730054360B /* FormVerticalContainerControl.swift */; };
-		29AF404C21A27D950054360B /* FormHorizontalContainerControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404B21A27D950054360B /* FormHorizontalContainerControl.swift */; };
-		29AF404E21A283E70054360B /* FormButtonControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404D21A283E70054360B /* FormButtonControl.swift */; };
+		299FD950219D5AA900A1CE48 /* FormViewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD94F219D5AA900A1CE48 /* FormViewLabel.swift */; };
+		299FD952219D5ACC00A1CE48 /* FormViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD951219D5ACC00A1CE48 /* FormViewBadge.swift */; };
+		299FD954219D5AE400A1CE48 /* FormViewTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD953219D5AE400A1CE48 /* FormViewTextField.swift */; };
+		299FD956219D5AFC00A1CE48 /* FormViewTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD955219D5AFC00A1CE48 /* FormViewTextView.swift */; };
+		299FD95A219D611000A1CE48 /* FormViewSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD959219D611000A1CE48 /* FormViewSwitcher.swift */; };
+		299FD95E219DAAE600A1CE48 /* FormViewImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD95D219DAAE600A1CE48 /* FormViewImageView.swift */; };
+		29AF404A21A279730054360B /* FormViewVerticalContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404921A279730054360B /* FormViewVerticalContainer.swift */; };
+		29AF404C21A27D950054360B /* FormViewHorizontalContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404B21A27D950054360B /* FormViewHorizontalContainer.swift */; };
+		29AF404E21A283E70054360B /* FormViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404D21A283E70054360B /* FormViewButton.swift */; };
 		29AF405121A297E20054360B /* FormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF405021A297E20054360B /* FormValidator.swift */; };
 		29AF405321A298B90054360B /* FormLengthValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF405221A298B90054360B /* FormLengthValidator.swift */; };
 		29AF405521A2AFE10054360B /* FormRequiredValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF405421A2AFE10054360B /* FormRequiredValidator.swift */; };
@@ -73,15 +73,15 @@
 		299227BC21A85547007869E9 /* FromViewConstrainable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromViewConstrainable.swift; sourceTree = "<group>"; };
 		299FD8CB219D076400A1CE48 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		299FD94D219D5A5F00A1CE48 /* FormControllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormControllable.swift; sourceTree = "<group>"; };
-		299FD94F219D5AA900A1CE48 /* FormLabelControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormLabelControl.swift; sourceTree = "<group>"; };
-		299FD951219D5ACC00A1CE48 /* FormBadgeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormBadgeControl.swift; sourceTree = "<group>"; };
-		299FD953219D5AE400A1CE48 /* FormTextFieldControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextFieldControl.swift; sourceTree = "<group>"; };
-		299FD955219D5AFC00A1CE48 /* FormTextViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormTextViewControl.swift; sourceTree = "<group>"; };
-		299FD959219D611000A1CE48 /* FormSwitcherControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSwitcherControl.swift; sourceTree = "<group>"; };
-		299FD95D219DAAE600A1CE48 /* FormImageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormImageControl.swift; sourceTree = "<group>"; };
-		29AF404921A279730054360B /* FormVerticalContainerControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormVerticalContainerControl.swift; sourceTree = "<group>"; };
-		29AF404B21A27D950054360B /* FormHorizontalContainerControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormHorizontalContainerControl.swift; sourceTree = "<group>"; };
-		29AF404D21A283E70054360B /* FormButtonControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormButtonControl.swift; sourceTree = "<group>"; };
+		299FD94F219D5AA900A1CE48 /* FormViewLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewLabel.swift; sourceTree = "<group>"; };
+		299FD951219D5ACC00A1CE48 /* FormViewBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewBadge.swift; sourceTree = "<group>"; };
+		299FD953219D5AE400A1CE48 /* FormViewTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewTextField.swift; sourceTree = "<group>"; };
+		299FD955219D5AFC00A1CE48 /* FormViewTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewTextView.swift; sourceTree = "<group>"; };
+		299FD959219D611000A1CE48 /* FormViewSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewSwitcher.swift; sourceTree = "<group>"; };
+		299FD95D219DAAE600A1CE48 /* FormViewImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewImageView.swift; sourceTree = "<group>"; };
+		29AF404921A279730054360B /* FormViewVerticalContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewVerticalContainer.swift; sourceTree = "<group>"; };
+		29AF404B21A27D950054360B /* FormViewHorizontalContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewHorizontalContainer.swift; sourceTree = "<group>"; };
+		29AF404D21A283E70054360B /* FormViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewButton.swift; sourceTree = "<group>"; };
 		29AF405021A297E20054360B /* FormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormValidator.swift; sourceTree = "<group>"; };
 		29AF405221A298B90054360B /* FormLengthValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormLengthValidator.swift; sourceTree = "<group>"; };
 		29AF405421A2AFE10054360B /* FormRequiredValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRequiredValidator.swift; sourceTree = "<group>"; };
@@ -189,15 +189,15 @@
 		29A650FE21A80EDB00F038D1 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				299FD94F219D5AA900A1CE48 /* FormLabelControl.swift */,
-				299FD951219D5ACC00A1CE48 /* FormBadgeControl.swift */,
-				299FD953219D5AE400A1CE48 /* FormTextFieldControl.swift */,
-				299FD955219D5AFC00A1CE48 /* FormTextViewControl.swift */,
-				299FD959219D611000A1CE48 /* FormSwitcherControl.swift */,
-				299FD95D219DAAE600A1CE48 /* FormImageControl.swift */,
-				29AF404921A279730054360B /* FormVerticalContainerControl.swift */,
-				29AF404B21A27D950054360B /* FormHorizontalContainerControl.swift */,
-				29AF404D21A283E70054360B /* FormButtonControl.swift */,
+				299FD94F219D5AA900A1CE48 /* FormViewLabel.swift */,
+				299FD951219D5ACC00A1CE48 /* FormViewBadge.swift */,
+				299FD953219D5AE400A1CE48 /* FormViewTextField.swift */,
+				299FD955219D5AFC00A1CE48 /* FormViewTextView.swift */,
+				299FD959219D611000A1CE48 /* FormViewSwitcher.swift */,
+				299FD95D219DAAE600A1CE48 /* FormViewImageView.swift */,
+				29AF404D21A283E70054360B /* FormViewButton.swift */,
+				29AF404921A279730054360B /* FormViewVerticalContainer.swift */,
+				29AF404B21A27D950054360B /* FormViewHorizontalContainer.swift */,
 				299FD94D219D5A5F00A1CE48 /* FormControllable.swift */,
 			);
 			name = Controls;
@@ -308,39 +308,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				29AF405121A297E20054360B /* FormValidator.swift in Sources */,
-				29AF404A21A279730054360B /* FormVerticalContainerControl.swift in Sources */,
+				29AF404A21A279730054360B /* FormViewVerticalContainer.swift in Sources */,
 				291E3D14217A3A7B006C3D4D /* FormView.swift in Sources */,
 				299FD94E219D5A5F00A1CE48 /* FormControllable.swift in Sources */,
 				29904107219E56EF007DF31F /* FormViewHeaderFooterContainerView.swift in Sources */,
 				29904105219E56DC007DF31F /* FormViewHeaderFooterContainer.swift in Sources */,
-				299FD952219D5ACC00A1CE48 /* FormBadgeControl.swift in Sources */,
-				299FD95E219DAAE600A1CE48 /* FormImageControl.swift in Sources */,
+				299FD952219D5ACC00A1CE48 /* FormViewBadge.swift in Sources */,
+				299FD95E219DAAE600A1CE48 /* FormViewImageView.swift in Sources */,
 				299227BD21A85547007869E9 /* FromViewConstrainable.swift in Sources */,
 				29AF405321A298B90054360B /* FormLengthValidator.swift in Sources */,
 				29AF405721A2B0330054360B /* FormEmailValidator.swift in Sources */,
 				29AF405521A2AFE10054360B /* FormRequiredValidator.swift in Sources */,
-				299FD956219D5AFC00A1CE48 /* FormTextViewControl.swift in Sources */,
+				299FD956219D5AFC00A1CE48 /* FormViewTextView.swift in Sources */,
 				291E3CF6217A3942006C3D4D /* ViewController.swift in Sources */,
 				29904115219E7B3A007DF31F /* FormViewCellContainer.swift in Sources */,
 				299FD8CC219D076400A1CE48 /* TestViewController.swift in Sources */,
-				29AF404C21A27D950054360B /* FormHorizontalContainerControl.swift in Sources */,
+				29AF404C21A27D950054360B /* FormViewHorizontalContainer.swift in Sources */,
 				2990410F219E75AB007DF31F /* FormViewCell.swift in Sources */,
-				299FD95A219D611000A1CE48 /* FormSwitcherControl.swift in Sources */,
+				299FD95A219D611000A1CE48 /* FormViewSwitcher.swift in Sources */,
 				29904117219E7B9B007DF31F /* FormViewCellContainerView.swift in Sources */,
 				291E3D0F217A39BD006C3D4D /* ExtendedButton.swift in Sources */,
 				29904102219E5283007DF31F /* FormViewHeaderFooter.swift in Sources */,
 				29904111219E75B4007DF31F /* FormViewCellView.swift in Sources */,
 				29904113219E771F007DF31F /* Former.swift in Sources */,
-				29AF404E21A283E70054360B /* FormButtonControl.swift in Sources */,
+				29AF404E21A283E70054360B /* FormViewButton.swift in Sources */,
 				29AF40BB21A2E2160054360B /* FormField.swift in Sources */,
-				299FD950219D5AA900A1CE48 /* FormLabelControl.swift in Sources */,
+				299FD950219D5AA900A1CE48 /* FormViewLabel.swift in Sources */,
 				29AF40BA21A2E2160054360B /* Form.swift in Sources */,
 				291E3D10217A39BD006C3D4D /* ExtendedTextView.swift in Sources */,
 				291E3D11217A39BD006C3D4D /* ExtendedLabel.swift in Sources */,
 				291E3D16217A3B13006C3D4D /* FormViewGroup.swift in Sources */,
 				291E3CF4217A3942006C3D4D /* AppDelegate.swift in Sources */,
 				299040FE219E525D007DF31F /* FormViewHeaderFooterView.swift in Sources */,
-				299FD954219D5AE400A1CE48 /* FormTextFieldControl.swift in Sources */,
+				299FD954219D5AE400A1CE48 /* FormViewTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

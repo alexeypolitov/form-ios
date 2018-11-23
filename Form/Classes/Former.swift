@@ -12,40 +12,40 @@ public class Former {
 
     // Control
     
-    public static func label(_ name: String = UUID().uuidString) -> FormLabelControl {
-        return FormLabelControl(name)
+    public static func label(_ name: String = UUID().uuidString) -> FormViewLabel {
+        return FormViewLabel(name)
     }
     
-    public static func badge(_ name: String = UUID().uuidString) -> FormBadgeControl {
-        return FormBadgeControl(name)
+    public static func badge(_ name: String = UUID().uuidString) -> FormViewBadge {
+        return FormViewBadge(name)
     }
     
-    public static func textField(_ name: String = UUID().uuidString) -> FormTextFieldControl {
-        return FormTextFieldControl(name)
+    public static func textField(_ name: String = UUID().uuidString) -> FormViewTextField {
+        return FormViewTextField(name)
     }
     
-    public static func textView(_ name: String = UUID().uuidString) -> FormTextViewControl {
-        return FormTextViewControl(name)
+    public static func textView(_ name: String = UUID().uuidString) -> FormViewTextView {
+        return FormViewTextView(name)
     }
     
-    public static func switcher(_ name: String = UUID().uuidString) -> FormSwitcherControl {
-        return FormSwitcherControl(name)
+    public static func switcher(_ name: String = UUID().uuidString) -> FormViewSwitcher {
+        return FormViewSwitcher(name)
     }
     
-    public static func image(_ name: String = UUID().uuidString) -> FormImageControl {
-        return FormImageControl(name)
+    public static func image(_ name: String = UUID().uuidString) -> FormViewImageView {
+        return FormViewImageView(name)
     }
     
-    public static func button(_ name: String = UUID().uuidString) -> FormButtonControl {
-        return FormButtonControl(name)
+    public static func button(_ name: String = UUID().uuidString) -> FormViewButton {
+        return FormViewButton(name)
     }
     
-    public static func vertical(_ name: String = UUID().uuidString) -> FormVerticalContainerControl {
-        return FormVerticalContainerControl(name)
+    public static func vertical(_ name: String = UUID().uuidString) -> FormViewVerticalContainer {
+        return FormViewVerticalContainer(name)
     }
     
-    public static func horizontal(_ name: String = UUID().uuidString) -> FormHorizontalContainerControl {
-        return FormHorizontalContainerControl(name)
+    public static func horizontal(_ name: String = UUID().uuidString) -> FormViewHorizontalContainer {
+        return FormViewHorizontalContainer(name)
     }
     
     // Group

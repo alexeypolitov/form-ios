@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormBadgeControl: FormLabelControl {
+open class FormViewBadge: FormViewLabel {
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Use init()")

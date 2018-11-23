@@ -8,13 +8,13 @@
 
 import UIKit
 
-open class FormButtonControl: ExtendedButton, FormControllable, FormSizeable, FormOnLoad {
+open class FormViewButton: ExtendedButton, FormControllable, FormSizeable, FormOnLoad {
     
     public var isMain: Bool
     public let name: String
     public var layoutDelegate: FormLayoutable?
     
-    open var onAction: ((FormButtonControl) -> Void)?
+    open var onAction: ((FormViewButton) -> Void)?
     
     public override init(frame: CGRect) {
         fatalError("Use init()")
@@ -75,64 +75,64 @@ open class FormButtonControl: ExtendedButton, FormControllable, FormSizeable, Fo
 
 // MARK: - Setters
 
-extension FormButtonControl {
+extension FormViewButton {
     
-    open func isMain(_ isMain: Bool) -> FormButtonControl {
+    open func isMain(_ isMain: Bool) -> FormViewButton {
         self.isMain = isMain
         return self
     }
     
-    open func title(_ title: String?, for state: UIControl.State) -> FormButtonControl {
+    open func title(_ title: String?, for state: UIControl.State) -> FormViewButton {
         self.setTitle(title, for: state)
         return self
     }
     
-    open func attributedTitle(_ attributedTitle: NSAttributedString?, for state: UIControl.State) -> FormButtonControl {
+    open func attributedTitle(_ attributedTitle: NSAttributedString?, for state: UIControl.State) -> FormViewButton {
         self.setAttributedTitle(attributedTitle, for: state)
         return self
     }
     
-    open func backgroundColor(_ backgroundColor: UIColor?, for state: UIControl.State) -> FormButtonControl {
+    open func backgroundColor(_ backgroundColor: UIColor?, for state: UIControl.State) -> FormViewButton {
         self.setBackgroundColor(backgroundColor, for: state)
         return self
     }
     
-    open func cornerRadius(_ cornerRadius: CGFloat?, for state: UIControl.State) -> FormButtonControl {
+    open func cornerRadius(_ cornerRadius: CGFloat?, for state: UIControl.State) -> FormViewButton {
         self.setCornerRadius(cornerRadius, for: state)
         return self
     }
     
-    open func borderWidth(_ borderWidth: CGFloat?, for state: UIControl.State) -> FormButtonControl {
+    open func borderWidth(_ borderWidth: CGFloat?, for state: UIControl.State) -> FormViewButton {
         self.setBorderWidth(borderWidth, for: state)
         return self
     }
     
-    open func borderColor(_ borderColor: UIColor?, for state: UIControl.State) -> FormButtonControl {
+    open func borderColor(_ borderColor: UIColor?, for state: UIControl.State) -> FormViewButton {
         self.setBorderColor(borderColor, for: state)
         return self
     }
 
-    open func isEnabled(_ isEnabled: Bool) -> FormButtonControl {
+    open func isEnabled(_ isEnabled: Bool) -> FormViewButton {
         self.isEnabled = isEnabled
         return self
     }
     
-    open func onAction(_ handler: ((FormButtonControl) -> Void)?) -> FormButtonControl {
+    open func onAction(_ handler: ((FormViewButton) -> Void)?) -> FormViewButton {
         onAction = handler
         return self
     }
     
-    open func fixedWidth(_ width: CGFloat?) -> FormButtonControl {
+    open func fixedWidth(_ width: CGFloat?) -> FormViewButton {
         self.fixedWidth = width
         return self
     }
     
-    open func fixedHeigth(_ height: CGFloat?) -> FormButtonControl {
+    open func fixedHeigth(_ height: CGFloat?) -> FormViewButton {
         self.fixedHeigth = height
         return self
     }
 
-    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormButtonControl {
+    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormViewButton {
         self.onLoad = handler
         return self
     }
