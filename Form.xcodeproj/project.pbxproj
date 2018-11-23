@@ -118,15 +118,7 @@
 		291E3CF2217A3942006C3D4D /* Form */ = {
 			isa = PBXGroup;
 			children = (
-				29AF40B821A2E2160054360B /* Form.swift */,
-				29AF40B921A2E2160054360B /* FormField.swift */,
-				29904112219E771F007DF31F /* Former.swift */,
-				29AF404F21A297BD0054360B /* Validators */,
-				2990410C219E7549007DF31F /* Controls */,
-				2990410B219E753E007DF31F /* Cells */,
-				2990410A219E752F007DF31F /* HeaderFooters */,
-				291E3D12217A3A48006C3D4D /* FormView */,
-				291E3D05217A3959006C3D4D /* Libraries */,
+				29A650FC21A80CFE00F038D1 /* Classes */,
 				291E3CF3217A3942006C3D4D /* AppDelegate.swift */,
 				291E3CF5217A3942006C3D4D /* ViewController.swift */,
 				299FD8CB219D076400A1CE48 /* TestViewController.swift */,
@@ -139,55 +131,35 @@
 			path = Form;
 			sourceTree = "<group>";
 		};
-		291E3D05217A3959006C3D4D /* Libraries */ = {
+		29A650FC21A80CFE00F038D1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				291E3D0C217A39BD006C3D4D /* ExtendedButton.swift */,
-				291E3D0E217A39BD006C3D4D /* ExtendedLabel.swift */,
-				291E3D0D217A39BD006C3D4D /* ExtendedTextView.swift */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		291E3D12217A3A48006C3D4D /* FormView */ = {
-			isa = PBXGroup;
-			children = (
-				291E3D15217A3B13006C3D4D /* FormGroup.swift */,
+				29A6510421A80F5200F038D1 /* Libraries */,
+				29A6510521A80F6500F038D1 /* Cells */,
+				29A6510021A80EFF00F038D1 /* HeaderFooters */,
+				29A650FE21A80EDB00F038D1 /* Controls */,
+				29A650FD21A80EBD00F038D1 /* Validators */,
+				29AF40B821A2E2160054360B /* Form.swift */,
+				29AF40B921A2E2160054360B /* FormField.swift */,
+				29904112219E771F007DF31F /* Former.swift */,
 				291E3D13217A3A7B006C3D4D /* FormView.swift */,
+				291E3D15217A3B13006C3D4D /* FormGroup.swift */,
 			);
-			path = FormView;
+			path = Classes;
 			sourceTree = "<group>";
 		};
-		29904103219E56BC007DF31F /* Container */ = {
+		29A650FD21A80EBD00F038D1 /* Validators */ = {
 			isa = PBXGroup;
 			children = (
-				29904104219E56DC007DF31F /* FormHeaderFooterContainer.swift */,
-				29904106219E56EF007DF31F /* FormHeaderFooterContainerView.swift */,
+				29AF405021A297E20054360B /* FormValidator.swift */,
+				29AF405221A298B90054360B /* FormLengthValidator.swift */,
+				29AF405421A2AFE10054360B /* FormRequiredValidator.swift */,
+				29AF405621A2B0330054360B /* FormEmailValidator.swift */,
 			);
-			path = Container;
+			name = Validators;
 			sourceTree = "<group>";
 		};
-		2990410A219E752F007DF31F /* HeaderFooters */ = {
-			isa = PBXGroup;
-			children = (
-				29904103219E56BC007DF31F /* Container */,
-				299040FD219E525D007DF31F /* FormHeaderFooterView.swift */,
-				29904101219E5283007DF31F /* FormHeaderFooter.swift */,
-			);
-			path = HeaderFooters;
-			sourceTree = "<group>";
-		};
-		2990410B219E753E007DF31F /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				2990410D219E7576007DF31F /* Container */,
-				2990410E219E75AB007DF31F /* FormCell.swift */,
-				29904110219E75B4007DF31F /* FormCellView.swift */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
-		2990410C219E7549007DF31F /* Controls */ = {
+		29A650FE21A80EDB00F038D1 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
 				299FD94F219D5AA900A1CE48 /* FormLabelControl.swift */,
@@ -201,27 +173,39 @@
 				29AF404D21A283E70054360B /* FormButtonControl.swift */,
 				299FD94D219D5A5F00A1CE48 /* FormControllable.swift */,
 			);
-			path = Controls;
+			name = Controls;
 			sourceTree = "<group>";
 		};
-		2990410D219E7576007DF31F /* Container */ = {
+		29A6510021A80EFF00F038D1 /* HeaderFooters */ = {
+			isa = PBXGroup;
+			children = (
+				29904104219E56DC007DF31F /* FormHeaderFooterContainer.swift */,
+				29904106219E56EF007DF31F /* FormHeaderFooterContainerView.swift */,
+				299040FD219E525D007DF31F /* FormHeaderFooterView.swift */,
+				29904101219E5283007DF31F /* FormHeaderFooter.swift */,
+			);
+			name = HeaderFooters;
+			sourceTree = "<group>";
+		};
+		29A6510421A80F5200F038D1 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				291E3D0C217A39BD006C3D4D /* ExtendedButton.swift */,
+				291E3D0E217A39BD006C3D4D /* ExtendedLabel.swift */,
+				291E3D0D217A39BD006C3D4D /* ExtendedTextView.swift */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		29A6510521A80F6500F038D1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				29904114219E7B3A007DF31F /* FormCellContainer.swift */,
 				29904116219E7B9B007DF31F /* FormCellContainerView.swift */,
+				2990410E219E75AB007DF31F /* FormCell.swift */,
+				29904110219E75B4007DF31F /* FormCellView.swift */,
 			);
-			path = Container;
-			sourceTree = "<group>";
-		};
-		29AF404F21A297BD0054360B /* Validators */ = {
-			isa = PBXGroup;
-			children = (
-				29AF405021A297E20054360B /* FormValidator.swift */,
-				29AF405221A298B90054360B /* FormLengthValidator.swift */,
-				29AF405421A2AFE10054360B /* FormRequiredValidator.swift */,
-				29AF405621A2B0330054360B /* FormEmailValidator.swift */,
-			);
-			path = Validators;
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
