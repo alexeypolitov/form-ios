@@ -168,21 +168,6 @@ extension FormCellContainer: FormSearchable {
     
 }
 
-// MARK: - FormValidatable
-
-extension FormCellContainer: FormValidatable {
-    
-    func validate() -> (Bool, String?) {
-        
-        if let `control` = control as? FormValidatable {
-            return control.validate()
-        }
-        
-        return (true, nil)
-    }
-    
-}
-
 // MARK: - FormViewBindDelegate
 
 extension FormCellContainer: FormViewBindDelegate {

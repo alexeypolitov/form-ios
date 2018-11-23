@@ -179,22 +179,6 @@ extension FormView {
     
 }
 
-extension FormView {
-    
-    func validate() -> (Bool, String?) {
-        
-        for group in storedGroups {
-            let (success, message) = group.validate()
-            if !success {
-                return (success, message)
-            }
-        }
-        
-        return (true, nil)
-    }
-    
-}
-
 extension FormView: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {

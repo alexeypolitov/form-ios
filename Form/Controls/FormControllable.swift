@@ -35,12 +35,6 @@ protocol FormValuable {
 //    var pandingValue: Any? { get set }
 }
 
-// MARK: - Validatable
-
-protocol FormValidatable {
-    func validate() -> (Bool, String?)
-}
-
 // MARK: - Selectable
 
 protocol FormSelectable {

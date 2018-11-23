@@ -76,8 +76,7 @@ class ViewController: UIViewController {
                     Former.textField("test3")
                         .placeholder("Enter name")
                         .textAlignment(.right)
-                        .bind("name")
-                        .validator(Former.maxLength(maxLength: 6, "SignUp.Name.Validation.BetweedLength.Error"))
+                        .bind("name")                    
                     ])
 
             )

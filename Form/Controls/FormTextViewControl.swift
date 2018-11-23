@@ -8,18 +8,11 @@
 
 import UIKit
 
-open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable, FormValidatable, FormBindable, FormOnLoad {
+open class FormTextViewControl: ExtendedTextView, FormControllable, FormBindable, FormOnLoad {
     
     var isMain: Bool
     let name: String
     var layoutDelegate: FormLayoutable?
-    
-    open override var text: String! {
-        didSet {
-            _value = text
-//            _pandingValue = nil
-        }
-    }
     
     var onChange: ((FormTextViewControl, String?) -> Void)?
     var onEndEditing: ((FormTextViewControl) -> Void)?
@@ -77,71 +70,6 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable
         if size.height != newSize.height {
             layoutDelegate?.updateControlLayout(element: self)
         }
-    }
-    
-    // MARK: - FormValuable
-    
-    private var _value: Any?
-    var value: Any? {
-        get {
-            return _value
-        }
-        set {
-            _value = newValue
-            if let `stringValue` = newValue as? String {
-                let _ = text(stringValue)
-                _value = newValue
-            } else {
-                let _ = text(nil)
-                _value = nil
-            }
-        }
-    }
-//    private var _pandingValue: Any?
-//    var pandingValue: Any? {
-//        get {
-//            return _pandingValue
-//        }
-//        set {
-//            _pandingValue = newValue
-//        }
-//    }
-    
-    // MARK: - FormValidatable
-    
-    var validators: [FormValidator] = []
-
-    func validate() -> (Bool, String?) {
-        
-        if validators.count  == 0 { return (true, nil) }
-        
-        if let message = prepareValidateByPriority(priority: .high, validators) {
-            return (false, message)
-        }
-        
-        if let message = prepareValidateByPriority(priority: .medium, validators) {
-            return (false, message)
-        }
-        
-        if let message = prepareValidateByPriority(priority: .low, validators) {
-            return (false, message)
-        }
-        
-        return (true, nil)
-    }
-    
-    private func prepareValidateByPriority(priority: FormValidator.Priority,_ validators: [FormValidator]) -> String? {
-        let localValidators = validators.filter { (validator) -> Bool in
-            return validator.priority == priority
-        }
-        
-        for validator in localValidators {
-            if !validator.validate(self) {
-                return validator.message
-            }
-        }
-        
-        return nil
     }
     
     // MARK: - FormBindable
@@ -252,16 +180,6 @@ extension FormTextViewControl {
         shouldInteractWithAttachment = handler
         return self
     }
-    
-    func validators(_ validators: [FormValidator]) -> FormTextViewControl {
-        self.validators = validators
-        return self
-    }
-    
-    func validator(_ validator: FormValidator) -> FormTextViewControl {
-        self.validators = [validator]
-        return self
-    }
 
 }
 
@@ -270,12 +188,10 @@ extension FormTextViewControl {
 extension FormTextViewControl: UITextViewDelegate {
     
     public func textViewDidChange(_ textView: UITextView) {
-        value = text
-        
-        onChange?(self, textView.text)
+        onChange?(self, text)
         
         if let `bindName` = bindName {
-            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: _value)
+            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: text)
         }
     }
     
@@ -301,34 +217,6 @@ extension FormTextViewControl: UITextViewDelegate {
     
     public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         return shouldChangeCharacters?(self, textView.text, range, text) ?? true
-        
-//        _pandingValue = (textView.text as NSString).replacingCharacters(in: range, with: text)
-//        print("ddd: \(_pandingValue)")
-//
-////        self.textStorage.delegate
-//
-//        // Inline validation
-//        let (success, _ ) = validateInline()
-//        if !success {
-//            _pandingValue = nil
-//            return false
-//
-//        }
-//
-//        // Other validation
-//        let result = shouldChangeCharacters?(self, textView.text, range, text) ?? true
-//        _pandingValue = nil
-//        if result {
-//            _value = (textView.text as NSString).replacingCharacters(in: range, with: text)
-//        } else {
-//            _value = textView.text
-//        }
-//
-//        if let `bindName` = bindName {
-//            bindDelegate?.bindValueChanged(control: self, bindName: bindName, value: _value)
-//        }
-//
-//        return result
     }
 
     public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {

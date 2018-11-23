@@ -73,39 +73,6 @@ extension FormGroup: FormSearchable {
     
 }
 
-// MARK: - FormValidatable
-
-extension FormGroup: FormValidatable {
-    
-    func validate() -> (Bool, String?) {
-        
-//        if let `header` = header as? FormSearchable {
-//            if let control = header.control(name) {
-//                return control
-//            }
-//        }
-        
-        for row in rows {
-            if let `row` = row as? FormValidatable {
-                let (success, message) = row.validate()
-                if !success {
-                    return (success, message)
-                }
-            }
-            
-        }
-        
-//        if let `footer` = footer as? FormSearchable {
-//            if let control = footer.control(name) {
-//                return control
-//            }
-//        }
-        
-        return (true, nil)
-    }
-    
-}
-
 // MARK: - Setters
 
 extension FormGroup {
