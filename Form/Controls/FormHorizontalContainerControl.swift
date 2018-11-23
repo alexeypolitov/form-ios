@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormHorizontalContainerControl: UIView, FormControllable, FormBindable, FormSelectable {
+class FormHorizontalContainerControl: UIView, FormControllable, FormBindable, FormSelectable, FormOnLoad {
     
     var isMain: Bool
     let name: String
@@ -160,6 +160,18 @@ class FormHorizontalContainerControl: UIView, FormControllable, FormBindable, Fo
     var accessoryType: UITableViewCell.AccessoryType?
     var onSelect: ((FormCellContainer) -> Void)?
     
+    // MARK: - FormOnLoad
+    var onLoad: ((FormControllable) -> Void)?
+    
+    func prepareOnLoad() {
+        for control in controls {
+            if let `onLoad` = control as? FormOnLoad {
+                onLoad.prepareOnLoad()
+                onLoad.onLoad?(control)
+            }
+        }
+    }
+    
 }
 
 // MARK: - FormLayoutable
@@ -276,6 +288,11 @@ extension FormHorizontalContainerControl {
     
     func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormHorizontalContainerControl {
         self.onSelect = handler
+        return self
+    }
+    
+    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormHorizontalContainerControl {
+        self.onLoad = handler
         return self
     }
     

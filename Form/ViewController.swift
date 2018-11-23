@@ -49,30 +49,40 @@ class ViewController: UIViewController {
         let _ = formView.bind(form)
 //        try? formView.addGroup(Former.group().add(Former.textField("testLabelRow6").placeholder("test").bind("name")))
         try? formView.addGroup(Former.group()
-//            .header(Former.vertical().add(
-//                [
-//                    Former.horizontal().add([
-//                        Former.label("testLabelRow1").text("test 1").bind("name").isMain(true),
-//                        Former.textField("testLabelRow2").placeholder("test").bind("name")
-//                    ]),
-//                    Former.horizontal().add([
-//                        Former.label("testLabelRow3").text("test 1").bind("name").isMain(true),
-//                        Former.textField("testLabelRow4").placeholder("test").bind("name")
-//                    ])
-//                ]))
+            .header(
+                Former.vertical().add([
+                    Former.horizontal().add([
+                        Former.label("testLabelRow1").isMain(true).onLoad({ (control) in
+                            guard let `control` = control as? FormLabelControl else { return }
+                            control.text = "pppp 1"
+                        }),
+                        Former.textField("testLabelRow2").placeholder("test")
+                        ]),
+                    Former.horizontal().add([
+                        Former.label("testLabelRow3-1").text("test 1").bind("name").isMain(true),
+                        Former.textField("testLabelRow4-1").placeholder("test").bind("name")
+                        ])
+                    ]).onLoad({ (_) in
+                        guard let control = self.formView.control("testLabelRow1") as? FormLabelControl else { return }
+                        control.text = "pppp 2"
+                    })
+            )
             .add(
                 Former.vertical().add([
                     Former.horizontal().add([
-                        Former.label("testLabelRow5").text("test 1").bind("name").isMain(true),
-                        Former.textField("testLabelRow6").placeholder("test").bind("name")
+                        Former.label("testLabelRow3").isMain(true).onLoad({ (control) in
+                            guard let `control` = control as? FormLabelControl else { return }
+                            control.text = "pppp 3"
+                        }),
+                        Former.textField("testLabelRow4").placeholder("test")
                         ]),
                     Former.horizontal().add([
-                        Former.label("testLabelRow7").text("test 1").bind("name").isMain(true),
-                        Former.textField("testLabelRow8").placeholder("test").bind("name")
+                        Former.label("testLabelRow5").text("test 1").bind("name").isMain(true),
+                        Former.textField("testLabelRow6").placeholder("test").bind("name")
                         ])
-                ]
-                    ).onSelect({ (container) in
-                        print("dddd")
+                    ]).onLoad({ (_) in
+                        guard let control = self.formView.control("testLabelRow3") as? FormLabelControl else { return }
+                        control.text = "pppp 4"
                     })
             )
 //            .footer(Former.vertical().add(

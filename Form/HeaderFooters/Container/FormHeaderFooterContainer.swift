@@ -30,8 +30,9 @@ class FormHeaderFooterContainer: FormHeaderFooter {
             bindable.refreshBindValue()
         }
 
-        if let `controlOnLoad` = control as? FormOnLoad, let control = control {
-            controlOnLoad.onLoad?(control)
+        if let `onLoad` = control as? FormOnLoad, let control = control {
+            onLoad.prepareOnLoad()
+            onLoad.onLoad?(control)
         }
 
         guard let `linkedView` = linkedView as? FormHeaderFooterContainerView else { return }

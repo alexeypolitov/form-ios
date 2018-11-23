@@ -51,7 +51,13 @@ protocol FormViewBindDelegate {
 
 protocol FormOnLoad {
     var onLoad: ((FormControllable) -> Void)? { get set }
+    func prepareOnLoad() -> Void
 }
+
+extension FormOnLoad {
+    func prepareOnLoad() -> Void {  }
+}
+
 protocol FormControllable {
     var isMain: Bool { get set }
     var name: String { get }

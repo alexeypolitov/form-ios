@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormVerticalContainerControl: UIView, FormControllable, FormBindable, FormSelectable {
+class FormVerticalContainerControl: UIView, FormControllable, FormBindable, FormSelectable, FormOnLoad {
     
     var isMain: Bool
     let name: String
@@ -159,6 +159,18 @@ class FormVerticalContainerControl: UIView, FormControllable, FormBindable, Form
     var selectionStyle: UITableViewCell.SelectionStyle?
     var accessoryType: UITableViewCell.AccessoryType?
     var onSelect: ((FormCellContainer) -> Void)?
+ 
+    // MARK: - FormOnLoad
+    var onLoad: ((FormControllable) -> Void)?
+    
+    func prepareOnLoad() {
+        for control in controls {
+            if let `onLoad` = control as? FormOnLoad {
+                onLoad.prepareOnLoad()
+                onLoad.onLoad?(control)
+            }
+        }
+    }
     
 }
 
@@ -276,6 +288,11 @@ extension FormVerticalContainerControl {
     
     func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormVerticalContainerControl {
         self.onSelect = handler
+        return self
+    }
+    
+    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormVerticalContainerControl {
+        self.onLoad = handler
         return self
     }
     
