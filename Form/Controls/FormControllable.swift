@@ -74,6 +74,17 @@ extension FormOnLoad {
     func prepareOnLoad() -> Void {  }
 }
 
+// MARK: - Subscontrols
+protocol FormContainerable {
+    func controlsNames() -> [String]
+}
+
+extension FormContainerable {
+    func controlsNames() -> [String] {
+        return []
+    }
+}
+
 // MARK: - Controllable
 
 protocol FormControllable {

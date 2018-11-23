@@ -96,6 +96,25 @@ class FormCellContainer: FormCell, FormCellSelectable {
     
 }
 
+// MARK: - FormContainerable
+
+extension FormCellContainer: FormContainerable {
+    
+    // MARK: - Containerable
+    func controlsNames() -> [String] {
+        var list: [String] = []
+        if let controlnName = control?.name {
+            list.append(controlnName)
+        }
+        if let `control` = control as? FormContainerable {
+            list.append(contentsOf: control.controlsNames())
+        }
+        return list
+        
+    }
+    
+}
+
 // MARK: - FormCellContainerViewDataSource
 
 extension FormCellContainer: FormCellContainerViewDataSource {

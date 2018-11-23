@@ -255,6 +255,24 @@ extension FormHorizontalContainerControl: FormViewBindDelegate {
 
 }
 
+// MARK: - FormContainerable
+
+extension FormHorizontalContainerControl: FormContainerable {
+    
+    // MARK: - Containerable
+    func controlsNames() -> [String] {
+        var list: [String] = []
+        for control in controls {
+            list.append(control.name)
+            if let `control` = control as? FormContainerable {
+                list.append(contentsOf: control.controlsNames())
+            }
+        }
+        return list
+    }
+    
+}
+
 // MARK: - Setters
 
 extension FormHorizontalContainerControl {
