@@ -14,7 +14,7 @@ public class FormEmailValidator: FormValidator {
         super.init(priority: .high, message: message)
     }
     
-    override func validate(_ field: FormField) -> Bool {
+    public override func validate(_ field: FormField) -> Bool {
         guard let value = field.value as? String else {
             return true
         }

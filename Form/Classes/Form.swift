@@ -8,26 +8,26 @@
 
 import Foundation
 
-protocol FormBindDelegate {
+public protocol FormBindDelegate {
     func formBindValueChanged(bindName: String, value: Any?, exclude: [String])
 }
 
 open class Form {
     
-    var fields: [FormField] = []
-    var bindDelegate: FormBindDelegate?
+    open var fields: [FormField] = []
+    open var bindDelegate: FormBindDelegate?
     
-    func add(_ field: FormField) -> Form {
+    open func add(_ field: FormField) -> Form {
         field.delegate = self
         fields.append(field)
         return self
     }
     
-    func field(_ name: String) -> FormField? {
+    open func field(_ name: String) -> FormField? {
         return fields.first(where: {$0.name == name})
     }
     
-    func validate() -> (Bool, String?) {
+    open func validate() -> (Bool, String?) {
         for field in fields {
             let (_, error) = field.validate()
             if let error = error {
@@ -43,7 +43,7 @@ open class Form {
 
 extension Form : FormFieldDelegate {
     
-    func valueChanged(field: FormField, value: Any?, exclude: [String]) {
+    open func valueChanged(field: FormField, value: Any?, exclude: [String]) {
         bindDelegate?.formBindValueChanged(bindName: field.name, value: value, exclude: exclude)
     }
     

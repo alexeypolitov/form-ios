@@ -14,7 +14,7 @@ public class FormRequiredValidator: FormValidator {
         super.init(priority: .high, message: message)
     }
     
-    override func validate(_ field: FormField) -> Bool {
+    public override func validate(_ field: FormField) -> Bool {
         if let value = field.value as? Bool {
             return value
         } else {

@@ -10,11 +10,11 @@ import UIKit
 
 open class FormSwitcherControl: UISwitch, FormControllable, FormBindable, FormOnLoad {
 
-    var isMain: Bool
-    let name: String
-    var layoutDelegate: FormLayoutable?
+    public var isMain: Bool
+    public let name: String
+    public var layoutDelegate: FormLayoutable?
     
-    var onChange: ((FormSwitcherControl, Bool) -> Void)?
+    open var onChange: ((FormSwitcherControl, Bool) -> Void)?
     
     public override init(frame: CGRect) {
         fatalError("Use init()")
@@ -40,7 +40,7 @@ open class FormSwitcherControl: UISwitch, FormControllable, FormBindable, FormOn
         self.addTarget(self, action: #selector(self.onChangeEvent(_:)), for: .valueChanged)
     }
     
-    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
+    open func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
@@ -56,14 +56,14 @@ open class FormSwitcherControl: UISwitch, FormControllable, FormBindable, FormOn
     
     // MARK: - FormBindable
     
-    var bindDelegate: FormViewBindDelegate?
-    var bindName: String?
+    open var bindDelegate: FormViewBindDelegate?
+    open var bindName: String?
     
-    func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
+    open func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
         self.bindDelegate = bindDelegate
     }
     
-    func refreshBindValue() {
+    open func refreshBindValue() {
         guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
         guard let bindValue = bindDelegate.bindValue(bindName) as? Bool else { return }
         
@@ -71,39 +71,39 @@ open class FormSwitcherControl: UISwitch, FormControllable, FormBindable, FormOn
     }
     
     // MARK: - FormOnLoad
-    var onLoad: ((FormControllable) -> Void)?
+    open var onLoad: ((FormControllable) -> Void)?
 }
 
 // MARK: - Setters
 
 extension FormSwitcherControl {
 
-    func isMain(_ isMain: Bool) -> FormSwitcherControl {
+    open func isMain(_ isMain: Bool) -> FormSwitcherControl {
         self.isMain = isMain
         return self
     }
     
-    func isOn(_ isOn: Bool) -> FormSwitcherControl {
+    open func isOn(_ isOn: Bool) -> FormSwitcherControl {
         self.isOn = isOn
         return self
     }
     
-    func onChange(_ handler: ((FormSwitcherControl, Bool) -> Void)?) -> FormSwitcherControl {
+    open func onChange(_ handler: ((FormSwitcherControl, Bool) -> Void)?) -> FormSwitcherControl {
         onChange = handler
         return self
     }
     
-    func backgroundColor(_ backgroundColor: UIColor?) -> FormSwitcherControl {
+    open func backgroundColor(_ backgroundColor: UIColor?) -> FormSwitcherControl {
         self.backgroundColor = backgroundColor
         return self
     }
     
-    func bind(_ bindName: String?) -> FormSwitcherControl {
+    open func bind(_ bindName: String?) -> FormSwitcherControl {
         self.bindName = bindName
         return self
     }
     
-    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormSwitcherControl {
+    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormSwitcherControl {
         self.onLoad = handler
         return self
     }

@@ -72,18 +72,18 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     private var bindForm: Form?
     
-    func bind(_ form: Form?) -> FormView {
+    open func bind(_ form: Form?) -> FormView {
         self.bindForm = form
         self.bindForm?.bindDelegate = self
         return self
     }
     
-    func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
+    open func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
         guard let field = bindForm?.field(bindName) else { return }
         field.setValueFromFormView(value, controlName: control.name)
     }
     
-    func bindValue(_ bindName: String) -> Any? {
+    open func bindValue(_ bindName: String) -> Any? {
         precondition(bindForm != nil, "Form has not binding, but bindValue did called")        
         guard let field = bindForm?.field(bindName) else { return nil }
         return field.value
@@ -91,7 +91,7 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     // MARK: - FormBindDelegate
     
-    func formBindValueChanged(bindName: String, value: Any?, exclude: [String]) {
+    open func formBindValueChanged(bindName: String, value: Any?, exclude: [String]) {
         let constols = bindableControls(bindName)
         for control in constols {
             if let `control` = control as? FormControllable, let _ = exclude.first(where: {$0 == control.name}) { continue }
@@ -103,7 +103,7 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
 
 extension FormView {
     
-    func addGroup(_ group: FormGroup) throws {
+    open func addGroup(_ group: FormGroup) throws {
         
         if let container = group.header {
             try registerName(container.name)
@@ -142,7 +142,7 @@ extension FormView {
         
     }
     
-    func control(_ name: String) -> FormControllable? {
+    open func control(_ name: String) -> FormControllable? {
         
         for group in storedGroups {
             if let control = group.control(name) {
@@ -153,7 +153,7 @@ extension FormView {
         return nil
     }
     
-    func bindableControls(_ bindName: String) -> [FormBindable] {
+    open func bindableControls(_ bindName: String) -> [FormBindable] {
         var list: [FormBindable] = []
         for group in storedGroups {
             list.append(contentsOf: group.bindableControls(bindName))
@@ -161,19 +161,19 @@ extension FormView {
         return list
     }
     
-    func removeAllControls() {
+    open func removeAllControls() {
         storedGroups.removeAll()
         tableView?.reloadData()
     }
     
-    func updateControls() {
+    open func updateControls() {
         UIView.setAnimationsEnabled(false)
         tableView?.beginUpdates()
         tableView?.endUpdates()
         UIView.setAnimationsEnabled(true)
     }
     
-    func reloadData() {
+    open func reloadData() {
         tableView?.reloadData()
     }
     
@@ -210,7 +210,7 @@ extension FormView: UITableViewDataSource {
 
 extension FormView: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if storedGroups.count > 0, let header = storedGroups[section].header {            
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: header.viewClass)) as! FormHeaderFooterView
             header.prepare(headerView, formView: self)
@@ -219,7 +219,7 @@ extension FormView: UITableViewDelegate {
         return nil
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if storedGroups.count > 0, let footer = storedGroups[section].footer {
             let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: footer.viewClass)) as! FormHeaderFooterView
             footer.prepare(footerView, formView: self)
@@ -228,7 +228,7 @@ extension FormView: UITableViewDelegate {
         return nil
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = storedGroups[indexPath.section].rows[indexPath.row]
         
         if let row = row as? FormCellSelectable {

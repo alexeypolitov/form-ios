@@ -10,21 +10,21 @@ import Foundation
 
 open class FormValidator {
 
-    enum Priority {
+    public enum Priority {
         case low
         case medium
         case high
     }
     
-    var priority: Priority
-    var message: String
+    open var priority: Priority
+    open var message: String
     
     init(priority: Priority, message: String) {
         self.priority = priority
         self.message = message
     }
         
-    func validate(_ field: FormField) -> Bool {
+    open func validate(_ field: FormField) -> Bool {
         fatalError("Subclasses need to implement the `validate` variable.")
     }
     

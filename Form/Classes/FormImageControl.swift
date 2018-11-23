@@ -10,15 +10,9 @@ import UIKit
 
 open class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBindable, FormOnLoad {
 
-    var isMain: Bool
-    let name: String
-    var layoutDelegate: FormLayoutable?
-    
-    open override var image: UIImage? {
-        didSet {
-            
-        }
-    }
+    public var isMain: Bool
+    public let name: String
+    public var layoutDelegate: FormLayoutable?
     
     public override init(frame: CGRect) {
         fatalError("Use init()")
@@ -43,14 +37,14 @@ open class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBi
         self.contentMode = .scaleAspectFit
     }
     
-    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
+    open func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
     // MARK: - FormStackControlElementSizing
     
     private var _fixedWidth:CGFloat?
-    var fixedWidth: CGFloat? {
+    open var fixedWidth: CGFloat? {
         get {
             return _fixedWidth
         }
@@ -59,7 +53,7 @@ open class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBi
         }
     }
     private var _fixedHeigth:CGFloat?
-    var fixedHeigth: CGFloat? {
+    open var fixedHeigth: CGFloat? {
         get {
             return _fixedHeigth
         }
@@ -70,14 +64,14 @@ open class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBi
     
     // MARK: - FormBindable
     
-    var bindDelegate: FormViewBindDelegate?
-    var bindName: String?
+    open var bindDelegate: FormViewBindDelegate?
+    open var bindName: String?
     
-    func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
+    open func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
         self.bindDelegate = bindDelegate
     }
     
-    func refreshBindValue() {
+    open func refreshBindValue() {
         guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
         guard let bindValue = bindDelegate.bindValue(bindName) as? UIImage else { return }
         
@@ -85,7 +79,7 @@ open class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBi
     }
     
     // MARK: - FormOnLoad
-    var onLoad: ((FormControllable) -> Void)?
+    open var onLoad: ((FormControllable) -> Void)?
 }
 
 
@@ -93,38 +87,38 @@ open class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBi
 
 extension FormImageControl {
     
-    func isMain(_ isMain: Bool) -> FormImageControl {
+    open func isMain(_ isMain: Bool) -> FormImageControl {
         self.isMain = isMain
         return self
     }
     
-    func image(_ image: UIImage?) -> FormImageControl {
+    open func image(_ image: UIImage?) -> FormImageControl {
         self.image = image
         layoutDelegate?.updateControlLayout(element: self)
         return self
     }
     
-    func fixedWidth(_ width: CGFloat?) -> FormImageControl {
+    open func fixedWidth(_ width: CGFloat?) -> FormImageControl {
         self.fixedWidth = width
         return self
     }
     
-    func fixedHeigth(_ height: CGFloat?) -> FormImageControl {
+    open func fixedHeigth(_ height: CGFloat?) -> FormImageControl {
         self.fixedHeigth = height
         return self
     }
     
-    func backgroundColor(_ backgroundColor: UIColor?) -> FormImageControl {
+    open func backgroundColor(_ backgroundColor: UIColor?) -> FormImageControl {
         self.backgroundColor = backgroundColor
         return self
     }
     
-    func bind(_ bindName: String?) -> FormImageControl {
+    open func bind(_ bindName: String?) -> FormImageControl {
         self.bindName = bindName
         return self
     }
     
-    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormImageControl {
+    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormImageControl {
         self.onLoad = handler
         return self
     }

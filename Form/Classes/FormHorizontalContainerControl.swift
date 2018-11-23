@@ -10,12 +10,12 @@ import UIKit
 
 open class FormHorizontalContainerControl: UIView, FormControllable, FormBindable, FormSelectable, FormOnLoad {
     
-    var isMain: Bool
-    let name: String
-    var layoutDelegate: FormLayoutable?    
-    var controls: [FormControllable] = []
-    var insets: UIEdgeInsets = UIEdgeInsets.zero
-    var minimalInset: CGFloat = 8
+    public var isMain: Bool
+    public let name: String
+    public var layoutDelegate: FormLayoutable?
+    open var controls: [FormControllable] = []
+    open var insets: UIEdgeInsets = UIEdgeInsets.zero
+    open var minimalInset: CGFloat = 8
     
     init(_ name: String = UUID().uuidString, isMain: Bool = false) {
         self.name = name
@@ -31,11 +31,11 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
         fatalError("Use init()")
     }
     
-    func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
+    open func layoutDelegate(_ layoutDelegate: FormLayoutable?) {
         self.layoutDelegate = layoutDelegate
     }
     
-    func buildLayout() {
+    open func buildLayout() {
         
         removeStoredConstrains()
         
@@ -90,7 +90,7 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
     
     // MARK: - Constains
     
-    class StoredConstrain {
+    private class StoredConstrain {
         let view: UIView
         var constrains: [NSLayoutConstraint]
         
@@ -133,8 +133,8 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
     
     // MARK: - FormBindable
     
-    var bindDelegate: FormViewBindDelegate?
-    var bindName: String? {
+    open var bindDelegate: FormViewBindDelegate?
+    open var bindName: String? {
         get {
             return nil
         }
@@ -143,11 +143,11 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
         }
     }
     
-    func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
+    open func bindDelegate(_ bindDelegate: FormViewBindDelegate?) {
         self.bindDelegate = bindDelegate
     }
     
-    func refreshBindValue() {
+    open func refreshBindValue() {
         for control in controls {
             guard let `bindable` = control as? FormBindable else { continue }
             bindable.refreshBindValue()
@@ -156,14 +156,14 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
     
     // MARK: - FormSelectable
     
-    var selectionStyle: UITableViewCell.SelectionStyle?
-    var accessoryType: UITableViewCell.AccessoryType?
-    var onSelect: ((FormCellContainer) -> Void)?
+    open var selectionStyle: UITableViewCell.SelectionStyle?
+    open var accessoryType: UITableViewCell.AccessoryType?
+    open var onSelect: ((FormCellContainer) -> Void)?
     
     // MARK: - FormOnLoad
-    var onLoad: ((FormControllable) -> Void)?
+    open var onLoad: ((FormControllable) -> Void)?
     
-    func prepareOnLoad() {
+    open func prepareOnLoad() {
         for control in controls {
             if let `onLoad` = control as? FormOnLoad {
                 onLoad.prepareOnLoad()
@@ -178,7 +178,7 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
 
 extension FormHorizontalContainerControl: FormLayoutable {
     
-    func updateControlLayout(element: FormControllable) {
+    open func updateControlLayout(element: FormControllable) {
         layoutDelegate?.updateControlLayout(element: element)
     }
     
@@ -188,7 +188,7 @@ extension FormHorizontalContainerControl: FormLayoutable {
 
 extension FormHorizontalContainerControl: FormSearchable {
     
-    func control(_ name: String) -> FormControllable? {
+    open func control(_ name: String) -> FormControllable? {
         for control in controls {
             if control.name == name {
                 return control
@@ -203,7 +203,7 @@ extension FormHorizontalContainerControl: FormSearchable {
         return nil
     }
     
-    func bindableControls(_ bindName: String) -> [FormBindable] {
+    open func bindableControls(_ bindName: String) -> [FormBindable] {
         var list: [FormBindable] = []
         for control in controls {
             if let `control` = control as? FormBindable {
@@ -225,11 +225,11 @@ extension FormHorizontalContainerControl: FormSearchable {
 
 extension FormHorizontalContainerControl: FormViewBindDelegate {
 
-    func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
+    open func bindValueChanged(control: FormControllable, bindName: String, value: Any?) {
         bindDelegate?.bindValueChanged(control: control, bindName: bindName, value: value)
     }
 
-    func bindValue(_ bindName: String) -> Any? {
+    open func bindValue(_ bindName: String) -> Any? {
         return bindDelegate?.bindValue(bindName)
     }
 
@@ -240,7 +240,7 @@ extension FormHorizontalContainerControl: FormViewBindDelegate {
 extension FormHorizontalContainerControl: FormContainerable {
     
     // MARK: - Containerable
-    func controlsNames() -> [String] {
+    open func controlsNames() -> [String] {
         var list: [String] = []
         for control in controls {
             list.append(control.name)
@@ -257,12 +257,12 @@ extension FormHorizontalContainerControl: FormContainerable {
 
 extension FormHorizontalContainerControl {
     
-    func isMain(_ isMain: Bool) -> FormHorizontalContainerControl {
+    open func isMain(_ isMain: Bool) -> FormHorizontalContainerControl {
         self.isMain = isMain
         return self
     }
     
-    func add(_ control: FormControllable) -> FormHorizontalContainerControl {
+    open func add(_ control: FormControllable) -> FormHorizontalContainerControl {
         control.layoutDelegate(self)
         if let `bindable` = control as? FormBindable {
             bindable.bindDelegate(self)
@@ -272,7 +272,7 @@ extension FormHorizontalContainerControl {
         return self
     }
     
-    func add(_ controls: [FormControllable]) -> FormHorizontalContainerControl {
+    open func add(_ controls: [FormControllable]) -> FormHorizontalContainerControl {
         for control in controls {
             control.layoutDelegate(self)
             if let `bindable` = control as? FormBindable {
@@ -284,12 +284,12 @@ extension FormHorizontalContainerControl {
         return self
     }
     
-    func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormHorizontalContainerControl {
+    open func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormHorizontalContainerControl {
         self.onSelect = handler
         return self
     }
     
-    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormHorizontalContainerControl {
+    open func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormHorizontalContainerControl {
         self.onLoad = handler
         return self
     }

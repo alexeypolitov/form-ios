@@ -90,7 +90,7 @@ open class FormCellContainer: FormCell, FormCellSelectable {
         }
     }
     
-    func formCellOnSelect() {
+    open func formCellOnSelect() {
         onSelect?(self)
     }
     

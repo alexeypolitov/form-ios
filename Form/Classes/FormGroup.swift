@@ -9,9 +9,9 @@
 import Foundation
 
 open class FormGroup {
-    var header: FormHeaderFooter?
-    var rows: [FormCell] = []
-    var footer: FormHeaderFooter?
+    open var header: FormHeaderFooter?
+    open var rows: [FormCell] = []
+    open var footer: FormHeaderFooter?
     
     init(header: FormHeaderFooter? = nil, _ rows: [FormCell] = [], footer: FormHeaderFooter? = nil) {
         self.header = header
@@ -24,7 +24,7 @@ open class FormGroup {
 
 extension FormGroup: FormSearchable {
     
-    func control(_ name: String) -> FormControllable? {
+    open func control(_ name: String) -> FormControllable? {
         
         if let `header` = header as? FormSearchable {
             if let control = header.control(name) {
@@ -50,7 +50,7 @@ extension FormGroup: FormSearchable {
         return nil
     }
     
-    func bindableControls(_ bindName: String) -> [FormBindable] {
+    open func bindableControls(_ bindName: String) -> [FormBindable] {
         var list: [FormBindable] = []
         
         if let `header` = header as? FormSearchable {
@@ -77,32 +77,32 @@ extension FormGroup: FormSearchable {
 
 extension FormGroup {
     
-    func header(_ container: FormHeaderFooter) -> FormGroup {
+    open func header(_ container: FormHeaderFooter) -> FormGroup {
         self.header = container
         return self
     }
     
-    func header(_ control: FormControllable) -> FormGroup {
+    open func header(_ control: FormControllable) -> FormGroup {
         self.header = FormHeaderFooterContainer().control(control)
         return self
     }
     
-    func footer(_ container: FormHeaderFooter) -> FormGroup {
+    open func footer(_ container: FormHeaderFooter) -> FormGroup {
         self.footer = container
         return self
     }
     
-    func footer(_ control: FormControllable) -> FormGroup {
+    open func footer(_ control: FormControllable) -> FormGroup {
         self.footer = FormHeaderFooterContainer().control(control)
         return self
     }
     
-    func add(_ container: FormCell) -> FormGroup {
+    open func add(_ container: FormCell) -> FormGroup {
         rows.append(container)
         return self
     }
     
-    func add(_ control: FormControllable) -> FormGroup {
+    open func add(_ control: FormControllable) -> FormGroup {
         rows.append(FormCellContainer().control(control))
         return self
     }

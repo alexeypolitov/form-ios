@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol FormFieldDelegate {
+public protocol FormFieldDelegate {
     func valueChanged(field: FormField, value: Any?, exclude: [String])
 }
 
 open class FormField: NSObject {
-    var name: String
+    open var name: String
     private var _value: Any? {
         didSet {
             if Thread.isMainThread {
@@ -25,7 +25,7 @@ open class FormField: NSObject {
             }
         }
     }
-    var value: Any? {
+    open var value: Any? {
         get {
             return _value
         }
@@ -40,15 +40,15 @@ open class FormField: NSObject {
             }
         }
     }
-    var validators: [FormValidator] = []
-    var onChange: ((Any?) -> Void)?
-    var delegate: FormFieldDelegate?
+    open var validators: [FormValidator] = []
+    open var onChange: ((Any?) -> Void)?
+    open var delegate: FormFieldDelegate?
     
     init(_ name: String) {
         self.name = name
     }
     
-    func setValueFromFormView(_ value: Any?, controlName: String) {
+    open func setValueFromFormView(_ value: Any?, controlName: String) {
         self._value = value
         if Thread.isMainThread {
             delegate?.valueChanged(field: self, value: _value, exclude: [controlName])
@@ -59,7 +59,7 @@ open class FormField: NSObject {
         }
     }
     
-    func validate() -> (Bool, String?) {
+    open func validate() -> (Bool, String?) {
         
         if let message = prepareValidateByPriority(priority: .high) {
             return (false, message)
@@ -76,7 +76,7 @@ open class FormField: NSObject {
         return (true, nil)
     }
     
-    func validate(priority: FormValidator.Priority) -> (Bool, String?) {
+    open func validate(priority: FormValidator.Priority) -> (Bool, String?) {
         
         if let message = prepareValidateByPriority(priority: priority) {
             return (false, message)
@@ -104,22 +104,22 @@ open class FormField: NSObject {
 
 extension FormField {
     
-    func value(_ value: Any?) -> FormField {
+    open func value(_ value: Any?) -> FormField {
         self.value = value
         return self
     }
     
-    func validators(_ validators: [FormValidator]) -> FormField {
+    open func validators(_ validators: [FormValidator]) -> FormField {
         self.validators = validators
         return self
     }
     
-    func validator(_ validator: FormValidator) -> FormField {
+    open func validator(_ validator: FormValidator) -> FormField {
         self.validators = [validator]
         return self
     }
     
-    func onChange(_ onChange: ((Any?) -> Void)?) -> FormField {
+    open func onChange(_ onChange: ((Any?) -> Void)?) -> FormField {
         self.onChange = onChange
         return self
     }
@@ -128,7 +128,7 @@ extension FormField {
 
 extension Form {
     
-    static func field(_ name: String) -> FormField {
+    public static func field(_ name: String) -> FormField {
         return FormField(name)
     }
 }
