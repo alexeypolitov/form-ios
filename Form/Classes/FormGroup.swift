@@ -13,7 +13,7 @@ open class FormGroup {
     open var rows: [FormCell] = []
     open var footer: FormHeaderFooter?
     
-    init(header: FormHeaderFooter? = nil, _ rows: [FormCell] = [], footer: FormHeaderFooter? = nil) {
+    public init(header: FormHeaderFooter? = nil, _ rows: [FormCell] = [], footer: FormHeaderFooter? = nil) {
         self.header = header
         self.rows = rows
         self.footer = footer

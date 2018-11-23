@@ -17,6 +17,8 @@ open class Form {
     open var fields: [FormField] = []
     open var bindDelegate: FormBindDelegate?
     
+    public init() { }
+    
     open func add(_ field: FormField) -> Form {
         field.delegate = self
         fields.append(field)

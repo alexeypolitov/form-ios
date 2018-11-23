@@ -44,7 +44,7 @@ open class FormField: NSObject {
     open var onChange: ((Any?) -> Void)?
     open var delegate: FormFieldDelegate?
     
-    init(_ name: String) {
+    public init(_ name: String) {
         self.name = name
     }
     
