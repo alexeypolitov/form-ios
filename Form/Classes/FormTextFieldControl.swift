@@ -107,6 +107,21 @@ extension FormTextFieldControl {
         return self
     }
     
+    open func keyboardType(_ keyboardType: UIKeyboardType) -> FormTextFieldControl {
+        self.keyboardType = keyboardType
+        return self
+    }
+    
+    open func returnKeyType(_ returnKeyType: UIReturnKeyType) -> FormTextFieldControl {
+        self.returnKeyType = returnKeyType
+        return self
+    }
+    
+    open func isSecureTextEntry(_ isSecureTextEntry: Bool) -> FormTextFieldControl {
+        self.isSecureTextEntry = isSecureTextEntry
+        return self
+    }
+    
     open func onChange(_ handler: ((FormTextFieldControl, String?) -> Void)?) -> FormTextFieldControl {
         onChange = handler
         return self

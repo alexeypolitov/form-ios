@@ -15,7 +15,7 @@ enum FormViewError: Error {
 open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     fileprivate var tableView: UITableView?
-    fileprivate var storedGroups: [FormGroup] = []
+    fileprivate var groups: [FormViewGroup] = []
     fileprivate var registredIdentifiers: [String: AnyClass] = [:]
     fileprivate var registredNames: [String] = []
     
@@ -103,7 +103,7 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
 
 extension FormView {
     
-    open func addGroup(_ group: FormGroup) throws {
+    open func addGroup(_ group: FormViewGroup) throws {
         
         if let container = group.header {
             try registerName(container.name)
@@ -136,7 +136,7 @@ extension FormView {
             register(row.viewClass, name: row.name)
         }
         
-        storedGroups.append(group)
+        groups.append(group)
         
         tableView?.reloadData()
         
@@ -144,7 +144,7 @@ extension FormView {
     
     open func control(_ name: String) -> FormControllable? {
         
-        for group in storedGroups {
+        for group in groups {
             if let control = group.control(name) {
                 return control
             }
@@ -155,14 +155,14 @@ extension FormView {
     
     open func bindableControls(_ bindName: String) -> [FormBindable] {
         var list: [FormBindable] = []
-        for group in storedGroups {
+        for group in groups {
             list.append(contentsOf: group.bindableControls(bindName))
         }
         return list
     }
     
     open func removeAllControls() {
-        storedGroups.removeAll()
+        groups.removeAll()
         tableView?.reloadData()
     }
     
@@ -182,15 +182,15 @@ extension FormView {
 extension FormView: UITableViewDataSource {
     
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return storedGroups.count > 0 ? storedGroups.count : 1
+        return groups.count > 0 ? groups.count : 1
     }
     
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return storedGroups.count > 0 ? storedGroups[section].rows.count : 0
+        return groups.count > 0 ? groups[section].rows.count : 0
     }
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = storedGroups[indexPath.section].rows[indexPath.row]
+        let row = groups[indexPath.section].rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: row.viewClass), for: indexPath) as! FormCellView
         
         if let row = row as? FormCellSelectable {
@@ -211,8 +211,8 @@ extension FormView: UITableViewDataSource {
 extension FormView: UITableViewDelegate {
     
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if storedGroups.count > 0, let header = storedGroups[section].header {            
-            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: header.viewClass)) as! FormHeaderFooterView
+        if groups.count > 0, let header = groups[section].header {
+            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: header.viewClass)) as! FormViewHeaderFooterView
             header.prepare(headerView, formView: self)
             return headerView
         }
@@ -220,8 +220,8 @@ extension FormView: UITableViewDelegate {
     }
     
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if storedGroups.count > 0, let footer = storedGroups[section].footer {
-            let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: footer.viewClass)) as! FormHeaderFooterView
+        if groups.count > 0, let footer = groups[section].footer {
+            let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: footer.viewClass)) as! FormViewHeaderFooterView
             footer.prepare(footerView, formView: self)
             return footerView
         }
@@ -229,7 +229,7 @@ extension FormView: UITableViewDelegate {
     }
     
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row = storedGroups[indexPath.section].rows[indexPath.row]
+        let row = groups[indexPath.section].rows[indexPath.row]
         
         if let row = row as? FormCellSelectable {
             row.formCellOnSelect()

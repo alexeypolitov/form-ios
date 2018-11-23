@@ -8,10 +8,10 @@
 
 import UIKit
 
-open class FormHeaderFooter {
+open class FormViewHeaderFooter {
     
-    public var viewClass: FormHeaderFooterView.Type { return FormHeaderFooterView.self }
-    public weak var linkedView: FormHeaderFooterView?
+    public var viewClass: FormViewHeaderFooterView.Type { return FormViewHeaderFooterView.self }
+    public weak var linkedView: FormViewHeaderFooterView?
     public weak var linkedFormView: FormView?
     public let name: String
     private var _prepareInProgress: Bool = false
@@ -23,7 +23,7 @@ open class FormHeaderFooter {
         self.name = name
     }
     
-    public func prepare(_ view: FormHeaderFooterView, formView: FormView) {
+    public func prepare(_ view: FormViewHeaderFooterView, formView: FormView) {
         _prepareInProgress = true
         linkedView = view
         linkedFormView = formView

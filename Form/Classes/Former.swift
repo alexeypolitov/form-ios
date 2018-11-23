@@ -50,18 +50,18 @@ public class Former {
     
     // Group
     
-    public static func group(_ name: String = UUID().uuidString) -> FormGroup {
-        return FormGroup()
+    public static func group(_ name: String = UUID().uuidString) -> FormViewGroup {
+        return FormViewGroup()
     }
 
     // Container
     
-    public static func header(_ name: String = UUID().uuidString) -> FormHeaderFooterContainer {
-        return FormHeaderFooterContainer(name)
+    public static func header(_ name: String = UUID().uuidString) -> FormViewHeaderFooterContainer {
+        return FormViewHeaderFooterContainer(name)
     }
     
-    public static func footer(_ name: String = UUID().uuidString) -> FormHeaderFooterContainer {
-        return FormHeaderFooterContainer(name)
+    public static func footer(_ name: String = UUID().uuidString) -> FormViewHeaderFooterContainer {
+        return FormViewHeaderFooterContainer(name)
     }
     
     public static func row(_ name: String = UUID().uuidString) -> FormCellContainer {
