@@ -51,18 +51,24 @@ class ViewController: UIViewController {
         
         let _ = formView.bind(form)
         try? formView.addGroup(Former.group()
-            .header(Former.label("testLabel1").bind("test").numberOfLines(0).onLoad({ (control) in
-                guard let `control` = control as? FormLabelControl else { return }
-                control.text = "test 1"
+            .header(Former.switcher("nameTextField1").onLoad({ (control) in
+                guard let `control` = control as? FormSwitcherControl else { return }
+                control.isOn = false
             })) //
 //            .header(Former.image("testImage1").image(UIImage(named: "lemur1")).fixedWidth(50).fixedHeigth(50)) //
-            .add(Former.label("testLabel2").bind("test").numberOfLines(0).onLoad({ (control) in
+//            .add(Former.label("testLabelRow").numberOfLines(0).onLoad({ (control) in
+////                guard let `control` = control as? FormLabelControl else { return }
+////                control.text = "test 2"
+//            }))
+//            .add(Former.badge("testBadgeRow").onLoad({ (control) in
 //                guard let `control` = control as? FormLabelControl else { return }
-//                control.text = "test 2"
-            }))
-//            .add(Former.badge("testBadge"))
+//                control.text = "Row Badge"
+//            }))
 //            .add(Former.image("testImage2").bind("test").fixedWidth(50).fixedHeigth(50))
-//            .add(Former.textField("nameTextField1").placeholder("1氏名"))
+            .add(Former.switcher("nameTextField1").onLoad({ (control) in
+                guard let `control` = control as? FormSwitcherControl else { return }
+                control.isOn = true
+            }))
 //            .add(Former.textView("emailTextField1").placeholder("1メールアドレス"))
 //            .add(Former.switcher("passwordTextField1"))
 //            .footer(Former.image("testImage3").bind("test").fixedWidth(50).fixedHeigth(50))

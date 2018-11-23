@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable, FormValidatable, FormBindable {
+open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable, FormValidatable, FormBindable, FormOnLoad {
     
     var isMain: Bool
     let name: String
@@ -189,6 +189,9 @@ open class FormTextViewControl: ExtendedTextView, FormControllable, FormValuable
         
         let _ = text(bindValue)
     }
+    
+    // MARK: - FormOnLoad
+    var onLoad: ((FormControllable) -> Void)?
 }
 
 // MARK: - Setters
@@ -228,6 +231,11 @@ extension FormTextViewControl {
     
     func bind(_ bindName: String?) -> FormTextViewControl {
         self.bindName = bindName
+        return self
+    }
+    
+    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormTextViewControl {
+        self.onLoad = handler
         return self
     }
     

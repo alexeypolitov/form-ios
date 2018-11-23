@@ -143,11 +143,6 @@ extension FormLabelControl {
         return self
     }
     
-    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormLabelControl {
-        self.onLoad = handler
-        return self
-    }
-    
     func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormLabelControl {
         self.onSelect = handler
         return self
@@ -155,6 +150,11 @@ extension FormLabelControl {
     
     func bind(_ bindName: String?) -> FormLabelControl {
         self.bindName = bindName
+        return self
+    }
+    
+    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormLabelControl {
+        self.onLoad = handler
         return self
     }
 }

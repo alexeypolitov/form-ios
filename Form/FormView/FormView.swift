@@ -297,7 +297,6 @@ extension FormView: UITableViewDelegate {
         if storedGroups.count > 0, let header = storedGroups[section].header {            
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: header.viewClass)) as! FormHeaderFooterView
             header.prepare(headerView, formView: self)
-            print(headerView)
             return headerView
         }
         return nil

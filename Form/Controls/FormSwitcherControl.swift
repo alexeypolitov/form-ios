@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormSwitcherControl: UISwitch, FormControllable, FormBindable {
+open class FormSwitcherControl: UISwitch, FormControllable, FormBindable, FormOnLoad {
 
     var isMain: Bool
     let name: String
@@ -69,6 +69,9 @@ open class FormSwitcherControl: UISwitch, FormControllable, FormBindable {
         
         let _ = isOn(bindValue)
     }
+    
+    // MARK: - FormOnLoad
+    var onLoad: ((FormControllable) -> Void)?
 }
 
 // MARK: - Setters
@@ -97,6 +100,11 @@ extension FormSwitcherControl {
     
     func bind(_ bindName: String?) -> FormSwitcherControl {
         self.bindName = bindName
+        return self
+    }
+    
+    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormSwitcherControl {
+        self.onLoad = handler
         return self
     }
 }

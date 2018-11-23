@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormButtonControl: ExtendedButton, FormControllable, FormSizeable {
+open class FormButtonControl: ExtendedButton, FormControllable, FormSizeable, FormOnLoad {
     
     var isMain: Bool
     let name: String
@@ -68,6 +68,9 @@ open class FormButtonControl: ExtendedButton, FormControllable, FormSizeable {
             _fixedHeigth = newValue
         }
     }
+    
+    // MARK: - FormOnLoad
+    var onLoad: ((FormControllable) -> Void)?
 }
 
 // MARK: - Setters
@@ -129,5 +132,9 @@ extension FormButtonControl {
         return self
     }
 
+    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormButtonControl {
+        self.onLoad = handler
+        return self
+    }
 }
 

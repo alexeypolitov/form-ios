@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBindable {
+class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBindable, FormOnLoad {
 
     var isMain: Bool
     let name: String
@@ -83,6 +83,9 @@ class FormImageControl: UIImageView, FormControllable, FormSizeable, FormBindabl
         
         self.image = bindValue
     }
+    
+    // MARK: - FormOnLoad
+    var onLoad: ((FormControllable) -> Void)?
 }
 
 
@@ -118,6 +121,11 @@ extension FormImageControl {
     
     func bind(_ bindName: String?) -> FormImageControl {
         self.bindName = bindName
+        return self
+    }
+    
+    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormImageControl {
+        self.onLoad = handler
         return self
     }
     

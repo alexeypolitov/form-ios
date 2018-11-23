@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormTextFieldControl: UITextField, FormControllable, FormValuable, FormValidatable, FormBindable {
+open class FormTextFieldControl: UITextField, FormControllable, FormValuable, FormValidatable, FormBindable, FormOnLoad {
     
     var isMain: Bool
     let name: String
@@ -168,6 +168,8 @@ open class FormTextFieldControl: UITextField, FormControllable, FormValuable, Fo
         let _ = text(bindValue)
     }
     
+    // MARK: - FormOnLoad
+    var onLoad: ((FormControllable) -> Void)?
 }
 
 // MARK: - Setters
@@ -211,6 +213,11 @@ extension FormTextFieldControl {
     
     func bind(_ bindName: String?) -> FormTextFieldControl {
         self.bindName = bindName
+        return self
+    }
+    
+    func onLoad(_ handler: ((FormControllable) -> Void)?) -> FormTextFieldControl {
+        self.onLoad = handler
         return self
     }
     
