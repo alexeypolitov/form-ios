@@ -191,9 +191,9 @@ extension FormView: UITableViewDataSource {
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = groups[indexPath.section].rows[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: row.viewClass), for: indexPath) as! FormCellView
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: row.viewClass), for: indexPath) as! FormViewCellView
         
-        if let row = row as? FormCellSelectable {
+        if let row = row as? FormViewCellSelectable {
             cell.selectionStyle = row.selectionStyle ?? .none
             cell.accessoryType = row.accessoryType ?? .none
         } else {
@@ -231,7 +231,7 @@ extension FormView: UITableViewDelegate {
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = groups[indexPath.section].rows[indexPath.row]
         
-        if let row = row as? FormCellSelectable {
+        if let row = row as? FormViewCellSelectable {
             row.formCellOnSelect()
         }
         

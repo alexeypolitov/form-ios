@@ -1,5 +1,5 @@
 //
-//  FormHeaderFooterView.swift
+//  FormCellView.swift
 //  Form
 //
 //  Created by Alexey Politov on 2018/11/16.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-open class FormViewHeaderFooterView: UITableViewHeaderFooterView {
-    
-    public override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
+open class FormViewCellView: UITableViewCell {
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
         translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -28,18 +28,18 @@ open class FormViewHeaderFooterView: UITableViewHeaderFooterView {
     }
     
     // MARK: - Constrains
-
+    
     public func addFormConstrain(view: UIView, constrain: NSLayoutConstraint, priority: UILayoutPriority? = nil) {
         if let `priority` = priority {
             constrain.priority = priority
         }
         constrain.isActive = true
     }
-
+    
     public func removeFormConstrains() {
         for subview in contentView.subviews {
             subview.removeFromSuperview()
         }
     }
+    
 }
-

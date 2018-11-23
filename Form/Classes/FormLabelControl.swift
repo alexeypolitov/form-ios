@@ -64,7 +64,7 @@ open class FormLabelControl: ExtendedLabel, FormControllable, FormSelectable, Fo
     
     open var selectionStyle: UITableViewCell.SelectionStyle?
     open var accessoryType: UITableViewCell.AccessoryType?
-    open var onSelect: ((FormCellContainer) -> Void)?
+    open var onSelect: ((FormViewCellContainer) -> Void)?
     
     // MARK: - FormBindable
     
@@ -143,7 +143,7 @@ extension FormLabelControl {
         return self
     }
     
-    open func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormLabelControl {
+    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormLabelControl {
         self.onSelect = handler
         return self
     }

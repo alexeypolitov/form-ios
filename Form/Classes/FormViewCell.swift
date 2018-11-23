@@ -8,16 +8,16 @@
 
 import UIKit
 
-public protocol FormCellSelectable {
+public protocol FormViewCellSelectable {
     var selectionStyle: UITableViewCell.SelectionStyle? { get set }
     var accessoryType: UITableViewCell.AccessoryType? { get set }
     func formCellOnSelect()
 }
 
-open class FormCell {
+open class FormViewCell {
     
-    public var viewClass: FormCellView.Type { return FormCellView.self }
-    public weak var linkedView: FormCellView?
+    public var viewClass: FormViewCellView.Type { return FormViewCellView.self }
+    public weak var linkedView: FormViewCellView?
     public weak var linkedFormView: FormView?
     public let name: String
     private var _prepareInProgress: Bool = false
@@ -29,7 +29,7 @@ open class FormCell {
         self.name = name
     }
     
-    public func prepare(_ view: FormCellView, formView: FormView) {
+    public func prepare(_ view: FormViewCellView, formView: FormView) {
         _prepareInProgress = true
         linkedView = view
         linkedFormView = formView

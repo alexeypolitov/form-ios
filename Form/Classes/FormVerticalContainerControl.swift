@@ -158,7 +158,7 @@ open class FormVerticalContainerControl: UIView, FormControllable, FormBindable,
     
     open var selectionStyle: UITableViewCell.SelectionStyle?
     open var accessoryType: UITableViewCell.AccessoryType?
-    open var onSelect: ((FormCellContainer) -> Void)?
+    open var onSelect: ((FormViewCellContainer) -> Void)?
  
     // MARK: - FormOnLoad
     open var onLoad: ((FormControllable) -> Void)?
@@ -284,7 +284,7 @@ extension FormVerticalContainerControl {
         return self
     }
     
-    open func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormVerticalContainerControl {
+    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormVerticalContainerControl {
         self.onSelect = handler
         return self
     }

@@ -158,7 +158,7 @@ open class FormHorizontalContainerControl: UIView, FormControllable, FormBindabl
     
     open var selectionStyle: UITableViewCell.SelectionStyle?
     open var accessoryType: UITableViewCell.AccessoryType?
-    open var onSelect: ((FormCellContainer) -> Void)?
+    open var onSelect: ((FormViewCellContainer) -> Void)?
     
     // MARK: - FormOnLoad
     open var onLoad: ((FormControllable) -> Void)?
@@ -284,7 +284,7 @@ extension FormHorizontalContainerControl {
         return self
     }
     
-    open func onSelect(_ handler: ((FormCellContainer) -> Void)?) -> FormHorizontalContainerControl {
+    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormHorizontalContainerControl {
         self.onSelect = handler
         return self
     }

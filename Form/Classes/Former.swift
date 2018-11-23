@@ -64,8 +64,8 @@ public class Former {
         return FormViewHeaderFooterContainer(name)
     }
     
-    public static func row(_ name: String = UUID().uuidString) -> FormCellContainer {
-        return FormCellContainer(name)
+    public static func row(_ name: String = UUID().uuidString) -> FormViewCellContainer {
+        return FormViewCellContainer(name)
     }
     
     // Validator

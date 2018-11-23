@@ -10,10 +10,10 @@ import Foundation
 
 open class FormViewGroup {
     open var header: FormViewHeaderFooter?
-    open var rows: [FormCell] = []
+    open var rows: [FormViewCell] = []
     open var footer: FormViewHeaderFooter?
     
-    public init(header: FormViewHeaderFooter? = nil, _ rows: [FormCell] = [], footer: FormViewHeaderFooter? = nil) {
+    public init(header: FormViewHeaderFooter? = nil, _ rows: [FormViewCell] = [], footer: FormViewHeaderFooter? = nil) {
         self.header = header
         self.rows = rows
         self.footer = footer
@@ -97,13 +97,13 @@ extension FormViewGroup {
         return self
     }
     
-    open func add(_ container: FormCell) -> FormViewGroup {
+    open func add(_ container: FormViewCell) -> FormViewGroup {
         rows.append(container)
         return self
     }
     
     open func add(_ control: FormControllable) -> FormViewGroup {
-        rows.append(FormCellContainer().control(control))
+        rows.append(FormViewCellContainer().control(control))
         return self
     }
     

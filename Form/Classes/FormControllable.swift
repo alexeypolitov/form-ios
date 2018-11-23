@@ -33,7 +33,7 @@ public protocol FormSearchable {
 public protocol FormSelectable {
     var selectionStyle: UITableViewCell.SelectionStyle? { get set }
     var accessoryType: UITableViewCell.AccessoryType? { get set }
-    var onSelect: ((FormCellContainer) -> Void)? { get set }
+    var onSelect: ((FormViewCellContainer) -> Void)? { get set }
 }
 
 // MARK: - Binding
