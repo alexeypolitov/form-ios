@@ -27,7 +27,7 @@ open class FormViewTextField: UITextField, FormViewControllable, FormViewBindabl
         fatalError("Use init()")
     }
     
-    init(_ name: String = UUID().uuidString,
+    public init(_ name: String = UUID().uuidString,
          text: String? = nil,
          placeholder: String? = nil,
          isMain: Bool = false

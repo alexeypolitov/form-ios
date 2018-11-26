@@ -14,7 +14,7 @@ open class FormViewBadge: FormViewLabel {
         fatalError("Use init()")
     }
     
-    init(_ name: String = UUID().uuidString,
+    public init(_ name: String = UUID().uuidString,
          text: String? = nil,
          color: UIColor = UIColor.red,
          cornerRadius: CGFloat = 5,

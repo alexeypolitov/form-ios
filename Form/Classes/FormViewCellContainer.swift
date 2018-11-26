@@ -15,7 +15,7 @@ open class FormViewCellContainer: FormViewCell, FormViewCellSelectable {
     open var insets: UIEdgeInsets = UIEdgeInsets.zero
     open var minimalInset: CGFloat = 8
     
-    override init(_ name: String = UUID().uuidString) {
+    public override init(_ name: String = UUID().uuidString) {
         super.init(name)
         
         self.insets = FormViewCellContainer.appearance.insets

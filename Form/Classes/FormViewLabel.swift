@@ -34,7 +34,7 @@ open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectabl
         fatalError("Use init()")
     }
     
-    init(_ name: String = UUID().uuidString,
+    public init(_ name: String = UUID().uuidString,
          text: String? = nil,
          textVerticalAlignment: ExtendedLabel.TextVerticalAlignment = .center,
          textHorizontalAlignment: NSTextAlignment = .left,

@@ -28,7 +28,7 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
         fatalError("Use init()")
     }
     
-    init(_ name: String = UUID().uuidString,
+    public init(_ name: String = UUID().uuidString,
          text: String? = nil,
          placeholder: String? = nil,
          isMultiline: Bool = true,

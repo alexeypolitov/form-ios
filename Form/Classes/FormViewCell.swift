@@ -25,7 +25,7 @@ open class FormViewCell {
         return _prepareInProgress
     }
     
-    init(_ name: String = UUID().uuidString) {
+    public init(_ name: String = UUID().uuidString) {
         self.name = name
     }
     

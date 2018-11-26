@@ -24,7 +24,7 @@ open class FormViewSwitcher: UISwitch, FormViewControllable, FormViewBindable, F
         fatalError("Use init()")
     }
     
-    init(_ name: String = UUID().uuidString,
+    public init(_ name: String = UUID().uuidString,
          isOn: Bool = true,
          isMain: Bool = false
         )

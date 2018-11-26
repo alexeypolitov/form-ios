@@ -19,7 +19,7 @@ open class FormValidator {
     open var priority: Priority
     open var message: String
     
-    init(priority: Priority, message: String) {
+    public init(priority: Priority, message: String) {
         self.priority = priority
         self.message = message
     }

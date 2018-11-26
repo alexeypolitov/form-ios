@@ -12,7 +12,7 @@ public class FormMaxLengthValidator: FormValidator {
     
     public var maxLength: Int
     
-    init(maxLength: Int,_ message: String) {
+    public init(maxLength: Int,_ message: String) {
         self.maxLength = maxLength
         
         super.init(priority: .medium, message: message)
@@ -30,7 +30,7 @@ public class FormMinLengthValidator: FormValidator {
     
     public var minLength: Int
     
-    init(minLength: Int,_ message: String) {
+    public init(minLength: Int,_ message: String) {
         self.minLength = minLength
         
         super.init(priority: .medium, message: message)
@@ -48,7 +48,7 @@ public class FormBetweenLengthValidator: FormValidator {
     public var minLength: Int
     public var maxLength: Int
     
-    init(minLength: Int, maxLength: Int,_ message: String) {
+    public init(minLength: Int, maxLength: Int,_ message: String) {
         self.minLength = minLength
         self.maxLength = maxLength
         

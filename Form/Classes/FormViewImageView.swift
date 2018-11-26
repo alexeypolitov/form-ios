@@ -22,7 +22,7 @@ open class FormViewImageView: UIImageView, FormViewControllable, FormViewSizeabl
         fatalError("Use init()")
     }
     
-    init(_ name: String = UUID().uuidString,
+    public init(_ name: String = UUID().uuidString,
          image: UIImage? = nil,
          isMain: Bool = false
         )

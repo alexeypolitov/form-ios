@@ -14,7 +14,7 @@ open class FormViewHeaderFooterContainer: FormViewHeaderFooter {
     open var control: FormViewControllable?
     open var insets: UIEdgeInsets = UIEdgeInsets.zero
     
-    override init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
+    public override init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
         super.init(name)
 
         if isFooter {
@@ -42,7 +42,7 @@ open class FormViewHeaderFooterContainer: FormViewHeaderFooter {
     open class Appearance {
         
         var insets: UIEdgeInsets
-        init(_ insets:UIEdgeInsets = UIEdgeInsets.zero) {
+        public init(_ insets:UIEdgeInsets = UIEdgeInsets.zero) {
             self.insets = insets
         }        
     }

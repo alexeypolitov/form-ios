@@ -17,7 +17,7 @@ open class FormViewHorizontalContainer: UIView, FormViewControllable, FormViewBi
     open var insets: UIEdgeInsets = UIEdgeInsets.zero
     open var minimalInset: CGFloat = 8
     
-    init(_ name: String = UUID().uuidString, isMain: Bool = false) {
+    public init(_ name: String = UUID().uuidString, isMain: Bool = false) {
         self.name = name
         self.isMain = isMain
         

@@ -19,7 +19,7 @@ open class FormViewHeaderFooter {
         return _prepareInProgress
     }
     
-    init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
+    public init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
         self.name = name
     }
     

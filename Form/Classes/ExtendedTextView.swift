@@ -29,7 +29,7 @@ open class ExtendedTextView: UITextView {
     
     // MARK: - LifeCycle
     
-    init() {
+    public init() {
         super.init(frame: CGRect.zero, textContainer: nil)
         awakeFromNib()
         updateLayout()

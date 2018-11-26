@@ -10,7 +10,7 @@ import Foundation
 
 public class FormEmailValidator: FormValidator {
     
-    init(_ message: String) {
+    public init(_ message: String) {
         super.init(priority: .high, message: message)
     }
     
