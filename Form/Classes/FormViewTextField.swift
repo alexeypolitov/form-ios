@@ -70,7 +70,7 @@ open class FormViewTextField: UITextField, FormViewControllable, FormViewBindabl
     }
     
     // MARK: - FormViewOnLoad
-    open var onLoad: ((FormViewControllable) -> Void)?
+    open var onLoad: ((Any) -> Void)?
     
     // MARK: - FormViewInputable
     private var _inputSource: FormViewInputSource?
@@ -150,7 +150,7 @@ extension FormViewTextField {
         return self
     }
     
-    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewTextField {
+    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewTextField {
         self.onLoad = handler
         return self
     }

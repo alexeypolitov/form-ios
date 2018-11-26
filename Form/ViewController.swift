@@ -111,79 +111,148 @@ class ViewController: UIViewController {
         )
         
         // FormView
-        let sampleInputSource = SampleFormViewInputSource()
+//        let sampleInputSource = SampleFormViewInputSource()
+//
+//        let html = "<table width=\"100%\"> <tr> <td align=\"left\">Left string</td> <td align=\"right\">Right string</td></tr></table>"
+//        let attrtest = try NSAttributedString(data: html.data(using: .utf8)!, options: [
+//            .documentType: NSAttributedString.DocumentType.html,
+//            .characterEncoding: String.Encoding.utf8.rawValue
+//            ], documentAttributes: nil)
         
-        let html = "<table width=\"100%\"> <tr> <td align=\"left\">Left string</td> <td align=\"right\">Right string</td></tr></table>"
-        let attrtest = try NSAttributedString(data: html.data(using: .utf8)!, options: [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-            ], documentAttributes: nil)
         
-        let _ = formView.bind(form)
-        //        try? formView.addGroup(Former.group().add(Former.textField("testLabelRow6").placeholder("test").bind("name")))
-        try formView.addGroup(Former.group("g1")
-//            .header(
-//                Former.vertical().add([
-//                    Former.horizontal().add([
-//                        Former.label("label1").isMain(true),
-//                        Former.textField("text1").placeholder("test")
-//                        ]),
-//                    Former.horizontal().add([
-//                        Former.label("label2").text("test 1").bind("name").isMain(true),
-//                        Former.textField("test2").placeholder("test").bind("name")
-//                        ])
+        try formView +++ FormViewGroup() {
+            $0.header = FormViewHeaderFooterContainer() { container in
+                
+                container.insets = UIEdgeInsets(top: 20, left: 16, bottom: 8, right: 16)
+                container.control = FormViewLabel() { control in
+                
+                    let termsAttrString = NSAttributedString(string: "\("SignUp.Terms.Part1")", attributes: [
+                        .tappableRegion: true,
+                        NSAttributedString.Key.underlineStyle: 0,
+                        NSAttributedString.Key.link: URL(string: "http://example.com")!,
+                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+                        ])
+                    let textAttrString = NSAttributedString(string: "SignUp.Terms.Part2", attributes: [
+                        NSAttributedString.Key.foregroundColor: UIColor.black,
+                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+                        ])
+                    let spaceAttrString = NSAttributedString(string: " ", attributes: [
+                        NSAttributedString.Key.foregroundColor: UIColor.black,
+                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+                        ])
+                    let iconAttachment = NSTextAttachment()
+                    let iconAttributes: [NSAttributedString.Key: Any] = [
+                        .tappableRegion: true,
+                        NSAttributedString.Key("tag"): "terms"]
+                    let iconRange = NSRange(location: 0, length: 1)
+                    //                if form?.field(name: "terms")?.value as? Bool == true {
+                    //                    iconAttachment.image = UIImage(named: "bear-checked-checkbox")
+                    //                } else {
+                    iconAttachment.image = UIImage(named: "bear-unchecked-checkbox")
+                    //                }
+                    iconAttachment.bounds =  CGRect(x: 0.0, y: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize).descender, width: iconAttachment.image!.size.width, height: iconAttachment.image!.size.height)
+                    let iconAttrString = NSAttributedString(attachment: iconAttachment)
+                    
+                    let attrString = NSMutableAttributedString()
+                    attrString.append(iconAttrString)
+                    attrString.addAttributes(iconAttributes, range: iconRange)
+                    attrString.append(spaceAttrString)
+                    attrString.append(termsAttrString)
+                    attrString.append(textAttrString)
+                    
+                    control.attributedText = attrString
+                    control.textAlignment = .left
+                    
+                }
+            }
+        }
+        
+//        let _ = formView.bind(form)
+//        try formView.addGroup(Former.group("g1")
+//            .header(Former.header().onLoad({ (container) in
+//                guard let `container` = container as? FormViewHeaderFooterContainer else { return }
+//
+//                let termsAttrString = NSAttributedString(string: "\("SignUp.Terms.Part1")", attributes: [
+//                    .tappableRegion: true,
+//                    NSAttributedString.Key.underlineStyle: 0,
+//                    NSAttributedString.Key.link: URL(string: "http://example.com")!,
+//                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
 //                    ])
-//            )
-            .add(
-                Former.horizontal().add([
-//                    Former.label("label3")
-//                        .text("dsfdssfsdfsdf")
-//                        .isMain(true)
-////                        .inputSource(test)
-//                        .onLoad({ (control) in
-////                            guard let `control` = control as? FormViewLabel else { return }
-////                            control.inputAccessoryView = test.inputAccessoryView
-////                            control.inputView = test.inputView
-//                        }),
-                    Former.textField("nameTextField")
-//                        .placeholder("Enter name")
-                        .attributedPlaceholder(attrtest)
-//                        .textAlignment(.right)                        
-                        .bind("name")
-                        .isMain(true)
-                        .backgroundColor(UIColor.yellow)
-                        .inputSource(sampleInputSource)
-                        .onLoad({ (control) in
-//                            guard let `control` = control as? FormViewTextField else { return }
-                            
-                        })
-                    ])
-
-            )
-//            .add(
-//                Former.vertical().add([
-//                    Former.horizontal().add([
-//                        Former.label("label3").text("test 1").isMain(true),
-//                        Former.textField("test3").text("test 2").placeholder("test")
-//                        ]),
-//                    Former.horizontal().add([
-//                        Former.label("label4").text("test 3").isMain(true),
-//                        Former.textField("test4").placeholder("test").text("test 4")
-//                        ])
+//                let textAttrString = NSAttributedString(string: "SignUp.Terms.Part2", attributes: [
+//                    NSAttributedString.Key.foregroundColor: UIColor.black,
+//                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
 //                    ])
+//                let spaceAttrString = NSAttributedString(string: " ", attributes: [
+//                    NSAttributedString.Key.foregroundColor: UIColor.black,
+//                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+//                    ])
+//                let iconAttachment = NSTextAttachment()
+//                let iconAttributes: [NSAttributedString.Key: Any] = [
+////                    .tappableRegion: true,
+//                    NSAttributedString.Key("tag"): "terms"]
+//                let iconRange = NSRange(location: 0, length: 1)
+//                //            if form?.field(name: "terms")?.value as? Bool == true {
+//                //                iconAttachment.image = UIImage(named: "bear-checked-checkbox")
+//                //            } else {
+//                iconAttachment.image = UIImage(named: "bear-unchecked-checkbox")
+//                //            }
+//                iconAttachment.bounds =  CGRect(x: 0.0, y: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize).descender, width: iconAttachment.image!.size.width, height: iconAttachment.image!.size.height)
+//                let iconAttrString = NSAttributedString(attachment: iconAttachment)
+//
+//                let attrString = NSMutableAttributedString()
+//                attrString.append(iconAttrString)
+//                attrString.addAttributes(iconAttributes, range: iconRange)
+//                attrString.append(spaceAttrString)
+//                attrString.append(termsAttrString)
+//                attrString.append(textAttrString)
+//
+//                let control = Former.label()
+//
+//                control.attributedText = attrString
+//                let _ = control.textHorizontalAlignment(.left)
+//
+//                let _ = container.insets(UIEdgeInsets(top: 20, left: 16, bottom: 8, right: 16))
+//                let _ = container.control(control)
+//            })
+////                Former.vertical().add([
+////                    Former.horizontal().add([
+////                        Former.label("label1").isMain(true),
+////                        Former.textField("text1").placeholder("test")
+////                        ]),
+////                    Former.horizontal().add([
+////                        Former.label("label2").text("test 1").bind("name").isMain(true),
+////                        Former.textField("test2").placeholder("test").bind("name")
+////                        ])
+////                    ])
 //            )
-//            .footer(Former.vertical().add(
-//                [
-//                    Former.horizontal().add([
-//                        Former.label("testLabelRow9").text("test 1").bind("name").isMain(true),
-//                        Former.textField("testLabelRow10").placeholder("test").bind("name")
-//                        ]),
-//                    Former.horizontal().add([
-//                        Former.label("testLabelRow11").text("test 1").bind("name").isMain(true),
-//                        Former.textField("testLabelRow12").placeholder("test").bind("name")
-//                        ])
-//                ]))
-        )
+////            .add(
+////                Former.horizontal().add([
+//////                    Former.label("label3")
+//////                        .text("dsfdssfsdfsdf")
+//////                        .isMain(true)
+////////                        .inputSource(test)
+//////                        .onLoad({ (control) in
+////////                            guard let `control` = control as? FormViewLabel else { return }
+////////                            control.inputAccessoryView = test.inputAccessoryView
+////////                            control.inputView = test.inputView
+//////                        }),
+////                    Former.textField("nameTextField")
+//////                        .placeholder("Enter name")
+////                        .attributedPlaceholder(attrtest)
+//////                        .textAlignment(.right)
+////                        .bind("name")
+////                        .isMain(true)
+////                        .backgroundColor(UIColor.yellow)
+////                        .inputSource(sampleInputSource)
+////                        .onLoad({ (control) in
+//////                            guard let `control` = control as? FormViewTextField else { return }
+////
+////                        })
+////                    ])
+////
+////            )
+//
+//        )
         
     }
     

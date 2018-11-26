@@ -19,9 +19,14 @@ open class FormViewHeaderFooter {
         return _prepareInProgress
     }
     
-    public init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
+    public init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewHeaderFooter) -> Void = { _ in }) {
         self.name = name
+        initializer(self)
     }
+//
+//    public init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
+//        self.name = name
+//    }
     
     public func prepare(_ view: FormViewHeaderFooterView, formView: FormView) {
         _prepareInProgress = true

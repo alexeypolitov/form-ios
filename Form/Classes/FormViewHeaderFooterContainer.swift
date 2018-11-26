@@ -8,24 +8,29 @@
 
 import UIKit
 
-open class FormViewHeaderFooterContainer: FormViewHeaderFooter {
+open class FormViewHeaderFooterContainer: FormViewHeaderFooter, FormViewOnLoad {
 
     open override var viewClass: FormViewHeaderFooterView.Type { return FormViewHeaderFooterContainerView.self }
-    open var control: FormViewControllable?
+    open var control: FormViewControllable? {
+        didSet {
+            self.control?.layoutDelegate = self
+            if let bindable = control as? FormViewBindable {
+                bindable.bindDelegate(self)
+            }
+        }
+    }
     open var insets: UIEdgeInsets = UIEdgeInsets.zero
     
-    public override init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
+    public override init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewHeaderFooterContainer) -> Void = { _ in }) {
         super.init(name)
-
-        if isFooter {
-            self.insets = FormViewHeaderFooterContainer.appearanceFooter.insets
-        } else {
-            self.insets = FormViewHeaderFooterContainer.appearanceHeader.insets
-        }
-
+        initializer(self)
     }
     
     open override func onPrepare() {
+        // Container
+        self.onLoad?(self)
+        
+        // Control
         if let `bindable` = control as? FormViewBindable {
             bindable.refreshBindValue()
         }
@@ -49,7 +54,9 @@ open class FormViewHeaderFooterContainer: FormViewHeaderFooter {
     
     public static let appearanceHeader = Appearance(UIEdgeInsets(top: 20, left: 16, bottom: 8, right: 16))
     public static let appearanceFooter = Appearance(UIEdgeInsets(top: 8, left: 16, bottom: 20, right: 16))
-    
+ 
+    // MARK: - FormViewOnLoad
+    open var onLoad: ((Any) -> Void)?
 }
 
 // MARK: - FormViewContainerable
@@ -138,21 +145,27 @@ extension FormViewHeaderFooterContainer: FormViewBindDelegate {
     
 }
 
-// MARK: - Setters
-
-extension FormViewHeaderFooterContainer {
-    
-    open func control(_ control: FormViewControllable?) -> FormViewHeaderFooterContainer {
-        self.control = control
-        self.control?.layoutDelegate = self
-        if let bindable = control as? FormViewBindable {
-            bindable.bindDelegate(self)
-        }  
-        return self
-    }
-    
-    open func insets(_ insets: UIEdgeInsets) -> FormViewHeaderFooterContainer {
-        self.insets = insets
-        return self
-    }
-}
+//// MARK: - Setters
+//
+//extension FormViewHeaderFooterContainer {
+//
+//    open func control(_ control: FormViewControllable?) -> FormViewHeaderFooterContainer {
+//        self.control = control
+//        self.control?.layoutDelegate = self
+//        if let bindable = control as? FormViewBindable {
+//            bindable.bindDelegate(self)
+//        }
+//        return self
+//    }
+//
+//    open func insets(_ insets: UIEdgeInsets) -> FormViewHeaderFooterContainer {
+//        self.insets = insets
+//        return self
+//    }
+//
+//    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewHeaderFooterContainer {
+//        self.onLoad = handler
+//        return self
+//    }
+//
+//}

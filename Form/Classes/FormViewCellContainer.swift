@@ -8,20 +8,30 @@
 
 import UIKit
 
-open class FormViewCellContainer: FormViewCell, FormViewCellSelectable {
+open class FormViewCellContainer: FormViewCell, FormViewCellSelectable, FormViewOnLoad {
 
     open override var viewClass: FormViewCellView.Type { return FormViewCellContainerView.self }
-    open var control: FormViewControllable?
+    open var control: FormViewControllable? {
+        didSet {
+            self.control?.layoutDelegate = self
+            if let bindable = control as? FormViewBindable {
+                bindable.bindDelegate(self)
+            }   
+        }
+    }
     open var insets: UIEdgeInsets = UIEdgeInsets.zero
     open var minimalInset: CGFloat = 8
     
-    public override init(_ name: String = UUID().uuidString) {
-        super.init(name)
-        
-        self.insets = FormViewCellContainer.appearance.insets
+    public override init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewCellContainer) -> Void = { _ in }) {
+        super.init(name)        
+        initializer(self)
     }
     
     open override func onPrepare() {
+        // Container
+        self.onLoad?(self)
+        
+        // Control
         if let `bindable` = control as? FormViewBindable {
             bindable.refreshBindValue()
         }
@@ -94,6 +104,8 @@ open class FormViewCellContainer: FormViewCell, FormViewCellSelectable {
         onSelect?(self)
     }
     
+    // MARK: - FormViewOnLoad
+    open var onLoad: ((Any) -> Void)?
 }
 
 // MARK: - FormViewContainerable
@@ -182,26 +194,31 @@ extension FormViewCellContainer: FormViewBindDelegate {
     
 }
 
-// MARK: - Setters
-
-extension FormViewCellContainer {
-    
-    open func control(_ control: FormViewControllable?) -> FormViewCellContainer {
-        self.control = control
-        self.control?.layoutDelegate = self
-        if let bindable = control as? FormViewBindable {
-            bindable.bindDelegate(self)
-        }        
-        return self
-    }
-    
-    open func insets(_ insets: UIEdgeInsets) -> FormViewCellContainer {
-        self.insets = insets
-        return self
-    }
-    
-    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormViewCellContainer {
-        onSelect = handler
-        return self
-    }
-}
+//// MARK: - Setters
+//
+//extension FormViewCellContainer {
+//
+//    open func control(_ control: FormViewControllable?) -> FormViewCellContainer {
+//        self.control = control
+//        self.control?.layoutDelegate = self
+//        if let bindable = control as? FormViewBindable {
+//            bindable.bindDelegate(self)
+//        }
+//        return self
+//    }
+//
+//    open func insets(_ insets: UIEdgeInsets) -> FormViewCellContainer {
+//        self.insets = insets
+//        return self
+//    }
+//
+//    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormViewCellContainer {
+//        onSelect = handler
+//        return self
+//    }
+//
+//    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewCellContainer {
+//        self.onLoad = handler
+//        return self
+//    }
+//}

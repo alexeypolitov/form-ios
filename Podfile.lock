@@ -1,0 +1,16 @@
+PODS:
+  - ZSWTappableLabel (2.0)
+
+DEPENDENCIES:
+  - ZSWTappableLabel (~> 2.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ZSWTappableLabel
+
+SPEC CHECKSUMS:
+  ZSWTappableLabel: cff84c0a55e30f2141f7dac24e5903302a7e35ec
+
+PODFILE CHECKSUM: 319530244ee786aea6563cbaa85c60199802295f
+
+COCOAPODS: 1.5.3

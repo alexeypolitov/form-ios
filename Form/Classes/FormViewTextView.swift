@@ -89,7 +89,7 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
     }
     
     // MARK: - FormViewOnLoad
-    open var onLoad: ((FormViewControllable) -> Void)?
+    open var onLoad: ((Any) -> Void)?
 }
 
 // MARK: - Setters
@@ -147,7 +147,7 @@ extension FormViewTextView {
         return self
     }
     
-    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewTextView {
+    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewTextView {
         self.onLoad = handler
         return self
     }

@@ -70,7 +70,7 @@ open class FormViewButton: ExtendedButton, FormViewControllable, FormViewSizeabl
     }
     
     // MARK: - FormViewOnLoad
-    open var onLoad: ((FormViewControllable) -> Void)?
+    open var onLoad: ((Any) -> Void)?
 }
 
 // MARK: - Setters
@@ -87,6 +87,11 @@ extension FormViewButton {
         return self
     }
     
+    open func titleColor(_ titleColor: UIColor?, for state: UIControl.State) -> FormViewButton {
+        self.setTitleColor(titleColor, for: state)
+        return self
+    }
+        
     open func attributedTitle(_ attributedTitle: NSAttributedString?, for state: UIControl.State) -> FormViewButton {
         self.setAttributedTitle(attributedTitle, for: state)
         return self
@@ -132,7 +137,7 @@ extension FormViewButton {
         return self
     }
 
-    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewButton {
+    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewButton {
         self.onLoad = handler
         return self
     }

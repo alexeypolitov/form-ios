@@ -79,7 +79,7 @@ open class FormViewImageView: UIImageView, FormViewControllable, FormViewSizeabl
     }
     
     // MARK: - FormViewOnLoad
-    open var onLoad: ((FormViewControllable) -> Void)?
+    open var onLoad: ((Any) -> Void)?
 }
 
 
@@ -118,7 +118,7 @@ extension FormViewImageView {
         return self
     }
     
-    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewImageView {
+    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewImageView {
         self.onLoad = handler
         return self
     }

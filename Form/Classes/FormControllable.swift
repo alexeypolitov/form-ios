@@ -53,7 +53,7 @@ public protocol FormViewBindDelegate {
 // MARK: - OnLoad
 
 public protocol FormViewOnLoad {
-    var onLoad: ((FormViewControllable) -> Void)? { get set }
+    var onLoad: ((Any) -> Void)? { get set }
     func prepareOnLoad() -> Void
 }
 

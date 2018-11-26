@@ -86,15 +86,15 @@ open class FormField: NSObject {
     }
     
     private func prepareValidateByPriority(priority: FormValidator.Priority) -> String? {
-//        let localValidators = validators.filter { (validator) -> Bool in
-//            return validator.priority == priority
-//        }
-//
-//        for validator in localValidators {
-//            if !validator.validate(self) {
-//                return validator.message
-//            }
-//        }
+        let localValidators = validators.filter { (validator) -> Bool in
+            return validator.priority == priority
+        }
+
+        for validator in localValidators {
+            if !validator.validate(self) {
+                return validator.message
+            }
+        }
         
         return nil
     }

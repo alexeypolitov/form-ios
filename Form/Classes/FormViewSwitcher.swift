@@ -71,7 +71,7 @@ open class FormViewSwitcher: UISwitch, FormViewControllable, FormViewBindable, F
     }
     
     // MARK: - FormViewOnLoad
-    open var onLoad: ((FormViewControllable) -> Void)?
+    open var onLoad: ((Any) -> Void)?
 }
 
 // MARK: - Setters
@@ -103,7 +103,7 @@ extension FormViewSwitcher {
         return self
     }
     
-    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewSwitcher {
+    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewSwitcher {
         self.onLoad = handler
         return self
     }

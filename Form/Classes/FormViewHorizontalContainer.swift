@@ -133,7 +133,7 @@ open class FormViewHorizontalContainer: UIView, FormViewControllable, FormViewBi
     open var onSelect: ((FormViewCellContainer) -> Void)?
     
     // MARK: - FormViewOnLoad
-    open var onLoad: ((FormViewControllable) -> Void)?
+    open var onLoad: ((Any) -> Void)?
     
     open func prepareOnLoad() {
         for control in controls {
@@ -261,7 +261,7 @@ extension FormViewHorizontalContainer {
         return self
     }
     
-    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewHorizontalContainer {
+    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewHorizontalContainer {
         self.onLoad = handler
         return self
     }

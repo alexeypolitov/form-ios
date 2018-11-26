@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import ZSWTappableLabel
 
-open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectable, FormViewBindable, FormViewOnLoad, FormViewInputable {
+open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectable, FormViewBindable, FormViewOnLoad, FormViewInputable, ZSWTappableLabelTapDelegate {
     
-    public var isMain: Bool
+    public var isMain: Bool = false
     public let name: String
     public var layoutDelegate: FormViewLayoutable?
 
@@ -34,28 +35,19 @@ open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectabl
         fatalError("Use init()")
     }
     
-    public init(_ name: String = UUID().uuidString,
-         text: String? = nil,
-         textVerticalAlignment: ExtendedLabel.TextVerticalAlignment = .center,
-         textHorizontalAlignment: NSTextAlignment = .left,
-         isMain: Bool = false
-        )
-    {
+    public init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewLabel) -> Void = { _ in }) {
         self.name = name
-        self.isMain = isMain
-        
+    
         super.init(frame: CGRect.zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false
-        if text != nil {
-            self.text = text
-        }        
         self.numberOfLines = 1
-        self.textVerticalAlignment = textVerticalAlignment
-        self.textAlignment = textHorizontalAlignment
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+        self.tapDelegate = self
         
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onTap(_:))))
+        initializer(self)
+        
+//        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onTap(_:))))
     }
     
     open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
@@ -80,14 +72,14 @@ open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectabl
     open func refreshBindValue() {
         guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
         if let bindValue = bindDelegate.bindValue(bindName) as? String {
-            let _ = text(bindValue)
+            text = bindValue
         } else if let bindValue = bindDelegate.bindValue(bindName) as? NSAttributedString {
-            let _ = attributedText(bindValue)
+            attributedText = bindValue
         }
     }
     
     // MARK: - FormViewOnLoad
-    open var onLoad: ((FormViewControllable) -> Void)?
+    open var onLoad: ((Any) -> Void)?
     
     // MARK: - FormViewInputable
     private var _inputSource: FormViewInputSource?
@@ -126,79 +118,90 @@ open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectabl
         becomeFirstResponder()
     }
     
+    // MARK: - ZSWTappableLabelTapDelegate
+    open var onTap: ((FormViewLabel, [NSAttributedString.Key : Any]) -> Void)?
+    public func tappableLabel(_ tappableLabel: ZSWTappableLabel, tappedAt idx: Int, withAttributes attributes: [NSAttributedString.Key : Any] = [:]) {
+        onTap?(self, attributes)
+    }
+    
 }
 
-// MARK: - Setters
-
-extension FormViewLabel {
-    
-    open func isMain(_ isMain: Bool) -> FormViewLabel {
-        self.isMain = isMain
-        return self
-    }
-    
-    open func textHorizontalAlignment(_ textAlignment: NSTextAlignment) -> FormViewLabel {
-        self.textAlignment = textAlignment
-        return self
-    }
-    
-    open func textVerticalAlignment(_ textAlignment: ExtendedLabel.TextVerticalAlignment) -> FormViewLabel {
-        self.textVerticalAlignment = textAlignment
-        return self
-    }
-    
-    open func text(_ text: String?) -> FormViewLabel {
-        self.text = text
-        return self
-    }
-    
-    open func attributedText(_ text: NSAttributedString?) -> FormViewLabel {
-        self.attributedText = text
-        return self
-    }
-    
-    open func font(_ font: UIFont) -> FormViewLabel {
-        self.font = font
-        return self
-    }
-    
-    open func numberOfLines(_ numberOfLines: Int) -> FormViewLabel {
-        self.numberOfLines = numberOfLines
-        return self
-    }
-    
-    open func backgroundColor(_ backgroundColor: UIColor?) -> FormViewLabel {
-        self.backgroundColor = backgroundColor
-        return self
-    }
-    
-    open func selectionStyle(_ selectionStyle: UITableViewCell.SelectionStyle?) -> FormViewLabel {
-        self.selectionStyle = selectionStyle
-        return self
-    }
-    
-    open func accessoryType(_ accessoryType: UITableViewCell.AccessoryType?) -> FormViewLabel {
-        self.accessoryType = accessoryType
-        return self
-    }
-    
-    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormViewLabel {
-        self.onSelect = handler
-        return self
-    }
-    
-    open func bind(_ bindName: String?) -> FormViewLabel {
-        self.bindName = bindName
-        return self
-    }
-    
-    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewLabel {
-        self.onLoad = handler
-        return self
-    }
-    
-    open func inputSource(_ inputSource: FormViewInputSource?) -> FormViewLabel {
-        self.inputSource = inputSource
-        return self
-    }
-}
+//// MARK: - Setters
+//
+//extension FormViewLabel {
+//
+//    open func isMain(_ isMain: Bool) -> FormViewLabel {
+//        self.isMain = isMain
+//        return self
+//    }
+//
+//    open func textHorizontalAlignment(_ textAlignment: NSTextAlignment) -> FormViewLabel {
+//        self.textAlignment = textAlignment
+//        return self
+//    }
+//
+//    open func textVerticalAlignment(_ textAlignment: ExtendedLabel.TextVerticalAlignment) -> FormViewLabel {
+//        self.textVerticalAlignment = textAlignment
+//        return self
+//    }
+//
+//    open func text(_ text: String?) -> FormViewLabel {
+//        self.text = text
+//        return self
+//    }
+//
+//    open func attributedText(_ text: NSAttributedString?) -> FormViewLabel {
+//        self.attributedText = text
+//        return self
+//    }
+//
+//    open func font(_ font: UIFont) -> FormViewLabel {
+//        self.font = font
+//        return self
+//    }
+//
+//    open func numberOfLines(_ numberOfLines: Int) -> FormViewLabel {
+//        self.numberOfLines = numberOfLines
+//        return self
+//    }
+//
+//    open func backgroundColor(_ backgroundColor: UIColor?) -> FormViewLabel {
+//        self.backgroundColor = backgroundColor
+//        return self
+//    }
+//
+//    open func selectionStyle(_ selectionStyle: UITableViewCell.SelectionStyle?) -> FormViewLabel {
+//        self.selectionStyle = selectionStyle
+//        return self
+//    }
+//
+//    open func accessoryType(_ accessoryType: UITableViewCell.AccessoryType?) -> FormViewLabel {
+//        self.accessoryType = accessoryType
+//        return self
+//    }
+//
+//    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormViewLabel {
+//        self.onSelect = handler
+//        return self
+//    }
+//
+//    open func bind(_ bindName: String?) -> FormViewLabel {
+//        self.bindName = bindName
+//        return self
+//    }
+//
+//    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewLabel {
+//        self.onLoad = handler
+//        return self
+//    }
+//
+//    open func inputSource(_ inputSource: FormViewInputSource?) -> FormViewLabel {
+//        self.inputSource = inputSource
+//        return self
+//    }
+//
+//    open func onTap(_ handler: ((FormViewLabel, [NSAttributedString.Key : Any]) -> Void)?) -> FormViewLabel {
+//        self.onTap = handler
+//        return self
+//    }
+//}

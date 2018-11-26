@@ -133,7 +133,7 @@ open class FormViewVerticalContainer: UIView, FormViewControllable, FormViewBind
     open var onSelect: ((FormViewCellContainer) -> Void)?
  
     // MARK: - FormViewOnLoad
-    open var onLoad: ((FormViewControllable) -> Void)?
+    open var onLoad: ((Any) -> Void)?
     
     open func prepareOnLoad() {
         for control in controls {
@@ -261,7 +261,7 @@ extension FormViewVerticalContainer {
         return self
     }
     
-    open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewVerticalContainer {
+    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewVerticalContainer {
         self.onLoad = handler
         return self
     }

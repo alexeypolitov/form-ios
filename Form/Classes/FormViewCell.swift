@@ -25,8 +25,9 @@ open class FormViewCell {
         return _prepareInProgress
     }
     
-    public init(_ name: String = UUID().uuidString) {
+    public init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewCell) -> Void = { _ in }) {
         self.name = name
+        initializer(self)
     }
     
     public func prepare(_ view: FormViewCellView, formView: FormView) {

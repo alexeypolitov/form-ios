@@ -13,10 +13,16 @@ open class FormViewGroup {
     open var rows: [FormViewCell] = []
     open var footer: FormViewHeaderFooter?
     
-    public init(header: FormViewHeaderFooter? = nil, _ rows: [FormViewCell] = [], footer: FormViewHeaderFooter? = nil) {
+    public init(_ initializer: @escaping (FormViewGroup) -> Void) {
+        initializer(self)
+    }
+    
+    public init(header: FormViewHeaderFooter? = nil, _ rows: [FormViewCell] = [], footer: FormViewHeaderFooter? = nil, _ initializer: @escaping (FormViewGroup) -> Void = { _ in }) {
         self.header = header
         self.rows = rows
         self.footer = footer
+        
+        initializer(self)
     }
 }
 
@@ -77,34 +83,34 @@ extension FormViewGroup: FormViewSearchable {
 
 extension FormViewGroup {
     
-    open func header(_ container: FormViewHeaderFooter) -> FormViewGroup {
-        self.header = container
-        return self
-    }
-    
-    open func header(_ control: FormViewControllable) -> FormViewGroup {
-        self.header = FormViewHeaderFooterContainer().control(control)
-        return self
-    }
-    
-    open func footer(_ container: FormViewHeaderFooter) -> FormViewGroup {
-        self.footer = container
-        return self
-    }
-    
-    open func footer(_ control: FormViewControllable) -> FormViewGroup {
-        self.footer = FormViewHeaderFooterContainer().control(control)
-        return self
-    }
-    
-    open func add(_ container: FormViewCell) -> FormViewGroup {
-        rows.append(container)
-        return self
-    }
-    
-    open func add(_ control: FormViewControllable) -> FormViewGroup {
-        rows.append(FormViewCellContainer().control(control))
-        return self
-    }
+//    open func header(_ container: FormViewHeaderFooter) -> FormViewGroup {
+//        self.header = container
+//        return self
+//    }
+//    
+//    open func header(_ control: FormViewControllable) -> FormViewGroup {
+//        self.header = FormViewHeaderFooterContainer().control(control)
+//        return self
+//    }
+//    
+//    open func footer(_ container: FormViewHeaderFooter) -> FormViewGroup {
+//        self.footer = container
+//        return self
+//    }
+//    
+//    open func footer(_ control: FormViewControllable) -> FormViewGroup {
+//        self.footer = FormViewHeaderFooterContainer().control(control)
+//        return self
+//    }
+//    
+//    open func add(_ container: FormViewCell) -> FormViewGroup {
+//        rows.append(container)
+//        return self
+//    }
+//    
+//    open func add(_ control: FormViewControllable) -> FormViewGroup {
+//        rows.append(FormViewCellContainer().control(control))
+//        return self
+//    }
     
 }

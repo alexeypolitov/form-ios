@@ -16,5 +16,6 @@ Test description
   s.ios.deployment_target = '11.0'
   s.swift_version = '4.2'
   s.source_files = 'Form/Classes'
+  s.dependency 'ZSWTappableLabel', '~> 2.0'
  
 end

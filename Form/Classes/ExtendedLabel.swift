@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ZSWTappableLabel
 
-open class ExtendedLabel: UILabel {
+open class ExtendedLabel: ZSWTappableLabel {
 
     public enum TextVerticalAlignment {
         case top

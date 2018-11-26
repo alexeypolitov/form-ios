@@ -14,24 +14,16 @@ open class FormViewBadge: FormViewLabel {
         fatalError("Use init()")
     }
     
-    public init(_ name: String = UUID().uuidString,
-         text: String? = nil,
-         color: UIColor = UIColor.red,
-         cornerRadius: CGFloat = 5,
-         inserts: UIEdgeInsets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4),
-         textVerticalAlignment: ExtendedLabel.TextVerticalAlignment = .center,
-         textHorizontalAlignment: NSTextAlignment = .left,
-         isMain: Bool = false
-        )
-    {
-        super.init(name, text: text, textVerticalAlignment: textVerticalAlignment, textHorizontalAlignment: textHorizontalAlignment, isMain: isMain)
+    public override init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewBadge) -> Void = { _ in }) {
+        super.init(name)
         
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize - 2)
         self.numberOfLines = 0
-        self.insets = inserts
-        self.backgroundRectColor = color
-        self.backgroundRectCornerRadius = cornerRadius
+        self.insets = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
+        self.backgroundRectColor = UIColor.red
+        self.backgroundRectCornerRadius = 5
         
+        initializer(self)
     }
     
 }
