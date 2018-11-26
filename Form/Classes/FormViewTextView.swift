@@ -10,7 +10,7 @@ import UIKit
 
 open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBindable, FormViewOnLoad {
     
-    public var isMain: Bool
+    public var isMain: Bool = false
     public let name: String
     public var layoutDelegate: FormViewLayoutable?
     
@@ -24,25 +24,22 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
     open var shouldInteractWithURL: ((FormViewTextView, URL, NSRange, UITextItemInteraction) -> Bool)?
     open var shouldInteractWithAttachment: ((FormViewTextView, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)?
     
+    open override var text: String! {
+        didSet {
+            updateLayout()
+        }
+    }
+    
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Use init()")
     }
     
-    public init(_ name: String = UUID().uuidString,
-         text: String? = nil,
-         placeholder: String? = nil,
-         isMultiline: Bool = true,
-         isMain: Bool = false
-        )
-    {
+    public init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewTextView) -> Void = { _ in }) {
         self.name = name
-        self.isMain = isMain
         
         super.init()
         
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.text = text
-        self.placeholder = placeholder
         self.textContainerInset = UIEdgeInsets.zero
         self.textContainer.lineFragmentPadding = 0
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
@@ -50,6 +47,7 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
         self.backgroundColor = UIColor.clear
         self.delegate = self        
         
+        initializer(self)
     }
     
     open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
@@ -85,118 +83,11 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
         guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
         guard let bindValue = bindDelegate.bindValue(bindName) as? String else { return }
         
-        let _ = text(bindValue)
+        text = bindValue
     }
     
     // MARK: - FormViewOnLoad
     open var onLoad: ((Any) -> Void)?
-}
-
-// MARK: - Setters
-
-extension FormViewTextView {
-
-    open func isMain(_ isMain: Bool) -> FormViewTextView {
-        self.isMain = isMain
-        return self
-    }
-    
-    open func textAlignment(_ textAlignment: NSTextAlignment) -> FormViewTextView {
-        self.textAlignment = textAlignment
-        return self
-    }
-    
-    open func text(_ text: String?) -> FormViewTextView {
-        self.text = text
-        updateLayout()
-        return self
-    }
-    
-    open func font(_ font: UIFont) -> FormViewTextView {
-        self.font = font
-        return self
-    }
-    
-    open func placeholder(_ placeholder: String) -> FormViewTextView {
-        self.placeholder = placeholder
-        return self
-    }
-    
-    open func backgroundColor(_ backgroundColor: UIColor?) -> FormViewTextView {
-        self.backgroundColor = backgroundColor
-        return self
-    }
-    
-    open func keyboardType(_ keyboardType: UIKeyboardType) -> FormViewTextView {
-        self.keyboardType = keyboardType
-        return self
-    }
-    
-    open func returnKeyType(_ returnKeyType: UIReturnKeyType) -> FormViewTextView {
-        self.returnKeyType = returnKeyType
-        return self
-    }
-    
-    open func isSecureTextEntry(_ isSecureTextEntry: Bool) -> FormViewTextView {
-        self.isSecureTextEntry = isSecureTextEntry
-        return self
-    }
-    
-    open func bind(_ bindName: String?) -> FormViewTextView {
-        self.bindName = bindName
-        return self
-    }
-    
-    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewTextView {
-        self.onLoad = handler
-        return self
-    }
-    
-    open func onChange(_ handler: ((FormViewTextView, String?) -> Void)?) -> FormViewTextView {
-        onChange = handler
-        return self
-    }
-    
-    open func onEndEditing(_ handler: ((FormViewTextView) -> Void)?) -> FormViewTextView {
-        onEndEditing = handler
-        return self
-    }
-
-    open func onBeginEditing(_ handler: ((FormViewTextView) -> Void)?) -> FormViewTextView {
-        onBeginEditing = handler
-        return self
-    }
-
-    open func onChangeSelection(_ handler: ((FormViewTextView) -> Void)?) -> FormViewTextView {
-        onChangeSelection = handler
-        return self
-    }
-    
-    open func shouldEndEditing(_ handler: ((FormViewTextView) -> Bool)?) -> FormViewTextView {
-        shouldEndEditing = handler
-        return self
-    }
-
-    open func shouldBeginEditing(_ handler: ((FormViewTextView) -> Bool)?) -> FormViewTextView {
-        shouldBeginEditing = handler
-        return self
-    }
-
-    open func shouldChangeCharacters(_ handler: ((FormViewTextView, String?, NSRange, String) -> Bool)?) -> FormViewTextView {
-        shouldChangeCharacters = handler
-        return self
-    }
-
-    open func shouldInteractWithURL(_ handler: ((FormViewTextView, URL, NSRange, UITextItemInteraction) -> Bool)?) -> FormViewTextView {
-        shouldInteractWithURL = handler
-        return self
-    }
-
-    open func shouldInteractWithAttachment(_ handler: ((FormViewTextView, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool)?) -> FormViewTextView {
-        shouldInteractWithAttachment = handler
-        return self
-    }
-
 }
 
 // MARK: - UITextViewDelegate
