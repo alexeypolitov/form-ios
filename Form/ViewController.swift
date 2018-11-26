@@ -59,6 +59,17 @@ class ViewController: UIViewController {
                     Former.required("SignUp.Name.Validation.Required.Error"),
                     Former.between(minLength: 3, maxLength: 20, "SignUp.Name.Validation.BetweedLength.Error")])
                 .onChange({ (value) in
+                    guard let control = self.formView.control("nameTextField") as? FormViewTextField else { return }
+                    guard let inputSource = control.inputSource as? SampleFormViewInputSource else { return }
+                    inputSource.label.text = "\(value ?? "")"
+                    inputSource.label.sizeToFit()
+//                    print(inputSource.label)
+//                    print(inputSource.toolbar.items?.first)
+//                    inputSource.toolbar.setNeedsUpdateConstraints()
+                    
+//                    let test3 = UIBarButtonItem(title: "test", style: .plain, target: nil, action: nil)
+//                    inputSource.toolbar.setItems([test3], animated: false)
+                    
                     print("name - onChange")
                 })
         )
@@ -100,6 +111,13 @@ class ViewController: UIViewController {
         )
         
         // FormView
+        let sampleInputSource = SampleFormViewInputSource()
+        
+        let html = "<table width=\"100%\"> <tr> <td align=\"left\">Left string</td> <td align=\"right\">Right string</td></tr></table>"
+        let attrtest = try NSAttributedString(data: html.data(using: .utf8)!, options: [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+            ], documentAttributes: nil)
         
         let _ = formView.bind(form)
         //        try? formView.addGroup(Former.group().add(Former.textField("testLabelRow6").placeholder("test").bind("name")))
@@ -118,11 +136,27 @@ class ViewController: UIViewController {
 //            )
             .add(
                 Former.horizontal().add([
-                    Former.label("label3").bind("name").isMain(true),
-                    Former.textField("test3")
-                        .placeholder("Enter name")
-                        .textAlignment(.right)
-                        .bind("name")                    
+//                    Former.label("label3")
+//                        .text("dsfdssfsdfsdf")
+//                        .isMain(true)
+////                        .inputSource(test)
+//                        .onLoad({ (control) in
+////                            guard let `control` = control as? FormViewLabel else { return }
+////                            control.inputAccessoryView = test.inputAccessoryView
+////                            control.inputView = test.inputView
+//                        }),
+                    Former.textField("nameTextField")
+//                        .placeholder("Enter name")
+                        .attributedPlaceholder(attrtest)
+//                        .textAlignment(.right)                        
+                        .bind("name")
+                        .isMain(true)
+                        .backgroundColor(UIColor.yellow)
+                        .inputSource(sampleInputSource)
+                        .onLoad({ (control) in
+//                            guard let `control` = control as? FormViewTextField else { return }
+                            
+                        })
                     ])
 
             )

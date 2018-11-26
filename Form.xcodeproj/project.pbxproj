@@ -28,6 +28,9 @@
 		29904115219E7B3A007DF31F /* FormViewCellContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29904114219E7B3A007DF31F /* FormViewCellContainer.swift */; };
 		29904117219E7B9B007DF31F /* FormViewCellContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29904116219E7B9B007DF31F /* FormViewCellContainerView.swift */; };
 		299227BD21A85547007869E9 /* FromViewConstrainable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299227BC21A85547007869E9 /* FromViewConstrainable.swift */; };
+		299227C121A85FE2007869E9 /* FormViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299227C021A85FE2007869E9 /* FormViewInput.swift */; };
+		299227C321A86089007869E9 /* SampleFormViewInputSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299227C221A86089007869E9 /* SampleFormViewInputSource.swift */; };
+		299227C721A93512007869E9 /* ExtandedBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299227C621A93512007869E9 /* ExtandedBarButtonItem.swift */; };
 		299FD8CC219D076400A1CE48 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD8CB219D076400A1CE48 /* TestViewController.swift */; };
 		299FD94E219D5A5F00A1CE48 /* FormControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD94D219D5A5F00A1CE48 /* FormControllable.swift */; };
 		299FD950219D5AA900A1CE48 /* FormViewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD94F219D5AA900A1CE48 /* FormViewLabel.swift */; };
@@ -71,6 +74,9 @@
 		29904114219E7B3A007DF31F /* FormViewCellContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewCellContainer.swift; sourceTree = "<group>"; };
 		29904116219E7B9B007DF31F /* FormViewCellContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewCellContainerView.swift; sourceTree = "<group>"; };
 		299227BC21A85547007869E9 /* FromViewConstrainable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromViewConstrainable.swift; sourceTree = "<group>"; };
+		299227C021A85FE2007869E9 /* FormViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewInput.swift; sourceTree = "<group>"; };
+		299227C221A86089007869E9 /* SampleFormViewInputSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleFormViewInputSource.swift; sourceTree = "<group>"; };
+		299227C621A93512007869E9 /* ExtandedBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtandedBarButtonItem.swift; sourceTree = "<group>"; };
 		299FD8CB219D076400A1CE48 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		299FD94D219D5A5F00A1CE48 /* FormControllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormControllable.swift; sourceTree = "<group>"; };
 		299FD94F219D5AA900A1CE48 /* FormViewLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewLabel.swift; sourceTree = "<group>"; };
@@ -141,6 +147,7 @@
 				29A6510021A80EFF00F038D1 /* HeaderFooters */,
 				29A6510521A80F6500F038D1 /* Cells */,
 				29A650FE21A80EDB00F038D1 /* Controls */,
+				299227BF21A85D89007869E9 /* InputSource */,
 				291E3D13217A3A7B006C3D4D /* FormView.swift */,
 				291E3D15217A3B13006C3D4D /* FormViewGroup.swift */,
 			);
@@ -163,6 +170,31 @@
 				299227BC21A85547007869E9 /* FromViewConstrainable.swift */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		299227BF21A85D89007869E9 /* InputSource */ = {
+			isa = PBXGroup;
+			children = (
+				299227C521A864E2007869E9 /* inputAccessoryViews */,
+				299227C421A864D9007869E9 /* inputViews */,
+				299227C021A85FE2007869E9 /* FormViewInput.swift */,
+				299227C221A86089007869E9 /* SampleFormViewInputSource.swift */,
+			);
+			name = InputSource;
+			sourceTree = "<group>";
+		};
+		299227C421A864D9007869E9 /* inputViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = inputViews;
+			sourceTree = "<group>";
+		};
+		299227C521A864E2007869E9 /* inputAccessoryViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = inputAccessoryViews;
 			sourceTree = "<group>";
 		};
 		29A650FC21A80CFE00F038D1 /* Classes */ = {
@@ -220,6 +252,7 @@
 				291E3D0C217A39BD006C3D4D /* ExtendedButton.swift */,
 				291E3D0E217A39BD006C3D4D /* ExtendedLabel.swift */,
 				291E3D0D217A39BD006C3D4D /* ExtendedTextView.swift */,
+				299227C621A93512007869E9 /* ExtandedBarButtonItem.swift */,
 			);
 			name = Extended;
 			sourceTree = "<group>";
@@ -313,12 +346,15 @@
 				299FD94E219D5A5F00A1CE48 /* FormControllable.swift in Sources */,
 				29904107219E56EF007DF31F /* FormViewHeaderFooterContainerView.swift in Sources */,
 				29904105219E56DC007DF31F /* FormViewHeaderFooterContainer.swift in Sources */,
+				299227C121A85FE2007869E9 /* FormViewInput.swift in Sources */,
 				299FD952219D5ACC00A1CE48 /* FormViewBadge.swift in Sources */,
+				299227C721A93512007869E9 /* ExtandedBarButtonItem.swift in Sources */,
 				299FD95E219DAAE600A1CE48 /* FormViewImageView.swift in Sources */,
 				299227BD21A85547007869E9 /* FromViewConstrainable.swift in Sources */,
 				29AF405321A298B90054360B /* FormLengthValidator.swift in Sources */,
 				29AF405721A2B0330054360B /* FormEmailValidator.swift in Sources */,
 				29AF405521A2AFE10054360B /* FormRequiredValidator.swift in Sources */,
+				299227C321A86089007869E9 /* SampleFormViewInputSource.swift in Sources */,
 				299FD956219D5AFC00A1CE48 /* FormViewTextView.swift in Sources */,
 				291E3CF6217A3942006C3D4D /* ViewController.swift in Sources */,
 				29904115219E7B3A007DF31F /* FormViewCellContainer.swift in Sources */,

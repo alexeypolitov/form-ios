@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectable, FormViewBindable, FormViewOnLoad {
+open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectable, FormViewBindable, FormViewOnLoad, FormViewInputable {
     
     public var isMain: Bool
     public let name: String
@@ -54,6 +54,8 @@ open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectabl
         self.textVerticalAlignment = textVerticalAlignment
         self.textAlignment = textHorizontalAlignment
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+        
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onTap(_:))))
     }
     
     open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
@@ -86,6 +88,43 @@ open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectabl
     
     // MARK: - FormViewOnLoad
     open var onLoad: ((FormViewControllable) -> Void)?
+    
+    // MARK: - FormViewInputable
+    private var _inputSource: FormViewInputSource?
+    public var inputSource: FormViewInputSource? {
+        get {
+            return _inputSource
+        }
+        set {
+            if let `newValue` = newValue {
+                if newValue.inputView != nil {
+                    _inputSource = newValue
+                    isUserInteractionEnabled = true
+                } else {
+                    print("Error: \(String(describing: self)) expect not nil inputAccessoryView")
+                }
+            } else {
+                _inputSource = nil
+                isUserInteractionEnabled = false
+            }
+        }
+    }
+    
+    open override var canBecomeFirstResponder: Bool {
+        return inputSource != nil
+    }
+    
+    open override var inputAccessoryView: UIView? {
+        return inputSource?.inputAccessoryView
+    }
+    
+    open override var inputView: UIView? {
+        return inputSource?.inputView
+    }
+    
+    @objc private func onTap(_ sender:Any) {
+        becomeFirstResponder()
+    }
     
 }
 
@@ -155,6 +194,11 @@ extension FormViewLabel {
     
     open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewLabel {
         self.onLoad = handler
+        return self
+    }
+    
+    open func inputSource(_ inputSource: FormViewInputSource?) -> FormViewLabel {
+        self.inputSource = inputSource
         return self
     }
 }

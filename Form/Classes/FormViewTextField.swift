@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormViewTextField: UITextField, FormViewControllable, FormViewBindable, FormViewOnLoad {
+open class FormViewTextField: UITextField, FormViewControllable, FormViewBindable, FormViewOnLoad, FormViewInputable {
     
     public var isMain: Bool
     public let name: String
@@ -71,6 +71,19 @@ open class FormViewTextField: UITextField, FormViewControllable, FormViewBindabl
     
     // MARK: - FormViewOnLoad
     open var onLoad: ((FormViewControllable) -> Void)?
+    
+    // MARK: - FormViewInputable
+    private var _inputSource: FormViewInputSource?
+    public var inputSource: FormViewInputSource? {
+        get {
+            return _inputSource
+        }
+        set {
+            _inputSource = newValue
+            inputView = newValue?.inputView
+            inputAccessoryView = newValue?.inputAccessoryView
+        }
+    }
 }
 
 // MARK: - Setters
@@ -99,6 +112,11 @@ extension FormViewTextField {
     
     open func placeholder(_ placeholder: String) -> FormViewTextField {
         self.placeholder = placeholder
+        return self
+    }
+    
+    open func attributedPlaceholder(_ attributedPlaceholder: NSAttributedString) -> FormViewTextField {
+        self.attributedPlaceholder = attributedPlaceholder
         return self
     }
     
@@ -134,6 +152,11 @@ extension FormViewTextField {
     
     open func onLoad(_ handler: ((FormViewControllable) -> Void)?) -> FormViewTextField {
         self.onLoad = handler
+        return self
+    }
+    
+    open func inputSource(_ inputSource: FormViewInputSource?) -> FormViewTextField {
+        self.inputSource = inputSource
         return self
     }
     
