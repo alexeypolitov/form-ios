@@ -144,28 +144,3 @@ extension FormViewHeaderFooterContainer: FormViewBindDelegate {
     }
     
 }
-
-//// MARK: - Setters
-//
-//extension FormViewHeaderFooterContainer {
-//
-//    open func control(_ control: FormViewControllable?) -> FormViewHeaderFooterContainer {
-//        self.control = control
-//        self.control?.layoutDelegate = self
-//        if let bindable = control as? FormViewBindable {
-//            bindable.bindDelegate(self)
-//        }
-//        return self
-//    }
-//
-//    open func insets(_ insets: UIEdgeInsets) -> FormViewHeaderFooterContainer {
-//        self.insets = insets
-//        return self
-//    }
-//
-//    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewHeaderFooterContainer {
-//        self.onLoad = handler
-//        return self
-//    }
-//
-//}

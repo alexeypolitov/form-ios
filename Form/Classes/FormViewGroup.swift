@@ -78,39 +78,3 @@ extension FormViewGroup: FormViewSearchable {
     }
     
 }
-
-// MARK: - Setters
-
-extension FormViewGroup {
-    
-//    open func header(_ container: FormViewHeaderFooter) -> FormViewGroup {
-//        self.header = container
-//        return self
-//    }
-//    
-//    open func header(_ control: FormViewControllable) -> FormViewGroup {
-//        self.header = FormViewHeaderFooterContainer().control(control)
-//        return self
-//    }
-//    
-//    open func footer(_ container: FormViewHeaderFooter) -> FormViewGroup {
-//        self.footer = container
-//        return self
-//    }
-//    
-//    open func footer(_ control: FormViewControllable) -> FormViewGroup {
-//        self.footer = FormViewHeaderFooterContainer().control(control)
-//        return self
-//    }
-//    
-//    open func add(_ container: FormViewCell) -> FormViewGroup {
-//        rows.append(container)
-//        return self
-//    }
-//    
-//    open func add(_ control: FormViewControllable) -> FormViewGroup {
-//        rows.append(FormViewCellContainer().control(control))
-//        return self
-//    }
-    
-}

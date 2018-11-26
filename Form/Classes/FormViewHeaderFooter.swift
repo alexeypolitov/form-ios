@@ -23,10 +23,6 @@ open class FormViewHeaderFooter {
         self.name = name
         initializer(self)
     }
-//
-//    public init(_ name: String = UUID().uuidString, isFooter: Bool = false) {
-//        self.name = name
-//    }
     
     public func prepare(_ view: FormViewHeaderFooterView, formView: FormView) {
         _prepareInProgress = true

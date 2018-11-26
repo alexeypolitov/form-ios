@@ -10,7 +10,7 @@ import UIKit
 
 open class FormViewTextField: UITextField, FormViewControllable, FormViewBindable, FormViewOnLoad, FormViewInputable {
     
-    public var isMain: Bool
+    public var isMain: Bool = false
     public let name: String
     public var layoutDelegate: FormViewLayoutable?
     
@@ -27,26 +27,19 @@ open class FormViewTextField: UITextField, FormViewControllable, FormViewBindabl
         fatalError("Use init()")
     }
     
-    public init(_ name: String = UUID().uuidString,
-         text: String? = nil,
-         placeholder: String? = nil,
-         isMain: Bool = false
-        )
-    {
+    public init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewTextField) -> Void = { _ in }) {
         self.name = name
-        self.isMain = isMain
         
         super.init(frame: CGRect.zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.text = text
-        self.placeholder = placeholder
         self.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
         self.backgroundColor = UIColor.clear
         self.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.onTextDidChange(notification:)), name: UITextField.textDidChangeNotification, object: self)
-        
+     
+        initializer(self)
     }
     
     open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
@@ -66,7 +59,7 @@ open class FormViewTextField: UITextField, FormViewControllable, FormViewBindabl
         guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
         guard let bindValue = bindDelegate.bindValue(bindName) as? String else { return }
         
-        let _ = text(bindValue)
+        text = bindValue
     }
     
     // MARK: - FormViewOnLoad
@@ -84,117 +77,6 @@ open class FormViewTextField: UITextField, FormViewControllable, FormViewBindabl
             inputAccessoryView = newValue?.inputAccessoryView
         }
     }
-}
-
-// MARK: - Setters
-
-extension FormViewTextField {
-    
-    open func isMain(_ isMain: Bool) -> FormViewTextField {
-        self.isMain = isMain
-        return self
-    }
-    
-    open func textAlignment(_ textAlignment: NSTextAlignment) -> FormViewTextField {
-        self.textAlignment = textAlignment
-        return self
-    }
-    
-    open func text(_ text: String?) -> FormViewTextField {
-        self.text = text
-        return self
-    }
-    
-    open func font(_ font: UIFont) -> FormViewTextField {
-        self.font = font
-        return self
-    }
-    
-    open func placeholder(_ placeholder: String) -> FormViewTextField {
-        self.placeholder = placeholder
-        return self
-    }
-    
-    open func attributedPlaceholder(_ attributedPlaceholder: NSAttributedString) -> FormViewTextField {
-        self.attributedPlaceholder = attributedPlaceholder
-        return self
-    }
-    
-    open func backgroundColor(_ backgroundColor: UIColor?) -> FormViewTextField {
-        self.backgroundColor = backgroundColor
-        return self
-    }
-    
-    open func keyboardType(_ keyboardType: UIKeyboardType) -> FormViewTextField {
-        self.keyboardType = keyboardType
-        return self
-    }
-    
-    open func returnKeyType(_ returnKeyType: UIReturnKeyType) -> FormViewTextField {
-        self.returnKeyType = returnKeyType
-        return self
-    }
-    
-    open func isSecureTextEntry(_ isSecureTextEntry: Bool) -> FormViewTextField {
-        self.isSecureTextEntry = isSecureTextEntry
-        return self
-    }
-    
-    open func onChange(_ handler: ((FormViewTextField, String?) -> Void)?) -> FormViewTextField {
-        onChange = handler
-        return self
-    }
-    
-    open func bind(_ bindName: String?) -> FormViewTextField {
-        self.bindName = bindName
-        return self
-    }
-    
-    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewTextField {
-        self.onLoad = handler
-        return self
-    }
-    
-    open func inputSource(_ inputSource: FormViewInputSource?) -> FormViewTextField {
-        self.inputSource = inputSource
-        return self
-    }
-    
-    open func onBeginEditing(_ handler: ((FormViewTextField) -> Void)?) -> FormViewTextField {
-        onBeginEditing = handler
-        return self
-    }
-    
-    open func onEndEditing(_ handler: ((FormViewTextField, UITextField.DidEndEditingReason) -> Void)?) -> FormViewTextField {
-        onEndEditing = handler
-        return self
-    }
-    
-    open func shouldBeginEditing(_ handler: ((FormViewTextField) -> Bool)?) -> FormViewTextField {
-        shouldBeginEditing = handler
-        return self
-    }
-    
-    open func shouldEndEditing(_ handler: ((FormViewTextField) -> Bool)?) -> FormViewTextField {
-        shouldEndEditing = handler
-        return self
-    }
-    
-    open func shouldChangeCharacters(_ handler: ((FormViewTextField, String?, NSRange, String) -> Bool)?) -> FormViewTextField {
-        shouldChangeCharacters = handler
-        return self
-    }
-    
-    open func shouldClear(_ handler: ((FormViewTextField) -> Bool)?) -> FormViewTextField {
-        shouldClear = handler
-        return self
-    }
-    
-    open func shouldReturn(_ handler: ((FormViewTextField) -> Bool)?) -> FormViewTextField {
-        shouldReturn = handler
-        return self
-    }
-    
 }
 
 // MARK: - UITextFieldDelegate
