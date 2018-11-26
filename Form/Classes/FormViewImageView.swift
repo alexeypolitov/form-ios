@@ -10,9 +10,15 @@ import UIKit
 
 open class FormViewImageView: UIImageView, FormViewControllable, FormViewSizeable, FormViewBindable, FormViewOnLoad {
 
-    public var isMain: Bool
+    public var isMain: Bool = false
     public let name: String
     public var layoutDelegate: FormViewLayoutable?
+    
+    open override var image: UIImage? {
+        didSet {
+            layoutDelegate?.updateControlLayout(element: self)
+        }
+    }
     
     public override init(frame: CGRect) {
         fatalError("Use init()")
@@ -22,19 +28,12 @@ open class FormViewImageView: UIImageView, FormViewControllable, FormViewSizeabl
         fatalError("Use init()")
     }
     
-    public init(_ name: String = UUID().uuidString,
-         image: UIImage? = nil,
-         isMain: Bool = false
-        )
-    {
-        self.isMain = isMain
+    public init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewImageView) -> Void = { _ in }) {
         self.name = name
-        
         super.init(frame: CGRect.zero)
-        
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.image = image
         self.contentMode = .scaleAspectFit
+        initializer(self)
     }
     
     open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
@@ -80,47 +79,4 @@ open class FormViewImageView: UIImageView, FormViewControllable, FormViewSizeabl
     
     // MARK: - FormViewOnLoad
     open var onLoad: ((Any) -> Void)?
-}
-
-
-// MARK: - Setters
-
-extension FormViewImageView {
-    
-    open func isMain(_ isMain: Bool) -> FormViewImageView {
-        self.isMain = isMain
-        return self
-    }
-    
-    open func image(_ image: UIImage?) -> FormViewImageView {
-        self.image = image
-        layoutDelegate?.updateControlLayout(element: self)
-        return self
-    }
-    
-    open func fixedWidth(_ width: CGFloat?) -> FormViewImageView {
-        self.fixedWidth = width
-        return self
-    }
-    
-    open func fixedHeigth(_ height: CGFloat?) -> FormViewImageView {
-        self.fixedHeigth = height
-        return self
-    }
-    
-    open func backgroundColor(_ backgroundColor: UIColor?) -> FormViewImageView {
-        self.backgroundColor = backgroundColor
-        return self
-    }
-    
-    open func bind(_ bindName: String?) -> FormViewImageView {
-        self.bindName = bindName
-        return self
-    }
-    
-    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewImageView {
-        self.onLoad = handler
-        return self
-    }
-    
 }

@@ -10,7 +10,7 @@ import UIKit
 
 open class FormViewSwitcher: UISwitch, FormViewControllable, FormViewBindable, FormViewOnLoad {
 
-    public var isMain: Bool
+    public var isMain: Bool = false
     public let name: String
     public var layoutDelegate: FormViewLayoutable?
     
@@ -24,20 +24,12 @@ open class FormViewSwitcher: UISwitch, FormViewControllable, FormViewBindable, F
         fatalError("Use init()")
     }
     
-    public init(_ name: String = UUID().uuidString,
-         isOn: Bool = true,
-         isMain: Bool = false
-        )
-    {
+    public init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewSwitcher) -> Void = { _ in }) {
         self.name = name
-        self.isMain = isMain
-        
         super.init(frame: CGRect.zero)
-        
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.isOn = isOn
-        
         self.addTarget(self, action: #selector(self.onChangeEvent(_:)), for: .valueChanged)
+        initializer(self)
     }
     
     open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
@@ -67,44 +59,9 @@ open class FormViewSwitcher: UISwitch, FormViewControllable, FormViewBindable, F
         guard let `bindDelegate` = bindDelegate, let `bindName` = bindName else { return }
         guard let bindValue = bindDelegate.bindValue(bindName) as? Bool else { return }
         
-        let _ = isOn(bindValue)
+        isOn = bindValue
     }
     
     // MARK: - FormViewOnLoad
     open var onLoad: ((Any) -> Void)?
-}
-
-// MARK: - Setters
-
-extension FormViewSwitcher {
-
-    open func isMain(_ isMain: Bool) -> FormViewSwitcher {
-        self.isMain = isMain
-        return self
-    }
-    
-    open func isOn(_ isOn: Bool) -> FormViewSwitcher {
-        self.isOn = isOn
-        return self
-    }
-    
-    open func onChange(_ handler: ((FormViewSwitcher, Bool) -> Void)?) -> FormViewSwitcher {
-        onChange = handler
-        return self
-    }
-    
-    open func backgroundColor(_ backgroundColor: UIColor?) -> FormViewSwitcher {
-        self.backgroundColor = backgroundColor
-        return self
-    }
-    
-    open func bind(_ bindName: String?) -> FormViewSwitcher {
-        self.bindName = bindName
-        return self
-    }
-    
-    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewSwitcher {
-        self.onLoad = handler
-        return self
-    }
 }

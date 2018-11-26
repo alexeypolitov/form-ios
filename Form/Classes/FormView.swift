@@ -70,22 +70,20 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     // MARK: - Binding
     
-    private var bindForm: Form?
-    
-    open func bind(_ form: Form?) -> FormView {
-        self.bindForm = form
-        self.bindForm?.bindDelegate = self
-        return self
+    var bind: Form? {
+        didSet {
+            bind?.bindDelegate = self
+        }
     }
     
     open func bindValueChanged(control: FormViewControllable, bindName: String, value: Any?) {
-        guard let field = bindForm?.field(bindName) else { return }
+        guard let field = bind?.field(bindName) else { return }
         field.setValueFromFormView(value, controlName: control.name)
     }
     
     open func bindValue(_ bindName: String) -> Any? {
-        precondition(bindForm != nil, "Form has not binding, but bindValue did called")        
-        guard let field = bindForm?.field(bindName) else { return nil }
+        precondition(bind != nil, "Form has not binding, but bindValue did called")
+        guard let field = bind?.field(bindName) else { return nil }
         return field.value
     }
     

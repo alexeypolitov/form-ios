@@ -10,21 +10,31 @@ import UIKit
 
 open class FormViewHorizontalContainer: UIView, FormViewControllable, FormViewBindable, FormViewSelectable, FormViewOnLoad {
     
-    public var isMain: Bool
+    public var isMain: Bool = false
     public let name: String
     public var layoutDelegate: FormViewLayoutable?
-    open var controls: [FormViewControllable] = []
+    open var controls: [FormViewControllable] = [] {
+        didSet {
+            for control in controls {
+                control.layoutDelegate(self)
+                if let `bindable` = control as? FormViewBindable {
+                    bindable.bindDelegate(self)
+                }
+            }
+            buildLayout()
+        }
+    }
     open var insets: UIEdgeInsets = UIEdgeInsets.zero
     open var minimalInset: CGFloat = 8
     
-    public init(_ name: String = UUID().uuidString, isMain: Bool = false) {
+    public init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewHorizontalContainer) -> Void = { _ in }) {
         self.name = name
-        self.isMain = isMain
         
         super.init(frame: CGRect.zero)
         
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = UIColor.clear
+        initializer(self)
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -221,49 +231,6 @@ extension FormViewHorizontalContainer: FormViewContainerable {
             }
         }
         return list
-    }
-    
-}
-
-// MARK: - Setters
-
-extension FormViewHorizontalContainer {
-    
-    open func isMain(_ isMain: Bool) -> FormViewHorizontalContainer {
-        self.isMain = isMain
-        return self
-    }
-    
-    open func add(_ control: FormViewControllable) -> FormViewHorizontalContainer {
-        control.layoutDelegate(self)
-        if let `bindable` = control as? FormViewBindable {
-            bindable.bindDelegate(self)
-        }
-        self.controls.append(control)
-        self.buildLayout()
-        return self
-    }
-    
-    open func add(_ controls: [FormViewControllable]) -> FormViewHorizontalContainer {
-        for control in controls {
-            control.layoutDelegate(self)
-            if let `bindable` = control as? FormViewBindable {
-                bindable.bindDelegate(self)
-            }
-        }
-        self.controls.append(contentsOf: controls)
-        self.buildLayout()
-        return self
-    }
-    
-    open func onSelect(_ handler: ((FormViewCellContainer) -> Void)?) -> FormViewHorizontalContainer {
-        self.onSelect = handler
-        return self
-    }
-    
-    open func onLoad(_ handler: ((Any) -> Void)?) -> FormViewHorizontalContainer {
-        self.onLoad = handler
-        return self
     }
     
 }
