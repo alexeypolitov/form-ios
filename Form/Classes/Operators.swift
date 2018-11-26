@@ -25,3 +25,15 @@ public func +++ (left: FormView, right: FormViewGroup) throws -> FormView  {
     try left.addGroup(right)
     return left
 }
+
+@discardableResult
+public func +++ (left: FormViewGroup, right: FormViewCell) -> FormViewGroup  {
+    left.rows.append(right)
+    return left
+}
+//
+//@discardableResult
+//public func +++ (left: FormViewGroup, right: FormViewControllable) -> FormViewGroup  {
+//    left.rows.append(right)
+//    return left
+//}

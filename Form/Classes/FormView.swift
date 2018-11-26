@@ -70,7 +70,7 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     // MARK: - Binding
     
-    var bind: Form? {
+    public var bind: Form? {
         didSet {
             bind?.bindDelegate = self
         }
