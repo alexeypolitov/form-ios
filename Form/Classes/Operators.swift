@@ -31,9 +31,9 @@ public func +++ (left: FormViewGroup, right: FormViewCell) -> FormViewGroup  {
     left.rows.append(right)
     return left
 }
-//
-//@discardableResult
-//public func +++ (left: FormViewGroup, right: FormViewControllable) -> FormViewGroup  {
-//    left.rows.append(right)
-//    return left
-//}
+
+@discardableResult
+public func +++ (left: Form, right: FormField) -> Form  {
+    left.add(right)
+    return left
+}

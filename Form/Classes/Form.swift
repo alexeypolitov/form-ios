@@ -19,10 +19,9 @@ open class Form {
     
     public init() { }
     
-    open func add(_ field: FormField) -> Form {
+    open func add(_ field: FormField) {
         field.delegate = self
         fields.append(field)
-        return self
     }
     
     open func field(_ name: String) -> FormField? {

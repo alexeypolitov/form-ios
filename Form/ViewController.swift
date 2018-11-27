@@ -54,61 +54,57 @@ class ViewController: UIViewController {
 //        )
         
         let _ = form
-            .add(Form.field("name")
-                .validators([
+            +++ FormField("name") { field in
+                field.validators = [
                     Former.required("SignUp.Name.Validation.Required.Error"),
-                    Former.between(minLength: 3, maxLength: 20, "SignUp.Name.Validation.BetweedLength.Error")])
-                .onChange({ (value) in
-                    guard let control = self.formView.control("nameTextField") as? FormViewTextField else { return }
-                    guard let inputSource = control.inputSource as? SampleFormViewInputSource else { return }
-                    inputSource.label.text = "\(value ?? "")"
-                    inputSource.label.sizeToFit()
-//                    print(inputSource.label)
-//                    print(inputSource.toolbar.items?.first)
-//                    inputSource.toolbar.setNeedsUpdateConstraints()
-                    
-//                    let test3 = UIBarButtonItem(title: "test", style: .plain, target: nil, action: nil)
-//                    inputSource.toolbar.setItems([test3], animated: false)
-                    
-                    print("name - onChange")
-                })
-        )
-        .add(Form.field("email")
-            .validators([
-                Former.required("SignUp.Email.Validation.Required.Error"),
-                Former.email("SignUp.Email.Validation.Email.Error")])
-            .onChange({ (value) in
-                print("email - onChange")
-            })
-        )
-        .add(Form.field("password")
-            .validators([
-                Former.required("SignUp.Password.Validation.Required.Error"),
-                Former.minLength(minLength: 6, "SignUp.Password.Validation.MinLength.Error")])
-            .onChange({ (value) in
-                print("password - onChange")
-            })
-        )
-        .add(Form.field("prWay")
-            .validator(Former.required("SignUp.PRWay.Validation.Required.Error"))
-            .onChange({ (value) in
-                print("prWay - onChange")
-//                    guard let control = self.formView.control("prWayLabel") as? FormLabelControl else { return }
-//                    if value != nil {
-//                        let _ = control.text("Value \(value!)")
-//                    } else {
-//                        let _ = control.text("選択してください")
-//                    }
-
-            })
-        )
-        .add(Form.field("terms")
-            .value(false)
-            .validator(Former.required("SignUp.Terms.Validation.Required.Error"))
-            .onChange({ (value) in
-                print("terms - onChange")
-            })
-        )
+                    Former.between(minLength: 3, maxLength: 20, "SignUp.Name.Validation.BetweedLength.Error")
+                ]
+            }
+//                .onChange({ (value) in
+//                    guard let control = self.formView.control("nameTextField") as? FormViewTextField else { return }
+//                    guard let inputSource = control.inputSource as? SampleFormViewInputSource else { return }
+//                    inputSource.label.text = "\(value ?? "")"
+//                    inputSource.label.sizeToFit()
+////                    print(inputSource.label)
+////                    print(inputSource.toolbar.items?.first)
+////                    inputSource.toolbar.setNeedsUpdateConstraints()
+//
+////                    let test3 = UIBarButtonItem(title: "test", style: .plain, target: nil, action: nil)
+////                    inputSource.toolbar.setItems([test3], animated: false)
+//
+//                    print("name - onChange")
+//                })
+//        )
+//        .add(Form.field("email")
+//            .validators([
+//                Former.required("SignUp.Email.Validation.Required.Error"),
+//                Former.email("SignUp.Email.Validation.Email.Error")])
+//            .onChange({ (value) in
+//                print("email - onChange")
+//            })
+//        )
+//        .add(Form.field("password")
+//            .validators([
+//                Former.required("SignUp.Password.Validation.Required.Error"),
+//                Former.minLength(minLength: 6, "SignUp.Password.Validation.MinLength.Error")])
+//            .onChange({ (value) in
+//                print("password - onChange")
+//            })
+//        )
+//        .add(Form.field("prWay")
+//            .validator(Former.required("SignUp.PRWay.Validation.Required.Error"))
+//            .onChange({ (value) in
+//                print("prWay - onChange")
+//
+//            })
+//        )
+//        .add(Form.field("terms")
+//            .value(false)
+//            .validator(Former.required("SignUp.Terms.Validation.Required.Error"))
+//            .onChange({ (value) in
+//                print("terms - onChange")
+//            })
+//        )
         
         // FormView
 //        let sampleInputSource = SampleFormViewInputSource()

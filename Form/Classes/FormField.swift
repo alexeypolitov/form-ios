@@ -44,8 +44,10 @@ open class FormField: NSObject {
     open var onChange: ((Any?) -> Void)?
     open var delegate: FormFieldDelegate?
     
-    public init(_ name: String) {
+    public init(_ name: String, _ initializer: @escaping (FormField) -> Void = { _ in }) {
         self.name = name
+        super.init()
+        initializer(self)
     }
     
     open func setValueFromFormView(_ value: Any?, controlName: String) {
