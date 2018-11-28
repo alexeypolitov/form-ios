@@ -69,6 +69,12 @@ open class FormViewHorizontalContainer: UIView, FormViewControllable, FormViewBi
                 if let fixedWidth = controlSizeable.fixedWidth {
                     addFormConstrain(view: controlView, constrain: controlView.widthAnchor.constraint(equalToConstant: fixedWidth))
                 }
+                if let minimumHeight = controlSizeable.minimumHeight {
+                    addFormConstrain(view: controlView, constrain: controlView.heightAnchor.constraint(greaterThanOrEqualToConstant: minimumHeight))
+                }
+                if let minimumWidth = controlSizeable.minimumWidth {
+                    addFormConstrain(view: controlView, constrain: controlView.widthAnchor.constraint(greaterThanOrEqualToConstant: minimumWidth))
+                }
             }
             
             if let lastControlView = lastControl as? UIView {

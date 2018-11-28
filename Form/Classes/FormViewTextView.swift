@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBindable, FormViewOnLoad, FormViewInputable {
+open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBindable, FormViewOnLoad, FormViewInputable, FormViewSizeable {
     
     public var isMain: Bool = false
     public let name: String
@@ -99,6 +99,45 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
             _inputSource = newValue
             inputView = newValue?.inputView
             inputAccessoryView = newValue?.inputAccessoryView
+        }
+    }
+    
+    // MARK: - FormStackControlElementSizing
+    
+    private var _fixedWidth:CGFloat?
+    open var fixedWidth: CGFloat? {
+        get {
+            return _fixedWidth
+        }
+        set {
+            _fixedWidth = newValue
+        }
+    }
+    private var _fixedHeigth:CGFloat?
+    open var fixedHeigth: CGFloat? {
+        get {
+            return _fixedHeigth
+        }
+        set {
+            _fixedHeigth = newValue
+        }
+    }
+    private var _minimumHeight:CGFloat?
+    open var minimumHeight: CGFloat? {
+        get {
+            return _minimumHeight
+        }
+        set {
+            _minimumHeight = newValue
+        }
+    }
+    private var _minimumWidth:CGFloat?
+    open var minimumWidth: CGFloat? {
+        get {
+            return _minimumWidth
+        }
+        set {
+            _minimumWidth = newValue
         }
     }
 }

@@ -30,22 +30,32 @@ class ViewController: UIViewController {
         
         try formView +++ FormViewGroup() { group in
             
-            group.footer = FormViewHeaderFooterContainer() { container in
-                
-                container.insets = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
-                container.control = FormViewBadge() { control in
-                    
-                    control.insets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
-                    control.backgroundRectColor = UIColor(displayP3Red: 255.0 / 255.0, green: 251.0 / 255.0, blue: 226.0 / 255.0, alpha: 1)
-                    control.backgroundRectBorderColor = UIColor(displayP3Red: 222.0 / 255.0, green: 216.0 / 255.0, blue: 188.0 / 255.0, alpha: 1)
-                    control.backgroundRectBorderWidth = 1
-                    control.textColor = UIColor(displayP3Red: 144.0 / 255.0, green: 139.0 / 255.0, blue: 76.0 / 255.0, alpha: 1)
-                    control.textAlignment = .left
-                    
-                    control.text = "お支払いはアプリ内課金として、AppleのAppStoreよりご請求が行われます。\nなお、ご請求確認方法等につきましてはコチラをご覧ください。"
+            group +++ FormViewCellContainer() { container in
+             
+                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+                container.control = FormViewTextView() { textView in
+                    textView.minimumHeight = 100
+                    textView.placeholder = "1234567890\n1234567890"
                 }
                 
             }
+            
+//            group.footer = FormViewHeaderFooterContainer() { container in
+//
+//                container.insets = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
+//                container.control = FormViewBadge() { control in
+//
+//                    control.insets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+//                    control.backgroundRectColor = UIColor(displayP3Red: 255.0 / 255.0, green: 251.0 / 255.0, blue: 226.0 / 255.0, alpha: 1)
+//                    control.backgroundRectBorderColor = UIColor(displayP3Red: 222.0 / 255.0, green: 216.0 / 255.0, blue: 188.0 / 255.0, alpha: 1)
+//                    control.backgroundRectBorderWidth = 1
+//                    control.textColor = UIColor(displayP3Red: 144.0 / 255.0, green: 139.0 / 255.0, blue: 76.0 / 255.0, alpha: 1)
+//                    control.textAlignment = .left
+//
+//                    control.text = "お支払いはアプリ内課金として、AppleのAppStoreよりご請求が行われます。\nなお、ご請求確認方法等につきましてはコチラをご覧ください。"
+//                }
+//
+//            }
             
         }
         

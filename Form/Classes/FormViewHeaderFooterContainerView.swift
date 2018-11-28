@@ -43,6 +43,12 @@ open class FormViewHeaderFooterContainerView: FormViewHeaderFooterView {
             if let fixedWidth = controlSizing.fixedWidth {
                 addFormConstrain(view: controlView, constrain: controlView.widthAnchor.constraint(equalToConstant: fixedWidth))
             }
+            if let minimumHeight = controlSizing.minimumHeight {
+                addFormConstrain(view: controlView, constrain: controlView.heightAnchor.constraint(greaterThanOrEqualToConstant: minimumHeight))
+            }
+            if let minimumWidth = controlSizing.minimumWidth {
+                addFormConstrain(view: controlView, constrain: controlView.widthAnchor.constraint(greaterThanOrEqualToConstant: minimumWidth))
+            }
         }
 
         addFormConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: controlInsets.left))

@@ -63,6 +63,24 @@ open class FormViewButton: ExtendedButton, FormViewControllable, FormViewSizeabl
             _fixedHeigth = newValue
         }
     }
+    private var _minimumHeight:CGFloat?
+    open var minimumHeight: CGFloat? {
+        get {
+            return _minimumHeight
+        }
+        set {
+            _minimumHeight = newValue
+        }
+    }
+    private var _minimumWidth:CGFloat?
+    open var minimumWidth: CGFloat? {
+        get {
+            return _minimumWidth
+        }
+        set {
+            _minimumWidth = newValue
+        }
+    }
     
     // MARK: - FormViewOnLoad
     open var onLoad: ((Any) -> Void)?

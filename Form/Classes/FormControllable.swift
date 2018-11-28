@@ -19,6 +19,8 @@ public protocol FormViewLayoutable {
 public protocol FormViewSizeable {
     var fixedWidth: CGFloat? { get set }
     var fixedHeigth: CGFloat? { get set }
+    var minimumHeight: CGFloat? { get set }
+    var minimumWidth: CGFloat? { get set }
 }
 
 // MARK: - Searchable
