@@ -37,3 +37,15 @@ public func +++ (left: Form, right: FormField) -> Form  {
     left.add(right)
     return left
 }
+
+@discardableResult
+public func +++ (left: FormViewHorizontalContainer, right: FormViewControllable) -> FormViewHorizontalContainer  {
+    left.controls.append(right)
+    return left
+}
+
+@discardableResult
+public func +++ (left: FormViewVerticalContainer, right: FormViewControllable) -> FormViewVerticalContainer  {
+    left.controls.append(right)
+    return left
+}

@@ -17,6 +17,8 @@ public class FormRequiredValidator: FormValidator {
     public override func validate(_ field: FormField) -> Bool {
         if let value = field.value as? Bool {
             return value
+        } else if let value = field.value as? String {
+            return value.count > 0
         } else {
             return field.value != nil
         }

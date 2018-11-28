@@ -19,11 +19,11 @@ open class ExtandedUIBarButtonItem: UIBarButtonItem {
 
 extension UIBarButtonItem {
     
-    static func flexibleSpace() -> UIBarButtonItem  {
+    static public func flexibleSpace() -> UIBarButtonItem  {
         return UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
     }
     
-    static func fixedSpace() -> UIBarButtonItem  {
+    static public func fixedSpace() -> UIBarButtonItem  {
         return UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
     }
 }

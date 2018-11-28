@@ -13,8 +13,10 @@ public protocol FormViewInputable {
 }
 
 open class FormViewInputSource {
-    var inputView: UIView?
-    var inputAccessoryView: UIView?
-    var keyboardType:UIKeyboardType?
-    var returnKeyType:UIReturnKeyType? 
+    open var inputView: UIView?
+    open var inputAccessoryView: UIView?
+    open var keyboardType:UIKeyboardType?
+    open var returnKeyType:UIReturnKeyType?
+    
+    public init() { }
 }
