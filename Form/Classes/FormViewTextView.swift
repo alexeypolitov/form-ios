@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBindable, FormViewOnLoad {
+open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBindable, FormViewOnLoad, FormViewInputable {
     
     public var isMain: Bool = false
     public let name: String
@@ -88,6 +88,19 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
     
     // MARK: - FormViewOnLoad
     open var onLoad: ((Any) -> Void)?
+    
+    // MARK: - FormViewInputable
+    private var _inputSource: FormViewInputSource?
+    public var inputSource: FormViewInputSource? {
+        get {
+            return _inputSource
+        }
+        set {
+            _inputSource = newValue
+            inputView = newValue?.inputView
+            inputAccessoryView = newValue?.inputAccessoryView
+        }
+    }
 }
 
 // MARK: - UITextViewDelegate
