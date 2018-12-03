@@ -41,5 +41,4 @@ open class FormViewCellView: UITableViewCell {
             subview.removeFromSuperview()
         }
     }
-    
 }

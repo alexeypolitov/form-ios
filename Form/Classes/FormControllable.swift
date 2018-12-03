@@ -15,6 +15,7 @@ public protocol FormViewLayoutable {
     
     func inputSourceWillShow(_ notification: Notification)
     func inputSourceWillHide(_ notification: Notification)
+    func hideInputSource()
 }
 
 // MARK: - Sizeable

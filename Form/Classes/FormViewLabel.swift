@@ -102,6 +102,10 @@ open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectabl
         }
     }
     
+    public func hideInputSource() {
+        resignFirstResponder()
+    }
+    
     open override var canBecomeFirstResponder: Bool {
         return inputSource != nil
     }

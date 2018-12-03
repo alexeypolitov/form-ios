@@ -195,7 +195,8 @@ class ViewController: UIViewController {
         actionSheet.addAction(UIAlertAction(title: "Reload", style: .default, handler: { [weak self] (action) in
             guard let `self` = self else { return }
             
-            self.formView.reloadData()
+//            self.formView.reloadData()
+            self.formView.hideInputSource()
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

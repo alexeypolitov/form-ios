@@ -48,7 +48,7 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     }
     
 //    open override func awakeFromNib() {
-//        
+//
 //    }
     
     private func register(_ cellClass: AnyClass, name: String? = nil) {
@@ -280,6 +280,12 @@ extension FormView {
     
     open func inputSourceWillHide(_ notification: Notification) {
         self.tableView?.tableFooterView = nil
+    }
+    
+    open func hideInputSource() {
+        for group in groups {
+            group.hideInputSource()
+        }
     }
     
 }

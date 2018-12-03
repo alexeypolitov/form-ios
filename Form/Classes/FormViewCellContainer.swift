@@ -157,6 +157,15 @@ extension FormViewCellContainer: FormViewLayoutable {
         linkedFormView?.inputSourceWillHide(notification)
     }
     
+    open func hideInputSource() {
+        if let `control` = control as? FormViewLayoutable {
+            control.hideInputSource()
+        }
+        if let `control` = control as? FormViewInputable {
+            control.hideInputSource()
+        }
+    }
+    
 }
 
 // MARK: - FormViewSearchable

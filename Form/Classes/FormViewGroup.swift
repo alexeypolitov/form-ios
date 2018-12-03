@@ -24,6 +24,14 @@ open class FormViewGroup {
         
         initializer(self)
     }
+    
+    open func hideInputSource() {
+        for row in rows {
+            if let `row` = row as? FormViewLayoutable {
+                row.hideInputSource()
+            }            
+        }
+    }
 }
 
 // MARK: - FormViewSearchable

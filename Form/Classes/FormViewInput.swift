@@ -10,6 +10,7 @@ import UIKit
 
 public protocol FormViewInputable {
     var inputSource: FormViewInputSource? { get set }
+    func hideInputSource()
 }
 
 open class FormViewInputSource {

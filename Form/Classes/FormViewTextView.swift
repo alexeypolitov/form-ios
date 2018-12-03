@@ -109,6 +109,10 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
         }
     }
     
+    public func hideInputSource() {
+        resignFirstResponder()
+    }
+    
     // MARK: - FormStackControlElementSizing
     
     private var _fixedWidth:CGFloat?
@@ -159,6 +163,7 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
         guard isFirstResponder else { return}        
         layoutDelegate?.inputSourceWillHide(notification)
     }
+    
 }
 
 // MARK: - UITextViewDelegate

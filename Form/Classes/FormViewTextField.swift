@@ -84,6 +84,10 @@ open class FormViewTextField: UITextField, FormViewControllable, FormViewBindabl
         }
     }
     
+    public func hideInputSource() {
+        resignFirstResponder()
+    }
+    
     // MARK: - Keyboard Notifications
     
     @objc func keyboardWillShow(_ notification: Notification) {

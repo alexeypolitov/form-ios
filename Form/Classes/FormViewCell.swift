@@ -50,4 +50,5 @@ open class FormViewCell {
     public var formView: FormView? {
         return linkedFormView
     }
+    
 }
