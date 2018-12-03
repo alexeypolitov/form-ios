@@ -31,11 +31,83 @@ class ViewController: UIViewController {
         try formView +++ FormViewGroup() { group in
             
             group +++ FormViewCellContainer() { container in
+                
+                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+                container.control = FormViewLabel() { label in
+                    label.text = "text"
+                }
+                
+            }
+            
+            group +++ FormViewCellContainer() { container in
+                
+                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+                container.control = FormViewLabel() { label in
+                    label.text = "text"
+                }
+                
+            }
+            
+            group +++ FormViewCellContainer() { container in
+                
+                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+                container.control = FormViewLabel() { label in
+                    label.text = "text"
+                }
+                
+            }
+            
+            group +++ FormViewCellContainer() { container in
+                
+                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+                container.control = FormViewLabel() { label in
+                    label.text = "text"
+                }
+                
+            }
+            
+            group +++ FormViewCellContainer() { container in
+                
+                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+                container.control = FormViewLabel() { label in
+                    label.text = "text"
+                }
+                
+            }
+            
+            group +++ FormViewCellContainer() { container in
+                
+                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+                container.control = FormViewLabel() { label in
+                    label.text = "text"
+                }
+                
+            }
+            
+            group +++ FormViewCellContainer() { container in
+                
+                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+                container.control = FormViewLabel() { label in
+                    label.text = "text"
+                }
+                
+            }
+            
+            group +++ FormViewCellContainer() { container in
              
                 container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
                 container.control = FormViewTextView() { textView in
                     textView.minimumHeight = 100
                     textView.placeholder = "1234567890\n1234567890"
+                }
+                
+            }
+            
+            group +++ FormViewCellContainer() { container in
+                
+                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+                container.control = FormViewTextField() { textField in
+                    textField.placeholder = "qwertyu"
                 }
                 
             }

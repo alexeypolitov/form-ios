@@ -12,6 +12,9 @@ import UIKit
 
 public protocol FormViewLayoutable {
     func updateControlLayout(element: FormViewControllable)
+    
+    func inputSourceWillShow(_ notification: Notification)
+    func inputSourceWillHide(_ notification: Notification)
 }
 
 // MARK: - Sizeable

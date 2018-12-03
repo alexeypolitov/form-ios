@@ -237,3 +237,37 @@ extension FormView: UITableViewDelegate {
     }
     
 }
+
+// MARK: - Input Source
+
+extension FormView {
+    
+    open func inputSourceWillShow(_ notification: Notification, container: Any?) {
+        guard let userInfo = notification.userInfo else { return }
+        
+        if
+            let keyboardRectValue = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+            let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval {
+            
+            let keyboardRect = keyboardRectValue.cgRectValue
+            
+            UIView.animate(withDuration: duration, animations: {
+                self.tableView?.tableFooterView = UIView(frame: CGRect(origin: CGPoint.zero, size: keyboardRect.size))
+            }) { (complete) in
+                if let cellObject = container as? FormViewCell, let cellView = cellObject.linkedView {
+                    if let indexPath = self.tableView?.indexPath(for: cellView) {
+                        self.tableView?.scrollToRow(at: indexPath, at: .top, animated: true)
+                    }
+
+                }
+            }
+            
+        }
+
+    }
+    
+    open func inputSourceWillHide(_ notification: Notification) {
+        self.tableView?.tableFooterView = nil
+    }
+    
+}

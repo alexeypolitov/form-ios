@@ -170,6 +170,14 @@ extension FormViewVerticalContainer: FormViewLayoutable {
         layoutDelegate?.updateControlLayout(element: element)
     }
     
+    open func inputSourceWillShow(_ notification: Notification) {
+        layoutDelegate?.inputSourceWillShow(notification)
+    }
+    
+    public func inputSourceWillHide(_ notification: Notification) {
+        layoutDelegate?.inputSourceWillHide(notification)
+    }
+    
 }
 
 // MARK: - FormViewSearchable

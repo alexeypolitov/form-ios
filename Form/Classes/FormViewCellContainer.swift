@@ -149,6 +149,14 @@ extension FormViewCellContainer: FormViewLayoutable {
         updateFormView()
     }
     
+    open func inputSourceWillShow(_ notification: Notification) {
+        linkedFormView?.inputSourceWillShow(notification, container: self)
+    }
+    
+    open func inputSourceWillHide(_ notification: Notification) {
+        linkedFormView?.inputSourceWillHide(notification)
+    }
+    
 }
 
 // MARK: - FormViewSearchable

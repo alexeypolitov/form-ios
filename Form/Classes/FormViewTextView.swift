@@ -47,7 +47,14 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
         self.backgroundColor = UIColor.clear
         self.delegate = self        
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         initializer(self)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     open func layoutDelegate(_ layoutDelegate: FormViewLayoutable?) {
@@ -139,6 +146,18 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
         set {
             _minimumWidth = newValue
         }
+    }
+    
+    // MARK: - Keyboard Notifications
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard isFirstResponder else { return}
+        layoutDelegate?.inputSourceWillShow(notification)
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        guard isFirstResponder else { return}        
+        layoutDelegate?.inputSourceWillHide(notification)
     }
 }
 
