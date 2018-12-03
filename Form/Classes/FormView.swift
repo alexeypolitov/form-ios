@@ -19,8 +19,17 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     fileprivate var registredIdentifiers: [String: AnyClass] = [:]
     fileprivate var registredNames: [String] = []
     
-    open override func awakeFromNib() {
-        
+    public init() {
+        super.init(frame: CGRect.zero)
+        prepareView()
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        prepareView()
+    }
+    
+    public func prepareView() {
         let tv = UITableView(frame: .zero, style: .grouped)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.delegate = self
@@ -32,12 +41,15 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
         tv.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         tv.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         tv.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-
+        
         tableView = tv
         
         register(UITableViewCell.self, name: String(describing: UITableViewCell.self))
-        
     }
+    
+//    open override func awakeFromNib() {
+//        
+//    }
     
     private func register(_ cellClass: AnyClass, name: String? = nil) {
         let reuseIdentifier = String(describing: cellClass.self)
