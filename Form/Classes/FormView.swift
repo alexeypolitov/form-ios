@@ -15,7 +15,7 @@ enum FormViewError: Error {
 open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     fileprivate var tableView: UITableView?
-    fileprivate var groups: [FormViewGroup] = []
+    public var groups: [FormViewGroup] = []
     fileprivate var registredIdentifiers: [String: AnyClass] = [:]
     fileprivate var registredNames: [String] = []
     
@@ -169,6 +169,13 @@ extension FormView {
             list.append(contentsOf: group.bindableControls(bindName))
         }
         return list
+    }
+    
+    open func removeRow(by name: String) {
+        for group in groups {
+            group.rows.removeAll(where: {$0.name == name})
+        }
+        reloadData()
     }
     
     open func removeAllControls() {

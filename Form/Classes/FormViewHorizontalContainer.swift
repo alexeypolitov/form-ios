@@ -60,11 +60,13 @@ open class FormViewHorizontalContainer: UIView, FormViewControllable, FormViewBi
             addSubview(controlView)
             
             addFormConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: self.topAnchor, constant: insets.top))
-            addFormConstrain(view: controlView, constrain: controlView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: insets.bottom * -1))
+            
             
             if let controlSizeable = control as? FormViewSizeable {
                 if let fixedHeigth = controlSizeable.fixedHeigth {
                     addFormConstrain(view: controlView, constrain: controlView.heightAnchor.constraint(equalToConstant: fixedHeigth))
+                } else {
+                    addFormConstrain(view: controlView, constrain: controlView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: insets.bottom * -1))
                 }
                 if let fixedWidth = controlSizeable.fixedWidth {
                     addFormConstrain(view: controlView, constrain: controlView.widthAnchor.constraint(equalToConstant: fixedWidth))
@@ -75,6 +77,8 @@ open class FormViewHorizontalContainer: UIView, FormViewControllable, FormViewBi
                 if let minimumWidth = controlSizeable.minimumWidth {
                     addFormConstrain(view: controlView, constrain: controlView.widthAnchor.constraint(greaterThanOrEqualToConstant: minimumWidth))
                 }
+            } else {
+                addFormConstrain(view: controlView, constrain: controlView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: insets.bottom * -1))
             }
             
             if let lastControlView = lastControl as? UIView {

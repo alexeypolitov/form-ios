@@ -27,110 +27,52 @@ class ViewController: UIViewController {
     }
     
     func buildForm() throws {
-        
+
         try formView +++ FormViewGroup() { group in
             
             group +++ FormViewCellContainer() { container in
                 
                 container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
-                container.control = FormViewLabel() { label in
-                    label.text = "text"
+                container.control = FormViewHorizontalContainer() { horizontalContainer in
+
+                    horizontalContainer +++ FormViewButton() { button in
+                        button.setTitle("+", for: .normal)
+                        button.setTitleColor(UIColor.black, for: .normal)
+                    }
+
+                    horizontalContainer +++ FormViewImageView() { imageView in
+
+                        imageView.fixedWidth = 50
+                        imageView.fixedHeigth = 50
+                        imageView.backgroundColor = UIColor.gray
+
+                    }
+
+                    horizontalContainer +++ FormViewVerticalContainer() { verticalController in
+
+                        verticalController.isMain = true
+                        verticalController +++ FormViewTextField() { textField in
+                            textField.backgroundColor = UIColor.purple
+                            textField.placeholder = "左写真に関するタイトルを付けましょう"
+                        }
+                        verticalController +++ FormViewTextView() { textView in
+                            textView.backgroundColor = UIColor.yellow
+//                            textView.minimumHeight = 48
+                            textView.placeholder = "左写真に関する説明を書きましょう！\n250文字以内で特徴をアピールしてください。"
+                        }
+
+                    }
+
                 }
-                
-            }
-            
-            group +++ FormViewCellContainer() { container in
-                
-                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
-                container.control = FormViewLabel() { label in
-                    label.text = "text"
-                }
-                
-            }
-            
-            group +++ FormViewCellContainer() { container in
-                
-                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
-                container.control = FormViewLabel() { label in
-                    label.text = "text"
-                }
-                
-            }
-            
-            group +++ FormViewCellContainer() { container in
-                
-                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
-                container.control = FormViewLabel() { label in
-                    label.text = "text"
-                }
-                
-            }
-            
-            group +++ FormViewCellContainer() { container in
-                
-                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
-                container.control = FormViewLabel() { label in
-                    label.text = "text"
-                }
-                
-            }
-            
-            group +++ FormViewCellContainer() { container in
-                
-                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
-                container.control = FormViewLabel() { label in
-                    label.text = "text"
-                }
-                
-            }
-            
-            group +++ FormViewCellContainer() { container in
-                
-                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
-                container.control = FormViewLabel() { label in
-                    label.text = "text"
-                }
-                
-            }
-            
-            group +++ FormViewCellContainer() { container in
-             
-                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
-                container.control = FormViewTextView() { textView in
-                    textView.minimumHeight = 100
-                    textView.placeholder = "1234567890\n1234567890"
-                }
-                
-            }
-            
-            group +++ FormViewCellContainer() { container in
-                
-                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
-                container.control = FormViewTextField() { textField in
-                    textField.placeholder = "qwertyu"
-                }
-                
-            }
-            
-//            group.footer = FormViewHeaderFooterContainer() { container in
-//
-//                container.insets = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
-//                container.control = FormViewBadge() { control in
-//
-//                    control.insets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
-//                    control.backgroundRectColor = UIColor(displayP3Red: 255.0 / 255.0, green: 251.0 / 255.0, blue: 226.0 / 255.0, alpha: 1)
-//                    control.backgroundRectBorderColor = UIColor(displayP3Red: 222.0 / 255.0, green: 216.0 / 255.0, blue: 188.0 / 255.0, alpha: 1)
-//                    control.backgroundRectBorderWidth = 1
-//                    control.textColor = UIColor(displayP3Red: 144.0 / 255.0, green: 139.0 / 255.0, blue: 76.0 / 255.0, alpha: 1)
-//                    control.textAlignment = .left
-//
-//                    control.text = "お支払いはアプリ内課金として、AppleのAppStoreよりご請求が行われます。\nなお、ご請求確認方法等につきましてはコチラをご覧ください。"
+//                container.control = FormViewTextView() { textView in
+//                    textView.backgroundColor = UIColor.yellow
+//                    textView.minimumHeight = 48
+//                    textView.placeholder = "左写真に関する説明を書きましょう！1234567890-1234567890-\n250文字以内で特徴をアピールしてください。"
 //                }
-//
-//            }
-            
+            }
         }
         
+
 //        try formView +++ FormViewGroup() { group in
 //            group.header = FormViewHeaderFooterContainer() { container in
 //

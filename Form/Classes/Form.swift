@@ -24,6 +24,10 @@ open class Form {
         fields.append(field)
     }
     
+    open func remove(by name: String) {
+        fields.removeAll(where: {$0.name == name})
+    }
+    
     open func field(_ name: String) -> FormField? {
         return fields.first(where: {$0.name == name})
     }
