@@ -9,7 +9,7 @@
 import UIKit
 import ZSWTappableLabel
 
-open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectable, FormViewBindable, FormViewOnLoad, FormViewInputable, ZSWTappableLabelTapDelegate {
+open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectable, FormViewBindable, FormViewOnLoad, FormViewInputable, ZSWTappableLabelTapDelegate, FormViewSizeable {
     
     public var isMain: Bool = false
     public let name: String
@@ -126,6 +126,45 @@ open class FormViewLabel: ExtendedLabel, FormViewControllable, FormViewSelectabl
     open var onTap: ((FormViewLabel, [NSAttributedString.Key : Any]) -> Void)?
     public func tappableLabel(_ tappableLabel: ZSWTappableLabel, tappedAt idx: Int, withAttributes attributes: [NSAttributedString.Key : Any] = [:]) {
         onTap?(self, attributes)
+    }
+    
+    // MARK: - FormStackControlElementSizing
+    
+    private var _fixedWidth:CGFloat?
+    open var fixedWidth: CGFloat? {
+        get {
+            return _fixedWidth
+        }
+        set {
+            _fixedWidth = newValue
+        }
+    }
+    private var _fixedHeigth:CGFloat?
+    open var fixedHeigth: CGFloat? {
+        get {
+            return _fixedHeigth
+        }
+        set {
+            _fixedHeigth = newValue
+        }
+    }
+    private var _minimumHeight:CGFloat?
+    open var minimumHeight: CGFloat? {
+        get {
+            return _minimumHeight
+        }
+        set {
+            _minimumHeight = newValue
+        }
+    }
+    private var _minimumWidth:CGFloat?
+    open var minimumWidth: CGFloat? {
+        get {
+            return _minimumWidth
+        }
+        set {
+            _minimumWidth = newValue
+        }
     }
     
 }

@@ -9,15 +9,18 @@
 import Foundation
 
 open class FormViewGroup {
+    public let name: String
     open var header: FormViewHeaderFooter?
     open var rows: [FormViewCell] = []
     open var footer: FormViewHeaderFooter?
     
-    public init(_ initializer: @escaping (FormViewGroup) -> Void) {
+    public init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewGroup) -> Void) {
+        self.name = name
         initializer(self)
     }
     
-    public init(header: FormViewHeaderFooter? = nil, _ rows: [FormViewCell] = [], footer: FormViewHeaderFooter? = nil, _ initializer: @escaping (FormViewGroup) -> Void = { _ in }) {
+    public init(name: String = UUID().uuidString, header: FormViewHeaderFooter? = nil, _ rows: [FormViewCell] = [], footer: FormViewHeaderFooter? = nil, _ initializer: @escaping (FormViewGroup) -> Void = { _ in }) {
+        self.name = name
         self.header = header
         self.rows = rows
         self.footer = footer

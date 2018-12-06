@@ -14,14 +14,14 @@ enum FormViewError: Error {
 
 open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
-    fileprivate var tableView: UITableView?
+    public var tableView: UITableView?
     public var groups: [FormViewGroup] = []
     fileprivate var registredIdentifiers: [String: AnyClass] = [:]
     fileprivate var registredNames: [String] = []
     
-    public init() {
+    public init(_ style: UITableView.Style = .grouped) {
         super.init(frame: CGRect.zero)
-        prepareView()
+        prepareView(style)
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -29,8 +29,8 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
         prepareView()
     }
     
-    public func prepareView() {
-        let tv = UITableView(frame: .zero, style: .grouped)
+    public func prepareView(_ style: UITableView.Style = .grouped) {
+        let tv = UITableView(frame: .zero, style: style)
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.delegate = self
         tv.dataSource = self
@@ -147,6 +147,45 @@ extension FormView {
         }
         
         groups.append(group)
+        
+        tableView?.reloadData()
+        
+    }
+    
+    open func insertGroup(_ group: FormViewGroup, at index: Int) throws {
+        
+        if let container = group.header {
+            try registerName(container.name)
+            if let `containerable` = container as? FormViewContainerable {
+                for controlName in containerable.controlsNames() {
+                    try registerName(controlName)
+                }
+            }
+            registerHeaderFooter(container.viewClass, name: container.name)
+        }
+        if let container = group.footer {
+            try registerName(container.name)
+            if let `containerable` = container as? FormViewContainerable {
+                for controlName in containerable.controlsNames() {
+                    try registerName(controlName)
+                }
+            }
+            registerHeaderFooter(container.viewClass, name: container.name)
+        }
+        
+        // Check duplications
+        
+        for row in group.rows {
+            try registerName(row.name)
+            if let `containerable` = row as? FormViewContainerable {
+                for controlName in containerable.controlsNames() {
+                    try registerName(controlName)
+                }
+            }
+            register(row.viewClass, name: row.name)
+        }
+        
+        groups.insert(group, at: index)
         
         tableView?.reloadData()
         
