@@ -62,7 +62,7 @@ class ViewController: UIViewController {
                         }
 
                     }
-
+                    
                 }
 //                container.control = FormViewTextView() { textView in
 //                    textView.backgroundColor = UIColor.yellow
@@ -70,9 +70,38 @@ class ViewController: UIViewController {
 //                    textView.placeholder = "左写真に関する説明を書きましょう！1234567890-1234567890-\n250文字以内で特徴をアピールしてください。"
 //                }
             }
+            
+            group +++ FormViewCellContainer() { container in
+                
+                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+                container.control = FormViewStack() { stack in
+                    
+                    stack.axis  = NSLayoutConstraint.Axis.horizontal
+                    stack.distribution  = UIStackView.Distribution.fillEqually
+                    stack.alignment = UIStackView.Alignment.center
+                    stack.spacing   = 16.0
+                    
+                    let textLabel1 = UILabel()
+                    textLabel1.backgroundColor = UIColor.yellow
+//                    textLabel1.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+//                    textLabel1.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+                    textLabel1.text  = "Hi World"
+                    textLabel1.textAlignment = .center
+                    
+                    let textLabel2 = UILabel()
+                    textLabel2.backgroundColor = UIColor.yellow
+//                    textLabel2.widthAnchor.constraint(equalToConstant: self.view.frame.width).isActive = true
+//                    textLabel2.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+                    textLabel2.text  = "Hi World 2"
+                    textLabel2.textAlignment = .center
+                    
+                    stack.addArrangedSubview(textLabel1)
+                    stack.addArrangedSubview(textLabel2)
+                    
+                }
+            }
         }
         
-
 //        try formView +++ FormViewGroup() { group in
 //            group.header = FormViewHeaderFooterContainer() { container in
 //
