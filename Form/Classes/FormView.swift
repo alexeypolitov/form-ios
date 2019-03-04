@@ -205,6 +205,17 @@ extension FormView {
         return nil
     }
     
+    open func group(_ name: String) -> FormViewGroup? {
+        
+        for group in groups {
+            if group.name == name {
+                return group
+            }
+        }
+        
+        return nil
+    }
+    
     open func bindableControls(_ bindName: String) -> [FormViewBindable] {
         var list: [FormViewBindable] = []
         for group in groups {
