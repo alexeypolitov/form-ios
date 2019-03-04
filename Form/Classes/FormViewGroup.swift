@@ -13,6 +13,17 @@ open class FormViewGroup {
     open var header: FormViewHeaderFooter?
     open var rows: [FormViewCell] = []
     open var footer: FormViewHeaderFooter?
+    public var formView: FormView?
+    private var _isHidden: Bool = false
+    open var isHidden: Bool {
+        get {
+            return _isHidden
+        }
+        set {
+            _isHidden = newValue
+            formView?.reloadData()
+        }
+    }
     
     public init(_ name: String = UUID().uuidString, _ initializer: @escaping (FormViewGroup) -> Void) {
         self.name = name

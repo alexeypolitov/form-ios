@@ -28,7 +28,16 @@ class ViewController: UIViewController {
     
     func buildForm() throws {
 
-        try formView +++ FormViewGroup() { group in
+        try formView +++ FormViewGroup("test1") { group in
+            group.header = FormViewHeaderFooterContainer() { container in
+                container.control = FormViewLabel() { label in
+                    label.text = "ddd1"
+                }
+            }
+
+        }
+        
+        try formView +++ FormViewGroup("testControls") { group in
             
             group +++ FormViewCellContainer() { container in
                 
@@ -102,6 +111,15 @@ class ViewController: UIViewController {
             }
         }
         
+        try formView +++ FormViewGroup("test2") { group in
+            group.header = FormViewHeaderFooterContainer() { container in
+                container.control = FormViewLabel() { label in
+                    label.text = "ddd2"
+                }
+            }
+            
+        }
+        
 //        try formView +++ FormViewGroup() { group in
 //            group.header = FormViewHeaderFooterContainer() { container in
 //
@@ -163,11 +181,19 @@ class ViewController: UIViewController {
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: "Reload", style: .default, handler: { [weak self] (action) in
+        actionSheet.addAction(UIAlertAction(title: "Show/Hide", style: .default, handler: { [weak self] (action) in
             guard let `self` = self else { return }
             
+            guard let group = self.formView.groups.first(where: { group in
+                return group.name == "test1"
+            }) else {
+                return
+            }
+            
+            group.isHidden = !group.isHidden
+            
 //            self.formView.reloadData()
-            self.formView.hideInputSource()
+//            self.formView.hideInputSource()
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

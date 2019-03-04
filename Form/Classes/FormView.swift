@@ -15,6 +15,7 @@ enum FormViewError: Error {
 open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
     
     public var tableView: UITableView?
+    private var visibleGroups: [FormViewGroup] = []
     public var groups: [FormViewGroup] = []
     fileprivate var registredIdentifiers: [String: AnyClass] = [:]
     fileprivate var registredNames: [String] = []
@@ -46,10 +47,6 @@ open class FormView: UIView, FormViewBindDelegate, FormBindDelegate {
         
         register(UITableViewCell.self, name: String(describing: UITableViewCell.self))
     }
-    
-//    open override func awakeFromNib() {
-//
-//    }
     
     private func register(_ cellClass: AnyClass, name: String? = nil) {
         let reuseIdentifier = String(describing: cellClass.self)
@@ -146,8 +143,11 @@ extension FormView {
             register(row.viewClass, name: row.name)
         }
         
+        // Link to FromView
+        group.formView = self
         groups.append(group)
         
+        prepareVisibleGroups()
         tableView?.reloadData()
         
     }
@@ -185,8 +185,11 @@ extension FormView {
             register(row.viewClass, name: row.name)
         }
         
+        // Link to FromView
+        group.formView = self
         groups.insert(group, at: index)
         
+        prepareVisibleGroups()
         tableView?.reloadData()
         
     }
@@ -219,7 +222,7 @@ extension FormView {
     
     open func removeAllControls() {
         groups.removeAll()
-        tableView?.reloadData()
+        reloadData()
     }
     
     open func updateControls() {
@@ -229,7 +232,17 @@ extension FormView {
         UIView.setAnimationsEnabled(true)
     }
     
+    private func prepareVisibleGroups() {
+        visibleGroups = []
+        for group in groups {
+            if !group.isHidden {
+                visibleGroups.append(group)
+            }
+        }
+    }
+    
     open func reloadData() {
+        prepareVisibleGroups()
         tableView?.reloadData()
     }
     
@@ -238,15 +251,15 @@ extension FormView {
 extension FormView: UITableViewDataSource {
     
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return groups.count > 0 ? groups.count : 1
+        return visibleGroups.count > 0 ? visibleGroups.count : 1
     }
     
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groups.count > 0 ? groups[section].rows.count : 0
+        return visibleGroups.count > 0 ? visibleGroups[section].rows.count : 0
     }
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = groups[indexPath.section].rows[indexPath.row]
+        let row = visibleGroups[indexPath.section].rows[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: row.viewClass), for: indexPath) as! FormViewCellView
         
         if let row = row as? FormViewCellSelectable {
@@ -267,7 +280,7 @@ extension FormView: UITableViewDataSource {
 extension FormView: UITableViewDelegate {
     
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if groups.count > 0, let header = groups[section].header {
+        if visibleGroups.count > 0, let header = visibleGroups[section].header {
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: header.viewClass)) as! FormViewHeaderFooterView
             header.prepare(headerView, formView: self)
             return headerView
@@ -276,7 +289,7 @@ extension FormView: UITableViewDelegate {
     }
     
     open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if groups.count > 0, let footer = groups[section].footer {
+        if visibleGroups.count > 0, let footer = visibleGroups[section].footer {
             let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: footer.viewClass)) as! FormViewHeaderFooterView
             footer.prepare(footerView, formView: self)
             return footerView
@@ -285,7 +298,7 @@ extension FormView: UITableViewDelegate {
     }
     
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row = groups[indexPath.section].rows[indexPath.row]
+        let row = visibleGroups[indexPath.section].rows[indexPath.row]
         
         if let row = row as? FormViewCellSelectable {
             row.formCellOnSelect()
@@ -329,7 +342,7 @@ extension FormView {
     }
     
     open func hideInputSource() {
-        for group in groups {
+        for group in visibleGroups {
             group.hideInputSource()
         }
     }
