@@ -10,16 +10,19 @@ import Foundation
 
 public class FormRegExValidator: FormValidator {
     
-    public init(_ message: String) {
+    public var pattern: String
+    
+    public init(pattern: String,_ message: String) {
+        self.pattern = pattern
+        
         super.init(priority: .high, message: message)
     }
     
     public override func validate(_ field: FormField) -> Bool {
         guard let value = field.value as? String else {
             return true
-        }
-        let regExp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$"
-        let predicate = NSPredicate(format:"SELF MATCHES %@", regExp)
+        }        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", pattern)
         return predicate.evaluate(with: value)
     }
     
