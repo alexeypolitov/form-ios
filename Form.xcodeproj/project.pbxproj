@@ -22,6 +22,7 @@
 		293F89672227ACF3007CEE92 /* FormViewSegmented.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F89662227ACF3007CEE92 /* FormViewSegmented.swift */; };
 		293F89692227B002007CEE92 /* ExtendedSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F89682227B002007CEE92 /* ExtendedSegmentedControl.swift */; };
 		293F896E2227C684007CEE92 /* FormViewStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293F896D2227C684007CEE92 /* FormViewStack.swift */; };
+		2947221E2237820D0045B5F4 /* FormRegExValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2947221D2237820D0045B5F4 /* FormRegExValidator.swift */; };
 		299040FE219E525D007DF31F /* FormViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299040FD219E525D007DF31F /* FormViewHeaderFooterView.swift */; };
 		29904102219E5283007DF31F /* FormViewHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29904101219E5283007DF31F /* FormViewHeaderFooter.swift */; };
 		29904105219E56DC007DF31F /* FormViewHeaderFooterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29904104219E56DC007DF31F /* FormViewHeaderFooterContainer.swift */; };
@@ -73,6 +74,7 @@
 		293F89662227ACF3007CEE92 /* FormViewSegmented.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewSegmented.swift; sourceTree = "<group>"; };
 		293F89682227B002007CEE92 /* ExtendedSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedSegmentedControl.swift; sourceTree = "<group>"; };
 		293F896D2227C684007CEE92 /* FormViewStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewStack.swift; sourceTree = "<group>"; };
+		2947221D2237820D0045B5F4 /* FormRegExValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRegExValidator.swift; sourceTree = "<group>"; };
 		299040FD219E525D007DF31F /* FormViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		29904101219E5283007DF31F /* FormViewHeaderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewHeaderFooter.swift; sourceTree = "<group>"; };
 		29904104219E56DC007DF31F /* FormViewHeaderFooterContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewHeaderFooterContainer.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				29AF405221A298B90054360B /* FormLengthValidator.swift */,
 				29AF405421A2AFE10054360B /* FormRequiredValidator.swift */,
 				29AF405621A2B0330054360B /* FormEmailValidator.swift */,
+				2947221D2237820D0045B5F4 /* FormRegExValidator.swift */,
 			);
 			name = Validators;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				299FD94E219D5A5F00A1CE48 /* FormControllable.swift in Sources */,
 				29904107219E56EF007DF31F /* FormViewHeaderFooterContainerView.swift in Sources */,
 				29904105219E56DC007DF31F /* FormViewHeaderFooterContainer.swift in Sources */,
+				2947221E2237820D0045B5F4 /* FormRegExValidator.swift in Sources */,
 				299227C121A85FE2007869E9 /* FormViewInput.swift in Sources */,
 				293F89692227B002007CEE92 /* ExtendedSegmentedControl.swift in Sources */,
 				299FD952219D5ACC00A1CE48 /* FormViewBadge.swift in Sources */,
