@@ -125,7 +125,7 @@ extension FormViewTextField: UITextFieldDelegate {
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if onDone != nil {
             onDone?(self)
-            return false
+            return true
         } else {
             return shouldReturn?(self) ?? false
         }
