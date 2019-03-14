@@ -17,6 +17,7 @@ open class FormViewTextField: UITextField, FormViewControllable, FormViewBindabl
     open var onChange: ((FormViewTextField, String?) -> Void)?
     open var onBeginEditing: ((FormViewTextField) -> Void)?
     open var onEndEditing: ((FormViewTextField, UITextField.DidEndEditingReason) -> Void)?
+    open var onDone: ((FormViewTextField) -> Void)?
     open var shouldBeginEditing: ((FormViewTextField) -> Bool)?
     open var shouldEndEditing: ((FormViewTextField) -> Bool)?
     open var shouldClear: ((FormViewTextField) -> Bool)?
@@ -122,7 +123,12 @@ extension FormViewTextField: UITextFieldDelegate {
     }
 
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return shouldReturn?(self) ?? false
+        if onDone != nil {
+            onDone?(self)
+            return false
+        } else {
+            return shouldReturn?(self) ?? false
+        }
     }
 
     public func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
