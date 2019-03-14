@@ -133,6 +133,7 @@ extension FormViewTextField: UITextFieldDelegate {
     }
 
     public func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldEndEditing")
         return shouldEndEditing?(self) ?? true
     }
 
@@ -141,6 +142,7 @@ extension FormViewTextField: UITextFieldDelegate {
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        print("textFieldDidEndEditing")
         onEndEditing?(self, reason)
     }
     
