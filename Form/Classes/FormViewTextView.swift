@@ -28,7 +28,7 @@ open class FormViewTextView: ExtendedTextView, FormViewControllable, FormViewBin
         didSet {
             updateLayout()
         }
-    }
+    }        
     
     public required init?(coder aDecoder: NSCoder) {
         fatalError("Use init()")

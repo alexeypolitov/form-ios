@@ -9,42 +9,6 @@
 import UIKit
 
 open class ExtendedTextField: UITextField {
-
-    open lazy var bottomBorder: UIView = {
-        let border = UIView()
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.isUserInteractionEnabled = false
-        border.backgroundColor = UIColor.clear
-        
-        return border
-    }()
-    
-    open lazy var topBorder: UIView = {
-        let border = UIView()
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.isUserInteractionEnabled = false
-        border.backgroundColor = UIColor.clear
-        
-        return border
-    }()
-    
-    open lazy var leftBorder: UIView = {
-        let border = UIView()
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.isUserInteractionEnabled = false
-        border.backgroundColor = UIColor.clear
-        
-        return border
-    }()
-    
-    open lazy var rightBorder: UIView = {
-        let border = UIView()
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.isUserInteractionEnabled = false
-        border.backgroundColor = UIColor.clear
-        
-        return border
-    }()
     
     // MARK: - LifeCycle
     
@@ -67,35 +31,7 @@ open class ExtendedTextField: UITextField {
         prepareLayout()
     }
     
-    private func prepareLayout() {
-        addSubview(bottomBorder)
-        
-        bottomBorder.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        bottomBorder.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        bottomBorder.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        bottomBorder.heightAnchor.constraint(greaterThanOrEqualToConstant: 0.5).isActive = true
-        
-        addSubview(topBorder)
-        
-        topBorder.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        topBorder.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        topBorder.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        topBorder.heightAnchor.constraint(greaterThanOrEqualToConstant: 0.5).isActive = true
-        
-        addSubview(leftBorder)
-        
-        leftBorder.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        leftBorder.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        leftBorder.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        leftBorder.widthAnchor.constraint(greaterThanOrEqualToConstant: 0.5).isActive = true
-        
-        addSubview(rightBorder)
-        
-        rightBorder.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        rightBorder.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        rightBorder.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        rightBorder.widthAnchor.constraint(greaterThanOrEqualToConstant: 0.5).isActive = true
-//        rightBorder.widthAnchor.constraint(equalToConstant: 0.5).isActive = true
+    private func prepareLayout() {        
         
     }
     

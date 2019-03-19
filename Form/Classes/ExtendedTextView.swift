@@ -27,41 +27,16 @@ open class ExtendedTextView: UITextView {
     
     open var placeholderColor:UIColor = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
     
-    open lazy var bottomBorder: UIView = {
-        let border = UIView()
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.isUserInteractionEnabled = false
-        border.backgroundColor = UIColor.clear
-        
-        return border
-    }()
+    open override var textContainerInset: UIEdgeInsets {
+        didSet {
+            updatePlaceholder()
+        }
+    }
     
-    open lazy var topBorder: UIView = {
-        let border = UIView()
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.isUserInteractionEnabled = false
-        border.backgroundColor = UIColor.clear
-        
-        return border
-    }()
-    
-    open lazy var leftBorder: UIView = {
-        let border = UIView()
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.isUserInteractionEnabled = false
-        border.backgroundColor = UIColor.clear
-        
-        return border
-    }()
-    
-    open lazy var rightBorder: UIView = {
-        let border = UIView()
-        border.translatesAutoresizingMaskIntoConstraints = false
-        border.isUserInteractionEnabled = false
-        border.backgroundColor = UIColor.clear
-        
-        return border
-    }()
+    private var placeholderLabelLeftAnchorConstraint: NSLayoutConstraint?
+    private var placeholderLabelRightAnchorConstraint: NSLayoutConstraint?
+    private var placeholderLabelTopAnchorConstraint: NSLayoutConstraint?
+    private var placeholderLabelBottomAnchorConstraint: NSLayoutConstraint?
     
     // MARK: - LifeCycle
     
@@ -85,39 +60,24 @@ open class ExtendedTextView: UITextView {
         
         addSubview(placeholderLabel)
         
-        placeholderLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        placeholderLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        placeholderLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        placeholderLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        placeholderLabelLeftAnchorConstraint = placeholderLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: self.textContainerInset.left)
+        placeholderLabelLeftAnchorConstraint?.isActive = true
+        placeholderLabelTopAnchorConstraint = placeholderLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: self.textContainerInset.top)
+        placeholderLabelTopAnchorConstraint?.isActive = true
+        placeholderLabelRightAnchorConstraint = placeholderLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: self.textContainerInset.right)
+        placeholderLabelRightAnchorConstraint?.isActive = true
+        placeholderLabelBottomAnchorConstraint = placeholderLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: self.textContainerInset.bottom)
+        placeholderLabelBottomAnchorConstraint?.isActive = true
         
-        addSubview(bottomBorder)
+    }
+    
+    private func updatePlaceholder() {
+        placeholderLabelLeftAnchorConstraint?.constant = self.textContainerInset.left
+        placeholderLabelTopAnchorConstraint?.constant = self.textContainerInset.top
+        placeholderLabelRightAnchorConstraint?.constant = self.textContainerInset.right
+        placeholderLabelBottomAnchorConstraint?.constant = self.textContainerInset.bottom
         
-        bottomBorder.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        bottomBorder.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        bottomBorder.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        bottomBorder.heightAnchor.constraint(greaterThanOrEqualToConstant: 0.5).isActive = true
-        
-        addSubview(topBorder)
-        
-        topBorder.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        topBorder.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        topBorder.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        topBorder.heightAnchor.constraint(greaterThanOrEqualToConstant: 0.5).isActive = true
-        
-        addSubview(leftBorder)
-        
-        leftBorder.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        leftBorder.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        leftBorder.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        leftBorder.widthAnchor.constraint(greaterThanOrEqualToConstant: 0.5).isActive = true
-        
-        addSubview(rightBorder)
-        
-        rightBorder.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        rightBorder.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        rightBorder.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        rightBorder.widthAnchor.constraint(greaterThanOrEqualToConstant: 0.5).isActive = true
-        
+        self.layoutIfNeeded()
     }
     
     open override func layoutSubviews() {

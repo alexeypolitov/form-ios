@@ -54,20 +54,19 @@ class ViewController: UIViewController {
                         verticalController.isMain = true
                         verticalController +++ FormViewTextField() { textField in
 //                            textField.backgroundColor = UIColor.purple
-                            textField.bottomBorder.backgroundColor = UIColor.lightGray
-                            textField.topBorder.backgroundColor = UIColor.green
-                            textField.leftBorder.backgroundColor = UIColor.red
-                            textField.rightBorder.backgroundColor = UIColor.purple
                             textField.placeholder = "左写真に関するタイトルを付けましょう"
                         }
                         verticalController +++ FormViewTextView() { textView in
 //                            textView.backgroundColor = UIColor.yellow
 //                            textView.minimumHeight = 48
-                            textView.bottomBorder.backgroundColor = UIColor.green
-                            textView.topBorder.backgroundColor = UIColor.green
-                            textView.leftBorder.backgroundColor = UIColor.green
-                            textView.rightBorder.backgroundColor = UIColor.green
                             textView.placeholder = "左写真に関する説明を書きましょう！\n250文字以内で特徴をアピールしてください。"
+                            
+                            textView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+                            textView.layer.borderWidth = 1.0
+                            textView.layer.cornerRadius = 5
+                            
+                            textView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+                            
                         }
 
                     }
