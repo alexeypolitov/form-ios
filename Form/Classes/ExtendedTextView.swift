@@ -64,10 +64,13 @@ open class ExtendedTextView: UITextView {
         placeholderLabelLeftAnchorConstraint?.isActive = true
         placeholderLabelTopAnchorConstraint = placeholderLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: self.textContainerInset.top)
         placeholderLabelTopAnchorConstraint?.isActive = true
-        placeholderLabelRightAnchorConstraint = placeholderLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: self.textContainerInset.right)
-        placeholderLabelRightAnchorConstraint?.isActive = true
-        placeholderLabelBottomAnchorConstraint = placeholderLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: self.textContainerInset.bottom)
-        placeholderLabelBottomAnchorConstraint?.isActive = true
+        
+//        placeholderLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30).isActive = true
+        
+//        placeholderLabelRightAnchorConstraint = placeholderLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: self.textContainerInset.right)
+//        placeholderLabelRightAnchorConstraint?.isActive = true
+//        placeholderLabelBottomAnchorConstraint = placeholderLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: self.textContainerInset.bottom)
+//        placeholderLabelBottomAnchorConstraint?.isActive = true
         
     }
     
@@ -83,7 +86,9 @@ open class ExtendedTextView: UITextView {
     open override func layoutSubviews() {
         super.layoutSubviews()
         
-        updateLayout()        
+        updateLayout()
+        
+        placeholderLabel.preferredMaxLayoutWidth = textContainer.size.width
         
     }
     

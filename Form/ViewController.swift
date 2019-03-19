@@ -59,6 +59,8 @@ class ViewController: UIViewController {
                         verticalController +++ FormViewTextView() { textView in
 //                            textView.backgroundColor = UIColor.yellow
 //                            textView.minimumHeight = 48
+                            textView.minimumHeight = 157
+                            textView.placeholderLabel.backgroundColor = UIColor.yellow
                             textView.placeholder = "左写真に関する説明を書きましょう！\n250文字以内で特徴をアピールしてください。"
                             
                             textView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
