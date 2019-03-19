@@ -53,12 +53,20 @@ class ViewController: UIViewController {
 
                         verticalController.isMain = true
                         verticalController +++ FormViewTextField() { textField in
-                            textField.backgroundColor = UIColor.purple
+//                            textField.backgroundColor = UIColor.purple
+                            textField.bottomBorder.backgroundColor = UIColor.lightGray
+                            textField.topBorder.backgroundColor = UIColor.green
+                            textField.leftBorder.backgroundColor = UIColor.red
+                            textField.rightBorder.backgroundColor = UIColor.purple
                             textField.placeholder = "左写真に関するタイトルを付けましょう"
                         }
                         verticalController +++ FormViewTextView() { textView in
-                            textView.backgroundColor = UIColor.yellow
+//                            textView.backgroundColor = UIColor.yellow
 //                            textView.minimumHeight = 48
+                            textView.bottomBorder.backgroundColor = UIColor.green
+                            textView.topBorder.backgroundColor = UIColor.green
+                            textView.leftBorder.backgroundColor = UIColor.green
+                            textView.rightBorder.backgroundColor = UIColor.green
                             textView.placeholder = "左写真に関する説明を書きましょう！\n250文字以内で特徴をアピールしてください。"
                         }
 
@@ -133,11 +141,11 @@ class ViewController: UIViewController {
                     
                     verticalController.isMain = true
                     verticalController +++ FormViewTextField() { textField in
-                        textField.backgroundColor = UIColor.purple
+//                        textField.backgroundColor = UIColor.purple
                         textField.placeholder = "左写真に関するタイトルを付けましょう"
                     }
                     verticalController +++ FormViewTextView() { textView in
-                        textView.backgroundColor = UIColor.yellow
+//                        textView.backgroundColor = UIColor.yellow
                         //                            textView.minimumHeight = 48
                         textView.placeholder = "左写真に関する説明を書きましょう！\n250文字以内で特徴をアピールしてください。"
                     }

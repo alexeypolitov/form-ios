@@ -45,6 +45,7 @@
 		299FD956219D5AFC00A1CE48 /* FormViewTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD955219D5AFC00A1CE48 /* FormViewTextView.swift */; };
 		299FD95A219D611000A1CE48 /* FormViewSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD959219D611000A1CE48 /* FormViewSwitcher.swift */; };
 		299FD95E219DAAE600A1CE48 /* FormViewImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD95D219DAAE600A1CE48 /* FormViewImageView.swift */; };
+		29ACE7D6224083EB00996CDD /* ExtendedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29ACE7D5224083EB00996CDD /* ExtendedTextField.swift */; };
 		29AF404A21A279730054360B /* FormViewVerticalContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404921A279730054360B /* FormViewVerticalContainer.swift */; };
 		29AF404C21A27D950054360B /* FormViewHorizontalContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404B21A27D950054360B /* FormViewHorizontalContainer.swift */; };
 		29AF404E21A283E70054360B /* FormViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF404D21A283E70054360B /* FormViewButton.swift */; };
@@ -97,6 +98,7 @@
 		299FD955219D5AFC00A1CE48 /* FormViewTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewTextView.swift; sourceTree = "<group>"; };
 		299FD959219D611000A1CE48 /* FormViewSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewSwitcher.swift; sourceTree = "<group>"; };
 		299FD95D219DAAE600A1CE48 /* FormViewImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewImageView.swift; sourceTree = "<group>"; };
+		29ACE7D5224083EB00996CDD /* ExtendedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedTextField.swift; sourceTree = "<group>"; };
 		29AF404921A279730054360B /* FormViewVerticalContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewVerticalContainer.swift; sourceTree = "<group>"; };
 		29AF404B21A27D950054360B /* FormViewHorizontalContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewHorizontalContainer.swift; sourceTree = "<group>"; };
 		29AF404D21A283E70054360B /* FormViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewButton.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 			children = (
 				291E3D0C217A39BD006C3D4D /* ExtendedButton.swift */,
 				291E3D0E217A39BD006C3D4D /* ExtendedLabel.swift */,
+				29ACE7D5224083EB00996CDD /* ExtendedTextField.swift */,
 				291E3D0D217A39BD006C3D4D /* ExtendedTextView.swift */,
 				299227C621A93512007869E9 /* ExtandedBarButtonItem.swift */,
 				293F89682227B002007CEE92 /* ExtendedSegmentedControl.swift */,
@@ -466,6 +469,7 @@
 				29AF40BA21A2E2160054360B /* Form.swift in Sources */,
 				291E3D10217A39BD006C3D4D /* ExtendedTextView.swift in Sources */,
 				291E3D11217A39BD006C3D4D /* ExtendedLabel.swift in Sources */,
+				29ACE7D6224083EB00996CDD /* ExtendedTextField.swift in Sources */,
 				293F896E2227C684007CEE92 /* FormViewStack.swift in Sources */,
 				291E3D16217A3B13006C3D4D /* FormViewGroup.swift in Sources */,
 				291E3CF4217A3942006C3D4D /* AppDelegate.swift in Sources */,

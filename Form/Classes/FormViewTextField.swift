@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class FormViewTextField: UITextField, FormViewControllable, FormViewBindable, FormViewOnLoad, FormViewInputable {
+open class FormViewTextField: ExtendedTextField, FormViewControllable, FormViewBindable, FormViewOnLoad, FormViewInputable {
     
     public var isMain: Bool = false
     public let name: String
