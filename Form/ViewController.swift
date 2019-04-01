@@ -28,6 +28,18 @@ class ViewController: UIViewController {
     
     func buildForm() throws {
         
+        let _ = form
+            +++ FormField("title") { field in
+                field.validators = [
+//                    Former.required("Required"),
+//                    Former.maxLength(maxLength: 5, "Max len expired")
+                    Former.custom(handle: { () -> Bool in
+                        return self.form.field("title")?.value is String
+                    }, "Custom validator error")
+                ]
+        }
+        
+        formView.bind = form
         try formView +++ FormViewGroup("testControls") { group in
 
             group +++ FormViewCellContainer() { container in
@@ -52,7 +64,8 @@ class ViewController: UIViewController {
                     horizontalContainer +++ FormViewVerticalContainer() { verticalController in
 
                         verticalController.isMain = true
-                        verticalController +++ FormViewTextField() { textField in
+                        verticalController +++ FormViewTextField("titleTextField") { textField in
+                            textField.bindName = "title"
 //                            textField.backgroundColor = UIColor.purple
                             textField.placeholder = "左写真に関するタイトルを付けましょう"
                         }
@@ -133,7 +146,6 @@ class ViewController: UIViewController {
                     
                     imageView.fixedWidth = 50
                     imageView.fixedHeigth = 50
-//                    imageView.image = UIImage(named: "lemur1")
                     imageView.backgroundColor = UIColor.gray
                     
                 }
@@ -142,12 +154,10 @@ class ViewController: UIViewController {
                     
                     verticalController.isMain = true
                     verticalController +++ FormViewTextField() { textField in
-//                        textField.backgroundColor = UIColor.purple
                         textField.placeholder = "左写真に関するタイトルを付けましょう"
                     }
                     verticalController +++ FormViewTextView() { textView in
-//                        textView.backgroundColor = UIColor.yellow
-                        //                            textView.minimumHeight = 48
+                        textView.minimumHeight = 48
                         textView.placeholder = "左写真に関する説明を書きましょう！\n250文字以内で特徴をアピールしてください。"
                     }
                     
@@ -168,12 +178,12 @@ class ViewController: UIViewController {
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        actionSheet.addAction(UIAlertAction(title: "Show/Hide", style: .default, handler: { [weak self] (action) in
+        actionSheet.addAction(UIAlertAction(title: "Validate", style: .default, handler: { [weak self] (action) in
             guard let `self` = self else { return }
 
-            self.addTest()
-            self.formView.reloadData()
-//            self.formView.hideInputSource()
+            if let (success, errorString) = self.form.field("title")?.validate() {
+                print("ddd: \(errorString)")
+            }
         }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

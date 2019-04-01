@@ -90,6 +90,10 @@ public class Former {
         return FormBetweenLengthValidator(minLength: minLength, maxLength: maxLength, message)
     }
     
+    public static func custom(handle: @escaping (() -> Bool), _ message: String) -> FormCustomValidator {
+        return FormCustomValidator(handle: handle, message)
+    }
+    
     
     
 }
