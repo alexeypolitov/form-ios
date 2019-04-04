@@ -257,6 +257,12 @@ extension FormView {
         tableView?.reloadData()
     }
     
+    open func reloadGroup(name: String) {
+        prepareVisibleGroups()
+        guard let index = visibleGroups.firstIndex(where: {$0.name == name}) else { return }
+        tableView?.reloadSections(IndexSet(integer: index), with: .none)
+    }
+    
 }
 
 extension FormView: UITableViewDataSource {
