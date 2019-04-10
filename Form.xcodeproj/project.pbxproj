@@ -42,7 +42,6 @@
 		299FD8CC219D076400A1CE48 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD8CB219D076400A1CE48 /* TestViewController.swift */; };
 		299FD94E219D5A5F00A1CE48 /* FormControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD94D219D5A5F00A1CE48 /* FormControllable.swift */; };
 		299FD950219D5AA900A1CE48 /* FormViewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD94F219D5AA900A1CE48 /* FormViewLabel.swift */; };
-		299FD952219D5ACC00A1CE48 /* FormViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD951219D5ACC00A1CE48 /* FormViewBadge.swift */; };
 		299FD954219D5AE400A1CE48 /* FormViewTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD953219D5AE400A1CE48 /* FormViewTextField.swift */; };
 		299FD956219D5AFC00A1CE48 /* FormViewTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD955219D5AFC00A1CE48 /* FormViewTextView.swift */; };
 		299FD95A219D611000A1CE48 /* FormViewSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 299FD959219D611000A1CE48 /* FormViewSwitcher.swift */; };
@@ -57,6 +56,7 @@
 		29AF405721A2B0330054360B /* FormEmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF405621A2B0330054360B /* FormEmailValidator.swift */; };
 		29AF40BA21A2E2160054360B /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF40B821A2E2160054360B /* Form.swift */; };
 		29AF40BB21A2E2160054360B /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF40B921A2E2160054360B /* FormField.swift */; };
+		29E55D69225D82340069E59B /* FormViewBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E55D68225D82340069E59B /* FormViewBadge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,7 +97,6 @@
 		299FD8CB219D076400A1CE48 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		299FD94D219D5A5F00A1CE48 /* FormControllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormControllable.swift; sourceTree = "<group>"; };
 		299FD94F219D5AA900A1CE48 /* FormViewLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewLabel.swift; sourceTree = "<group>"; };
-		299FD951219D5ACC00A1CE48 /* FormViewBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewBadge.swift; sourceTree = "<group>"; };
 		299FD953219D5AE400A1CE48 /* FormViewTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewTextField.swift; sourceTree = "<group>"; };
 		299FD955219D5AFC00A1CE48 /* FormViewTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewTextView.swift; sourceTree = "<group>"; };
 		299FD959219D611000A1CE48 /* FormViewSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewSwitcher.swift; sourceTree = "<group>"; };
@@ -112,6 +111,7 @@
 		29AF405621A2B0330054360B /* FormEmailValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormEmailValidator.swift; sourceTree = "<group>"; };
 		29AF40B821A2E2160054360B /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		29AF40B921A2E2160054360B /* FormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
+		29E55D68225D82340069E59B /* FormViewBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewBadge.swift; sourceTree = "<group>"; };
 		39852CBF11491DD27888AD8F /* Pods-Form.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Form.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Form/Pods-Form.debug.xcconfig"; sourceTree = "<group>"; };
 		A82434747E03AE90DD41CB6E /* Pods-Form.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Form.release.xcconfig"; path = "Pods/Target Support Files/Pods-Form/Pods-Form.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -265,7 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				299FD94F219D5AA900A1CE48 /* FormViewLabel.swift */,
-				299FD951219D5ACC00A1CE48 /* FormViewBadge.swift */,
+				29E55D68225D82340069E59B /* FormViewBadge.swift */,
 				299FD953219D5AE400A1CE48 /* FormViewTextField.swift */,
 				299FD955219D5AFC00A1CE48 /* FormViewTextView.swift */,
 				299FD959219D611000A1CE48 /* FormViewSwitcher.swift */,
@@ -447,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29AF405121A297E20054360B /* FormValidator.swift in Sources */,
+				29E55D69225D82340069E59B /* FormViewBadge.swift in Sources */,
 				29AF404A21A279730054360B /* FormViewVerticalContainer.swift in Sources */,
 				291E3D14217A3A7B006C3D4D /* FormView.swift in Sources */,
 				299FD94E219D5A5F00A1CE48 /* FormControllable.swift in Sources */,
@@ -455,7 +456,6 @@
 				2947221E2237820D0045B5F4 /* FormRegExValidator.swift in Sources */,
 				299227C121A85FE2007869E9 /* FormViewInput.swift in Sources */,
 				293F89692227B002007CEE92 /* ExtendedSegmentedControl.swift in Sources */,
-				299FD952219D5ACC00A1CE48 /* FormViewBadge.swift in Sources */,
 				299227C721A93512007869E9 /* ExtandedBarButtonItem.swift in Sources */,
 				299FD95E219DAAE600A1CE48 /* FormViewImageView.swift in Sources */,
 				299227BD21A85547007869E9 /* FromViewConstrainable.swift in Sources */,
