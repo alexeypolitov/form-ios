@@ -30,62 +30,55 @@ class ViewController: UIViewController {
         
         try formView +++ FormViewGroup() { group in
             
-            group.header = FormViewHeaderFooterContainer() { container in
+//            group.header = FormViewHeaderFooterContainer() { container in
+//
+//                container.insets = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
+//                let badge = FormViewBadge() { control in
+//                    control.insets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+//                    control.backgroundColor = UIColor(displayP3Red: 255.0 / 255.0, green: 251.0 / 255.0, blue: 226.0 / 255.0, alpha: 1)
+//                    control.borderColor = UIColor(displayP3Red: 222.0 / 255.0, green: 216.0 / 255.0, blue: 188.0 / 255.0, alpha: 1).cgColor
+//                    control.borderWidth = 1
+//                    control.cornerRadius = 15
+//                    control.textColor = UIColor(displayP3Red: 144.0 / 255.0, green: 139.0 / 255.0, blue: 76.0 / 255.0, alpha: 1)
+//                    control.textAlignment = .left
+//                    control.numberOfLines = 0
+//                    control.font = UIFont.systemFont(ofSize: UIFont.systemFontSize - 3)
+//
+//                    control.text = "一旦ご利用を停止する場合（今後また使うかもしれない場合）は、\n「無料お試しプランに戻す」をご選択ください。\n※ご解約に関する詳細はコチラ"
+//                }
+//
+//                container.control = badge
+//
+//            }
+            
+            group +++ FormViewCellContainer() { container in
                 
-                container.insets = UIEdgeInsets(top: 20, left: 16, bottom: 20, right: 16)
-                let badge = FormViewBadge() { control in
-                    control.insets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
-                    control.backgroundColor = UIColor(displayP3Red: 255.0 / 255.0, green: 251.0 / 255.0, blue: 226.0 / 255.0, alpha: 1)
-                    control.borderColor = UIColor(displayP3Red: 222.0 / 255.0, green: 216.0 / 255.0, blue: 188.0 / 255.0, alpha: 1).cgColor
-                    control.borderWidth = 1
-                    control.cornerRadius = 15
-                    control.textColor = UIColor(displayP3Red: 144.0 / 255.0, green: 139.0 / 255.0, blue: 76.0 / 255.0, alpha: 1)
-                    control.textAlignment = .left
-                    control.numberOfLines = 0
-                    control.font = UIFont.systemFont(ofSize: UIFont.systemFontSize - 3)
+                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
+                container.control = FormViewHorizontalContainer() { horizontalContainer in
                     
-                    control.text = "一旦ご利用を停止する場合（今後また使うかもしれない場合）は、\n「無料お試しプランに戻す」をご選択ください。\n※ご解約に関する詳細はコチラ"
+                    horizontalContainer +++ FormViewBadge() { badge in
+                        badge.backgroundColor = UIColor(displayP3Red: 100.0 / 255.0, green: 200.0 / 255.0, blue: 227.0 / 255.0, alpha: 1.0)
+//                        badge.textColor = UIColor.white
+//                        badge.isMain = true
+//                        badge.numberOfLines = 1
+                        badge.text = "yyy"
+                    }
+                    
+                    horizontalContainer +++ FormViewLabel() { label in
+                        label.isMain = true
+//                        label.numberOfLines = 0
+                        label.text = "Some title"
+                    }
+                    
+                    horizontalContainer +++ FormViewLabel() { label in
+                        label.textColor = UIColor(displayP3Red: 0, green: 88.0 / 255.0, blue: 1, alpha: 1.0)
+                        label.text = "詳細"
+                    }
+                    
                 }
                 
-                container.control = badge
                 
             }
-            
-//            group +++ FormViewCellContainer() { container in
-//                
-//                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
-//                container.control = FormViewHorizontalContainer() { horizontalContainer in
-//                    horizontalContainer +++ FormViewBadge() { badge in
-//                        badge.backgroundRectColor = UIColor(displayP3Red: 100.0 / 255.0, green: 200.0 / 255.0, blue: 227.0 / 255.0, alpha: 1)
-//                        badge.text = "2019/01/01"
-//                    }
-//                    horizontalContainer +++ FormViewLabel() { label in
-//                        label.isMain = true
-//                        label.numberOfLines = 0
-//                        label.text = "News"
-//                    }
-//                }
-//                container.accessoryType = .disclosureIndicator
-//                
-//            }
-//            
-//            group +++ FormViewCellContainer() { container in
-//                
-//                container.insets = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
-//                container.control = FormViewHorizontalContainer() { horizontalContainer in
-//                    horizontalContainer +++ FormViewBadge() { badge in
-//                        badge.backgroundColor = UIColor(displayP3Red: 100.0 / 255.0, green: 200.0 / 255.0, blue: 227.0 / 255.0, alpha: 1)
-//                        badge.text = "2019/01/01"
-//                    }
-//                    horizontalContainer +++ FormViewLabel() { label in
-//                        label.isMain = true
-//                        label.numberOfLines = 0
-//                        label.text = "News"
-//                    }
-//                }
-//                container.accessoryType = .disclosureIndicator
-//                
-//            }
             
         }
         
