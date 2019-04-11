@@ -116,6 +116,11 @@ open class FormViewBadge: UIView, FormViewControllable {
         }
     }
     
+    open override func setContentHuggingPriority(_ priority: UILayoutPriority, for axis: NSLayoutConstraint.Axis) {
+        super.setContentHuggingPriority(priority, for: axis)
+        label.setContentHuggingPriority(priority, for: axis)
+    }
+    
     private var labelLeftAnchorConstraint: NSLayoutConstraint?
     private var labelRightAnchorConstraint: NSLayoutConstraint?
     private var labelTopAnchorConstraint: NSLayoutConstraint?
@@ -153,7 +158,9 @@ open class FormViewBadge: UIView, FormViewControllable {
         labelLeftAnchorConstraint?.isActive = true
         labelTopAnchorConstraint = label.topAnchor.constraint(equalTo: self.topAnchor, constant: insets.top)
         labelTopAnchorConstraint?.isActive = true
-        labelRightAnchorConstraint = label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -insets.right)
+//        labelRightAnchorConstraint = label.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -insets.right)
+//        labelRightAnchorConstraint?.isActive = true
+        labelRightAnchorConstraint = label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -insets.right)
         labelRightAnchorConstraint?.isActive = true
         labelBottomAnchorConstraint = label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -insets.bottom)
         labelBottomAnchorConstraint?.isActive = true

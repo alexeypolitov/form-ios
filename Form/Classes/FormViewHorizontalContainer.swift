@@ -61,7 +61,6 @@ open class FormViewHorizontalContainer: UIView, FormViewControllable, FormViewBi
             
             addFormConstrain(view: controlView, constrain: controlView.topAnchor.constraint(equalTo: self.topAnchor, constant: insets.top))
             
-            
             if let controlSizeable = control as? FormViewSizeable {
                 if let fixedHeigth = controlSizeable.fixedHeigth {
                     addFormConstrain(view: controlView, constrain: controlView.heightAnchor.constraint(equalToConstant: fixedHeigth))
@@ -82,15 +81,15 @@ open class FormViewHorizontalContainer: UIView, FormViewControllable, FormViewBi
             }
             
             if let lastControlView = lastControl as? UIView {
-                addFormConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: lastControlView.rightAnchor, constant: minimalInset))
+                addFormConstrain(view: controlView, constrain: controlView.leadingAnchor.constraint(equalTo: lastControlView.trailingAnchor, constant: minimalInset))
             } else {
-                addFormConstrain(view: controlView, constrain: controlView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: insets.left))
+                addFormConstrain(view: controlView, constrain: controlView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: insets.left))
             }
             
             if control.isMain {
-                controlView.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
+                controlView.setContentHuggingPriority(.defaultLow, for: .horizontal)
             } else {
-                controlView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+                controlView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
             }
             
             // is last
@@ -98,7 +97,7 @@ open class FormViewHorizontalContainer: UIView, FormViewControllable, FormViewBi
                 if let controlSizeable = control as? FormViewSizeable, controlSizeable.fixedWidth != nil {
                     // do noting
                 } else {
-                    addFormConstrain(view: controlView, constrain: controlView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: insets.right * -1))
+                    addFormConstrain(view: controlView, constrain: controlView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: insets.right * -1))
                 }
             }
             
