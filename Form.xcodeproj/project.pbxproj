@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		06A72752DF124D6DF1205BD9 /* Pods_Form.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12814EDBD878061B262834D9 /* Pods_Form.framework */; };
 		2917A2DD21ABEE0200FDD967 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2917A2DC21ABEE0200FDD967 /* Operators.swift */; };
+		291A5C3A2265A34A00AB209E /* ProductSpecCollectionViewItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A5C392265A34A00AB209E /* ProductSpecCollectionViewItemCell.swift */; };
+		291A5C3C2265A7EE00AB209E /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A5C3B2265A7EE00AB209E /* String+Extension.swift */; };
+		291A5C4622670AAB00AB209E /* FormViewHeaderFooterEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A5C4522670AAB00AB209E /* FormViewHeaderFooterEmpty.swift */; };
+		291A5C4822670B2F00AB209E /* FormViewHeaderFooterEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291A5C4722670B2F00AB209E /* FormViewHeaderFooterEmptyView.swift */; };
 		291E3CF4217A3942006C3D4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E3CF3217A3942006C3D4D /* AppDelegate.swift */; };
 		291E3CF6217A3942006C3D4D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291E3CF5217A3942006C3D4D /* ViewController.swift */; };
 		291E3CF9217A3942006C3D4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 291E3CF7217A3942006C3D4D /* Main.storyboard */; };
@@ -62,6 +66,10 @@
 /* Begin PBXFileReference section */
 		12814EDBD878061B262834D9 /* Pods_Form.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Form.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2917A2DC21ABEE0200FDD967 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		291A5C392265A34A00AB209E /* ProductSpecCollectionViewItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSpecCollectionViewItemCell.swift; sourceTree = "<group>"; };
+		291A5C3B2265A7EE00AB209E /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		291A5C4522670AAB00AB209E /* FormViewHeaderFooterEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewHeaderFooterEmpty.swift; sourceTree = "<group>"; };
+		291A5C4722670B2F00AB209E /* FormViewHeaderFooterEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewHeaderFooterEmptyView.swift; sourceTree = "<group>"; };
 		291E3CF0217A3942006C3D4D /* Form.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Form.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		291E3CF3217A3942006C3D4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		291E3CF5217A3942006C3D4D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +241,8 @@
 			isa = PBXGroup;
 			children = (
 				2999E72322559DD700FDBAC4 /* ProductSpecCollectionView.swift */,
+				291A5C392265A34A00AB209E /* ProductSpecCollectionViewItemCell.swift */,
+				291A5C3B2265A7EE00AB209E /* String+Extension.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -287,6 +297,8 @@
 				29904106219E56EF007DF31F /* FormViewHeaderFooterContainerView.swift */,
 				299040FD219E525D007DF31F /* FormViewHeaderFooterView.swift */,
 				29904101219E5283007DF31F /* FormViewHeaderFooter.swift */,
+				291A5C4522670AAB00AB209E /* FormViewHeaderFooterEmpty.swift */,
+				291A5C4722670B2F00AB209E /* FormViewHeaderFooterEmptyView.swift */,
 			);
 			name = HeaderFooters;
 			sourceTree = "<group>";
@@ -446,6 +458,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				291A5C4622670AAB00AB209E /* FormViewHeaderFooterEmpty.swift in Sources */,
+				291A5C3A2265A34A00AB209E /* ProductSpecCollectionViewItemCell.swift in Sources */,
 				29AF405121A297E20054360B /* FormValidator.swift in Sources */,
 				29E55D69225D82340069E59B /* FormViewBadge.swift in Sources */,
 				29AF404A21A279730054360B /* FormViewVerticalContainer.swift in Sources */,
@@ -475,6 +489,7 @@
 				291E3D0F217A39BD006C3D4D /* ExtendedButton.swift in Sources */,
 				29904102219E5283007DF31F /* FormViewHeaderFooter.swift in Sources */,
 				2917A2DD21ABEE0200FDD967 /* Operators.swift in Sources */,
+				291A5C4822670B2F00AB209E /* FormViewHeaderFooterEmptyView.swift in Sources */,
 				293F89672227ACF3007CEE92 /* FormViewSegmented.swift in Sources */,
 				29904111219E75B4007DF31F /* FormViewCellView.swift in Sources */,
 				29904113219E771F007DF31F /* Former.swift in Sources */,
@@ -484,6 +499,7 @@
 				29AF40BA21A2E2160054360B /* Form.swift in Sources */,
 				291E3D10217A39BD006C3D4D /* ExtendedTextView.swift in Sources */,
 				291E3D11217A39BD006C3D4D /* ExtendedLabel.swift in Sources */,
+				291A5C3C2265A7EE00AB209E /* String+Extension.swift in Sources */,
 				29ACE7D6224083EB00996CDD /* ExtendedTextField.swift in Sources */,
 				293F896E2227C684007CEE92 /* FormViewStack.swift in Sources */,
 				291E3D16217A3B13006C3D4D /* FormViewGroup.swift in Sources */,

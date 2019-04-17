@@ -94,6 +94,9 @@ public class Former {
         return FormCustomValidator(handle: handle, message)
     }
     
-    
-    
+    // Header Footer
+    public static func emptyHeaderFooter() -> FormViewHeaderFooterEmpty {
+        return FormViewHeaderFooterEmpty()
+    }
+        
 }
