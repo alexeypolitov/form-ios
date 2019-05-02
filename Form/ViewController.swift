@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         
         try formView +++ FormViewGroup() { group in
             
-            group.header = Former.emptyHeaderFooter()
+//            group.header = Former.emptyHeaderFooter()
             
             group +++ FormViewCellContainer() { container in
                 
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
                 
             }
             
-            group.footer = Former.emptyHeaderFooter()
+//            group.footer = Former.emptyHeaderFooter()
             
         }
         

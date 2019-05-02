@@ -23,6 +23,10 @@ open class FormValidator {
         self.priority = priority
         self.message = message
     }
+    
+    open func message(_ field: FormField) -> String {
+        return message
+    }
         
     open func validate(_ field: FormField) -> Bool {
         fatalError("Subclasses need to implement the `validate` variable.")

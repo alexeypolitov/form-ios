@@ -94,7 +94,7 @@ open class FormField: NSObject {
 
         for validator in localValidators {
             if !validator.validate(self) {
-                return validator.message
+                return validator.message(self)
             }
         }
         
